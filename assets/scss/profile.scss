@@ -1,0 +1,107 @@
+// Styling Profile page
+// mobile
+.profile__page{
+	margin-top:5rem;
+	.card__profile-page{
+		.profile__info-data{
+			.col__img-profile{
+				img{
+					max-width: 150px;
+				}
+			}
+		}
+	}
+	.tabs__detail-profile{
+		margin-top:2rem;
+	}
+}
+
+// Desktop
+@media (min-width: 992px) {
+	.profile__page{
+		margin-top: 7rem;
+		.card__profile-page{
+			.profile__info-data{
+				.col__img-profile{				
+					img{
+						max-width: 130px;
+					}
+				}
+				.col__data-profile{
+					margin-left: -21rem;
+					margin-top: 2rem;				
+					h4{
+						color: $color-primary;
+						font-size:23px;
+						font-weight:700;
+					}
+					ul li{
+						list-style: none;
+					}
+					li{
+						margin-left: -2.5rem;
+					}
+				}
+			}
+
+			.profile__options-page{
+				margin-top:2rem; margin-left: 5rem;
+			}
+		}
+		.tabs__detail-profile{
+			margin-top:2rem;
+			.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+				color:$color-primary;
+				border-bottom: 3px solid $color-primary;
+			}
+			ul li {
+				list-style: none;
+			}
+			li{
+				font-size:18px;
+			}
+
+			h4{
+				color:$color-primary;
+				font-size: 20px;
+				font-weight: 700;
+				line-height: 27px;
+				text-transform: capitalize;
+			}
+
+			.badge__category{
+				margin-left: -13rem;
+			}
+
+			.row__form-filter{
+				margin-left: -13rem;	
+				.form__filter-profile-tabs{
+					select{
+						border: 1px solid $primary-button;
+						border-sizing: border-box;
+						background: $default;
+						color: $primary-button;
+						border-radius: 5px;
+						height:33.7px;
+						width:170px;
+					}
+					button{
+						margin-top:-5px;
+						width: 150px;
+						height: 38px;
+						border-radius:4px;
+						background-color: $primary-button!important;
+					}
+				}
+				.form__filter-caption{
+					left:312px;
+					color: $color-primary;
+					font-size: 16px;
+					line-height: 19px;
+					font-weight: 700;
+					top:5px;
+				}
+			}
+		}
+	}
+}

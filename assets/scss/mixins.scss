@@ -1,0 +1,514 @@
+// made with love
+// Bandung 22 januari 2022
+
+// For main component base on main.scss
+// Navigation
+@mixin navbar_desktop{
+	color:$nav-item;
+	text-transform: capitalize;
+	margin-right: 12px;
+	font-size:16px;
+	font-weight: 500;
+	line-height: 21.79px;
+	a{
+		color: $nav-item;
+		&:hover{
+			color:$color-secondary!important;
+		}
+		.active{
+			background-color:$color-secondary!important;
+		}
+	}
+	
+}
+
+@mixin navbar_mobile {
+	margin-top: .2rem;
+	text-transform: capitalize;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 21.79px;
+	a{
+		color: $nav-item;
+	}
+	&:hover{
+		color:$color-secondary;
+	}
+}
+// end navigation
+
+// Jumbotron
+@mixin container_jumbotron{
+	z-index: 1;
+	position: relative;
+	margin-top: -2rem;
+}
+@mixin jumbotron_mobile($color) {
+
+	.container{
+		// margin-top: 2rem;
+		@include container_jumbotron;
+	}
+	
+	.display-6{
+		color:$color;
+		margin-top: 170px;
+		font-weight: 700;
+		font-size:22px;
+		text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+	}
+	p{
+		color:$color;
+		font-weight: 500;
+		text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
+		width: 85%;
+		font-size:18px;
+		text-align: left;
+		line-height: 21px;
+		word-spacing: 12px;
+	}
+	
+}
+
+@mixin jumbotron_desktop($color) {
+	
+	.container{
+		@include container_jumbotron;
+	}
+	.display-6{
+		color:$color;
+		margin-top: 180px;
+		font-weight: 700;
+		font-size:36px;
+		text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+	}
+	p{
+		color:$color;
+		font-weight: 400;
+		text-shadow: 2px 2px rgba(0, 0, 0, 0.5);
+		width: 60%;
+		font-size:16px;
+		text-align: left;
+		line-height: 21px;
+		word-spacing: 12px
+	}
+}
+// end jumbotron
+
+@mixin button_primary {
+	background-color:$primary-button!important;
+}
+
+// Card pelatihan
+@mixin listDesktop($color){
+	
+	h1{
+		font-size:30px;
+		font-weight: 700;
+		color:$color;
+		line-height: 40.85px;
+	}
+
+	a{
+		color: $color-link;
+		font-weight: 400;
+		font-size:	16px;
+		line-height: 21.79px;
+	}
+
+}
+
+@mixin listMobile($color){
+	h1{
+		font-size:25px;
+		font-weight: 700;
+		color:$color;
+		line-height: 40.85px;
+	}
+
+	a{
+		color: $color-link;
+		font-weight: 400;
+		font-size:	14px;
+		line-height: 21.79px;
+	}
+}
+
+// Rounded card
+@mixin card_rounded_desktop{
+	border-radius: 8px!important;
+	
+	.card-title, h4{
+		color: $default-black;
+		font-size:20px;
+		font-weight:700;
+		line-height: 27.24px;
+		margin-top: -1rem;
+	}
+
+	.view{
+		border-radius:8px;
+	}
+	
+	.idr__color {
+		color: $idr-color;
+		font-weight: 700;
+		font-size:18px;
+		line-height: 24.51px;
+	}
+}
+
+@mixin card_rounded_mobile{
+	border-radius: 8px!important;
+	.view{
+		border-radius:8px;
+	}
+	.card-title, h4{
+		color: $default-black;
+		font-size:20px;
+		font-weight:700;
+		line-height: 27.24px;
+	}
+	.idr__color {
+		color: $idr-color;
+		font-weight: 700;
+		font-size:18px;
+		line-height: 24.51px;
+	}
+}
+// end card pelatihan
+
+// parallax home
+@mixin parallax_mobile{
+	min-height: 180px; 
+	background-attachment: scroll;
+	background-position: center;
+	background-repeat: no-repeat;
+	margin:0;
+	z-index: -1;
+	.caption {
+    	background-image: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+    	position: absolute;
+    	margin-top: -2.3rem;
+    	width: 100%;
+    	height: 217px;
+    	text-align: left;
+    	color: $default;
+		img{
+			width: 50%;
+			margin-top: -1rem;
+		}
+		h2{
+			text-shadow: 0 3px 20px rgba(0, 0, 0, 0.5);
+			font-size: 18px;
+			font-weight: 700;
+			line-height: 38.68px;
+		}
+		blockquote{
+			width: 70%;
+			font-size: 13px;
+			font-weight: 400;
+			line-height: 19.07px;
+		}
+	}
+}
+
+@mixin parallax_desktop{
+	min-height: 170px; 
+	background-attachment: fixed;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	margin:0;
+	z-index: -1;
+	.caption {
+		background-image: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
+    	position: absolute;
+    	z-index: 9999;
+    	margin-top: .1rem;
+    	width: 100%;
+    	height: 99%;
+    	text-align: left;
+    	color: $default;
+    	img{
+    		width: 70%;
+    	}
+    	h2{
+    		text-shadow: 0 3px 20px rgba(0, 0, 0, 0.5);
+    		font-size: 24px;
+    		font-weight: 700;
+    		line-height: 38.68px;
+    	}
+    	blockquote{
+    		font-size: 14px;
+    		font-weight: 400;
+    		line-height: 19.07px;
+    	}
+    }
+}
+
+@mixin parallax_overlay{
+	.overlay {
+		position: relative;
+		&:before {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			opacity: 0.4;
+			background: #081828;
+			content: "";
+			-webkit-transition: all 0.4s ease;
+			transition: all 0.4s ease;
+			z-index: -1;
+		}
+	}
+}
+
+// end parallax home
+
+
+// For header inside container
+@mixin header_inside_list_desktop($color){
+	.header__inside-content{
+		.btn__tooltip{
+			text-decoration: none;
+			&:hover{
+				color: $color-link;
+			}
+		}
+		margin-top: 2.9rem;
+		h1{
+			color:$color;
+			font-size:30px;
+			line-height: 40.85px;
+			font-weight: 700;
+			text-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);
+		}
+
+		blockquote{
+			color:$color;
+			font-size:14px;
+			line-height: 19.07px;
+			font-weight: 400;
+			text-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
+		}
+
+		a{
+			color:$color;
+			font-size: 16px;
+			line-height: 21.79px;
+			font-weight: 400;
+			text-transform: capitalize;
+			text-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
+		}
+	}
+	
+}
+
+@mixin header_inside_list_mobile($color){
+	.header__inside-content{
+		margin-top: 1rem;
+		.btn__tooltip{
+			text-decoration: none;
+			&:hover{
+				color: $color-link;
+			}
+		}
+		h1{
+			color:$color;
+			font-size:30px;
+			line-height: 40.85px;
+			font-weight: 700;
+			text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+		}
+
+		blockquote{
+			color:$color;
+			font-size:14px;
+			line-height: 19.07px;
+			font-weight: 400;
+			text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+		}
+
+		a{
+			color:$color;
+			font-size: 16px;
+			line-height: 21.79px;
+			font-weight: 400;
+			text-transform: capitalize;
+			text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+		}
+	}
+}
+// end header inside container
+
+// card testimoni content
+@mixin card_testimonial_mobile{
+	.card__testimoni-content {
+    position: relative;
+    background-color: $testimoni-card;
+    border-radius: 10px;
+    color: #fff;
+    .quote__txt {
+      font-size: 20px;
+      font-weight:700; 
+      line-height: 27.24px;
+      margin-bottom: 0;
+    }
+  }
+
+  .profile__name {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 21px;
+    margin-top: 27px;
+    color: $default;
+  }
+  .testimoni__date{
+  	position: absolute;
+  	font-size:14px;
+  	margin-top: -23rem;
+    font-weight: 700;
+    line-height: 21px;
+    left: 170px;
+  	color:$default;
+  }
+}
+@mixin card_testimonial_desktop{
+	.card__testimoni-content {
+    position: relative;
+    background-color: $testimoni-card;
+    border-radius: 10px;
+    color: #fff;
+    height: 200px;
+    .quote__txt {
+      font-size: 18px;
+      font-weight:400;  
+      line-height: 27.24px;
+      margin-bottom: 0;
+    }
+  }
+  
+  .profile__name {
+    font-size: 18px;
+    margin-top: 30px;
+    font-weight: 700;
+    line-height: 21px;
+    color: $default;
+  }
+  .testimoni__date{
+  	position: absolute;
+  	color:$default;
+  	font-size:14px;
+  	margin-top: 60px;
+    font-weight: 700;
+    line-height: 21px;
+    left: 170px;
+  }
+}
+// end card testimoni
+// End main component base on main.scss
+
+// Inside auth card
+// For auth component base on auth.scss
+@mixin inside_card_auth_mobile{
+	.form__auth{
+		h4{
+			font-size: 23px;
+			font-weight: 700;
+			line-height: 49.03px;
+		}
+		.has-input .form-control {
+			padding-left: 2.250rem;
+		}
+		.has-input .form-control-feedback {
+			position: absolute;
+			z-index: 2;
+			display: block;
+			width: 2.375rem;
+			height: 2.375rem;
+			line-height: 2.375rem;
+			text-align: center;
+			pointer-events: none;
+			color: $color-icon-primary;
+			font-size: 18px;
+		}
+		input{
+			font-size: 14px;
+		}
+		button{
+			text-transform: capitalize;
+			font-size: 13px;
+			font-weight: 700;
+			line-height: 21.79px;
+		}
+		
+		.fa-google {
+			background: conic-gradient(from -45deg, #ea4335 110deg, #4285f4 90deg 180deg, #34a853 180deg 270deg, #fbbc05 270deg) 73% 55%/150% 150% no-repeat;
+			-webkit-background-clip: text;
+			background-clip: text;
+			color: transparent;
+			-webkit-text-fill-color: transparent;
+			font-size: 21px;
+		}
+		.form__daftar-link{
+			a{
+				color:coral;
+			}
+		}
+	}
+}
+
+@mixin inside_card_auth_desktop{
+	.form__auth{
+		margin-top: 1.9rem;
+		color:$default;
+		h4{
+			font-size: 30px;
+			font-weight: 700;
+			line-height: 49.03px;
+		}
+
+		.has-input .form-control {
+			padding-left: 2.250rem;
+		}
+		.has-input .form-control-feedback {
+			position: absolute;
+			z-index: 2;
+			display: block;
+			width: 2.375rem;
+			height: 2.375rem;
+			line-height: 2.375rem;
+			text-align: center;
+			pointer-events: none;
+			color: $color-icon-primary;
+		}
+		button{
+			text-transform: capitalize;
+			font-size: 16px;
+			font-weight: 700;
+			line-height: 21.79px;
+		}
+		.line{
+			list-style: none;
+		}
+		.fa-google {
+			background: conic-gradient(from -45deg, #ea4335 110deg, #4285f4 90deg 180deg, #34a853 180deg 270deg, #fbbc05 270deg) 73% 55%/150% 150% no-repeat;
+			-webkit-background-clip: text;
+			background-clip: text;
+			color: transparent;
+			-webkit-text-fill-color: transparent;
+			font-size: 21px;
+		}
+
+		.form__daftar-link{
+			a{
+				color:coral;
+			}
+		}
+	}
+}
+
+// End auth component base on auth.scss

@@ -1,0 +1,19 @@
+// Styling from layout component
+// navigation component
+.nav-link {
+	@include navbar_mobile;
+}
+.btn__login{
+	@include button_primary;
+}
+@media (min-width: 992px) {
+	.nav-link {
+		@include navbar_desktop;
+	}
+	.my__btn-primary{
+		@include button_primary;
+	}
+	.animated-icon2{
+		background-color:$default-black!important;
+	}
+}
