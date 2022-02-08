@@ -187,13 +187,13 @@
 	margin:0;
 	z-index: -1;
 	.caption {
-    	background-image: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
-    	position: absolute;
-    	margin-top: -2.3rem;
-    	width: 100%;
-    	height: 217px;
-    	text-align: left;
-    	color: $default;
+		background-image: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+		position: absolute;
+		margin-top: -2.3rem;
+		width: 100%;
+		height: 217px;
+		text-align: left;
+		color: $default;
 		img{
 			width: 50%;
 			margin-top: -1rem;
@@ -223,28 +223,28 @@
 	z-index: -1;
 	.caption {
 		background-image: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
-    	position: absolute;
-    	z-index: 9999;
-    	margin-top: .1rem;
-    	width: 100%;
-    	height: 99%;
-    	text-align: left;
-    	color: $default;
-    	img{
-    		width: 70%;
-    	}
-    	h2{
-    		text-shadow: 0 3px 20px rgba(0, 0, 0, 0.5);
-    		font-size: 24px;
-    		font-weight: 700;
-    		line-height: 38.68px;
-    	}
-    	blockquote{
-    		font-size: 14px;
-    		font-weight: 400;
-    		line-height: 19.07px;
-    	}
-    }
+		position: absolute;
+		z-index: 9999;
+		margin-top: .1rem;
+		width: 100%;
+		height: 99%;
+		text-align: left;
+		color: $default;
+		img{
+			width: 70%;
+		}
+		h2{
+			text-shadow: 0 3px 20px rgba(0, 0, 0, 0.5);
+			font-size: 24px;
+			font-weight: 700;
+			line-height: 38.68px;
+		}
+		blockquote{
+			font-size: 14px;
+			font-weight: 400;
+			line-height: 19.07px;
+		}
+	}
 }
 
 @mixin parallax_overlay{
@@ -347,66 +347,66 @@
 // card testimoni content
 @mixin card_testimonial_mobile{
 	.card__testimoni-content {
-    position: relative;
-    background-color: $testimoni-card;
-    border-radius: 10px;
-    color: #fff;
-    .quote__txt {
-      font-size: 20px;
-      font-weight:700; 
-      line-height: 27.24px;
-      margin-bottom: 0;
-    }
-  }
+		position: relative;
+		background-color: $testimoni-card;
+		border-radius: 10px;
+		color: #fff;
+		.quote__txt {
+			font-size: 20px;
+			font-weight:700; 
+			line-height: 27.24px;
+			margin-bottom: 0;
+		}
+	}
 
-  .profile__name {
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 21px;
-    margin-top: 27px;
-    color: $default;
-  }
-  .testimoni__date{
-  	position: absolute;
-  	font-size:14px;
-  	margin-top: -23rem;
-    font-weight: 700;
-    line-height: 21px;
-    left: 170px;
-  	color:$default;
-  }
+	.profile__name {
+		font-size: 18px;
+		font-weight: 700;
+		line-height: 21px;
+		margin-top: 27px;
+		color: $default;
+	}
+	.testimoni__date{
+		position: absolute;
+		font-size:14px;
+		margin-top: -23rem;
+		font-weight: 700;
+		line-height: 21px;
+		left: 170px;
+		color:$default;
+	}
 }
 @mixin card_testimonial_desktop{
 	.card__testimoni-content {
-    position: relative;
-    background-color: $testimoni-card;
-    border-radius: 10px;
-    color: #fff;
-    height: 200px;
-    .quote__txt {
-      font-size: 18px;
-      font-weight:400;  
-      line-height: 27.24px;
-      margin-bottom: 0;
-    }
-  }
-  
-  .profile__name {
-    font-size: 18px;
-    margin-top: 30px;
-    font-weight: 700;
-    line-height: 21px;
-    color: $default;
-  }
-  .testimoni__date{
-  	position: absolute;
-  	color:$default;
-  	font-size:14px;
-  	margin-top: 60px;
-    font-weight: 700;
-    line-height: 21px;
-    left: 170px;
-  }
+		position: relative;
+		background-color: $testimoni-card;
+		border-radius: 10px;
+		color: #fff;
+		height: 200px;
+		.quote__txt {
+			font-size: 18px;
+			font-weight:400;  
+			line-height: 27.24px;
+			margin-bottom: 0;
+		}
+	}
+
+	.profile__name {
+		font-size: 18px;
+		margin-top: 30px;
+		font-weight: 700;
+		line-height: 21px;
+		color: $default;
+	}
+	.testimoni__date{
+		position: absolute;
+		color:$default;
+		font-size:14px;
+		margin-top: 60px;
+		font-weight: 700;
+		line-height: 21px;
+		left: 170px;
+	}
 }
 // end card testimoni
 // End main component base on main.scss
@@ -454,8 +454,9 @@
 			font-size: 21px;
 		}
 		.form__daftar-link{
+			margin-top: 5rem;
 			a{
-				color:coral;
+				color:$color-primary;
 			}
 		}
 	}
@@ -505,7 +506,7 @@
 
 		.form__daftar-link{
 			a{
-				color:coral;
+				color:$color-primary!important;
 			}
 		}
 	}

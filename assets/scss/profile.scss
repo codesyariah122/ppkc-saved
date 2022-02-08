@@ -20,6 +20,7 @@
 @media (min-width: 992px) {
 	.profile__page{
 		margin-top: 7rem;
+
 		.card__profile-page{
 			.profile__info-data{
 				.col__img-profile{				
@@ -28,8 +29,8 @@
 					}
 				}
 				.col__data-profile{
-					margin-left: -21rem;
-					margin-top: 2rem;				
+					margin-left: -13rem;
+					margin-top: 1rem;				
 					h4{
 						color: $color-primary;
 						font-size:23px;
@@ -45,14 +46,37 @@
 			}
 
 			.profile__options-page{
-				margin-top:2rem; margin-left: 5rem;
+				margin-top:2rem;
+				margin-left:5rem;
+				button{
+					width:100px;
+				}
 			}
 		}
 		.tabs__detail-profile{
 			margin-top:2rem;
-			.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+			.nav-tabs {
+				width: 50%;
+				margin-left: -1rem;
+				border-bottom: none;
+			}
+
+			.nav-item.show .nav-link, .nav-tabs .nav-link.active {
 				color:$color-primary;
-				border-bottom: 3px solid $color-primary;
+				font-weight: 700;
+				line-height: 31px;
+				font-size: 18px;
+				border:0;
+				margin-bottom: 3rem;
+				&:after{
+					content:'';
+					display: block;
+					border-bottom: 3px solid #0B63DC;
+					width:45%;
+					margin:auto;
+					padding-bottom: 5px;
+					margin-bottom: -8px;
+				}
 			}
 			ul li {
 				list-style: none;
@@ -70,11 +94,11 @@
 			}
 
 			.badge__category{
-				margin-left: -13rem;
+				margin-left: -9rem;
 			}
 
 			.row__form-filter{
-				margin-left: -13rem;	
+				margin-left: -25rem;	
 				.form__filter-profile-tabs{
 					select{
 						border: 1px solid $primary-button;
@@ -101,6 +125,12 @@
 					font-weight: 700;
 					top:5px;
 				}
+			}
+
+			.btn__link-event{
+				margin-top:5px;
+				margin-left: -2px;
+				border-radius:4px;
 			}
 		}
 	}

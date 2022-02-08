@@ -32,12 +32,29 @@
 
 		mounted(){
 			this.CheckToken(),
+			this.IsLoggedIn(),
 			this.UserProfileData(),
-			this.EventYangDiikuti(0,1),
+			this.EventYangDiikuti(),
 			this.EventCategories()
 		},
 
 		methods: {
+
+			IsLoggedIn(){
+				if(!this.token.accessToken){
+					this.$swal({
+						icon: 'error',
+						title: 'Oops...',
+						text: 'Sesi login telah habis!',
+					})
+					setTimeout(() => {
+						this.$router.push({
+							name: 'auth-login'
+						})
+					}, 900)
+				}
+			},
+
 			CheckToken(){
 				this.$store.dispatch('config/checkAuthLogin', 'token')
 			},
@@ -69,7 +86,7 @@
 				const url = `${this.api_url}/web/kegiatan/saya/list/page?start=${page}&jenis_pelatihan=${category}&bulan_pelatihan=${month}`
 				this.$axios.get(url)
 				.then(({data}) => {
-					// console.log(data.list_data.length)
+					console.log(data.list_data)
 					if(data.list_data.length > 0){
 						this.pelatihans = data.list_data
 					}else{
@@ -90,7 +107,8 @@
 
 				FetchData(url)
 				.then((data) => {
-					console.log(data)
+					// console.log(data)
+					// Ambil categories event
 					this.categories = data.list_jenis_kegiatan
 				})
 				.catch(err => console.log(err))

@@ -48,7 +48,9 @@
 								</nuxt-link>
 							</mdb-dropdown-item>
 							<div class="dropdown-divider"></div>
-							<mdb-dropdown-item>Logout</mdb-dropdown-item>
+							<mdb-dropdown-item @click="Logout">
+								Logout
+							</mdb-dropdown-item>
 						</mdb-dropdown-menu>
 					</mdb-dropdown>
 					<mdb-btn v-else @click="$router.push({name: 'auth-login'})" class="my__btn-primary ml-4 rounded" size="md">Masuk</mdb-btn>
@@ -75,6 +77,12 @@
 				{id:7, name: 'Fasilitator', link: '/ppkc/fasilitator'},
 				{id:8, name: 'Yayasan & Direksi', link: '/ppkc/yayasan-direksi'}
 				]
+			}
+		},
+
+		methods: {
+			Logout(){
+				this.$emit('logout-profile')
 			}
 		}
 	}

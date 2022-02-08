@@ -47,7 +47,13 @@
 							<mdb-row class="inside__second mt-3">
 
 								<mdb-col v-if="status_pendaftaran">
-									<mdb-btn color="success" size="md">{{status_pendaftaran}}</mdb-btn>
+									<div v-if="loading">
+										<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+										Loading...
+									</div>
+									<mdb-btn v-else color="primary" class="btn btn-success" size="md" disabled>
+										<mdb-icon far icon="calendar-check" /> {{status_pendaftaran}}
+									</mdb-btn>
 								</mdb-col>
 
 								<mdb-col v-else md="6">									
@@ -68,7 +74,13 @@
 			</mdb-row>
 
 			<!-- List Event lainnya -->
-			<mdb-row class="row justify-content-center event__detail-list">		
+			<mdb-row v-if="token.accessToken" class="row justify-content-center">
+				<mdb-col lg="12" xs="12" sm="12">
+					<ProfilepageEventAktif :token="token" :api_url="api_url" :events="events"/>
+				</mdb-col>
+			</mdb-row>
+
+			<mdb-row v-else class="row justify-content-center event__detail-list">		
 				<mdb-col lg="12" xs="12" sm="12">
 					<h4>Event Lainnya</h4>
 				</mdb-col>
@@ -84,8 +96,8 @@
 
 				<mdb-col lg="12" xs="12" sm="12" class="mt-3 mb-5">
 					<mdb-badge pill color="light-blue">
-							Page: {{currentPage}}
-						</mdb-badge>
+						Page: {{currentPage}}
+					</mdb-badge>
 				</mdb-col>
 				<!-- End paginationn -->
 
@@ -200,8 +212,6 @@
 				})
 			},
 
-		
-
 			StatusPembayaran(){
 				const url = `${this.api_url}/web/event/${this.$route.params.id}`
 				this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
@@ -210,7 +220,9 @@
 					this.status_pendaftaran = data.kegiatan.status_pendaftaran_value
 				})
 				.catch(err => console.log(err))
-			}
+			},
+
+
 
 		},
 

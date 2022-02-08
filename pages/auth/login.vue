@@ -48,7 +48,7 @@
 						this.show_alert = true
 						this.validation = res.message
 					}
-					const alert_data = `${res.user.nama}, Login berhasil !`
+					const alert_data = `Halo, Selamat Datang ${res.user.nama}, Login berhasil !`
 					this.Alert('success', alert_data)
 
 					// store access token

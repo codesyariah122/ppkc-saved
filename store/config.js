@@ -15,8 +15,14 @@ export const mutations = {
 		state.config.api_url=url
 	},
 
-	CONFIG_AUTH_LOGIN(state, data){
-		state.config.auth=localStorage.setItem('token', data)
+	CONFIG_AUTH_LOGIN(state, data, login=true){
+		console.log(login)
+		if(login){
+			state.config.auth=localStorage.setItem('token', data)
+		}else{
+			localStorage.removeItem('token')
+		}
+		// state.config.auth=option ? localStorage.setItem('token', data) : localStorage.removeItem('token')
 	},
 
 	CONFIG_CHECK_LOGIN(state, name){

@@ -2,16 +2,6 @@
 	<div>
 		<div class="card__list" :style="berita__list_style">
 			<mdb-container>
-
-				<!-- header -->
-				<mdb-row class="row justify-content-center header__ppkc-list-page">
-					<mdb-col lg="12" xs="12" sm="12">
-						<h4>Berita</h4>
-						<p>Ikuti semua kegiatan dan berita dari PPKC</p>
-					</mdb-col>
-				</mdb-row>
-
-				<!-- content -->
 				<mdb-row class="justify-content-center">
 					<mdb-col lg="12" xs="12" sm="12" class="mt-2">
 						<mdb-alert color="info" class="text-center">
@@ -46,7 +36,7 @@
 					<!-- List berita inside global-components -->
 					<mdb-col lg="12" xs="12" sm="12">
 						<div class="card__list">
-							<GlobalsListInside :path="path" :lists="lists" :listToShow="listToShow"/>
+							<GlobalsListBerita :lists="lists" :listToShow="listToShow"/>
 						</div>
 					</mdb-col>
 
@@ -59,15 +49,14 @@
 <script>
 
 	export default{
-		props: ['path', 'lists', 'loading', 'listToShow'],
+		props: ['lists', 'loading', 'listToShow'],
 		data(){
 			return {
 				currentPage: 1,
 
-				berita__list_style: this.$router.path == '/ppkc/berita' && this.$device.isDeskktop ? 'margin-top: 15rem;' : 'margin-top: 7rem;'
+				berita__list_style: this.$router.path == 'berita' && this.$device.isDeskktop ? 'margin-top: 15rem;' : 'margin-top: 5rem;'
 			}
 		},
-
 
 		methods: {
 			LoadBerita(page){

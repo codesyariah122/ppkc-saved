@@ -61,9 +61,9 @@
 				</mdb-btn>
 			</div>
 
-			<mdb-row :class="`${$device.isMobile ? 'justify-content-center black-text form__daftar-link' : 'justify-content-center black-text mb-2 mt-5'}`">
+			<mdb-row :class="`${$device.isMobile ? 'justify-content-center black-text form__daftar-link' : 'justify-content-center black-text mb-2'}`">
 				<mdb-col md="12" xs="12" sm="12" lg="12">
-					<h6 :class="`${$device.isMobile ? 'text-center mt-5 mb-5' : 'text-center mt-3 mb-5' }`">Belum punya Akun ? <nuxt-link to="/auth/registrasi">Daftar Sekarang</nuxt-link></h6>
+					<h6 :class="`${$device.isMobile ? 'text-center mt-5 mb-5' : 'text-center mt-5 mb-5' }`">Belum punya Akun ? <nuxt-link to="/auth/registrasi">Daftar Sekarang</nuxt-link></h6>
 				</mdb-col>
 
 				<mdb-col v-if="show_alert" lg="12" xs="12" sm="12" class="mb-3">

@@ -27,7 +27,8 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: 'Pusat Pengembangan Kesehatan Carolus | PPKC - Website' },
       { name: 'format-detection', content: 'telephone=no' },
-      { hid: 'og:image', property: 'og:image', content: 'http://ppkcarolus.com/upload/tampak_luar-min.jpg' }
+      { hid: 'og:image', property: 'og:image', content: 'http://ppkcarolus.com/upload/tampak_luar-min.jpg' },
+      { httpEquiv: "X-Frame-Options",  content:"deny"}
     ],
     link: [
       {

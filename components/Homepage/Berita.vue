@@ -4,11 +4,11 @@
 			<mdb-row class="justify-content-between">
 				<!-- colomn header berita -->
 				<mdb-col class="header__inside-content" md="3">
-					<h1 class="mt-5 mb-3">Berita</h1>
+					<h1 class="mb-3">Berita</h1>
 					<blockquote class="mb-5">Ikuti semua kegiatan dan berita dari PPKC</blockquote>
 					<mdb-tooltip trigger="hover" :options="{placement: 'top'}">
 						<span slot="tip"> Lihat semua berita </span>
-						<nuxt-link to="/ppkc/berita" class="btn__tooltip" slot="reference">
+						<nuxt-link to="/berita" class="btn__tooltip" slot="reference">
 							lihat semua berita 
 							<mdb-icon icon="arrow-right" />
 						</nuxt-link>

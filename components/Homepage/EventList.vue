@@ -9,7 +9,7 @@
 			</mdb-col>
 			<!-- <mdb-col md="4"></mdb-col> -->
 			<mdb-col md="3" class="text-justify text-capitalize mb-5 mt-2">
-				<mdb-tooltip trigger="hover" :options="{placement: 'top'}" :class="`${$device.isDesktop ? 'ml-4' : ''}`">
+				<mdb-tooltip trigger="hover" :options="{placement: 'top'}" :class="`${$device.isDesktop ? 'ml-3' : ''}`">
 					<span slot="tip"> Lihat semua pelatihan dan  webinar </span>
 					<nuxt-link to="/events" slot="reference">lihat semua pelatihan <mdb-icon icon="arrow-right" /></nuxt-link>
 				</mdb-tooltip>

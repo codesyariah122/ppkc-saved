@@ -12,7 +12,7 @@
 	import {FetchData} from '@/helpers'
 
 	export default{
-		name: 'detail-berita-id-slug',
+		name: 'detail-berita-slug',
 		layout: 'default'
 	}
 </script>

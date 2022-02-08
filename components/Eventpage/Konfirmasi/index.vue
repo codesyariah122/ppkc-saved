@@ -12,6 +12,7 @@
 				</mdb-container>
 
 				<mdb-container v-else>
+
 					<mdb-row class="justify-content-center header__registrasi-event-card">
 						<mdb-col md="12">						
 							<h6>Event</h6>
@@ -107,7 +108,7 @@
 
 						<mdb-col md="12">
 							<center>
-								<nuxt-link to="/events" class="white-text">Kembali Ke Events</nuxt-link>
+								<nuxt-link :to="`/detail/event/${$route.params.id}`" class="white-text">Kembali Ke Events</nuxt-link>
 							</center>
 						</mdb-col>
 					</mdb-row>
@@ -133,7 +134,10 @@
 				},
 				field: {},
 				new_message:'',
-				status_pembayaran: ''
+				status_pembayaran: '',
+				new_preview: '',
+				total_bayar: '',
+				status_bayar: null
 			}
 		},
 
@@ -152,9 +156,37 @@
 				const config = {
 					headers: {'content-type' : 'multipart/form-data'}
 				}
-				this.$axios.post(`/web/event/${this.id}/konfirmasi`, formData, config)
+				this.$axios.post(`${this.api_url}/web/event/${this.id}/buktibayar`, formData, config)
 				.then(({data}) => {
 					console.log(data)
+					this.new_preview = data.kegiatan_peserta.bukti_bayar
+
+					this.total_bayar = data.kegiatan_peserta.total_bayar
+
+					this.$swal({
+						position: 'top-end',
+						icon: status,
+						title: "Kami akan segera memverifikasi pembayaran anda",
+						showConfirmButton: false,
+						timer: 1500
+					})
+
+					this.status_bayar = true
+
+					const data_storage = {
+						data: data.kegiatan_peserta,
+						message: "Terima kasih telah melakukan pembayaran kami akan segera melakukan proses verifikasi pembayaran anda"
+					}
+
+					localStorage.setItem("success", JSON.stringify(data_storage))
+
+					this.$router.push({
+						name: 'events-id-success',
+						params: {
+							id: this.id
+						}
+					})
+
 				})
 				.catch(err => console.log(err))
 				.finally(() => {
