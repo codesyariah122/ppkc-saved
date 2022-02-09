@@ -8,7 +8,7 @@
 					<blockquote class="mb-5">Ikuti semua kegiatan dan berita dari PPKC</blockquote>
 					<mdb-tooltip trigger="hover" :options="{placement: 'top'}">
 						<span slot="tip"> Lihat semua berita </span>
-						<nuxt-link to="/berita" class="btn__tooltip" slot="reference">
+						<nuxt-link to="/ppkc/berita" class="btn__tooltip" slot="reference">
 							lihat semua berita 
 							<mdb-icon icon="arrow-right" />
 						</nuxt-link>
