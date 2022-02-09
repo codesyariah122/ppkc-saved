@@ -88,14 +88,15 @@
 				.col__img-profile{				
 					img{
 						max-width: 130px;
+						margin-left: -1rem;
 					}
 				}
 				.col__data-profile{
-					margin-left: -13rem;
+					margin-left: -15rem;
 					margin-top: 1rem;				
 					h4{
 						color: $color-primary;
-						font-size:23px;
+						font-size:21px;
 						font-weight:700;
 					}
 					ul li{
@@ -112,7 +113,7 @@
 				margin-left:5rem;
 				button{
 					text-align: left;
-					width:120px;
+					// width:100px;
 				}
 			}
 		}
@@ -124,22 +125,36 @@
 				border-bottom: none;
 			}
 
-			.nav-item.show .nav-link, .nav-tabs .nav-link.active {
+			.nav-tabs .nav-link.active{
 				color:$color-primary;
-				font-weight: 700;
-				line-height: 31px;
-				font-size: 18px;
 				border:0;
 				margin-bottom: 3rem;
+				font-weight: 700;
+				line-height: 31px;
+				font-size: 15px;
 				&:after{
 					content:'';
 					display: block;
 					border-bottom: 3px solid #0B63DC;
-					width:45%;
+					width:100%;
 					margin:auto;
 					padding-bottom: 5px;
 					margin-bottom: -8px;
 				}
+			}
+
+			.nav-link{
+				color:$color-primary!important;
+				font-weight: 700;
+				line-height: 31px;
+				font-size: 16px;
+			}
+
+			.nav-item.show .nav-link {
+				color:$color-primary!important;
+				font-weight: 700;
+				line-height: 31px;
+				font-size: 18px;
 			}
 			ul li {
 				list-style: none;
@@ -161,8 +176,14 @@
 			}
 
 			.row__form-filter{
-				margin-left: -25rem;	
+				margin-left: -3rem!important;
 				.form__filter-profile-tabs{
+					.select__1{
+						margin-left: -55px;
+					}
+					.select__2{
+						margin-left: 20px;
+					}
 					select{
 						border: 1px solid $primary-button;
 						border-sizing: border-box;
@@ -170,14 +191,17 @@
 						color: $primary-button;
 						border-radius: 5px;
 						height:33.7px;
-						width:150px!important;
+						font-size: 11px!important;
+						width:120px!important;
+						margin-left: 10rem!important;
 					}
 					button{
 						margin-top:-3px!important;
-						margin-left: 2.9rem;
-						width: 150px!important;
-						height: 38px;
+						margin-left: 5rem;
+						width: 140px!important;
+						height: 25px;
 						border-radius:4px;
+						font-size:10px!important;
 						background-color: $primary-button!important;
 					}
 				}
@@ -188,6 +212,7 @@
 					line-height: 19px;
 					font-weight: 700;
 					top:5px;
+					left: 300px!important;
 				}
 			}
 

@@ -12,7 +12,7 @@
 					<center>						
 						<mdb-card reverse class="card__berita-img">
 							<mdb-view hover cascade>
-								<a href="#!">
+								<a :href="lists.result.foto_url" target="_blank">
 									<mdb-card-image :src="lists.result.foto_url" alt="Card image cap"></mdb-card-image>
 									<mdb-mask waves overlay="white-slight"></mdb-mask>
 								</a>

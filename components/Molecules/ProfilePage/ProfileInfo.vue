@@ -1,11 +1,10 @@
 <template>
 	<div class="profile__info">
 		<ul class="mt-3">
-			<li>
+			<li class="mb-3">
 				<strong class="text-primary text-uppercase font-weight-bold">Nira</strong> <br>
-				<p>
-					<strong>{{profiles.no_anggota}}</strong>
-				</p>
+				
+				<mdb-badge color="success">{{profiles.no_anggota}}</mdb-badge>
 			</li>
 			<li>
 				<strong class="text-primary text-uppercase font-weight-bold">Pekerjaan</strong> <br>

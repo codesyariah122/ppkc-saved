@@ -17,19 +17,21 @@
     <b-container class="container">
       <b-row>
         <b-col>
-          <h2 class="display-6 text-capitalize white-text">
-            Selamat datang di PPKC
-          </h2>
-          <p style="color: white">
-            Pusat Pengembangan Kesehatan Caroulus (PPKC) menyelenggarakan
-            pelatihan di bidang kesehatan yang profesional, unggul dan
-            berlandaskan I-CARE serta mampu berdaya saing di tingkat nasional.
-          </p>
-          <b-button
-          class="my__btn-primary rounded"
-          @click="$router.push({ name: 'auth-registrasi' })"
-          >Daftar Sekarang</b-button
-          >
+          <div class="caption__banner">            
+            <h2 class="display-6 text-capitalize white-text">
+              Selamat datang di PPKC
+            </h2>
+            <p style="color: white">
+              Pusat Pengembangan Kesehatan Caroulus (PPKC) menyelenggarakan
+              pelatihan di bidang kesehatan yang profesional, unggul dan
+              berlandaskan I-CARE serta mampu berdaya saing di tingkat nasional.
+            </p>
+            <b-button
+            class="my__btn-primary rounded"
+            @click="$router.push({ name: 'auth-registrasi' })"
+            >Daftar Sekarang</b-button
+            >
+          </div>
         </b-col>
       </b-row>
     </b-container>

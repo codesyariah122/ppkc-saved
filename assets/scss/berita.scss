@@ -7,7 +7,8 @@
 		.col__berita-1{
 			margin-bottom: 2rem;
 			.card__berita-img{
-				max-width: 100%
+				max-width: 250px;
+				object-fit: cover;
 			}
 			h4{
 				color: $color-primary;
@@ -30,6 +31,7 @@
 				font-weight: 400;
 				line-height: 25px;
 				text-align: justify;
+				text-indent: 70px;
 			}
 		}
 	}
