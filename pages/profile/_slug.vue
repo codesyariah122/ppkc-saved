@@ -27,15 +27,15 @@
 		},
 
 		beforeMount(){
-			this.ConfigApiUrl()
+			this.ConfigApiUrl(),
+			this.UserProfileData(),
+			this.EventYangDiikuti(),
+			this.EventCategories()
 		},
 
 		mounted(){
 			this.CheckToken(),
-			this.IsLoggedIn(),
-			this.UserProfileData(),
-			this.EventYangDiikuti(),
-			this.EventCategories()
+			this.IsLoggedIn()
 		},
 
 		methods: {

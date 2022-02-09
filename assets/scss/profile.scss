@@ -1,18 +1,80 @@
 // Styling Profile page
 // mobile
 .profile__page{
-	margin-top:5rem;
+	margin-top:7rem;
 	.card__profile-page{
 		.profile__info-data{
 			.col__img-profile{
 				img{
 					max-width: 150px;
+					margin-left: 3.5rem;
+				}
+			}
+			.col__data-profile{
+				margin-top: 1rem;				
+				h4{
+					color: $color-primary;
+					font-size:23px;
+					font-weight:700;
+				}
+				ul li{
+					list-style: none;
+				}
+				li{
+					margin-left: -2.5rem;
 				}
 			}
 		}
 	}
 	.tabs__detail-profile{
 		margin-top:2rem;
+		// width: 100%;
+		.tabs {
+			.nav-tabs{
+				margin-left: -1rem;
+			}
+
+			.profile__info{
+				ul li{
+					list-style: none;
+				}
+			}
+
+			.row__form-filter{
+				margin-left: -17rem;
+				width:80%;
+				.form__filter-profile-tabs{
+					select{
+						border: 1px solid $primary-button;
+						border-sizing: border-box;
+						background: $default;
+						color: $primary-button;
+						border-radius: 5px;
+						height:33.7px;
+						width:190px;
+						margin-bottom: 1rem;
+						margin-left: 200px;
+					}
+					button{
+						margin-top:12px;
+						width: 320px;
+						left:100px;
+						height: 38px;
+						border-radius:4px;
+						font-size:16px;
+						background-color: $primary-button!important;
+					}
+				}
+				.form__filter-caption{
+					left:220px;
+					color: $color-primary;
+					font-size: 16px;
+					line-height: 19px;
+					font-weight: 700;
+					top:5px;
+				}
+			}
+		}
 	}
 }
 
@@ -49,7 +111,8 @@
 				margin-top:2rem;
 				margin-left:5rem;
 				button{
-					width:100px;
+					text-align: left;
+					width:120px;
 				}
 			}
 		}
@@ -107,18 +170,19 @@
 						color: $primary-button;
 						border-radius: 5px;
 						height:33.7px;
-						width:170px;
+						width:150px!important;
 					}
 					button{
-						margin-top:-5px;
-						width: 150px;
+						margin-top:-3px!important;
+						margin-left: 2.9rem;
+						width: 150px!important;
 						height: 38px;
 						border-radius:4px;
 						background-color: $primary-button!important;
 					}
 				}
 				.form__filter-caption{
-					left:312px;
+					left:312px!important;
 					color: $color-primary;
 					font-size: 16px;
 					line-height: 19px;

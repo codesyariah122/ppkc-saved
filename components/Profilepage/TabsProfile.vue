@@ -13,8 +13,8 @@
 					</b-col>
 					<b-col cols="5" class="form__filter-profile-tabs">
 						<form @submit.prevent="FilterEventChild">			
-							<b-row>
-								<b-col cols="4">
+							<b-row class="d-flex justify-content-center">
+								<b-col col="4" xs="12" sm="12">
 									<select selected :value="undefined" @change="ChangeCategoryChild($event)">
 										<option value="">Jenis Pelatihan</option>
 										<option v-for="(item, index) in categories" :value="item.code">
@@ -22,7 +22,7 @@
 										</option>
 									</select>
 								</b-col>
-								<b-col cols="4">
+								<b-col col="4" xs="12" sm="12">
 									<select selected :value="undefined" @change="ChangeMonthChild($event)">
 										<option value="">Bulan Pelatihan</option>
 										<option v-for="(month, index) in $moment.months()" :value="index + 1">
@@ -30,7 +30,7 @@
 										</option>
 									</select>
 								</b-col>
-								<b-col cols="4">
+								<b-col col="4" xs="12" sm="12">
 									<mdb-btn size="sm" type="submit">
 										<div v-if="loading">
 											<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -61,7 +61,7 @@
 							<mdb-col lg="12" xs="12" sm="12">
 								<mdb-card-title>{{item.kegiatan_title}}</mdb-card-title>
 								<small>
-									{{$moment(item.tanggal_awal).format("LL")}} {{$moment(item.tanggal_akhir).format("LL")}}
+									{{$moment(item.tanggal_awal).format("LL")}} - {{$moment(item.tanggal_akhir).format("LL")}}
 								</small>
 								<mdb-row class="d-flex justify-content-start">
 									<mdb-col md="3">
@@ -72,6 +72,10 @@
 									</mdb-col>
 								</mdb-row>
 								<mdb-row class="d-flex justify-content-start mb-3">
+									<!-- <br>
+									<pre>
+										{{categories[index].value}}
+									</pre> -->
 									<mdb-col md="3">
 										<span>Kategori : </span> 
 									</mdb-col>
@@ -106,6 +110,7 @@
 
 	export default{
 		props: ['profiles', 'studs', 'works', 'pelatihans', 'categories', 'loading', 'field'],
+		
 		components: {
 			ProfileInfo
 		},

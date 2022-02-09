@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="profile__info">
 		<ul class="mt-3">
 			<li>
 				<strong class="text-primary text-uppercase font-weight-bold">Nira</strong> <br>

@@ -1,6 +1,6 @@
 <template>
 	<div class="mt-2 card__content">
-		<mdb-row>
+		<mdb-row class="row justify-content-center">
 			<mdb-col id="show-event" v-if="listIndex <= lists.length" v-for="listIndex in listToShow" md="4" xs="12" sm="12" :key="lists[listIndex-1].kegiatan_id">
 				<mdb-card>
 					<mdb-view hover>

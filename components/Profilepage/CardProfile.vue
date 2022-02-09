@@ -16,7 +16,7 @@
 
 					<mdb-col sm="6" md="4" class="profile__options-page">
 						<mdb-btn outline="primary" size="sm">
-							<mdb-icon icon="edit" /> Edit Profile
+							<mdb-icon icon="user-edit" /> Edit 
 						</mdb-btn>
 						<mdb-btn color="deep-orange" size="sm" @click="LogoutProfile">
 							<mdb-icon icon="edit" />Logout

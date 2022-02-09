@@ -3,7 +3,7 @@
 		<LayoutsNavbarDesktop :token="token" :profiles="profiles" :slug="slug" @logout-profile="LogoutProfile"/>
 	</div>
 	<div v-else>
-		<LayoutsNavbarMobile :token="token" :profiles="profiles" :slug="slug"/>
+		<LayoutsNavbarMobile :token="token" :profiles="profiles" :slug="slug" @logout-profile="LogoutProfile"/>
 	</div>
 </template>
 
@@ -24,6 +24,7 @@
 				}).then((result) => {
 					if (result.isConfirmed) {
 						this.$store.dispatch('config/storeConfigAuth', '')
+						this.$store.dispatch('config/setEventToLogin', '')
 						this.$swal(
 							'Logout!',
 							`Anda berhasil keluar dari profile ${this.profiles.nama}.`,

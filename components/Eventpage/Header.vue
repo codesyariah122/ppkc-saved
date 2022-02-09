@@ -62,7 +62,7 @@
 				</mdb-col>
 				
 				<!-- Pagination option components -->
-				<mdb-pagination color="blue" md class="mt-3">
+				<mdb-pagination v-if="lists.length > 1" color="blue" md class="mt-3">
 					<b-pagination 
 					v-model="currentPage"
 					:total-rows="lists.length"

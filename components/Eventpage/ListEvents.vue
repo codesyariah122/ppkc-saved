@@ -1,8 +1,8 @@
 <template>
 	<div class="mt-2 card__content">
-		<mdb-row>
+		<mdb-row class="row justify-content-center">
 			<mdb-col id="show-event" v-for="list in lists" class="col-lg-4 d-flex align-items-stretch" md="4" xs="12" sm="12" :key="list.kegiatan_id">
-				<mdb-card>
+				<mdb-card :style="`${$device.isMobile ? 'max-width:350px; margin-left:.7rem;' : ''}`">
 					<mdb-view hover>
 						<a :href="`/detail/event/${list.kegiatan_id}/${$slug(list.kegiatan_title)}`">
 							<mdb-card-image

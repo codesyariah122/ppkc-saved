@@ -29,7 +29,7 @@
 				</div>
 			</form>
 			<!-- Material form login -->
-			<mdb-row class="row justify-content-center white-text">
+			<!-- <mdb-row class="row justify-content-center white-text">
 				<mdb-col md="5" class="mt-2">
 					<b-dropdown-divider class="line"></b-dropdown-divider>
 				</mdb-col>
@@ -46,7 +46,7 @@
 				<mdb-btn block color="white" size="md" class="text-primary">
 					<mdb-icon fab icon="google" /> Daftar dengan Akun Google
 				</mdb-btn>
-			</div>
+			</div> -->
 
 			<mdb-row :class="`${$device.isMobile ? 'justify-content-center black-text form__daftar-link' : 'justify-content-center black-text'}`">
 				<mdb-col md="12" xs="12" sm="12" lg="12">

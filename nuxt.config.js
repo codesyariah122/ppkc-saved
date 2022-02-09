@@ -67,6 +67,7 @@ export default {
       '~assets/scss/berita.scss',
       '~assets/scss/auth.scss',
       '~assets/scss/profile.scss',
+      '~assets/scss/event-detail-login.scss'
     ]
   },
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins

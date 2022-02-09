@@ -39,17 +39,17 @@
 					<!-- check user login -->
 					<mdb-dropdown v-if="token.accessToken" tag="li" class="nav-item nav-profile" style="font-size:31px!important;">
 						<mdb-dropdown-toggle tag="a" navLink slot="toggle">
-							<mdb-icon far icon="user-circle" />Profile
+							<mdb-icon far icon="user-circle" /> Profile
 						</mdb-dropdown-toggle>
 						<mdb-dropdown-menu>
 							<mdb-dropdown-item>
-								<nuxt-link :to="{name: 'profile-slug', params: {slug: $username(slug)}}">
-									{{profiles.nama}}
+								<nuxt-link :to="{name: 'profile-slug', params: {slug: $username(slug)}}" class="text-center">
+									<mdb-icon icon="user-check" /> {{profiles.nama}}
 								</nuxt-link>
 							</mdb-dropdown-item>
 							<div class="dropdown-divider"></div>
-							<mdb-dropdown-item @click="Logout">
-								Logout
+							<mdb-dropdown-item @click="Logout" class="text-center">
+								<mdb-icon icon="sign-out-alt" /> Logout
 							</mdb-dropdown-item>
 						</mdb-dropdown-menu>
 					</mdb-dropdown>

@@ -1,5 +1,5 @@
 <template>
-	<div class="event__detail mb-5">
+	<div :class="`${$device.isDesktop ? 'event__detail mb-5' : 'event__detail'}`">
 		<mdb-container>
 			<!-- Event detail content -->
 			<mdb-row class="row event__detail-content">
@@ -56,11 +56,11 @@
 									</mdb-btn>
 								</mdb-col>
 
-								<mdb-col v-else md="6">									
+								<mdb-col v-else md="4">									
 									<mdb-btn v-if="data_event || token.accessToken" color="primary" size="md" class="my__btn-primary" @click="RegistrasiEvent(events.kegiatan.kegiatan_id)">Daftar</mdb-btn>
 									<mdb-btn v-else size="md" color="grey" disabled class="mb-3 not__allowed">Daftar</mdb-btn>
 								</mdb-col>
-								<mdb-col  v-if="!token.accessToken" md="6">
+								<mdb-col  v-if="!token.accessToken" md="8">
 									<p>
 										Silahkan masuk untuk mendaftar pelatihan ini <br>
 										<a @click="SetEventLogin(events)" class="text-primary">Masuk Sekarang</a>
@@ -73,20 +73,21 @@
 				</mdb-col>
 			</mdb-row>
 
-			<!-- List Event lainnya -->
+			<!-- Event profile setelah login -->
 			<mdb-row v-if="token.accessToken" class="row justify-content-center">
 				<mdb-col lg="12" xs="12" sm="12">
 					<ProfilepageEventAktif :token="token" :api_url="api_url" :events="events"/>
 				</mdb-col>
 			</mdb-row>
 
+			<!-- List Event lainnya -->
 			<mdb-row v-else class="row justify-content-center event__detail-list">		
 				<mdb-col lg="12" xs="12" sm="12">
 					<h4>Event Lainnya</h4>
 				</mdb-col>
 
 				<!-- Pagination option components & info -->
-				<mdb-pagination color="blue" md class="mt-3">
+				<mdb-pagination v-if="lists.length > 1" color="blue" md class="mt-3">
 					<b-pagination 
 					v-model="currentPage"
 					:total-rows="lists.length"
@@ -132,7 +133,8 @@
 				listToShow: 3,
 				loading:null,
 				currentPage: 1,
-				status_pendaftaran: ''
+				status_pendaftaran: '',
+				id: this.$route.params.id
 			}
 		},
 
@@ -172,8 +174,10 @@
 
 				FetchData(url)
 				.then((res) => {
-					this.lists = res.list_kegiatan_terdekat
-					// console.log(res)
+					this.lists = res.map(d => {
+						d.list_kegiatan_terdekat.filter(d => d.id != this.id)
+					})
+					console.log(this.lists)
 				})
 				.catch((err) => {
 					console.log(err.response)
@@ -220,9 +224,7 @@
 					this.status_pendaftaran = data.kegiatan.status_pendaftaran_value
 				})
 				.catch(err => console.log(err))
-			},
-
-
+			}
 
 		},
 

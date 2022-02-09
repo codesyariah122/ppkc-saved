@@ -30,15 +30,17 @@
 				</mdb-navbar-nav>
 				<!-- check user login -->
 				<mdb-dropdown v-if="token.accessToken" tag="li" class="nav-item">
-					<mdb-dropdown-toggle tag="a" navLink slot="toggle" size="md">Profile</mdb-dropdown-toggle>
+					<mdb-dropdown-toggle tag="a" navLink slot="toggle" size="md"><mdb-icon far icon="user-circle" /> Profile</mdb-dropdown-toggle>
 					<mdb-dropdown-menu>
 						<mdb-dropdown-item>
-							<nuxt-link :to="{name: 'profile-slug', params: {slug: $username(slug)}}">
-								{{profiles.nama}}
+							<nuxt-link :to="{name: 'profile-slug', params: {slug: $username(slug)}}" class="text-center">
+								<mdb-icon icon="user-check" /> {{profiles.nama}}
 							</nuxt-link>
 						</mdb-dropdown-item>
 						<div class="dropdown-divider"></div>
-						<mdb-dropdown-item>Logout</mdb-dropdown-item>
+						<mdb-dropdown-item @click="Logout" class="text-center">
+							<mdb-icon icon="sign-out-alt" /> Logout
+						</mdb-dropdown-item>
 					</mdb-dropdown-menu>
 				</mdb-dropdown>
 
@@ -64,6 +66,12 @@
 					{id:7, name: 'Fasilitator', link: '/ppkc/fasilitator'},
 					{id:8, name: 'Yayasan & Direksi', link: '/ppkc/yayasan-direksi'}
 				]
+			}
+		},
+
+		methods: {
+			Logout(){
+				this.$emit('logout-profile')
 			}
 		}
 	}

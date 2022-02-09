@@ -35,7 +35,7 @@
 <script>
 	//Image base on assets directory
 	import HeroImage from '~/assets/images/homepage/hero-image.svg'
-	import HeroImageMobile from '~/assets/images/homepage/hero-image-mobile.svg'
+	import HeroImageMobile from '~/assets/images/homepage/banner.svg'
 
 	export default {
 		name: 'home',
