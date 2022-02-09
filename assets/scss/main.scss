@@ -109,19 +109,52 @@
 		img{
 			max-width: 100%;
 		}
+		.carousel-control-prev-icon,
+		.carousel-control-next-icon {
+			height: 50px !important;
+			width: 50px !important;
+			margin-top: -5rem;
+			border-radius:50%;
+			background-color: $color-primary;
+		}
+		.carousel-indicators{
+			z-index: 9999;
+			li{
+				width:20px;
+				height: 20px;
+				background-color: linear-gradient(to top, $color-primary, $bg-second-primary);
+			}
+			.active{
+					background-color: $bg-second-primary !important;	
+				}
+		}
 	
 		.container{
 			z-index: 1000;
-			max-width: 1000px;
+			width: $bg-jumbo-width;
+			height: 270px;
 			position: absolute;
 			left: 0;
 			right: 0;
 			top: 75%;
 			text-align: left;
 			transform: translateY(-50%);
+			background-image: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
 			h2, p{
 				text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.5);
 				font-weight: 700;
+				font-size: 33px;
+				margin-top:1rem;
+			}
+			p{
+				width: 600px;
+				text-align: justify;
+				font-size: 16px;
+			}
+			button{
+				background-color:$color-primary;
+				font-size: 14px;
+				border-radius:8px;
 			}
 			&:after{
 				content: "";
@@ -131,6 +164,7 @@
 				top:0;
 				position:absolute;
 				background-image: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.5));
+				z-index:1;
 			}
 		}
 	}
@@ -343,7 +377,7 @@
 		@include header_inside_list_desktop($color-primary);
 		.col__testimoni{
 			.card{
-				height: 210px;
+				height: 270px;
 				@include card_rounded_desktop;
 			}
 		}

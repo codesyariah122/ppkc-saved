@@ -8,13 +8,13 @@
 					<blockquote class="mb-5">PPKC telah melakukan berbagai macam pelatihan dan telah banyak membantu meningkatkan kemampuan tenaga kesehatan</blockquote>
 					<mdb-tooltip trigger="hover" :options="{placement: 'top'}">
 						<span slot="tip"> Lihat semua berita </span>
-						<nuxt-link to="/testimoni" slot="reference">lihat semua testimoni <mdb-icon icon="arrow-right" /></nuxt-link>
+						<nuxt-link to="/ppkc/testimoni" slot="reference">lihat semua testimoni <mdb-icon icon="arrow-right" /></nuxt-link>
 					</mdb-tooltip>
 				</mdb-col>
 				<!-- column card testimoni -->
 				<mdb-col col="12" class="col__testimoni mt-5 mb-5" md="9">
 					<!-- Testimoni card components -->
-					<CardTestimoni :lists="lists"/>
+					<MoleculesHomepageMoleculesCardTestimoni :lists="lists"/>
 				</mdb-col>
 			</mdb-row>
 		</mdb-container>
@@ -22,12 +22,7 @@
 </template>
 
 <script>
-	import CardTestimoni from '@/components/Molecules/HomepageMolecules/CardTestimoni'
-
 	export default{
-		props: ['lists'],
-		components: {
-			CardTestimoni
-		}
+		props: ['lists']
 	}
 </script>

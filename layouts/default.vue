@@ -20,6 +20,15 @@
 			}
 		},
 
+		head:{
+			script: [
+				{
+					src: 'https://widget.tochat.be/bundle.js?key=170a7420-1695-469f-8d04-c0971fb44c8c',
+					defer: true
+				}
+			]
+		},
+
 		beforeMount(){
 			this.ConfigApiUrl(),
 			this.CheckToken()

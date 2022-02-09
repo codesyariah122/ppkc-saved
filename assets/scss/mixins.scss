@@ -214,7 +214,7 @@
 }
 
 @mixin parallax_desktop{
-	min-height: 170px; 
+	min-height: 180px; 
 	background-attachment: fixed;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -278,7 +278,7 @@
 				color: $color-link;
 			}
 		}
-		margin-top: 2.9rem;
+		margin-top: 3.5rem;
 		h1{
 			color:$color;
 			font-size:30px;
@@ -382,7 +382,7 @@
 		background-color: $testimoni-card;
 		border-radius: 10px;
 		color: #fff;
-		height: 200px;
+		height: 230px;
 		.quote__txt {
 			font-size: 18px;
 			font-weight:400;  
