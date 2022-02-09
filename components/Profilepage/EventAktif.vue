@@ -58,12 +58,12 @@
 
 
 
-				<mdb-col col="8" md="8" class="content__detail mt-3">
+				<mdb-col col="8" md="8" class="content__event-pelatihan mt-3">
 					<div v-if="show_file">
-						<object v-if="detailed.file_pdf" :data="detailed.file_pdf" type="application/pdf" width="100%" :height="`${$device.isDesktop ? '800px' : '500px'}`">
+						<object v-if="detailed.file_pdf" :data="detailed.file_pdf" type="application/pdf" width="95%" :height="`${$device.isDesktop ? '800px' : '500px'}`">
 						</object>
 
-						<div v-if="detailed.video">
+						<div v-if="detailed.video" class="embed__video">
 							<!-- <b-embed
 							type="iframe"
 							aspect="16by9"
@@ -73,7 +73,7 @@
 							<b-embed
 							type="iframe"
 							aspect="16by9"
-							src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0"
+							:src="detailed.video"
 							allowfullscreen
 							></b-embed>
 						</div>

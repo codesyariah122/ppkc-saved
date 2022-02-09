@@ -86,7 +86,7 @@
 				const url = `${this.api_url}/web/kegiatan/saya/list/page?start=${page}&jenis_pelatihan=${category}&bulan_pelatihan=${month}`
 				this.$axios.get(url)
 				.then(({data}) => {
-					console.log(data.list_data)
+					// console.log(data.list_data)
 					if(data.list_data.length > 0){
 						this.pelatihans = data.list_data
 					}else{

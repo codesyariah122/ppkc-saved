@@ -64,6 +64,14 @@
 									{{$moment(item.tanggal_awal).format("LL")}} - {{$moment(item.tanggal_akhir).format("LL")}}
 								</small>
 								<mdb-row class="d-flex justify-content-start">
+									<mdb-col md="12">
+										<blockquote class="blockquote-footer">
+											{{item.kegiatan_desc}}
+										</blockquote>
+										<!-- <pre>
+											{{item}}
+										</pre> -->
+									</mdb-col>
 									<mdb-col md="3">
 										<span>Status : </span> 
 									</mdb-col>
@@ -113,6 +121,10 @@
 		
 		components: {
 			ProfileInfo
+		},
+
+		mounted(){
+			console.log(this.categories)
 		},
 
 		methods: {

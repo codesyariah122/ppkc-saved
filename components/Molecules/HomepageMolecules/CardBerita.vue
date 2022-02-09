@@ -9,7 +9,7 @@
 			<mdb-col v-if="listsIndex <= lists.length" v-for="listsIndex in listsToShow" md="5" :class="`${$device.isDesktop || $device.isTablet ? 'mr-5' : ''}`" :key="lists[listsIndex-1].id">
 				<mdb-card>
 					<mdb-view hover class="rounded">
-						<a href="#!">
+						<a :href="`/detail/berita/${lists[listsIndex-1].id}/${$slug(lists[listsIndex-1].judul)}`">
 							<mdb-card-image
 							:src="lists[listsIndex-1].foto_url"
 							alt="Card image cap" class="img-fluid"/>
@@ -18,11 +18,7 @@
 					</mdb-view>
 					<mdb-card-body>
 						<mdb-card-title class="mb-5 mt-1">{{lists[listsIndex-1].judul}}</mdb-card-title>
-
-						<mdb-tooltip trigger="hover" :options="{placement: 'top'}">
-							<span slot="tip"> Baca berita secara lengkap </span>
-							<a href="#" slot="reference">Baca Selengkapnya <mdb-icon icon="arrow-right" /></a>
-						</mdb-tooltip>
+						<nuxt-link :to="{name: `detail-berita-id-slug`, params: {id: lists[listsIndex-1].id, slug: $slug(lists[listsIndex-1].judul)}}" class="mt-5 mb-2" color="primary">Baca Selengkapnya <mdb-icon icon="arrow-right" /></nuxt-link>
 					</mdb-card-body>
 				</mdb-card>
 			</mdb-col>

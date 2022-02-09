@@ -6,7 +6,7 @@
 // Desktop
 @media (min-width: 992px) {
 	.pelatihan__box{
-		background-color: $bg-button-gray;		
+		background-color: rgba(220, 220, 211, 0.3);		
 		.nav__event-pelatihan {
 			.btn__pelatihan {
 				background-color: $bg-button-clean!important;
@@ -51,6 +51,15 @@
 				&:hover{
 					color: $color-primary;
 				}
+			}
+		}
+		.content__event-pelatihan{
+			width: 100%;
+			object {
+				margin-left: 23px;
+			}
+			.embed__video{
+				margin-left: 23px;
 			}
 		}
 	}
