@@ -13,7 +13,7 @@
 								{{lists[listIndex-1].testimoni}}
 							</span>
 							<p class="profile__name">
-								{{lists[listIndex-1].konsumen ? lists[listIndex-1] : 'PPKC Visitor'}}
+								{{lists[testiIndex-1].konsumen ? lists[testiIndex-1].konsumen : 'PPKC Visitor'}}
 							</p>
 						</blockquote>
 					</mdb-container>

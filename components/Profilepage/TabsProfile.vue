@@ -13,7 +13,7 @@
 					</b-col>
 					<b-col cols="5" class="form__filter-profile-tabs">
 						<form @submit.prevent="FilterEventChild">			
-							<b-row class="row justify-content-center">
+							<b-row class="d-flex justify-content-center">
 								<b-col cols="4" xs="12" sm="12" lg="12" class="select__1">
 									<select selected :value="undefined" @change="ChangeCategoryChild($event)">
 										<option value="">Jenis Pelatihan</option>
@@ -22,6 +22,7 @@
 										</option>
 									</select>
 								</b-col>
+
 								<b-col cols="4" xs="12" sm="12" lg="12" class="select__2">
 									<select selected :value="undefined" @change="ChangeMonthChild($event)">
 										<option value="">Bulan Pelatihan</option>
@@ -37,7 +38,7 @@
 											Loading...
 										</div>
 										<div v-else>
-											Terapkan Filter		
+											<mdb-icon icon="filter" size="lg"/> Terapkan Filter		
 										</div>
 									</mdb-btn>
 								</b-col>

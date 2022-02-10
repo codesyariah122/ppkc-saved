@@ -7,7 +7,7 @@
 					<h1 class="mb-3">Testimoni</h1>
 					<blockquote class="mb-5">PPKC telah melakukan berbagai macam pelatihan dan telah banyak membantu meningkatkan kemampuan tenaga kesehatan</blockquote>
 					<mdb-tooltip trigger="hover" :options="{placement: 'top'}">
-						<span slot="tip"> Lihat semua berita </span>
+						<span slot="tip"> Lihat semua testimoni </span>
 						<nuxt-link to="/ppkc/testimoni" slot="reference">lihat semua testimoni <mdb-icon icon="arrow-right" /></nuxt-link>
 					</mdb-tooltip>
 				</mdb-col>

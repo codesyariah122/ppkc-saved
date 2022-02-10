@@ -60,7 +60,7 @@
 
 				<mdb-col col="8" md="8" class="content__event-pelatihan mt-3">
 					<div v-if="show_file">
-						<object v-if="detailed.file_pdf" :data="detailed.file_pdf" type="application/pdf" width="95%" :height="`${$device.isDesktop ? '800px' : '500px'}`">
+						<object v-if="detailed.file_pdf" :data="detailed.file_pdf" type="application/pdf" width="90%" :height="`${$device.isDesktop ? '800px' : '500px'}`">
 						</object>
 
 						<div v-if="detailed.video" class="embed__video">

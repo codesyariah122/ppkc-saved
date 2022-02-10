@@ -81,10 +81,10 @@
 				width:100%;
 				.form__filter-profile-tabs{
 					.select__1{
-						margin-left: -50px;
+						margin-left: -52px;
 					}
 					.select__2{
-						margin-left: -53px;
+						margin-left: -50px;
 						margin-top: 3rem;
 					}
 					select{
@@ -242,16 +242,16 @@
 			}
 
 			.row__form-filter{
-				margin-left: 3rem!important;
+				margin-left: 8rem!important;
 				margin-top: -2rem;
 				width:100%;
 				.form__filter-profile-tabs{
 					.select__1{
-						margin-left: -33rem!important;
+						margin-left: -23rem!important;
 					}
 					.select__2{
-						margin-left: -15rem!important;
-						margin-top: 0rem!important;
+						margin-left: -24.3rem!important;
+						// margin-top: 0rem!important;
 					}
 					select{
 						border: 1px solid $primary-button!important;
@@ -260,15 +260,16 @@
 						color: $primary-button!important;
 						border-radius: 5px!important;
 						height:33.7px!important;
-						width:130px!important;
+						width:150px!important;
 						font-size: 10px!important;
 						margin-bottom: 1rem!important;
 						margin-left: 200px!important;
 					}
 					button{
-						margin-top:-5.5rem!important;
-						width: 160px!important;
-						left:9rem!important;
+						// margin-top:-5.5rem!important;
+						margin-top:1em!important;
+						width: 180px!important;
+						left:.1rem!important;
 						height: 33px!important;
 						border-radius:4px!important;
 						font-size:10px!important;
@@ -276,7 +277,7 @@
 					}
 				}
 				.form__filter-caption{
-					left:100px!important;
+					left:250px!important;
 					color: $color-primary;
 					font-size: 14px!important;
 					line-height: 19px!important;
