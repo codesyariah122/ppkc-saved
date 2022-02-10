@@ -31,10 +31,25 @@
 		},
 
 		mounted(){
+			this.IsLoggedIn(),
 			this.EventDataLogin()
 		},
 
 		methods: {
+			IsLoggedIn(){
+				if(!this.token.accessToken){
+					this.$swal({
+						icon: 'error',
+						title: 'Oops...',
+						text: 'Anda telah login!',
+					})
+					setTimeout(() => {
+						this.$router.push({
+							name: 'auth-login'
+						})
+					}, 900)
+				}
+			},
 			Login(params){
 				this.loading = true
 				const url = `${this.api_url}/web/auth/login`
