@@ -30,9 +30,44 @@
 		margin-top:2rem;
 		// width: 100%;
 		.tabs {
-			.nav-tabs{
+			.nav-tabs {
+				width: 100%;
 				margin-left: -1rem;
+				border-bottom: none;
 			}
+
+			.nav-tabs .nav-link.active{
+				color:$color-primary;
+				border:0;
+				margin-bottom: 3rem;
+				font-weight: 700;
+				line-height: 31px;
+				font-size: 13px;
+				&:after{
+					content:'';
+					display: block;
+					border-bottom: 3px solid #0B63DC;
+					width:100%;
+					margin:auto;
+					padding-bottom: 5px;
+					margin-bottom: -8px;
+				}
+			}
+
+			.nav-link{
+				color:$color-primary!important;
+				font-weight: 500;
+				line-height: 31px;
+				font-size: 14px;
+			}
+
+			.nav-item.show .nav-link {
+				color:$color-primary!important;
+				font-weight: 700;
+				line-height: 31px;
+				font-size: 18px;
+			}
+			
 
 			.profile__info{
 				ul li{
@@ -42,8 +77,16 @@
 
 			.row__form-filter{
 				margin-left: -17rem;
-				width:80%;
+				margin-top: -2rem;
+				width:100%;
 				.form__filter-profile-tabs{
+					.select__1{
+						margin-left: -85px;
+					}
+					.select__2{
+						margin-left: -47px;
+						margin-top: 3rem;
+					}
 					select{
 						border: 1px solid $primary-button;
 						border-sizing: border-box;
@@ -51,30 +94,53 @@
 						color: $primary-button;
 						border-radius: 5px;
 						height:33.7px;
-						width:190px;
+						width:160px;
+						font-size: 10px;
 						margin-bottom: 1rem;
 						margin-left: 200px;
 					}
 					button{
-						margin-top:12px;
-						width: 320px;
-						left:100px;
-						height: 38px;
+						margin-top:100px;
+						width: 250px;
+						left:60px;
+						height: 30px;
 						border-radius:4px;
-						font-size:16px;
+						font-size:10px;
 						background-color: $primary-button!important;
 					}
 				}
 				.form__filter-caption{
 					left:220px;
 					color: $color-primary;
-					font-size: 16px;
+					font-size: 14px;
 					line-height: 19px;
 					font-weight: 700;
 					top:5px;
 				}
 			}
 		}
+
+		.card{
+			.card-title{
+				font-size: 16px;
+				font-weight: 700;
+				color: $color-primary;
+				text-transform:capitalize;
+			}
+			small{
+				font-size:10px;
+				font-weight: 700;
+				color: $default-gray;
+			}
+			h4{
+				font-size:16px;
+				font-weight: bold;
+			}
+			a{
+				font-size:11px;
+			}
+		}
+
 	}
 }
 

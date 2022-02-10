@@ -16,7 +16,7 @@
 						<ul>
 							<li class="mb-2"> 
 								<a :href="`mailto:${profiles.email}`">
-									{{profiles.email}}
+									<mdb-icon far icon="envelope-open" /> {{profiles.email}}
 								</a> 
 							</li>
 							<li> 
@@ -30,7 +30,7 @@
 							<mdb-icon icon="user-cog" size="lg"/>
 						</mdb-btn>
 						<mdb-btn color="deep-orange" size="sm" @click="LogoutProfile">
-							<mdb-icon icon="edit" size="lg"/>Logout
+							<mdb-icon icon="sign-out-alt" size="lg"/> Logout
 						</mdb-btn>
 					</mdb-col>
 				</mdb-row>

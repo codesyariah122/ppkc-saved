@@ -13,8 +13,8 @@
 					</b-col>
 					<b-col cols="5" class="form__filter-profile-tabs">
 						<form @submit.prevent="FilterEventChild">			
-							<b-row class="d-flex justify-content-center">
-								<b-col cols="4" class="select__1">
+							<b-row class="row justify-content-center">
+								<b-col cols="4" xs="12" sm="12" lg="12" class="select__1">
 									<select selected :value="undefined" @change="ChangeCategoryChild($event)">
 										<option value="">Jenis Pelatihan</option>
 										<option v-for="(item, index) in categories" :value="item.code">
@@ -22,7 +22,7 @@
 										</option>
 									</select>
 								</b-col>
-								<b-col cols="4" class="select__2">
+								<b-col cols="4" xs="12" sm="12" lg="12" class="select__2">
 									<select selected :value="undefined" @change="ChangeMonthChild($event)">
 										<option value="">Bulan Pelatihan</option>
 										<option v-for="(month, index) in $moment.months()" :value="index + 1">
@@ -30,7 +30,7 @@
 										</option>
 									</select>
 								</b-col>
-								<b-col cols="4">
+								<b-col cols="4" xs="12" sm="12" lg="12">
 									<mdb-btn size="sm" type="submit">
 										<div v-if="loading">
 											<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
