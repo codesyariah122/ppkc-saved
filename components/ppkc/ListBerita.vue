@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<mdb-row>
-			<mdb-col id="show-event" v-if="listIndex <= lists.length" v-for="listIndex in listToShow" md="4" xs="12" sm="12" :key="lists[listIndex-1].id" class="mb-2">
+			<mdb-col id="show-event" v-if="listIndex <= lists.length" v-for="listIndex in listToShow" md="4" xs="12" sm="12" :key="lists[listIndex-1].id" class="mb-2 col-lg-4 d-flex align-items-stretch">
 				<mdb-card>
 					<mdb-view hover>
 						<a :href="`/detail/berita/${lists[listIndex-1].id}/${$slug(lists[listIndex-1].judul)}`">

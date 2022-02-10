@@ -74,9 +74,16 @@
 			</mdb-row>
 
 			<!-- Event profile setelah login -->
-			<mdb-row v-if="token.accessToken" class="row justify-content-center">
+			<mdb-row v-if="token.accessToken" class="row justify-content-center event__detail-profile">
 				<mdb-col lg="12" xs="12" sm="12">
-					<ProfilepageEventAktif :token="token" :api_url="api_url" :events="events"/>
+					<div v-if="$device.isDesktop">
+						<ProfilepageEventAktif :token="token" :api_url="api_url" :events="events"/>
+					</div>
+					<div v-else>
+						<mdb-alert color="warning" v-if="p1" @closeAlert="p1=false" dismiss>
+							<strong>Ooppss !</strong> Untuk menampilkan konten ini anda harus membuka nya di komputer/PC - Laptop.
+						</mdb-alert>
+					</div>
 				</mdb-col>
 			</mdb-row>
 
@@ -134,7 +141,8 @@
 				loading:null,
 				currentPage: 1,
 				status_pendaftaran: '',
-				id: this.$route.params.id
+				id: this.$route.params.id,
+				p1: true
 			}
 		},
 

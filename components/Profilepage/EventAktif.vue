@@ -86,11 +86,11 @@
 
 
 		<!-- debuging -->
-		<pre class="mt-5">
+		<!-- <pre class="mt-5">
 			{{pelatihans.map(d => {
 				return d.categories
 			})}}
-		</pre>
+		</pre> -->
 	</div>
 </template>
 
