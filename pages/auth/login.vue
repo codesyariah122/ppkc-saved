@@ -37,12 +37,8 @@
 
 		methods: {
 			IsLoggedIn(){
-				if(!this.token.accessToken){
-					this.$swal({
-						icon: 'error',
-						title: 'Oops...',
-						text: 'Anda telah login!',
-					})
+				if(this.token.accessToken){
+					this.Alert('success', 'Anda telah login')
 					setTimeout(() => {
 						this.$router.push({
 							name: 'auth-login'
