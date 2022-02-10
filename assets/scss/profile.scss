@@ -81,10 +81,10 @@
 				width:100%;
 				.form__filter-profile-tabs{
 					.select__1{
-						margin-left: -85px;
+						margin-left: -50px;
 					}
 					.select__2{
-						margin-left: -47px;
+						margin-left: -53px;
 						margin-top: 3rem;
 					}
 					select{
@@ -186,7 +186,7 @@
 		.tabs__detail-profile{
 			margin-top:2rem;
 			.nav-tabs {
-				width: 50%;
+				width: 50%!important;
 				margin-left: -1rem;
 				border-bottom: none;
 			}
@@ -242,43 +242,46 @@
 			}
 
 			.row__form-filter{
-				margin-left: -3rem!important;
+				margin-left: 3rem!important;
+				margin-top: -2rem;
+				width:100%;
 				.form__filter-profile-tabs{
 					.select__1{
-						margin-left: -55px;
+						margin-left: -33rem!important;
 					}
 					.select__2{
-						margin-left: 20px;
+						margin-left: -15rem!important;
+						margin-top: 0rem!important;
 					}
 					select{
-						border: 1px solid $primary-button;
-						border-sizing: border-box;
-						background: $default;
-						color: $primary-button;
-						border-radius: 5px;
-						height:33.7px;
-						font-size: 11px!important;
-						width:120px!important;
-						margin-left: 10rem!important;
+						border: 1px solid $primary-button!important;
+						border-sizing: border-box!important;
+						background: $default!important;
+						color: $primary-button!important;
+						border-radius: 5px!important;
+						height:33.7px!important;
+						width:130px!important;
+						font-size: 10px!important;
+						margin-bottom: 1rem!important;
+						margin-left: 200px!important;
 					}
 					button{
-						margin-top:-3px!important;
-						margin-left: 5rem;
-						width: 140px!important;
-						height: 25px;
-						border-radius:4px;
+						margin-top:-5.5rem!important;
+						width: 160px!important;
+						left:9rem!important;
+						height: 33px!important;
+						border-radius:4px!important;
 						font-size:10px!important;
 						background-color: $primary-button!important;
 					}
 				}
 				.form__filter-caption{
-					left:312px!important;
+					left:100px!important;
 					color: $color-primary;
-					font-size: 16px;
-					line-height: 19px;
-					font-weight: 700;
-					top:5px;
-					left: 300px!important;
+					font-size: 14px!important;
+					line-height: 19px!important;
+					font-weight: 700!important;
+					top:5px!important;
 				}
 			}
 

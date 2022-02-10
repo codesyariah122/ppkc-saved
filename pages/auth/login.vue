@@ -3,6 +3,11 @@
 		<mdb-container>
 			<mdb-row class="row justify-content-center">
 				<mdb-col md="6" sm="8" xs="8">
+
+					<!-- <pre>
+						{{profiles }}
+					</pre> -->
+
 					<AuthpageLoginCard @login-profile="Login" :validation="validation" :show_alert="show_alert" :loading="loading" ref="AuthLogin" :event_data="event_data"/>
 				</mdb-col>
 			</mdb-row>
@@ -22,30 +27,54 @@
 				validation:{},
 				show_alert: null,
 				profiles:[],
+				username: '',
 				loading: null
 			}
 		},
 
 		beforeMount(){
-			this.ConfigApiUrl()
+			this.ConfigApiUrl(),
+			this.CheckToken()
 		},
 
 		mounted(){
-			this.IsLoggedIn(),
-			this.EventDataLogin()
+			this.EventDataLogin(),
+			this.UserProfileData(),
+			this.IsLoggedIn()
 		},
 
 		methods: {
 			IsLoggedIn(){
 				if(this.token.accessToken){
-					this.Alert('success', 'Anda telah login')
+					this.Alert('success', `Anda sedang login`)
 					setTimeout(() => {
 						this.$router.push({
-							name: 'auth-login'
+							name: 'profile-slug',
+							params: {
+								slug: this.username
+							}
 						})
 					}, 900)
 				}
 			},
+
+			CheckToken(){
+				this.$store.dispatch('config/checkAuthLogin', 'token')
+			},
+
+			UserProfileData(){
+				if(this.token){					
+					const url = `${this.api_url}/web/user`
+					this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
+					this.$axios.get(url)
+					.then(({data}) => {
+						this.profiles = data.user
+						this.username = this.$username(data.user.nama)
+					})
+					.catch(err => console.log(err.response ? err.response : ''))
+				}
+			},
+
 			Login(params){
 				this.loading = true
 				const url = `${this.api_url}/web/auth/login`
@@ -142,7 +171,10 @@
 			},
 			event_data(){
 				return this.$store.getters['config/ConfigEventDataLogin']
-			}
+			},
+			token(){
+				return this.$store.getters['config/ConfigCheckLogin']
+			},
 		}
 	}
 </script>
