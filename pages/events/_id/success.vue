@@ -9,10 +9,10 @@
 					</center>
 				</mdb-col>
 				
-				<pre>
+				<!-- <pre>
 					{{your_events}}
 				</pre>
-
+ -->
 				<mdb-col lg="6" class="mt-3">
 					<mdb-alert color="success">
 						{{checks.message}}

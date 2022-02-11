@@ -40,7 +40,8 @@
 		mounted(){
 			this.EventDataLogin(),
 			this.UserProfileData(),
-			this.IsLoggedIn()
+			this.IsLoggedIn(),
+			console.log(this.event_data)
 		},
 
 		methods: {
@@ -78,8 +79,8 @@
 			Login(params){
 				this.loading = true
 				const url = `${this.api_url}/web/auth/login`
-				const event_id = this.event_data.kegiatan ? this.event_data.kegiatan.kegiatan_id : false
-				const event_slug = this.event_data.kegiatan ? this.$slug(this.event_data.kegiatan.kegiatan_title) : false
+				const event_id = this.event_data.event_id ? this.event_data.event_id : false
+				const event_path = this.event_data.event_path ? this.event_data.event_path : false
 				// Method from helpers
 				LoginProfile(url, params)
 				.then((res) => {
@@ -101,11 +102,7 @@
 					if(event_id){
 						// console.log("ok send event")
 						this.$router.push({
-							name: 'detail-event-id-slug',
-							params: {
-								id:  event_id,
-								slug: event_slug
-							}
+							path: event_path
 						})
 					}else{
 						// console.log("no event data")

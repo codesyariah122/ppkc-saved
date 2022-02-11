@@ -1,8 +1,8 @@
 <template>
 	<div>
 		<b-card>
-			<mdb-container>							
-				<mdb-row class="d-flex justify-content-between profile__info-data">
+			<mdb-container class="profile__info-data">							
+				<mdb-row class="d-flex justify-content-between">
 					<!-- <pre>
 						{{profiles}}
 					</pre>
@@ -63,10 +63,12 @@
 							'success'
 							)
 
+						this.$router.push({
+							// name: 'auth-login'
+							path: this.$route.path
+						})
 						setTimeout(() => {
-							this.$router.push({
-								name: 'auth-login'
-							})
+							location.reload()
 						}, 900)
 					}
 				})

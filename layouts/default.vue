@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<LayoutsNavigation :token="token" :profiles="profiles" :slug="slug"/>
+		<LayoutsNavigation :token="token" :profiles="profiles" :slug="slug" :event_id="event_id" :event_path="event_path"/>
 		<Nuxt/>
 		<LayoutsFooter/>
 
@@ -16,19 +16,21 @@
 		data(){
 			return{
 				profiles: {},
-				slug: ''
+				slug: '',
+				event_id: this.$route.params.id,
+				event_path: this.$route.path
 			}
 		},
 
 		head:{
-			script: [
-				{
-					src: 'https://widget.tochat.be/bundle.js?key=93ba0156-969f-4e9c-b1c8-0c25aafde170',
-					defer: false
-				}
-			]
+			// script: [
+			// 	{
+			// 		src: 'https://widget.tochat.be/bundle.js?key=93ba0156-969f-4e9c-b1c8-0c25aafde170',
+			// 		defer: false
+			// 	}
+			// ]
 		},
-
+		
 		beforeMount(){
 			this.ConfigApiUrl(),
 			this.CheckToken()

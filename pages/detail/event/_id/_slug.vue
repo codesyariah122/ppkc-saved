@@ -5,6 +5,11 @@
 			<mdb-row class="row event__detail-content">
 				<mdb-col lg="12">
 					<mdb-row>
+
+						<!-- <pre>
+							{{events}}	
+						</pre> -->
+
 						<mdb-col md="3" sm="12" xs="12" class="col-1">
 							<img :src="events.kegiatan.photo" class="rounded">
 						</mdb-col>
@@ -46,26 +51,37 @@
 
 							<mdb-row class="inside__second mt-3">
 
-								<mdb-col v-if="status_pendaftaran">
+								<mdb-col v-if="status_pendaftaran == 'Daftar'" md="4">
 									<div v-if="loading">
 										<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
 										Loading...
 									</div>
-									<mdb-btn v-else color="primary" class="btn btn-success" size="md" disabled>
-										<mdb-icon far icon="calendar-check" /> {{status_pendaftaran}}
+									<div v-else>
+										<mdb-btn @click="RegistrasiEvent(events.kegiatan.kegiatan_id)" color="primary" size="md" class="my__btn-primary">
+											{{status_pendaftaran}}
+										</mdb-btn>
+									</div>
+								</mdb-col>
+
+								<mdb-col v-else-if="status_pendaftaran == 'Menunggu Konfirmasi'">
+									<mdb-btn @click="RegistrasiEvent(events.kegiatan.kegiatan_id)" disabled color="info"size="md"> 
+										<mdb-icon icon="check" /> {{status_pendaftaran}}
 									</mdb-btn>
 								</mdb-col>
 
-								<mdb-col v-else md="4">									
-									<mdb-btn v-if="data_event || token.accessToken" color="primary" size="md" class="my__btn-primary" @click="RegistrasiEvent(events.kegiatan.kegiatan_id)">Daftar</mdb-btn>
+								<mdb-col v-else>
+									<mdb-btn v-if="data_event || token.accessToken" color="success" size="md" >
+										<mdb-icon far icon="calendar-check" /> {{status_pendaftaran}}
+									</mdb-btn>
 									<mdb-btn v-else size="md" color="grey" disabled class="mb-3 not__allowed">Daftar</mdb-btn>
 								</mdb-col>
-								<mdb-col  v-if="!token.accessToken" md="8">
-									<p>
+
+								<!-- <mdb-col v-else md="8">
+									<p v-if="!token.accessToken">
 										Silahkan masuk untuk mendaftar pelatihan ini <br>
 										<a @click="SetEventLogin(events)" class="text-primary">Masuk Sekarang</a>
 									</p>
-								</mdb-col>
+								</mdb-col> -->
 							</mdb-row>
 
 						</mdb-col>
@@ -73,11 +89,15 @@
 				</mdb-col>
 			</mdb-row>
 
+			<!-- <pre>
+				{{data_event}}
+			</pre> -->
+
 			<!-- Event profile setelah login -->
 			<mdb-row v-if="token.accessToken" class="row justify-content-center event__detail-profile">
-				<mdb-col lg="12" xs="12" sm="12">
+				<mdb-col v-if="events" lg="12" xs="12" sm="12">
 					<div v-if="$device.isDesktop">
-						<ProfilepageEventAktif :token="token" :api_url="api_url" :events="events"/>
+						<ProfilepageEventAktif :token="token" :api_url="api_url" :events="events" :status_pendaftaran="status_pendaftaran"/>
 					</div>
 					<div v-else>
 						<mdb-alert color="warning" v-if="p1" @closeAlert="p1=false" dismiss>
@@ -176,25 +196,27 @@
 			},
 
 			ListEvent(page, category, month, keyword){
-				this.loading=true
-				
-				const url = `${this.api_url}/web/event/page?jenis_pelatihan=${category ? category : ''}&bulan_pelatihan=${month ? month : ''}&start=${page ? page : 0}&keyword=${keyword ? keyword : ''}`
+				if(this.token.accessToken){					
+					this.loading=true
 
-				FetchData(url)
-				.then((res) => {
-					this.lists = res.map(d => {
-						d.list_kegiatan_terdekat.filter(d => d.id != this.id)
+					const url = `${this.api_url}/web/event/page?jenis_pelatihan=${category ? category : ''}&bulan_pelatihan=${month ? month : ''}&start=${page ? page : 0}&keyword=${keyword ? keyword : ''}`
+
+					FetchData(url)
+					.then((res) => {
+						this.lists = res.map(d => {
+							d.list_kegiatan_terdekat.filter(d => d.id != this.id)
+						})
+						console.log(this.lists)
 					})
-					console.log(this.lists)
-				})
-				.catch((err) => {
-					console.log(err.response)
-				})
-				.finally(() => {
-					setTimeout(() => {
-						this.loading=false
-					}, 1000)
-				})
+					.catch((err) => {
+						console.log(err.response)
+					})
+					.finally(() => {
+						setTimeout(() => {
+							this.loading=false
+						}, 1000)
+					})
+				}
 			},
 
 			LoadEvent(page){
@@ -225,13 +247,15 @@
 			},
 
 			StatusPembayaran(){
-				const url = `${this.api_url}/web/event/${this.$route.params.id}`
-				this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
-				this.$axios.get(url)
-				.then(({data}) => {
-					this.status_pendaftaran = data.kegiatan.status_pendaftaran_value
-				})
-				.catch(err => console.log(err))
+				if(this.token.accessToken){
+					const url = `${this.api_url}/web/event/${this.$route.params.id}`
+					this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
+					this.$axios.get(url)
+					.then(({data}) => {
+						this.status_pendaftaran = data.kegiatan.status_pendaftaran_value
+					})
+					.catch(err => console.log(err))
+				}
 			}
 
 		},

@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<hr class="mt-5">
-		<mdb-container :class="`${$device.isDesktop ? 'mt-5' : ''}`">
+		<mdb-container  v-if="status_pendaftaran !== 'Menunggu Konfirmasi' &&status_pendaftaran !== 'Daftar'" :class="`${$device.isDesktop ? 'mt-5' : ''}`">
 			<mdb-row class="justify-content-center mt-2 mb-5">
 				<mdb-col lg="12" col="12">
 					<mdb-tooltip trigger="hover" :options="{placement: 'top'}">
@@ -44,7 +44,7 @@
 								</b-button>
 								<b-collapse :id="`collapse-${c.id}-inner`" class="collapse__category-event-2 mb-3">
 									<b-card>
-										<div v-for="(d, index) in c.details" :key="d.id" class="list__modul">
+										<div v-for="(d, index) in c.details" :key="d.id" class="list__modul mb-5">
 											<h5> {{d.title}} </h5>
 											<b-list-group>
 												<!-- <pre>
@@ -74,29 +74,20 @@
 					</div>
 					<div v-else>
 						<div v-if="show_file">
-							<div v-if="type === 'File Materi'">
-								<object v-if="detailed.file_pdf_original" :data="detailed.file_pdf" type="application/pdf" width="90%" :height="`${$device.isDesktop ? '800px' : '500px'}`">
-								</object>
-
-								<mdb-alert v-else color="danger" size="sm" class="text-center">
+							<object v-if="detailed.file_pdf_original" :data="detailed.file_pdf" type="application/pdf" width="90%" :height="`${$device.isDesktop ? '800px' : '500px'}`">
+							</object>
+							<div v-else-if="detailed.video" class="embed__video">
+								<b-embed
+								type="iframe"
+								aspect="16by9"
+								:src="detailed.video"
+								allowfullscreen
+								></b-embed>
+							</div>
+							<div v-else>
+								<mdb-alert color="danger" class="text-center">
 									File tidak tersedia
 								</mdb-alert>
-							</div>
-
-							<div v-else-if="type === 'Video Materi'">
-								<div v-if="detailed.video" class="embed__video">
-									<b-embed
-									type="iframe"
-									aspect="16by9"
-									:src="detailed.video"
-									allowfullscreen
-									></b-embed>
-								</div>
-								<div v-else>
-									<mdb-alert color="danger" class="text-center">
-										Video tidak tersedia
-									</mdb-alert>
-								</div>
 							</div>
 						</div>
 					</div>
@@ -105,14 +96,9 @@
 			</mdb-row>
 		</mdb-container>
 		
-
-
-
 		<!-- debuging -->
 		<!-- <pre class="mt-5">
-			{{pelatihans.map(d => {
-				return d.categories
-			})}}
+			{{pelatihans}}
 		</pre> -->
 	</div>
 </template>
@@ -120,7 +106,7 @@
 
 <script>
 	export default{
-		props: ['token', 'api_url', 'events'],
+		props: ['token', 'api_url', 'events', 'status_pendaftaran'],
 
 		data(){
 			return {
@@ -158,7 +144,7 @@
 				this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
 				this.$axios.get(`${this.api_url}/web/event/${this.$route.params.id}`)
 				.then(({data}) => {
-					// console.log(data)s
+					// console.log(data)
 					this.pelatihans = data.pelatihans
 				})
 				.catch(err => console.log(err))

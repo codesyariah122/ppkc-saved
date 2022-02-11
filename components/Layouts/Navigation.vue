@@ -1,18 +1,19 @@
 <template>
 	<div v-if="$device.isDesktop">
-		<LayoutsNavbarDesktop :token="token" :profiles="profiles" :slug="slug" @logout-profile="LogoutProfile"/>
+		<LayoutsNavbarDesktop :token="token" :profiles="profiles" :slug="slug" @logout-profile="LogoutProfile" :event_id="event_id" :event_path="event_path"/>
 	</div>
 	<div v-else>
-		<LayoutsNavbarMobile :token="token" :profiles="profiles" :slug="slug" @logout-profile="LogoutProfile"/>
+		<LayoutsNavbarMobile :token="token" :profiles="profiles" :slug="slug" @logout-profile="LogoutProfile" :event_id="event_id" :event_path="event_path"/>
 	</div>
 </template>
 
 <script>
 	export default{
-		props: ['token', 'profiles', 'slug'],
+		props: ['token', 'profiles', 'slug', 'event_id', 'event_path'],
 
 		methods: {
 			LogoutProfile(){
+				// console.log(this.$route.path)
 				this.$swal({
 					title: `Keluar sebagai ${this.profiles.nama}?`,
 					text: "Anda akan keluar dari halaman profile!",
@@ -30,11 +31,12 @@
 							`Anda berhasil keluar dari profile ${this.profiles.nama}.`,
 							'success'
 							)
-
+						this.$router.push({
+							// name: 'auth-login'
+							path: this.$route.path
+						})
 						setTimeout(() => {
-							this.$router.push({
-								name: 'auth-login'
-							})
+							location.reload()
 						}, 900)
 					}
 				})

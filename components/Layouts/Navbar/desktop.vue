@@ -53,7 +53,7 @@
 							</mdb-dropdown-item>
 						</mdb-dropdown-menu>
 					</mdb-dropdown>
-					<mdb-btn v-else @click="$router.push({name: 'auth-login'})" class="my__btn-primary ml-4 rounded" size="md">Masuk</mdb-btn>
+					<mdb-btn v-else @click="GoToLogin" class="my__btn-primary ml-4 rounded" size="md">Masuk</mdb-btn>
 					<!-- end check -->
 				</mdb-navbar-toggler>
 			</mdb-container>
@@ -64,7 +64,7 @@
 
 <script>
 	export default {
-		props: ['token', 'profiles', 'slug'],
+		props: ['token', 'profiles', 'slug', 'event_id', 'event_path'],
 		data(){
 			return  {
 				links: [
@@ -80,9 +80,38 @@
 			}
 		},
 
+		mounted(){
+			console.log(this.event_id)
+		},
+
 		methods: {
 			Logout(){
 				this.$emit('logout-profile')
+			},
+
+			GoToLogin(){
+				if(this.event_id === this.$route.params.id){
+					const data = {
+						event_id: this.event_id,
+						event_path: this.event_path
+					}
+					this.SetEventLogin(data)
+				}else{
+					this.$router.push({name: 'auth-login'})
+				}
+			},
+
+			SetEventLogin(data){
+				this.$store.dispatch('config/setEventToLogin', JSON.stringify(data))
+				this.$router.push({
+					name: 'auth-login'
+				})
+			}
+		},
+
+		computed: {
+			set_event(){
+				return this.$store.getters['config/ConfigSetEventLogin']
 			}
 		}
 	}
