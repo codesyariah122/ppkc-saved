@@ -30,6 +30,12 @@
 					color:$default;
 					font-weight: 500;
 					.list__modul{					
+						h5{
+							font-size:23px;
+							margin-left: 1rem;
+							font-weight: 700;
+							border-bottom:2px solid $default;
+						}
 						.list-group-item{
 							background-color:$color-primary!important;
 							border:0;
@@ -55,6 +61,10 @@
 		}
 		.content__event-pelatihan{
 			width: 100%;
+			.alert{
+				width: 80%;
+				margin-left: 3rem;
+			}
 			object {
 				margin-left: 37px;
 			}

@@ -1,7 +1,7 @@
 <template>
 	<div class="testimoni__list">
 		<mdb-row>
-			<mdb-col v-if="listIndex<= lists.length" v-for="listIndex in listToShow" col="12" md="6" :key="lists[listIndex-1].id" class="col__testimoni">
+			<mdb-col v-if="listIndex <= lists.length" v-for="listIndex in listToShow" col="12" md="6" :key="lists[listIndex-1].id" class="col__testimoni">
 				<mdb-card class="card__testimoni-content">
 					<mdb-container class="mt-4">
 						<!-- <small>
@@ -13,7 +13,7 @@
 								{{lists[listIndex-1].testimoni}}
 							</span>
 							<p class="profile__name">
-								{{lists[testiIndex-1].konsumen ? lists[testiIndex-1].konsumen : 'PPKC Visitor'}}
+								{{lists[listIndex-1].konsumen ? lists[listIndex-1].konsumen : 'PPKC Visitor'}}
 							</p>
 						</blockquote>
 					</mdb-container>

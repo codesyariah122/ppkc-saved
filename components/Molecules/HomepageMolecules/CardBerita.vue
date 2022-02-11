@@ -2,7 +2,7 @@
 	<div>
 
 		<!-- card lists -->
-		<mdb-row>
+		<mdb-row class="row justify-content-center">
 			<!-- <pre>
 				{{lists}}
 			</pre> -->

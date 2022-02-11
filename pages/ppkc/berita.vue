@@ -15,7 +15,7 @@
 			return {
 				loading: null,
 				lists: [],
-				listToShow: 9,
+				listToShow: 6,
 				path: this.$route.name
 			}
 		},

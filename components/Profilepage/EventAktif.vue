@@ -18,13 +18,13 @@
 			<mdb-row class="no-gutters pelatihan__box">
 				<mdb-col col="4" md="4" class="nav__event-pelatihan">
 					<div v-for="(item, index) in pelatihans" :key="item.id">
-						<b-button v-b-toggle="`collapse-${item.id}`" class="btn__pelatihan">
+						<b-button v-b-toggle="`collapse-${item.id}`" class="btn__pelatihan" @click="ToggleFile">
 							<mdb-row class="row justify-content-between">
 								<mdb-col md="6">	
 									Pelatihan {{item.id}} 
 								</mdb-col>
 								<mdb-col md="2">
-									<mdb-icon icon="plus" />
+									<mdb-icon icon="plus" size="lg"/>
 								</mdb-col>
 							</mdb-row>
 						</b-button>
@@ -32,7 +32,16 @@
 
 						<b-collapse :id="`collapse-${item.id}`" class="collapse__category-event-1">
 							<div v-for="(c, index) in item.categories"  :key="c.id">
-								<b-button v-b-toggle="`collapse-${c.id}-inner`" size="sm" class="btn__category">Kategori {{index+1}}</b-button>
+								<b-button v-b-toggle="`collapse-${c.id}-inner`" size="sm" class="btn__category" @click="ToggleFile">
+									<mdb-row class="row justify-content-between">
+										<mdb-col md="6">
+											Kategori {{index+1}}
+										</mdb-col>
+										<mdb-col md="2">
+											<mdb-icon icon="plus" size="lg"/>
+										</mdb-col>
+									</mdb-row>
+								</b-button>
 								<b-collapse :id="`collapse-${c.id}-inner`" class="collapse__category-event-2 mb-3">
 									<b-card>
 										<div v-for="(d, index) in c.details" :key="d.id" class="list__modul">
@@ -53,31 +62,45 @@
 							</div>
 						</b-collapse>
 					</div>
-
 				</mdb-col>
 
-
-
 				<mdb-col col="8" md="8" class="content__event-pelatihan mt-3">
-					<div v-if="show_file">
-						<object v-if="detailed.file_pdf" :data="detailed.file_pdf" type="application/pdf" width="90%" :height="`${$device.isDesktop ? '800px' : '500px'}`">
-						</object>
-
-						<div v-if="detailed.video" class="embed__video">
-							<!-- <b-embed
-							type="iframe"
-							aspect="16by9"
-							:src="detailed.video"
-							allowfullscreen
-							></b-embed> -->
-							<b-embed
-							type="iframe"
-							aspect="16by9"
-							:src="detailed.video"
-							allowfullscreen
-							></b-embed>
+					<div v-if="loading" class="mt-5">
+						<div class="text-center">
+							<div class="spinner-grow text-primary" style="width: 5rem; height: 5rem;" role="status">
+								<span class="sr-only">Loading...</span>
+							</div>
 						</div>
 					</div>
+					<div v-else>
+						<div v-if="show_file">
+							<div v-if="type === 'File Materi'">
+								<object v-if="detailed.file_pdf_original" :data="detailed.file_pdf" type="application/pdf" width="90%" :height="`${$device.isDesktop ? '800px' : '500px'}`">
+								</object>
+
+								<mdb-alert v-else color="danger" size="sm" class="text-center">
+									File tidak tersedia
+								</mdb-alert>
+							</div>
+
+							<div v-else-if="type === 'Video Materi'">
+								<div v-if="detailed.video" class="embed__video">
+									<b-embed
+									type="iframe"
+									aspect="16by9"
+									:src="detailed.video"
+									allowfullscreen
+									></b-embed>
+								</div>
+								<div v-else>
+									<mdb-alert color="danger" class="text-center">
+										Video tidak tersedia
+									</mdb-alert>
+								</div>
+							</div>
+						</div>
+					</div>
+					
 				</mdb-col>
 			</mdb-row>
 		</mdb-container>
@@ -135,7 +158,7 @@
 				this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
 				this.$axios.get(`${this.api_url}/web/event/${this.$route.params.id}`)
 				.then(({data}) => {
-					// console.log(data)
+					// console.log(data)s
 					this.pelatihans = data.pelatihans
 				})
 				.catch(err => console.log(err))
@@ -155,6 +178,7 @@
 			},
 
 			ShowField(raw, field, type){
+				this.loading = true
 				this.show_file = true
 				this.detailed = ''
 				this.detailed = Object.keys(raw)
@@ -166,7 +190,11 @@
 
 				this.type = type
 
-				console.log(this.detailed);	
+				setTimeout(() => {
+					this.loading = false
+				}, 900)
+
+				console.log(this.detailed);
 			},
 
 			UserProfileData(){
@@ -179,6 +207,13 @@
 					})
 					.catch(err => console.log(err.response ? err.response : ''))
 				}
+			},
+
+			ToggleFile(){
+				if(this.show_file){
+					this.show_file = false
+				}
+				// console.log(this.show_file)
 			}
 		}
 	}

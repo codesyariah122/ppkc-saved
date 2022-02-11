@@ -43,7 +43,7 @@
 	export default{
 		name: 'detail-berita-id-slug',
 		layout: 'default',
-
+		
 		async asyncData({$axios, params}){
 			console.log(typeof 	params.id)
 			const next_id = parseInt(params.id) + 1

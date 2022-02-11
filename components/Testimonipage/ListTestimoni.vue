@@ -24,6 +24,7 @@
 						:per-page="listToShow"
 						@change="LoadTestimoni" aria-controls="show-event" align="center"></b-pagination>
 					</mdb-pagination>
+
 					<mdb-col lg="12" xs="12" sm="12" class="mt-2">
 						<mdb-badge pill color="light-blue">Page : {{currentPage}}</mdb-badge>
 					</mdb-col>
@@ -48,6 +49,10 @@
 							<GlobalsListInside :path="path" :lists="lists" :listToShow="listToShow"/>
 						</div>
 					</mdb-col>
+
+					<!-- <mdb-col lg="12" xs="12" sm="12">
+						<mdb-btn color="primary" @click="LoadTestimoni(currentPage++)">Load More Testimoni</mdb-btn>
+					</mdb-col> -->
 
 				</mdb-row>
 

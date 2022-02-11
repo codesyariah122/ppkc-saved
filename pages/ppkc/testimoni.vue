@@ -55,7 +55,7 @@
 			},
 
 			LoadListTestimoni(page){
-				console.log(page)
+				// console.log(page)
 				this.ListTestimoni(page)
 			},
 

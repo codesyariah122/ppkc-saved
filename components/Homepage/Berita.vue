@@ -1,7 +1,7 @@
 <template>
 	<div class="berita__list">
 		<mdb-container>
-			<mdb-row class="justify-content-between">
+			<mdb-row class="row justify-content-between">
 				<!-- colomn header berita -->
 				<mdb-col class="header__inside-content" md="3">
 					<h1 class="mb-3">Berita</h1>
