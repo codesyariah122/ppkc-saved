@@ -20,44 +20,61 @@
 			}
 			.collapse__category-event-1{
 				margin-top: -.7rem;
-			}
-			.collapse__category-event-2{
-				margin-top: -.2rem;
-				width: 320px;
-				margin-left: .5rem;
-				.card{
-					background-color:$color-primary!important;
-					color:$default;
-					font-weight: 500;
-					.list__modul{					
-						h5{
-							font-size:23px;
-							margin-left: 1rem;
-							font-weight: 700;
-							border-bottom:2px solid $default;
+				.btn__category-1{
+					background-color: $default-gray!important;
+					border:0;
+					color: $default;
+					font-weight: 400;
+					width: 320px;
+					&:hover{
+						color: $default;
+						font-weight:600;
+					}
+				}
+
+				.collapse__category-event-2{
+					margin-top:-.5rem;
+					.btn__category-2{
+						border:0;
+						color:$default;
+						font-weight: 600;
+						width: 320px;
+						&:hover{
+							color: $default;
+							font-weight:700;
 						}
-						.list-group-item{
+					}
+
+					.collapse__category-event-3{
+						margin-top: -.3rem;
+						margin-left: .3rem;
+						.card{
 							background-color:$color-primary!important;
-							border:0;
-							a{
-								color: $default;
-								font-size:16px;
-								font-weight: 500;
+							color:$default;
+							font-weight: 500;
+							width: 320px;
+							.list__modul{					
+								h5{
+									font-size:23px;
+									margin-left: 1rem;
+									font-weight: 700;
+									border-bottom:2px solid $default;
+								}
+								.list-group-item{
+									background-color:$color-primary!important;
+									border:0;
+									a{
+										color: $default;
+										font-size:16px;
+										font-weight: 500;
+									}
+								}
 							}
 						}
 					}
 				}
 			}
-			.btn__category{
-				background-color: $bg-button-gray!important;
-				border:0;
-				color: $color-primary;
-				font-weight: 400;
-				width: 320px;
-				&:hover{
-					color: $color-primary;
-				}
-			}
+			
 		}
 		.content__event-pelatihan{
 			width: 100%;
@@ -69,7 +86,7 @@
 				margin-left: 37px;
 			}
 			.embed__video{
-				margin-left: 23px;
+				margin-left: 37px;
 			}
 		}
 	}

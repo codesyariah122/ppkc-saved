@@ -70,7 +70,7 @@
 								</mdb-col>
 
 								<mdb-col v-else>
-									<mdb-btn v-if="data_event || token.accessToken" color="success" size="md" >
+									<mdb-btn v-if="data_event || token.accessToken" color="success" size="md" disabled>
 										<mdb-icon far icon="calendar-check" /> {{status_pendaftaran}}
 									</mdb-btn>
 									<mdb-btn v-else size="md" color="grey" disabled class="mb-3 not__allowed">Daftar</mdb-btn>

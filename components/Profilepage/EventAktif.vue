@@ -32,32 +32,43 @@
 
 						<b-collapse :id="`collapse-${item.id}`" class="collapse__category-event-1">
 							<div v-for="(c, index) in item.categories"  :key="c.id">
-								<b-button v-b-toggle="`collapse-${c.id}-inner`" size="sm" class="btn__category" @click="ToggleFile">
+								<b-button v-b-toggle="`collapse-${c.id}-inner`" size="sm" class="btn__category-1" @click="ToggleFile">
 									<mdb-row class="row justify-content-between">
 										<mdb-col md="6">
 											Kategori {{index+1}}
 										</mdb-col>
 										<mdb-col md="2">
-											<mdb-icon icon="plus" size="lg"/>
+											<mdb-icon icon="caret-down" size="lg"/>
 										</mdb-col>
 									</mdb-row>
 								</b-button>
-								<b-collapse :id="`collapse-${c.id}-inner`" class="collapse__category-event-2 mb-3">
-									<b-card>
-										<div v-for="(d, index) in c.details" :key="d.id" class="list__modul mb-5">
-											<h5> {{d.title}} </h5>
-											<b-list-group>
-												<!-- <pre>
-													{{d}}
-												</pre> -->
-												<b-list-group-item v-for="l in lists" :key="l.id">
-													<a href="#!" @click="ShowField(d, l.field, l.type)">
-														<mdb-icon far :icon="l.icon"/>	{{l.name}}
-													</a>
-												</b-list-group-item>
-											</b-list-group>
-										</div>
-									</b-card>
+
+								<b-collapse :id="`collapse-${c.id}-inner`" class="collapse__category-event-2 mb-5">
+									<div v-for="(d, index) in c.details" :key="d.id" class="list__modul">
+										<mdb-btn v-b-toggle="`collapse-${d.id}-pelatihan`" size="sm" class="btn__category-2" @click="ToggleFile">
+											<mdb-row class="row justify-content-between">
+												<mdb-col md="6">
+													{{d.title}}
+												</mdb-col>
+												<mdb-col md="2">
+													<mdb-icon icon="caret-down" size="lg"/>
+												</mdb-col>
+											</mdb-row>
+										</mdb-btn>
+
+										<b-collapse :id="`collapse-${d.id}-pelatihan`" class="collapse__category-event-3">
+											<b-card>
+												<b-list-group class="list__modul">
+													<b-list-group-item v-for="l in lists" :key="l.id">
+														<a href="#!" @click="ShowField(d, l.field, d.kategori)">
+															<mdb-icon far :icon="l.icon"/>	{{l.name}}
+														</a>
+													</b-list-group-item>
+												</b-list-group>
+											</b-card>
+										</b-collapse>
+
+									</div>
 								</b-collapse>
 							</div>
 						</b-collapse>
@@ -123,11 +134,11 @@
 				show_file:false,
 				show_collapse: true,
 				lists: [
-				{id:1, name: 'Modul 1', icon: 'copy', field: 'file_pdf', type: 'File Materi'},
-				{id:2, name: 'Modul 2', icon: 'file-alt', field: 'file_pdf', type: 'File Materi'},
-				{id:3, name: 'Video Pembelajaran 1', icon: 'play-circle', field: 'video', type: 'Video Materi'},
-				{id:4, name: 'Webinar 1', icon: 'file-video', field: 'video'},
-				{id:5, name: 'Test Akhir', icon: 'edit', field: 'file_pdf', type: 'File Materi'}
+					{id:1, name: 'Modul 1', icon: 'copy', field: 'file_pdf'},
+					{id:2, name: 'Modul 2', icon: 'file-alt', field: 'file_pdf'},
+					{id:3, name: 'Video Pembelajaran 1', icon: 'play-circle', field: 'video'},
+					{id:4, name: 'Webinar 1', icon: 'file-video'},
+					{id:5, name: 'Test Akhir', icon: 'edit', field: 'file_pdf'}
 				]
 			}
 		},
@@ -164,6 +175,7 @@
 			},
 
 			ShowField(raw, field, type){
+				console.log(type)
 				this.loading = true
 				this.show_file = true
 				this.detailed = ''
