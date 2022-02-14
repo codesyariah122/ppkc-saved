@@ -4,6 +4,7 @@
       <!-- Material form login -->
       <form @submit.prevent="RegistrasiProfile">
         <h4 class="h4 text-left mb-2">Daftar</h4>
+        
         <p class="text-left">
           Buat akun baru untuk mengakses seluruh layanan dan informasi pelatihan
           PPKC
@@ -86,6 +87,14 @@
 					<mdb-icon fab icon="google" /> Daftar dengan Akun Google
 				</mdb-btn>
 			</div> -->
+
+      <mdb-row class="row justify-content-center white-text">
+        <mdb-col v-if="show_alert" lg="12" xs="12" sm="12">
+          <mdb-alert color="danger" dismiss>
+            <strong>Ooops!</strong> {{ validation }}
+          </mdb-alert>
+        </mdb-col>
+      </mdb-row>
 
       <mdb-row
         :class="`${

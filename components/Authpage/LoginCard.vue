@@ -4,6 +4,7 @@
       <!-- Material form login -->
       <form @submit.prevent="LoginProfile">
         <h4 class="h4 text-left mb-2">Masuk</h4>
+
         <p class="text-left">
           Masukkan alamat email dan password yang terdaftar untuk mengakses akun
           Anda
@@ -63,6 +64,7 @@
           </mdb-btn>
         </div>
       </form>
+
       <!-- Material form login -->
       <!-- <mdb-row class="row justify-content-center white-text">
         <mdb-col md="5" class="mt-2">
@@ -77,44 +79,35 @@
         </mdb-col>
       </mdb-row> -->
 
-				<div class="form-group mt-5">
-					<mdb-btn type="submit" block color="white" size="md" class="text-primary">
-						<div v-if="loading">
-							<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-							Loading...
-						</div>
-						<div v-else>
-							Masuk
-						</div>
-					</mdb-btn>
-				</div>
-			</form>
-			<!-- Material form login -->
-			<!-- <mdb-row class="row justify-content-center white-text">
-				<mdb-col md="5" class="mt-2">
-					<b-dropdown-divider class="line"></b-dropdown-divider>
-				</mdb-col>
-				<mdb-col md="2">
-					<h6 v-if="$device.isMobile" class="text-center mt-2">Atau</h6>
-					<small v-else>Atau</small>
-				</mdb-col>
-				<mdb-col md="5" class="mt-2">
-					<b-dropdown-divider class="line"></b-dropdown-divider>
-				</mdb-col>
-			</mdb-row>
-
-			<div class="form-group mt-3">
-				<mdb-btn block color="white" size="md" class="text-primary">
-					<mdb-icon fab icon="google" /> Lanjutkan dengan Akun Google
-				</mdb-btn>
-			</div> -->
-
-        <mdb-col v-if="show_alert" lg="12" xs="12" sm="12" class="mb-3">
-          <mdb-alert color="warning" dismiss>
+      <mdb-row class="row justify-content-center white-text mb-1 mt-5">
+        <mdb-col v-if="show_alert" lg="12" xs="12" sm="12">
+          <mdb-alert color="danger" dismiss>
             <strong>Ooops!</strong> {{ validation }}
           </mdb-alert>
         </mdb-col>
       </mdb-row>
+
+      <mdb-row
+      :class="`${
+        $device.isMobile
+        ? 'justify-content-center black-text form__daftar-link'
+        : 'justify-content-center black-text'
+      }`"
+      >
+        <mdb-col md="12" xs="12" sm="12" lg="12">
+          <h6
+          :class="`${
+            $device.isMobile
+            ? 'text-center mt-1 mb-5'
+            : 'text-center mt-3 mb-5'
+          }`"
+          >
+          Belum punya Akun ?
+          <nuxt-link to="/auth/registrasi">Daftar Sekarang</nuxt-link>
+        </h6>
+      </mdb-col>
+    </mdb-row>
+
     </mdb-card-body>
   </mdb-card>
 </template>
