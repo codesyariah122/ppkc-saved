@@ -37,10 +37,21 @@
 		},
 
 		mounted(){
-			this.CheckPembayaran()
+			this.CheckPembayaran(),
+			this.IsLoggedIn()
 		},
 
 		methods:{
+			IsLoggedIn(){
+				if(!this.token.accessToken){
+					this.Alert('error', `Anda tidak dapat izin mengakses halaman ini`)
+					setTimeout(() => {
+						this.$router.push({
+							path: '/'
+						})
+					}, 900)
+				}
+			},
 			CheckToken(){
 				this.$store.dispatch('config/checkAuthLogin', 'token')
 			},
@@ -62,6 +73,27 @@
 				.finally(() => {
 					this.loading = false
 				})
+			},
+
+			Alert(status, data){
+				switch(status){
+					case 'error':
+					return this.$swal({
+						icon: status,
+						title: 'Oops...',
+						text: data,
+					})
+					break;
+					case 'success':
+					return this.$swal({
+						position: 'top-end',
+						icon: status,
+						title: data,
+						showConfirmButton: false,
+						timer: 1500
+					})
+					break;
+				}
 			}
 		},
 

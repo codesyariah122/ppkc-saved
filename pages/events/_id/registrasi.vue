@@ -42,13 +42,10 @@
 		methods:{
 			IsLoggedIn(){
 				if(!this.token.accessToken){
-					this.Alert('success', `Anda sedang login`)
+					this.Alert('error', `Anda tidak dapat izin mengakses halaman ini`)
 					setTimeout(() => {
 						this.$router.push({
-							name: 'profile-slug',
-							params: {
-								slug: this.username
-							}
+							path: '/'
 						})
 					}, 900)
 				}

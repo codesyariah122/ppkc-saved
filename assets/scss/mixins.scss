@@ -181,7 +181,7 @@
 
 // parallax home
 @mixin parallax_mobile{
-	min-height: 180px; 
+	min-height: 190px; 
 	background-attachment: scroll;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -192,7 +192,7 @@
 		position: absolute;
 		margin-top: -2.3rem;
 		width: 100%;
-		height: 217px;
+		height: 228px;
 		text-align: left;
 		color: $default;
 		img{

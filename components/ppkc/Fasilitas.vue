@@ -1,57 +1,50 @@
 <template>
-	<div class="card__list" :style="berita__list_style">
-		<mdb-container>
+  <div class="card__list" :style="berita__list_style">
+    <mdb-container>
+      <!-- header -->
+      <mdb-row class="row justify-content-center header__ppkc-list-page">
+        <mdb-col lg="12" xs="12" sm="12">
+          <h2 style="color: #004899 !important; font-weight: 700">Fasilitas</h2>
+        </mdb-col>
 
-			<!-- header -->
-			<mdb-row class="row justify-content-center header__ppkc-list-page">
-				<mdb-col lg="12" xs="12" sm="12">
-					<h4>Fasilitas</h4>
-				</mdb-col>
-
-				<mdb-col lg="12" xs="12" sm="12" class="ppkc__col-2 mt-2">
-					<h5>Kelas</h5>
-					<MoleculesFasilitasMoleculesKelas :kelas="kelas[0]"/>
-				</mdb-col>
-
-				<mdb-col lg="12" xs="12" sm="12" class="ppkc__col-2 mt-2">
-					<h5>Perpustakaan</h5>
-					<MoleculesFasilitasMoleculesPerpus :perpus="perpus[0]"/>
-				</mdb-col>
-
-				<mdb-col lg="12" xs="12" sm="12" class="ppkc__col-2 mt-2">
-					<h5>Laboratorium</h5>
-					<MoleculesFasilitasMoleculesLab :lab="lab[0]"/>
-				</mdb-col>
-
-				<mdb-col lg="12" xs="12" sm="12" class="ppkc__col-2 mt-2">
-					<h5>Kamar</h5>
-					<MoleculesFasilitasMoleculesKamar :kamar="kamar[0]"/>
-				</mdb-col>
-
-				<mdb-col lg="12" xs="12" sm="12" class="ppkc__col-2 mt-2">
-					<h5>Tempat Makan</h5>
-					<MoleculesFasilitasMoleculesTempatMakan :tempat_makan="tempat_makan[0]"/>
-				</mdb-col>
-
-				<mdb-col lg="12" xs="12" sm="12" class="ppkc__col-2 mt-2">
-					<h5>Dapur</h5>
-					<MoleculesFasilitasMoleculesDapur :dapur="dapur[0]"/>
-				</mdb-col>
-
-			</mdb-row>
-
-		</mdb-container>
-
-	</div>
+        <mdb-col
+          v-for="item in lists.list_data"
+          :key="item.id"
+          lg="12"
+          xs="12"
+          sm="12"
+          class="ppkc__col-2 mt-2"
+        >
+          <h5>{{ item.nama }}</h5>
+          <mdb-row v-if="item.list_foto.length > 0">
+            <mdb-col md="4" v-for="n in item.list_foto" :key="n.id">
+              <img
+                :src="n.foto_url"
+                class="img-fluid"
+                style="
+                  height: 200px;
+                  width: 100%;
+                  object-fit: cover;
+                  margin-top: 16px;
+                "
+              />
+            </mdb-col>
+          </mdb-row>
+        </mdb-col>
+      </mdb-row>
+    </mdb-container>
+  </div>
 </template>
 
 <script>
-	export default{
-		props: ['path', 'lists', 'kamar' , 'dapur', 'lab', 'perpus', 'kelas', 'tempat_makan'],
-		data(){
-			return {
-				berita__list_style: this.$device.isDesktop ? 'margin-top: 8rem;' : 'margin-top: 6rem;'
-			}
-		}
-	}
+export default {
+  props: ["path", "lists"],
+  data() {
+    return {
+      berita__list_style: this.$device.isDesktop
+        ? "margin-top: 8rem;"
+        : "margin-top: 6rem;",
+    };
+  },
+};
 </script>

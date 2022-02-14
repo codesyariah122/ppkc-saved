@@ -1,46 +1,54 @@
 # ppkc-portal
+
 ## update readme
+
+# test branch
+
 <details>
 	<summary>Lihat env config</summary>
-	Adding this line to env file :  
+	Adding this line to env file :
 
 ```bash
 NUXT_ENV_API_URL=https://your-api-url
 ```
+
 </details>
 
-
 #### Litle Docs
-### Pages  
+
+### Pages
+
 ```
 directory: /pages
-```  
+```
+
 **Example:**  
 Untuk halaman dengan kedalaman tertentu  
-```/detail/pages:(berita or event page)/_params1/_params2```  
+`/detail/pages:(berita or event page)/_params1/_params2`
 
-Otomatis akan mendiskripsikan sebuah ```router``` dengan link  
+Otomatis akan mendiskripsikan sebuah `router` dengan link
 
-- ```http://localhost:3000/detail/berita/5/s-l-u-g```  or  
-- ```http://localhost:3000/detail/event/44/s-l-u-g```  
+- `http://localhost:3000/detail/berita/5/s-l-u-g` or
+- `http://localhost:3000/detail/event/44/s-l-u-g`
 
 **For Notes :**  
--- pages untuk **homepage** saya letakan di root  direktori ```/pages```  
+-- pages untuk **homepage** saya letakan di root direktori `/pages`
 
-### Components   
-Component di nuxt bisa di gunakan langsung atau auto import dengan catatan untuk kedalaman direktori tertentu. misal :  
-- Component Login & Register  
-> component ini di representasikan di halaman atau ```/pages``` ```/auth/login or registrasi```  untuk membuat component tambahan yang di perlukan di sebuah ```/pages```, maka kita bisa langsung membuat sebuah file baru atau direktori baru untuk keperluan sebuah komponen dalam kasus ini untuk ```/pages``` login atau registrasi.  
+### Components
 
-**di direktori ```/components```**  
+Component di nuxt bisa di gunakan langsung atau auto import dengan catatan untuk kedalaman direktori tertentu. misal :
+
+- Component Login & Register
+  > component ini di representasikan di halaman atau `/pages` `/auth/login or registrasi` untuk membuat component tambahan yang di perlukan di sebuah `/pages`, maka kita bisa langsung membuat sebuah file baru atau direktori baru untuk keperluan sebuah komponen dalam kasus ini untuk `/pages` login atau registrasi.
+
+**di direktori `/components`**  
 saya membuat component baru denga listing direktori berikut :  
-```/components/Authpage``` setelah itu buat component file baru contohnya :  
-```/components/Authpage/LoginCard.vue``` dalam pemanggilannya akan otomatis membentuk tag component seperti berikut :  
-  
-```<AuthpageLoginCard/>```  
+`/components/Authpage` setelah itu buat component file baru contohnya :  
+`/components/Authpage/LoginCard.vue` dalam pemanggilannya akan otomatis membentuk tag component seperti berikut :
 
-<img src="/ss/ss-docs1.jpg">   
+`<AuthpageLoginCard/>`
 
+<img src="/ss/ss-docs1.jpg">
 
 <hr>
 
@@ -84,7 +92,6 @@ More information about the usage of this directory in [the documentation](https:
 Layouts are a great help when you want to change the look and feel of your Nuxt app, whether you want to include a sidebar or have distinct layouts for mobile and desktop.
 
 More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
-
 
 ### `pages`
 

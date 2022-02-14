@@ -9,10 +9,6 @@
 					</center>
 				</mdb-col>
 				
-				<!-- <pre>
-					{{your_events}}
-				</pre>
- -->
 				<mdb-col lg="6" class="mt-3">
 					<mdb-alert color="success">
 						{{checks.message}}
@@ -21,7 +17,7 @@
 
 				<mdb-col lg="8" class="mt-2">
 					<center>
-						<nuxt-link :to="`/detail/event/${id}`" color="primary" class="btn btn-primary"><mdb-icon icon="arrow-left" /> Selesai </nuxt-link>
+						<nuxt-link :to="`/detail/event/${id}/${$slug(your_events.kegiatan_title ? your_events.kegiatan_title : '')}`" color="primary" class="btn btn-primary"><mdb-icon icon="arrow-left" /> Selesai </nuxt-link>
 					</center>
 				</mdb-col>
 				
@@ -49,10 +45,21 @@
 		},
 
 		mounted(){
-			this.GoYourEvent()
+			this.GoYourEvent(),
+			this.IsLoggedIn()
 		},
 
 		methods: {
+			IsLoggedIn(){
+				if(!this.token.accessToken){
+					this.Alert('error', `Anda tidak dapat izin mengakses halaman ini`)
+					setTimeout(() => {
+						this.$router.push({
+							path: '/'
+						})
+					}, 900)
+				}
+			},
 			CheckToken(){
 				this.$store.dispatch('config/checkAuthLogin', 'token')
 			},
@@ -63,6 +70,27 @@
 				.then(({data}) => {
 					this.your_events = data.kegiatan
 				})
+			},
+
+			Alert(status, data){
+				switch(status){
+					case 'error':
+					return this.$swal({
+						icon: status,
+						title: 'Oops...',
+						text: data,
+					})
+					break;
+					case 'success':
+					return this.$swal({
+						position: 'top-end',
+						icon: status,
+						title: data,
+						showConfirmButton: false,
+						timer: 1500
+					})
+					break;
+				}
 			}
 		},
 		computed: {

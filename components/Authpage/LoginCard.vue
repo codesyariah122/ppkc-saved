@@ -1,33 +1,81 @@
 <template>
-	<mdb-card class="card__login">
-		<mdb-card-body class="form__auth">
+  <mdb-card class="card__login">
+    <mdb-card-body class="form__auth">
+      <!-- Material form login -->
+      <form @submit.prevent="LoginProfile">
+        <h4 class="h4 text-left mb-2">Masuk</h4>
+        <p class="text-left">
+          Masukkan alamat email dan password yang terdaftar untuk mengakses akun
+          Anda
+        </p>
 
-			<!-- Material form login -->
-			<form @submit.prevent="LoginProfile">
-				<h4 class="h4 text-left mb-2">Masuk</h4>
-				<p class="text-left">Masukkan alamat email dan password yang terdaftar untuk mengakses akun Anda</p>
+        <!-- Input login -->
+        <div class="form-group has-input">
+          <mdb-icon far icon="envelope" class="form-control-feedback" />
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Alamat Email"
+            v-model="fields.email"
+            autofocus
+          />
+        </div>
 
-				<!-- Input login -->
-				<div class="form-group has-input">
-					<mdb-icon far icon="envelope" class="form-control-feedback" />
-					<input type="text" class="form-control" placeholder="Alamat Email" v-model="fields.email" autofocus>
-				</div>
+        <div class="form-group has-input">
+          <mdb-icon icon="lock" class="form-control-feedback" />
+          <input
+            type="password"
+            id="password"
+            class="form-control"
+            placeholder="Password"
+            v-model="fields.password"
+          />
+        </div>
 
-				<div class="form-group has-input">
-					<mdb-icon icon="lock" class="form-control-feedback" />
-					<input type="password" id="password" class="form-control" placeholder="Password" v-model="fields.password">
-				</div>
+        <div class="form-group">
+          <div @click="showPassword">
+            <span v-if="showing_pass === false" style="cursor: pointer">
+              <mdb-icon far icon="eye" /> Check Password
+            </span>
+            <span v-else style="cursor: pointer">
+              <mdb-icon far icon="eye-slash" /> Sembunyikan
+            </span>
+          </div>
+        </div>
 
-				<div class="form-group">
-					<div @click="showPassword">
-						<span v-if="showing_pass === false" style="cursor: pointer;">
-							<mdb-icon far icon="eye" /> Check Password
-						</span>
-						<span v-else style="cursor: pointer;">
-							<mdb-icon far icon="eye-slash" /> Sembunyikan
-						</span>
-					</div>
-				</div>
+        <div class="form-group mt-5">
+          <mdb-btn
+            type="submit"
+            block
+            color="white"
+            size="md"
+            class="text-primary"
+          >
+            <div v-if="loading">
+              <span
+                class="spinner-border spinner-border-sm"
+                role="status"
+                aria-hidden="true"
+              ></span>
+              Loading...
+            </div>
+            <div v-else>Masuk</div>
+          </mdb-btn>
+        </div>
+      </form>
+      <!-- Material form login -->
+      <!-- <mdb-row class="row justify-content-center white-text">
+        <mdb-col md="5" class="mt-2">
+          <b-dropdown-divider class="line"></b-dropdown-divider>
+        </mdb-col>
+        <mdb-col md="2">
+          <h6 v-if="$device.isMobile" class="text-center mt-2">Atau</h6>
+          <small v-else>Atau</small>
+        </mdb-col>
+        <mdb-col md="5" class="mt-2">
+          <b-dropdown-divider class="line"></b-dropdown-divider>
+        </mdb-col>
+      </mdb-row> -->
 
 				<div class="form-group mt-5">
 					<mdb-btn type="submit" block color="white" size="md" class="text-primary">
@@ -61,51 +109,45 @@
 				</mdb-btn>
 			</div> -->
 
-			<mdb-row :class="`${$device.isMobile ? 'justify-content-center black-text form__daftar-link' : 'justify-content-center black-text mb-2'}`">
-				<mdb-col md="12" xs="12" sm="12" lg="12">
-					<h6 :class="`${$device.isMobile ? 'text-center mt-5 mb-5' : 'text-center mt-5 mb-5' }`">Belum punya Akun ? <nuxt-link to="/auth/registrasi">Daftar Sekarang</nuxt-link></h6>
-				</mdb-col>
-
-				<mdb-col v-if="show_alert" lg="12" xs="12" sm="12" class="mb-3">
-					<mdb-alert color="warning" dismiss>
-						<strong>Ooops!</strong> {{validation}}
-					</mdb-alert>
-				</mdb-col>
-			</mdb-row>
-
-		</mdb-card-body>
-	</mdb-card>
+        <mdb-col v-if="show_alert" lg="12" xs="12" sm="12" class="mb-3">
+          <mdb-alert color="warning" dismiss>
+            <strong>Ooops!</strong> {{ validation }}
+          </mdb-alert>
+        </mdb-col>
+      </mdb-row>
+    </mdb-card-body>
+  </mdb-card>
 </template>
 
 <script>
-	export default{
-		props: ['event_data', 'validation', 'show_alert', 'loading'],
-		data(){
-			return {
-				fields: {},
-				showing_pass:false
-			}
-		},
+export default {
+  props: ["event_data", "validation", "show_alert", "loading"],
+  data() {
+    return {
+      fields: {},
+      showing_pass: false,
+    };
+  },
 
-		methods: {
-			LoginProfile(){
-				const  params = {
-					email: this.fields.email,
-					password: this.fields.password
-				}
-				this.$emit('login-profile', params)
-			},
+  methods: {
+    LoginProfile() {
+      const params = {
+        email: this.fields.email,
+        password: this.fields.password,
+      };
+      this.$emit("login-profile", params);
+    },
 
-			showPassword(){
-				const password = document.querySelector('#password');
-				if (password.type === "password") {
-					password.type = "text";
-					this.showing_pass = true;
-				} else {
-					password.type = "password";
-					this.showing_pass = false;
-				}
-			}
-		}
-	}
+    showPassword() {
+      const password = document.querySelector("#password");
+      if (password.type === "password") {
+        password.type = "text";
+        this.showing_pass = true;
+      } else {
+        password.type = "password";
+        this.showing_pass = false;
+      }
+    },
+  },
+};
 </script>
