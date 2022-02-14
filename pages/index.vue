@@ -95,12 +95,3 @@ export default {
   },
 };
 </script>
-
-<style lang="css">
-@import url("https://fonts.googleapis.com/css?family=Open+Sans");
-
-html,
-body {
-  font-family: "Open Sans";
-}
-</style>

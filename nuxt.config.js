@@ -38,7 +38,11 @@ export default {
         rel: "canonical",
         href: "https://ppkc-online.com/",
       },
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css?family=Open+Sans'
+      }
     ],
     script: [
       {
@@ -61,6 +65,7 @@ export default {
   ],
   styleResources: {
     scss: [
+      '~assets/scss/global.scss',
       '~assets/scss/variables.scss',
       '~assets/scss/mixins.scss',
       '~assets/scss/layout.scss',
