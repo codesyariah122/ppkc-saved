@@ -59,10 +59,31 @@
 										<b-collapse :id="`collapse-${d.id}-pelatihan`" class="collapse__category-event-3">
 											<b-card>
 												<b-list-group class="list__modul">
-													<b-list-group-item v-for="l in lists" :key="l.id">
-														<a href="#!" @click="ShowField(d, l.field, d.kategori)">
-															<mdb-icon far :icon="l.icon"/>	{{l.name}}
+													<b-list-group-item >
+														<a v-if="d.kategori == 1" href="#!" @click="ShowField(d, 'video', d.kategori)">
+															<mdb-icon icon="video" /> Video
 														</a>
+
+														<a v-else-if="d.kategori == 2" href="#!" @click="ShowField(d, 'file_pdf', d.kategori)">
+															<mdb-icon far icon="file-pdf" /> Materi PDF
+														</a>
+
+														<a v-else-if="d.kategori == 3" href="#!" @click="ShowField(d, 'file_pdf', d.kategori)">
+															<mdb-icon far icon="file-alt" /> Pre Test
+														</a>
+
+														<a v-else-if="d.kategori == 4" href="#!" @click="ShowField(d, 'file_pdf', d.kategori)">
+															<mdb-icon icon="file-signature" /> Post Test
+														</a>
+
+														<a v-else-if="d.kategori == 5" href="#!" @click="ShowField(d, 'file_pdf', d.kategori)">
+															<mdb-icon icon="file-signature" /> Informed Consent
+														</a>
+
+														<a v-else-if="d.kategori == 6" href="#!" @click="ShowField(d, 'video', d.kategori)">
+															<mdb-icon far icon="file-video" /> Webinar
+														</a>
+
 													</b-list-group-item>
 												</b-list-group>
 											</b-card>
@@ -85,7 +106,12 @@
 					</div>
 					<div v-else>
 						<div v-if="show_file">
-							<object v-if="detailed.file_pdf_original" :data="detailed.file_pdf" type="application/pdf" width="90%" :height="`${$device.isDesktop ? '800px' : '500px'}`">
+							<div v-if="detailed.file_pdf == 'https://api.ppkc-online.com/file-pelatihan/null'">
+								<mdb-alert color="danger">
+									File not found
+								</mdb-alert>
+							</div>
+							<object v-if="detailed.file_pdf" :data="detailed.file_pdf" type="application/pdf" width="90%" :height="`${$device.isDesktop ? '800px' : '500px'}`">
 							</object>
 							<div v-else-if="detailed.video" class="embed__video">
 								<b-embed
@@ -102,14 +128,15 @@
 							</div>
 						</div>
 					</div>
-					
 				</mdb-col>
 			</mdb-row>
 		</mdb-container>
 		
 		<!-- debuging -->
 		<!-- <pre class="mt-5">
-			{{pelatihans}}
+			{{pelatihans.map(c => {
+				return c.categories
+			})}}
 		</pre> -->
 	</div>
 </template>
@@ -175,7 +202,7 @@
 			},
 
 			ShowField(raw, field, type){
-				console.log(type)
+				// console.log(type)
 				this.loading = true
 				this.show_file = true
 				this.detailed = ''

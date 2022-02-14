@@ -6,10 +6,6 @@
 				<mdb-col lg="12">
 					<mdb-row>
 
-						<!-- <pre>
-							{{events}}	
-						</pre> -->
-
 						<mdb-col md="3" sm="12" xs="12" class="col-1">
 							<img :src="events.kegiatan.photo" class="rounded">
 						</mdb-col>

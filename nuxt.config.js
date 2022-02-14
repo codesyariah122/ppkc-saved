@@ -2,6 +2,8 @@ require('dotenv').config()
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
+  mode: 'spa',
+  target: 'static',
   loading: {
     color: '#2f80ed',
     height: '15px'
@@ -74,7 +76,7 @@ export default {
   plugins: [
     {src: '~/plugins/format-currency', ssr: false},
     {src: '~/plugins/format-slug', ssr: false},
-    {src: '~/plugins/mdb-vue'},
+    {src: '~/plugins/mdb-vue', ssr: false},
     {src: '~/plugins/vue2-leaflet', mode: 'client', ssr: false },
     { src: '~/plugins/sweetalert', ssr: false},
   ],

@@ -1,11 +1,6 @@
 <template>
 	<div>
-
-		<!-- card lists -->
-		<mdb-row class="row justify-content-center">
-			<!-- <pre>
-				{{lists}}
-			</pre> -->
+		<mdb-row class="justify-content-center">
 			<mdb-col v-if="listsIndex <= lists.length" v-for="listsIndex in listsToShow" md="5" :class="`${$device.isDesktop || $device.isTablet ? 'mr-5' : ''}`" :key="lists[listsIndex-1].id">
 				<mdb-card>
 					<mdb-view hover class="rounded">

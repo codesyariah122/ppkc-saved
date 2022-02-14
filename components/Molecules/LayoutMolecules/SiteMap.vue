@@ -21,21 +21,21 @@
 				</ul>
 			</mdb-col>
 
-			<mdb-col col="12" sm="4">
+			<mdb-col col="12" sm="3" class="footer__sitemap-link">
 				<h5 class="title">Informasi</h5>
 				<ul>
-					<li class="list-unstyled"><a href="#!">Pelatihan</a></li>
+					<li class="list-unstyled"><a href="/events">Pelatihan</a></li>
 					<li class="list-unstyled"><a href="#!">Tentang Kami</a></li>
-					<li class="list-unstyled"><a href="#!">Berita</a></li>	
+					<li class="list-unstyled"><a href="/ppkc/berita">Berita</a></li>	
 				</ul>
 			</mdb-col>
 
-			<mdb-col col="12" sm="3" class="mb-3">
+			<mdb-col col="12" sm="3" class="mb-3 footer__sitemap-apk">
 				<!-- <h5 class="title">Links</h5> -->
 				<ul class="mt-5">
 					<li class="list-unstyled"><a href="#!">Download Aplikasi</a></li>
 					<li class="list-unstyled"><a href="#!">Jadwal</a></li>
-					<li class="list-unstyled"><a href="#!">Testimoni</a></li>
+					<li class="list-unstyled"><a href="/ppkc/testimoni">Testimoni</a></li>
 				</ul>
 			</mdb-col>
 		</mdb-row>

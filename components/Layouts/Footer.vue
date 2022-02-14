@@ -16,7 +16,7 @@
 
 				<mdb-col col="12" sm="7" :class="`${$device.isMobile ? 'mt-2 col-2' : 'mt-5 col-2'}`">
 					<!-- sitemap footer content -->
-					<SiteMap/>
+					<MoleculesLayoutMoleculesSiteMap/>
 				</mdb-col>
 
 			</mdb-row>
@@ -41,12 +41,8 @@
 
 <script>
 	import LogoBrand from '~/assets/images/logo/brand.svg'
-	import SiteMap from '@/components/Molecules/LayoutMolecules/SiteMap'
 
 	export default{
-		components: {
-			SiteMap
-		},
 
 		data(){
 			return{

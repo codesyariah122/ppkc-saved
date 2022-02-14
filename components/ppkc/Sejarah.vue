@@ -3,28 +3,28 @@
 		<mdb-container>
 
 			<!-- header -->
-			<mdb-row class="row justify-content-center header__ppkc-list-page">
+			<mdb-row class="row justify-content-center header__ppkc-list-page visi-misi__content">
 				<mdb-col lg="12" xs="12" sm="12">
 					<h4>Sejarah</h4>
 				</mdb-col>
 
 				<mdb-col lg="12" xs="12" sm="12" class="ppkc__col-1">
-					<center>						
-						<mdb-card reverse class="card__berita-img">
-							<mdb-view hover cascade>
-								<a :href="lists.result.foto_url" target="_blank">
-									<mdb-card-image :src="lists.result.foto_url" alt="Card image cap"></mdb-card-image>
-									<mdb-mask waves overlay="white-slight"></mdb-mask>
-								</a>
-							</mdb-view>
-						</mdb-card>
-					</center>
+					<img :src="lists.result.foto_url" class="img-fluid"/>
 				</mdb-col>
 
 				<mdb-col lg="12" xs="12" sm="12" class="ppkc__col-2">
 					<p class="text-justify">
-						{{lists.result.description}}
+						{{part1.slice(0,-1)}}
 					</p>
+				</mdb-col>
+				<mdb-col lg="12" xs="12" sm="12" class="ppkc__col-3">
+					<ol>
+						<li v-for="(n, index) in list_history"> 
+							<span>
+								{{n}}
+							</span>
+						</li>
+					</ol>
 				</mdb-col>
 			</mdb-row>
 
@@ -35,7 +35,7 @@
 
 <script>
 	export default{
-		props: ['path', 'lists'],
+		props: ['path', 'lists', 'part1', 'list_history'],
 		data(){
 			return {
 				berita__list_style: this.$device.isDesktop ? 'margin-top: 8rem;' : 'margin-top: 6rem;'

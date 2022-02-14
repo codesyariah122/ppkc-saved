@@ -81,7 +81,7 @@
 		},
 
 		mounted(){
-			console.log(this.event_id)
+			console.log(this.event_id ? this.event_id : 'no event -')
 		},
 
 		methods: {
