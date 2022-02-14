@@ -314,11 +314,11 @@
 		.card{
 			margin-top: 1rem;
 			filter: drop-shadow(5px 5px 10px $bg-fourt);
-			width: 345px;
+			width: 340px;
 			// height: 370px;
 			margin-bottom:1rem;
 			img{
-				max-width: 345px;
+				max-width: 340px;
 				object-fit: contain;
 			}
 			@include card_rounded_mobile;
