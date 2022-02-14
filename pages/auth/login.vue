@@ -3,11 +3,6 @@
 		<mdb-container>
 			<mdb-row class="row justify-content-center">
 				<mdb-col md="6" sm="8" xs="8">
-
-					<!-- <pre>
-						{{profiles }}
-					</pre> -->
-
 					<AuthpageLoginCard @login-profile="Login" :validation="validation" :show_alert="show_alert" :loading="loading" ref="AuthLogin" :event_data="event_data"/>
 				</mdb-col>
 			</mdb-row>

@@ -48,6 +48,10 @@
 				currentPage: 1,
 				status_pendaftaran: '',
 				id: this.$route.params.id,
+				data_event: {
+					event_id: this.$route.params.id,
+					event_path: this.$route.path
+				},
 				p1: true
 			}
 		},
@@ -61,7 +65,7 @@
 		},
 
 		beforeMount(){
-			this.GetEventDataLogin(),
+			this.SetEventLogin(this.data_event)
 			this.ConfigApiUrl(),
 			this.CheckToken()
 		},
@@ -69,7 +73,8 @@
 		mounted(){
 			this.ListEvent(0, '', '', ''),
 			this.StatusPembayaran(),
-			this.DetailEventProfileLogin()
+			this.DetailEventProfileLogin(),
+			this.GetEventDataLogin()
 		},
 
 		methods: {
@@ -128,10 +133,14 @@
 			},
 
 			SetEventLogin(data){
+				data = {
+					event_id: data.event_id,
+					event_path: data.event_path
+				}
 				this.$store.dispatch('config/setEventToLogin', JSON.stringify(data))
-				this.$router.push({
-					name: 'auth-login'
-				})
+				// this.$router.push({
+				// 	name: 'auth-login'
+				// })
 			},
 
 			GetEventDataLogin(){

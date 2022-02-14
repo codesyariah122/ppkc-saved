@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<LayoutsNavigation :token="token" :profiles="profiles" :slug="slug"/>
+		<LayoutsNavigation :token="token" :profiles="profiles" :slug="slug" :event_id="event_id" :event_path="event_path"/>
 
 		<Nuxt/>
 
@@ -17,7 +17,9 @@
 		data(){
 			return{
 				profiles: {},
-				slug: ''
+				slug: '',
+				event_id: localStorage.getItem('event_id'),
+				event_path: this.$route.path
 			}
 		},
 
@@ -27,7 +29,8 @@
 		},
 
 		mounted(){
-			this.UserProfileData()
+			this.UserProfileData(),
+			console.log(this.event_id)
 		},
 
 		methods: {

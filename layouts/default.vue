@@ -17,7 +17,7 @@
 			return{
 				profiles: {},
 				slug: '',
-				event_id: this.$route.params.id,
+				event_id: localStorage.getItem('event_id'),
 				event_path: this.$route.path
 			}
 		},
