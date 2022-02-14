@@ -1,12 +1,10 @@
 <template>
 	<div>
 		<b-card>
-			<mdb-container class="profile__info-data">							
+			<mdb-container class="profile__info-data">	
+
 				<mdb-row class="d-flex justify-content-between">
-					<!-- <pre>
-						{{profiles}}
-					</pre>
- -->
+			
 					<mdb-col sm="6" md="4" class="col__img-profile">
 						<!-- <img v-if="profiles.photo" :src="profiles.photo" class="img-fluid rounded-circle"/> -->
 						<img :src="require('~/assets/images/profile/user-profile.svg')" class="img-fluid rounded-circle">
@@ -27,7 +25,7 @@
 
 					<mdb-col sm="6" md="4" class="profile__options-page">
 						<mdb-btn outline="primary" size="sm" >
-							<mdb-icon icon="user-cog" size="lg"/>
+							<mdb-icon icon="user-cog" size="lg"/> Edit
 						</mdb-btn>
 						<mdb-btn color="deep-orange" size="sm" @click="LogoutProfile">
 							<mdb-icon icon="sign-out-alt" size="lg"/> Logout
@@ -42,6 +40,12 @@
 <script>
 	export default{
 		props: ['profiles'],
+
+		data(){
+			return {
+				p1: true
+			}
+		},
 
 		methods: {
 			LogoutProfile(){

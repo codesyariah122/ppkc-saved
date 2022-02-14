@@ -467,6 +467,9 @@
 	.form__auth{
 		margin-top: 1.9rem;
 		color:$default;
+		.alert{
+			margin-top: 3rem;
+		}
 		h4{
 			font-size: 30px;
 			font-weight: 700;

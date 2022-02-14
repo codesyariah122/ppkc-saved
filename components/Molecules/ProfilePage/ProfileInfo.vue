@@ -1,6 +1,11 @@
 <template>
 	<div class="profile__info">
 		<ul class="mt-3">
+			<li v-if="profiles.phone == null || profiles.no_anggota == null" class="mb-3 mt-2">
+				<mdb-alert color="warning" v-if="p1" @closeAlert="p1=false" dismiss>
+					<strong>Halo {{profiles.nama}}</strong> profile anda belum lengkap silahkan edit profile.
+				</mdb-alert>
+			</li>
 			<li class="mb-3">
 				<strong class="text-primary text-uppercase font-weight-bold">Nira</strong> <br>
 				
@@ -42,6 +47,12 @@
 
 <script>
 	export default{
-		props: ['works', 'studs', 'profiles']
+		props: ['works', 'studs', 'profiles'],
+
+		data(){
+			return {
+				p1: true
+			}
+		}
 	}
 </script>

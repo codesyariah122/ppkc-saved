@@ -40,8 +40,7 @@
 		mounted(){
 			this.EventDataLogin(),
 			this.UserProfileData(),
-			this.IsLoggedIn(),
-			console.log(this.event_data)
+			this.IsLoggedIn()
 		},
 
 		methods: {

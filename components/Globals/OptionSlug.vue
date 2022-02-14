@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="berita__detail">
 		<!-- Button options -->
 		<mdb-row class="row justify-content-center berita__detail-option">
 			<mdb-col md="6" xs="10" sm="10" class="back__link">
@@ -14,7 +14,7 @@
 					<mdb-badge class="mb-3" pill color="light-blue">Berita Selanjutnya</mdb-badge>
 					<mdb-card>
 						<mdb-view hover>
-							<a :href="`/detail/berita/${next.berita.id}/${$format(next.berita.judul)}`">
+							<a :href="`/detail/berita/${next.berita.id}/${$slug(next.berita.judul)}`">
 								<mdb-card-image
 								:src="next.berita.foto_url"
 								alt="Card image cap"
@@ -23,7 +23,7 @@
 							</a>
 						</mdb-view>
 						<!-- Share Button -->
-						<mdb-row class="d-flex justify-content-end mr-2 mb-4 share__btn-content">
+						<!-- <mdb-row class="d-flex justify-content-end mr-2 mb-4 share__btn-content">
 							<mdb-col md="3" xs="4" sm="4">
 								<mdb-btn @click="show = !show" color="success" class="share-btn rounded-circle px-4 py-3">
 									<mdb-icon icon="share-alt" />
@@ -43,8 +43,7 @@
 									</li>
 								</ul>
 							</mdb-col>
-							
-						</mdb-row>
+						</mdb-row> -->
 
 						<mdb-card-body>
 							<mdb-card-title>

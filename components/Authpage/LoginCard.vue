@@ -79,7 +79,7 @@
         </mdb-col>
       </mdb-row> -->
 
-      <mdb-row class="row justify-content-center white-text mb-1 mt-5">
+      <mdb-row class="row justify-content-center white-text mb-3 mt-5">
         <mdb-col v-if="show_alert" lg="12" xs="12" sm="12">
           <mdb-alert color="danger" dismiss>
             <strong>Ooops!</strong> {{ validation }}
@@ -119,6 +119,7 @@ export default {
     return {
       fields: {},
       showing_pass: false,
+      p1: true
     };
   },
 

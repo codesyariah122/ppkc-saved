@@ -9,7 +9,7 @@
 
 			<mdb-row class="row justify-content-center tabs__detail-profile">
 				<mdb-col lg="12" xs="12" sm="12">
-					<TabsProfile :profiles="profiles" :works="works" :studs="studs" :categories="categories" :pelatihans="pelatihans" :loading="loading" :field="field" @filter-event-child="FilterEvent" @change-category-child="ChangeCategory" @change-event-child="ChangeMonth"/>
+					<TabsProfile :profiles="profiles" :works="works ? works : '-'" :studs="studs ? studs : '-'" :categories="categories" :pelatihans="pelatihans" :loading="loading" :field="field" @filter-event-child="FilterEvent" @change-category-child="ChangeCategory" @change-event-child="ChangeMonth"/>
 				</mdb-col>
 			</mdb-row>
 

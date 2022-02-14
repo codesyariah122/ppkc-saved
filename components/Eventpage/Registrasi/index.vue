@@ -14,13 +14,13 @@
 				<mdb-container v-else>
 					<mdb-row class="justify-content-center">
 						<mdb-col md="12">						
-							<h6>Event</h6>
+							<h6>Pendaftaran Event</h6>
 							<h4>{{event.kegiatan_title}}</h4>
 						</mdb-col>
 
 						<mdb-col md="12">
 							<h6>Biaya</h6>
-							<h2>
+							<h2 class="font-weight-bolder">
 								{{$format(event.harga)}}
 							</h2>
 						</mdb-col>
@@ -52,7 +52,7 @@
 											Loading...
 										</div>
 										<div v-else>
-											Bayar Pendaftaran
+											<mdb-icon far icon="credit-card" size="lg" /> Bayar Pendaftaran
 										</div>
 									</mdb-btn>
 								</div>
@@ -63,6 +63,14 @@
 							<center>
 								<a @click="$router.back()">Kembali</a>
 							</center>
+						</mdb-col>
+					</mdb-row>
+
+					<mdb-row v-if="error" class="row justify-content-center">
+						<mdb-col md="12" class="mt-2 mb-5">
+							<mdb-alert v-if="validation" color="danger">
+								{{validation.message}}
+							</mdb-alert>
 						</mdb-col>
 					</mdb-row>
 
@@ -83,7 +91,9 @@
 				loading_btn:null,
 				event: {},
 				banks:[],
-				field: {}
+				field: {},
+				error: null,
+				validation: {}
 			}
 		},
 
@@ -117,38 +127,45 @@
 
 			RegisterEvent(){
 				this.loading_btn = true
-				this.loading_btn = true
 				// console.log(this.field.bank_id)
-				const url = `${this.api_url}/web/event/${this.id}/daftar`
+				if(this.field.bank_id === undefined){
+					this.error = true
+					this.validation.message = "Harap checklist dibagian bank yang tersedia"
+					setTimeout(() => {
+						this.loading_btn=false
+					}, 900)
+				}else{					
+					const url = `${this.api_url}/web/event/${this.id}/daftar`
 
-				this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
-				this.$axios.post(url, {
-					bank_id: this.field.bank_id
-				})
-				.then(({data}) => {
-					console.log(data)
-					let new_message = ''
-					if(data.kegiatan_peserta.kegiatan_id){
-						if(data.message === "Anda telah terdaftar pada event ini"){
-							new_message = "Terima kasih telah mendaftar, segera lakukan pembayaran"	
-						}else{
-							new_message = data.message
-						}
-						this.Alert('success', new_message)
-						this.$router.push({
-							name: 'events-id-konfirmasi',
-							params: {
-								id: data.kegiatan_peserta.kegiatan_id
+					this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
+					this.$axios.post(url, {
+						bank_id: this.field.bank_id
+					})
+					.then(({data}) => {
+						// console.log(data)
+						let new_message = ''
+						if(data.kegiatan_peserta.kegiatan_id){
+							if(data.message === "Anda telah terdaftar pada event ini"){
+								new_message = "Terima kasih telah mendaftar, segera lakukan pembayaran"	
+							}else{
+								new_message = data.message
 							}
-						})
-					}
-				})
-				.catch(err => {
-					console.log(err)
-				})
-				.finally(() => {
-					this.loading_btn = false
-				})
+							this.Alert('success', new_message)
+							this.$router.push({
+								name: 'events-id-konfirmasi',
+								params: {
+									id: data.kegiatan_peserta.kegiatan_id
+								}
+							})
+						}
+					})
+					.catch(err => {
+						console.log(err)
+					})
+					.finally(() => {
+						this.loading_btn = false
+					})
+				}
 			},
 
 			Alert(status, data){

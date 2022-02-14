@@ -61,26 +61,44 @@
                         <b-list-group class="list__modul">
                           <b-list-group-item >
                             <a v-if="d.kategori == 1" href="#!" @click="ShowField(d, '', 'video', d.kategori)">
+                              <small class="text-danger">
+                                Click bagian link dibawah ini :
+                              </small> <br>
                               <mdb-icon icon="video" /> Video
                             </a>
 
                             <a v-else-if="d.kategori == 2" href="#!" @click="ShowField(d, '', 'file_pdf', d.kategori)">
+                              <small class="text-danger">
+                                Click bagian link dibawah ini :
+                              </small> <br>
                               <mdb-icon far icon="file-pdf" /> Materi PDF
                             </a>
 
                             <a v-else-if="d.kategori == 3" href="#!" @click="ShowField(d, d.id, 'pre test', d.kategori)">
+                              <small class="text-danger">
+                                Click bagian link dibawah ini :
+                              </small> <br>
                               <mdb-icon far icon="file-alt" /> Pre Test {{d.title}}
                             </a>
 
                             <a v-else-if="d.kategori == 4" href="#!" @click="ShowField(d, d.id, 'post test', d.kategori)">
+                              <small class="text-danger">
+                                Click bagian link dibawah ini :
+                              </small> <br>
                               <mdb-icon icon="file-signature" /> Post Test {{d.title}}
                             </a>
 
                             <a v-else-if="d.kategori == 5" href="#!" @click="ShowField(d, '', 'file_pdf', d.kategori)">
+                              <small class="text-danger">
+                                Click bagian link dibawah ini :
+                              </small> <br>
                               <mdb-icon icon="file-signature" /> Informed Consent
                             </a>
 
                             <a v-else-if="d.kategori == 6" href="#!" @click="ShowField(d, '', 'video', d.kategori)">
+                              <small class="text-danger">
+                                Click bagian link dibawah ini :
+                              </small> <br>
                               <mdb-icon far icon="file-video" /> Webinar
                             </a>
 
@@ -148,28 +166,31 @@
     </mdb-container>
     
     <!-- debuging -->
-    <pre class="mt-5">
+    <!-- <pre class="mt-5">
+      {{events}}
+    </pre> -->
+    <!-- <pre class="mt-5">
       {{pelatihans.map(c => {
         return c.categories
       })}}
-    </pre>
+    </pre> -->
   </div>
 </template>
 
 
 <script>
   export default{
-    props: ['token', 'api_url', 'events', 'status_pendaftaran'],
+    props: ['token', 'api_url', 'status_pendaftaran'],
 
     data(){
       return {
         loading: null,
         profiles: [],
         pelatihans: [],
+        kegiataan: [],
         categories:[],
         detailed: '',
         type: '',
-        title: this.events.kegiatan.kegiatan_title,
         tgl: '',
         start: '',
         end: '',
@@ -199,6 +220,7 @@
         this.$axios.get(`${this.api_url}/web/event/${this.$route.params.id}`)
         .then(({data}) => {
           // console.log(data)
+          this.kegiatan = data.kegiatan
           this.pelatihans = data.pelatihans
         })
         .catch(err => console.log(err))

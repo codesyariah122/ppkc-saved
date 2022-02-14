@@ -31,7 +31,7 @@
                   >
                     <mdb-card>
                       <mdb-view hover>
-                        <a href="#!">
+                        <a :href="`/detail/berita/${item.id}/${$slug(item.judul)}`">
                           <mdb-card-image
                             :src="item.foto_url"
                             alt="Card image cap"
