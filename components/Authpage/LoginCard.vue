@@ -60,7 +60,7 @@
               ></span>
               Loading...
             </div>
-            <div v-else>Masuk</div>
+            <div v-else><mdb-icon icon="sign-in-alt" size="md"/> Masuk</div>
           </mdb-btn>
         </div>
       </form>

@@ -1,5 +1,5 @@
 <template>
-	<div class="webinar__list">
+	<div>
 		<mdb-jumbotron class="mb-3 mt-5 text-center lighten-5 jumbotron__event">
 			<mdb-container class="mt-2">
 				<h2 class="card-title h2">Events</h2>

@@ -1,10 +1,10 @@
 <template>
-	<div>
+	<div class="webinar__list">
 		<!-- Header filter event page -->
 		<EventpageHeader @update-list-event="ListEvent" :lists="lists" :loading="loading" :loadingBtn="loadingBtn" :listToShow="listToShow" @load-more-event="LoadListEvent" :categories="categories" ref="eventChild"/>
 
 		<!-- List event page content -->
-		<EventpageListEvents :lists="lists" :loading="loading" :loadingBtn="loadingBtn" :listToShow="listToShow" :message="message" :empty="empty"	:token="token" :data_event="data_event"/>
+		<EventpageListEvents :lists="lists" :loading="loading" :loadingBtn="loadingBtn" :listToShow="listToShow" :message="message" :empty="empty" :token="token" :data_event="data_event"/>
 
 	</div>
 </template>

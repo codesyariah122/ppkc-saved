@@ -1,18 +1,19 @@
 <template>
-	<div class="mt-2 card__content">
-		<mdb-row class="row justify-content-center">
-			<mdb-col id="show-event" v-for="list in lists" class="col-lg-4 d-flex align-items-stretch" md="4" xs="12" sm="12" :key="list.kegiatan_id">
-				<mdb-card :style="`${$device.isMobile ? 'max-width:350px; margin-left:.7rem;' : ''}`">
-					<mdb-view hover>
-						<a :href="`/detail/event/${list.kegiatan_id}/${$slug(list.kegiatan_title)}`">
-							<mdb-card-image
-							:src="list.photo"
-							alt="Card image cap" class="img-fluid"/>
-							<mdb-mask flex-center waves overlay="white-slight"></mdb-mask>
-						</a>
-					</mdb-view>
-					<mdb-card-body>
-						<mdb-badge class="badge btn-outline-primary mb-4" style="color:#004899!important;">{{list.kategori_value}}</mdb-badge>
+	<div class="mt-2 card__content-events">
+		<mdb-container>
+			<mdb-row class="row justify-content-center mb-5 webinar__content">
+				<mdb-col id="show-event" v-for="list in lists" class="col-md-4 d-flex align-items-stretch" md="4" xs="12" sm="12" :key="list.kegiatan_id">
+					<mdb-card :style="`${$device.isMobile ? 'max-width:350px;margin-bottom: 2rem;' : ''}`">
+						<mdb-view hover>
+							<a :href="`/detail/event/${list.kegiatan_id}/${$slug(list.kegiatan_title)}`">
+								<mdb-card-image
+								:src="list.photo"
+								alt="Card image cap" class="img-fluid"/>
+								<mdb-mask flex-center waves overlay="white-slight"></mdb-mask>
+							</a>
+						</mdb-view>
+						<mdb-card-body>
+							<mdb-badge class="badge btn-outline-primary mb-4" style="color:#004899!important;">{{list.kategori_value}}</mdb-badge>
 
 						<!-- <p>
 							{{list.kegiatan_id}}
@@ -41,6 +42,7 @@
 				</mdb-card>
 			</mdb-col>
 		</mdb-row>
+		</mdb-container>
 	</div>
 </template>
 

@@ -18,7 +18,7 @@
       <mdb-row class="row justify-content-center pelatihan__box">
         <mdb-col col="4" md="4" class="nav__event-pelatihan">
           <div v-for="(item, index) in pelatihans" :key="item.id">
-            <b-button v-b-toggle="`collapse-${item.id}`" class="btn__pelatihan">
+            <b-button v-b-toggle="`collapse-${item.id}`" class="btn__pelatihan" @click="ToggleFile">
               <mdb-row class="row justify-content-between">
                 <mdb-col md="6">  
                   {{item.id == 1 ? item.title : `Pelatihan ${item.id}`}} 
@@ -64,7 +64,7 @@
            </div>
          </mdb-col>
 
-         <mdb-col col="8" md="8" class="content__event-pelatihan mt-3">
+         <mdb-col col="12" md="8" class="content__event-pelatihan">
           <div v-if="loading">
             <div class="text-center">
               <div class="spinner-border text-primary" role="status" style="width:150px; height:150px;">
@@ -74,64 +74,67 @@
           </div>
           <!-- Show file event -->
           <div v-else>
-            <div v-if="show_file" data-spy="scroll" data-target="#navbar__event-detail" data-offset="0">
+            <mdb-row>
+              <mdb-col md="10">
+                <div v-if="show_file" data-spy="scroll" data-target="#navbar__event-detail" data-offset="0">
 
-              <div v-if="type == 1" :id="`#item-${type}`" class="embed__file">
-                <h5 class="type__name">{{type_name}}</h5>
-                <h2>{{detailed_data.title}}</h2>
-                <div v-if="yt_link" class="mt-5 mb-5">
-                  <div class="text-center">
-                    <div class="spinner-grow text-danger" style="width: 5rem; height: 5rem;" role="status">
-                      <span class="sr-only">Loading...</span>
+                  <div v-if="type == 1" :id="`#item-${type}`" class="embed__file">
+                    <h5 class="type__name">{{type_name}}</h5>
+                    <h2>{{detailed_data.title}}</h2>
+                    <div v-if="yt_link" class="mt-5 mb-5">
+                      <div class="text-center">
+                        <div class="spinner-grow text-danger" style="width: 5rem; height: 5rem;" role="status">
+                          <span class="sr-only">Loading...</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div v-else>
+                      <b-embed 
+                      type="iframe"
+                      aspect="16by9"
+                      :src="detailed.video"
+                      allowfullscreen 
+                      ></b-embed>
                     </div>
                   </div>
+
+                  <div v-else-if="type == 2" :id="`#item-${type}`" class="embed__file">
+                    <h5 class="type__name">{{type_name}}</h5>
+                    <h2>{{detailed_data.title}}</h2>
+                    <object :data="detailed.file_pdf" type="application/pdf" width="100%" :height="`${$device.isDesktop ? '800px' : '500px'}`">
+                    </object>
+                  </div>
+
+                  <div v-else-if="type == 3" :id="`#item-${type}`" class="embed__file">
+                    <EventTestPreTest :id_test="id_test" :type_name="type_name"/>
+                  </div>
+
+                  <div v-else-if="type == 4" :id="`#item-${type}`" class="embed__file">
+                    <EventTestPostTest :id_test="id_test" :type_name="type_name"/>
+                  </div>
+
+                  <div v-else-if="type == 5" class="embed__file">
+                    <h5 class="type__name">{{type_name}}</h5>
+                    <h2>{{detailed_data.title}}</h2>
+                    <object :data="detailed.file_pdf" type="application/pdf" width="100%" :height="`${$device.isDesktop ? '700px' : '500px'}`">
+                    </object>
+
+                  </div>
+
+                  <div v-else-if="type == 6" :id="`#item-${type}`">
+                    <EventWebinar :id_test="id_test" :detailed_data="detailed_data"/>
+                  </div>
                 </div>
-                <div v-else>
-                  <b-embed 
-                  type="iframe"
-                  aspect="16by9"
-                  :src="detailed.video"
-                  allowfullscreen 
-                  ></b-embed>
-                </div>
-              </div>
-
-              <div v-else-if="type == 2" :id="`#item-${type}`" class="embed__file">
-                <h5 class="type__name">{{type_name}}</h5>
-                <h2>{{detailed_data.title}}</h2>
-                <h4> {{category_name}} </h4>
-                <object :data="detailed.file_pdf" type="application/pdf" width="100%" :height="`${$device.isDesktop ? '800px' : '500px'}`">
-                </object>
-              </div>
-
-              <div v-else-if="type == 3" :id="`#item-${type}`" class="embed__file">
-                <EventTestPreTest :id_test="id_test" :type_name="type_name"/>
-              </div>
-
-              <div v-else-if="type == 4" :id="`#item-${type}`" class="embed__file">
-                <EventTestPostTest :id_test="id_test" :type_name="type_name"/>
-              </div>
-
-              <div v-else-if="type == 5" class="embed__file">
-                <h5 class="type__name">{{type_name}}</h5>
-                <h2>{{detailed_data.title}}</h2>
-
-                <h4> {{category_name}} </h4>
-
-                <object :data="detailed.file_pdf" type="application/pdf" width="100%" :height="`${$device.isDesktop ? '800px' : '500px'}`">
-                </object>
-
-                <mdb-list-group class="mt-5">
-                  <mdb-list-group-item>Cras justo odio</mdb-list-group-item>
-                </mdb-list-group>
-
-              </div>
-
-              <div v-else-if="type == 6" :id="`#item-${type}`">
-                <EventWebinar :id_test="id_test" :detailed_data="detailed_data"/>
-              </div>
-
-            </div>
+              </mdb-col>
+              <mdb-col v-if="show_close" md="2">
+                <mdb-tooltip trigger="hover" :options="{placement: 'bottom'}">
+                  <span slot="tip"> Close File </span>
+                    <mdb-btn color="primary" slot="reference" @click="ToggleFile">
+                      <mdb-icon icon="window-close" size="lg"/>
+                    </mdb-btn>
+                </mdb-tooltip>
+              </mdb-col>
+            </mdb-row>
           </div>
         </mdb-col>
       </mdb-row>
@@ -170,7 +173,8 @@
         end: '',
         show_file:false,
         id_test: '',
-        type_name: ''
+        type_name: '',
+        show_close: false
       }
     },
 
@@ -197,8 +201,9 @@
       },
 
       ToggleFile(){
-        if(this.show_file){
+        if(this.show_file || this.show_close){
           this.show_file = false
+          this.show_close = false
         }
       }, 
 
@@ -241,6 +246,7 @@
       ShowField(raw, id_kategori='', type){
         this.loading = true
         this.show_file = true
+        this.show_close = true
         this.detailed_data = raw
         let field = ''
         switch(type){

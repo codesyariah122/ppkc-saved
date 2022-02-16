@@ -9,7 +9,7 @@
 				<h1>
 					{{events.kegiatan.kegiatan_title}}
 				</h1>
-				<h4 class="mt-3">
+				<h4 class="mt-3 idr__color">
 					{{events.kegiatan.harga ? $format(events.kegiatan.harga) : 'Rp. -'}}
 				</h4>
 

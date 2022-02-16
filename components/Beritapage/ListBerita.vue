@@ -27,7 +27,7 @@
                     md="4"
                     xs="12"
                     sm="12"
-                    :key="item.id"
+                    :key="item.id" :style="`${$device.isMobile ? 'margin-bottom: 2rem;' : ''}`"
                   >
                     <mdb-card>
                       <mdb-view hover>

@@ -17,7 +17,7 @@
 					<mdb-col md="4">
 						<h5>Jenis kegiatan</h5>
 						<p>
-							{{details.kegiatan_value}}
+							{{details.kategori_value}}
 						</p>
 					</mdb-col>
 					<mdb-col md="4">
