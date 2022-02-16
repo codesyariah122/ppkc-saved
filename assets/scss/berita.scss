@@ -10,8 +10,8 @@
 				max-width: 250px;
 				object-fit: cover;
 			}
-			h4{
-				color: $color-primary;
+			h2{
+				color: $color-primary!important;
 				font-weight:500;
 			}
 			p{
@@ -24,7 +24,7 @@
 			}
 		}
 		.col__berita-2{
-			max-width: 90%;
+			width: 100%;
 			article{
 				color:$default-gray;
 				font-size:15px;

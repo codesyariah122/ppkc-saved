@@ -21,7 +21,14 @@ const SlugProfileName = (str) => {
   return str
 }
 
+const ValidYtString = (str) => {
+	str = str.substr(0, 30)
+	return str
+}
+
+
 export default ({ app }, inject) => {
   inject('slug', StringToSlug)
   inject('username', SlugProfileName)
+  inject('ytString', ValidYtString)
 }

@@ -17,13 +17,14 @@
             {{ lists.berita.konten }}
           </article>
         </mdb-col>
+        
         <mdb-col lg="12" xs="12" sm="12" class="mt-5">
           <b-dropdown-divider class="line"></b-dropdown-divider>
         </mdb-col>
       </mdb-row>
 
       <!-- Content second -->
-      <!-- <GlobalsOptionSlug :next="next"/> -->
+      <GlobalsOptionSlug :next="next"/>
 
     </mdb-container>
   </div>

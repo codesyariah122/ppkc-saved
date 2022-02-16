@@ -10,18 +10,19 @@
       <!-- <mdb-col md="4"></mdb-col> -->
       <mdb-col md="3" class="text-justify text-capitalize mb-5">
         <mdb-tooltip
-          trigger="hover"
-          :options="{ placement: 'top' }"
-          :class="`${$device.isDesktop ? 'ml-4' : ''} float-right`"
+        trigger="hover"
+        :options="{ placement: 'top' }"
+        :class="`${$device.isDesktop ? 'ml-4' : ''} float-right`"
         >
-          <span slot="tip"> Lihat semua pelatihan dan webinar </span>
-          <nuxt-link to="/events" slot="reference"
-            >lihat semua pelatihan <mdb-icon icon="arrow-right"
-          /></nuxt-link>
-        </mdb-tooltip>
-      </mdb-col>
-    </div>
-    <!-- End header webinar list -->
+        <span slot="tip"> Lihat semua pelatihan dan webinar </span>
+        <nuxt-link to="/events" slot="reference"
+        >lihat semua pelatihan <mdb-icon icon="arrow-right"
+        /></nuxt-link>
+      </mdb-tooltip>
+    </mdb-col>
+  </div>
+  <!-- End header webinar list -->
+
 
     <!-- Event webinar list content -->
     <CardEventList :lists="lists" :listsToShow="listsToShow" />

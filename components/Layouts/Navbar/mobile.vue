@@ -34,7 +34,7 @@
 					<mdb-dropdown-menu>
 						<mdb-dropdown-item>
 							<nuxt-link :to="{name: 'profile-slug', params: {slug: $username(slug)}}" class="text-center">
-								<mdb-icon icon="user-check" /> {{profiles.nama}}
+								<mdb-icon icon="user-md" /> {{profiles.nama}}
 							</nuxt-link>
 						</mdb-dropdown-item>
 						<div class="dropdown-divider"></div>

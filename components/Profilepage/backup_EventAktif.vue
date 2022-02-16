@@ -31,7 +31,7 @@
 
             <b-collapse :id="`collapse-${item.id}`" class="collapse__category-event-1">
               <div v-for="(c, index) in item.categories"  :key="c.id">
-                <b-button v-b-toggle="`collapse-${c.id}-inner`" size="sm" class="btn__category-1" @click="ShowCategory(c.id)">
+                <b-button v-b-toggle="`collapse-${c.id}-inner`" size="sm" class="btn__category-1">
                   <mdb-row class="row justify-content-between">
                     <mdb-col md="5">
                       <mdb-tooltip trigger="hover" :options="{placement: 'top'}">
@@ -40,31 +40,105 @@
                       </mdb-tooltip>
                     </mdb-col>
                     <mdb-col md="1">
-                     <mdb-icon icon="caret-down" size="lg"/>
-                   </mdb-col>
-                 </mdb-row>
-               </b-button>
+                       <mdb-icon icon="caret-down" size="lg"/>
+                    </mdb-col>
+                  </mdb-row>
+                </b-button>
 
-               <b-collapse :id="`collapse-${c.id}-inner`" class="collapse__category-event-2 mb-3">
-                <b-card>
-                  <div v-for="(d, index) in c.details" :key="d.id">
-                    <b-list-group class="list__modul">
-                      <b-list-group-item id="navbar__event-detail">
-                        <a class="font-weight-bold" :href="`#item-${d.kategori}`" @click="ShowField(d, d.kategori == 3 || d.kategori == 4 ? d.id : d.kategori, d.kategori)">
-                          <mdb-icon :icon="FilterIcon(d.kategori)" /> {{d.title}}
-                        </a>
-                      </b-list-group-item>
-                    </b-list-group>
+                <b-collapse :id="`collapse-${c.id}-inner`" class="collapse__category-event-2 mb-3">
+                  <div v-for="(d, index) in c.details" :key="d.id" class="list__modul">
+                    <mdb-btn v-b-toggle="`collapse-${d.id}-pelatihan`" size="sm" class="btn__category-2"  @click="ToggleFile(d.kategori, d.id)">
+                      <mdb-row class="row justify-content-between">
+                        <mdb-col md="6">
+                          {{d.kategori !== 3 && d.kategori !== 4 ? d.title : `Test ${index}`}}
+                        </mdb-col>
+                        <mdb-col md="2">
+                          <mdb-icon icon="caret-down" size="lg"/>
+                        </mdb-col>
+                      </mdb-row>
+                    </mdb-btn>
+
+                    <b-collapse :id="`collapse-${d.id ? d.id : ''}-pelatihan`" class="collapse__category-event-3">
+                      <b-card>
+                        <b-list-group class="list__modul">
+                          <b-list-group-item id="navbar__event-detail">
+                            <small class="text-sucess mb-5">
+                              Click tombol / link kategori dibawah untuk membuka {{d.kategori !== 3 && d.kategori !== 4 ? d.title : `Test ${index}`}} :
+                            </small> <br> <br>
+
+                            <a class="font-weight-bold btn btn-danger" v-if="d.kategori == 1" :href="`#item-${d.kategori}`" @click="ShowField(d, '', 'video', d.kategori)">
+                              <div v-if="loading">
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                Loading...
+                              </div>
+                              <div v-else>
+                                <mdb-icon icon="video" /> Buka Video
+                              </div>
+                            </a>
+
+                            <a class="font-weight-bold btn btn-info" v-else-if="d.kategori == 2" :href="`#item-${d.kategori}`" @click="ShowField(d, '', 'file_pdf', d.kategori)">
+                              <div v-if="loading">
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                Loading...
+                              </div>
+                              <div v-else>
+                                <mdb-icon far icon="file-pdf" /> Buka Materi PDF
+                              </div>
+                            </a>
+
+                            <a class="font-weight-bold btn btn-success" v-else-if="d.kategori == 3" :href="`#item-${d.kategori}`" @click="ShowField(d, d.id, 'pre test', d.kategori)">
+                              <div v-if="loading">
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                Loading...
+                              </div>
+                              <div v-else>
+                                <mdb-icon far icon="file-alt" /> Pre Test {{d.title}}
+                              </div>
+                            </a>
+
+                            <a class="font-weight-bold btn btn-success" v-else-if="d.kategori == 4" :href="`#item-${d.kategori}`" @click="ShowField(d, d.id, 'post test', d.kategori)">
+                              <div v-if="loading">
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                Loading...
+                              </div>
+                              <div v-else>
+                                <mdb-icon icon="file-signature" /> Post Test {{d.title}}
+                              </div>
+                            </a>
+
+                            <a class="font-weight-bold btn btn-info" v-else-if="d.kategori == 5" :href="`#item-${d.kategori}`" @click="ShowField(d, '', 'file_pdf', d.kategori)">
+                              <div v-if="loading">
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                Loading...
+                              </div>
+                              <div v-else>                                
+                                <mdb-icon icon="file-signature" /> Buka Informed Consent
+                              </div>
+                            </a>
+
+                            <a class="font-weight-bold btn btn-secondary" v-else-if="d.kategori == 6" :href="`#item-${d.kategori}`" @click="ShowField(d, d.id, 'video', d.kategori)">
+                              <div v-if="loading">
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                Loading...
+                              </div>
+                              <div v-else>
+                                <mdb-icon far icon="file-video" /> Buka Webinar
+                              </div>
+                            </a>
+
+                          </b-list-group-item>
+                        </b-list-group>
+                      </b-card>
+                    </b-collapse>
+
                   </div>
-                </b-card>
+                </b-collapse>
+              </div>
+            </b-collapse>
+          </div>
+        </mdb-col>
 
-                 </b-collapse>
-               </div>
-             </b-collapse>
-           </div>
-         </mdb-col>
-
-         <mdb-col col="8" md="8" class="content__event-pelatihan mt-3">
+        <mdb-col col="8" md="8" class="content__event-pelatihan mt-3">
           <div v-if="loading">
             <div class="text-center">
               <div class="spinner-border text-primary" role="status" style="width:150px; height:150px;">
@@ -82,8 +156,8 @@
                 <div v-if="yt_link" class="mt-5 mb-5">
                   <div class="text-center">
                     <div class="spinner-grow text-danger" style="width: 5rem; height: 5rem;" role="status">
-                      <span class="sr-only">Loading...</span>
-                    </div>
+                    <span class="sr-only">Loading...</span>
+                  </div>
                   </div>
                 </div>
                 <div v-else>
@@ -99,7 +173,6 @@
               <div v-else-if="type == 2" :id="`#item-${type}`" class="embed__file">
                 <h5 class="type__name">{{type_name}}</h5>
                 <h2>{{detailed_data.title}}</h2>
-                <h4> {{category_name}} </h4>
                 <object :data="detailed.file_pdf" type="application/pdf" width="100%" :height="`${$device.isDesktop ? '800px' : '500px'}`">
                 </object>
               </div>
@@ -116,7 +189,9 @@
                 <h5 class="type__name">{{type_name}}</h5>
                 <h2>{{detailed_data.title}}</h2>
 
-                <h4> {{category_name}} </h4>
+                <pre>
+                  {{categories}}
+                </pre>
 
                 <object :data="detailed.file_pdf" type="application/pdf" width="100%" :height="`${$device.isDesktop ? '800px' : '500px'}`">
                 </object>
@@ -159,10 +234,9 @@
         profiles: [],
         pelatihans: [],
         kegiataan: [],
-        categories:'',
+        categories:[],
         category_title: '',
         detailed_data: {},
-        category_name: '',
         detailed: '',
         type: '',
         tgl: '',
@@ -196,75 +270,30 @@
         }, 900)
       },
 
-      ToggleFile(){
+      ToggleFile(category='', id_kategori=''){
+        
         if(this.show_file){
           this.show_file = false
         }
-      }, 
 
-      FilterIcon(type){
-        switch(type){
-          case 1:
-          return 'video'
-          break;
-          case 2:
-          return 'file-pdf'
-          break;
-          case 3:
-          return 'file-alt'
-          break;
-          case 4:
-          return 'file-archive'
-          break;
-          case 5:
-          return 'file-pdf'
-          break;
-          case 6:
-          return 'file-video'
-          break;
-          default:
-          return 'No type here'
-        }
+
+        this.ShowCategory(id_kategori)
+        // console.log(this.show_file)
       },
 
       ShowCategory(id){
-        console.log(id)
+        const string_class = `collapse-${id}-pelatihan`
         const filter = this.pelatihans.filter(d => d.id == id)
         this.categories = filter.map(c => {
-          return c.categories.map(d => {
-            this.category_name = d.title
-            return d
-          })
+          return c.categories.filter(f => f.pelatihan_id == id)
         })
+        // this.categories  = filter
       },
 
-      ShowField(raw, id_kategori='', type){
+      ShowField(raw, id_kategori='', field, type){
         this.loading = true
         this.show_file = true
         this.detailed_data = raw
-        let field = ''
-        switch(type){
-          case 1:
-          field = 'video'
-          break;
-          case 2:
-          field = 'file_pdf'
-          break;
-          case 3:
-          field = 'pre_test'
-          break;
-          case 4:
-          field = 'post_test'
-          break;
-          case 5:
-          field = 'file_pdf'
-          break;
-          case 6:
-          field = 'video'
-          break;
-          default:
-          field = 'No field here'
-        }
         this.detailed = Object.keys(raw)
         .filter(key => field.includes(key))
         .reduce((obj, key) => {

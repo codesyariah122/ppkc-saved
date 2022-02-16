@@ -63,7 +63,7 @@
                   }"
                   class="text-center"
                 >
-                  <mdb-icon icon="user-check" /> {{ profiles.nama }}
+                  <mdb-icon icon="user-md" /> {{ profiles.nama }}
                 </nuxt-link>
               </mdb-dropdown-item>
               <div class="dropdown-divider"></div>

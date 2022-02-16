@@ -1,7 +1,6 @@
 <template>
 	<div class="auth__content">
 		<mdb-container>
-
 			<mdb-row class="justify-content-center registrasi__event-header">
 				<mdb-col lg="12" sm="12" xs="12">
 					<EventpageRegistrasiHeader/>
@@ -42,10 +41,10 @@
 		methods:{
 			IsLoggedIn(){
 				if(!this.token.accessToken){
-					this.Alert('error', `Anda tidak dapat izin mengakses halaman ini`)
+					this.Alert('error', `Anda tidak dapat izin untuk mengakses halaman ini`)
 					setTimeout(() => {
 						this.$router.push({
-							path: '/'
+							path: `/detail/event/${this.$route.params.id}`
 						})
 					}, 900)
 				}

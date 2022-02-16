@@ -26,7 +26,7 @@
 			</mdb-row>
 
 			<!-- List Event lainnya -->
-			<mdb-row class="event__detail-list">
+			<mdb-row v-else class="event__detail-list">
 				<EventpageEventLainnya :lists="lists" :currentPage="currentPage" :loading="loading" :listToShow="listToShow" :token="token" :data_event="data_event"/>
 			</mdb-row>
 		</mdb-container>
@@ -48,7 +48,7 @@
 				currentPage: 1,
 				status_pendaftaran: '',
 				id: this.$route.params.id,
-				data_event: {
+				data_event_path: {
 					event_id: this.$route.params.id,
 					event_path: this.$route.path
 				},
@@ -65,7 +65,7 @@
 		},
 
 		beforeMount(){
-			this.SetEventLogin(this.data_event)
+			this.SetEventLogin(this.data_event_path)
 			this.ConfigApiUrl(),
 			this.CheckToken()
 		},

@@ -61,7 +61,9 @@
 
 						<mdb-col md="12" class="mt-3 mb-2">
 							<center>
-								<a @click="$router.back()">Kembali</a>
+								<a @click="$router.back()">
+									<mdb-icon icon="arrow-left" size="md"/> Kembali
+								</a>
 							</center>
 						</mdb-col>
 					</mdb-row>
@@ -130,10 +132,10 @@
 				// console.log(this.field.bank_id)
 				if(this.field.bank_id === undefined){
 					this.error = true
-					this.validation.message = "Harap checklist dibagian bank yang tersedia"
+					this.validation.message = "Harap checklist pada bagian bank yang tersedia"
 					setTimeout(() => {
 						this.loading_btn=false
-					}, 900)
+					}, 800)
 				}else{					
 					const url = `${this.api_url}/web/event/${this.id}/daftar`
 

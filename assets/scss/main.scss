@@ -314,11 +314,11 @@
 		.card{
 			margin-top: 1rem;
 			filter: drop-shadow(5px 5px 10px $bg-fourt);
-			width: 340px;
+			width: 333px;
 			// height: 370px;
 			margin-bottom:1rem;
 			img{
-				max-width: 340px;
+				max-width: 333px;
 				object-fit: contain;
 			}
 			@include card_rounded_mobile;
@@ -594,7 +594,7 @@
 					}
 
 					.footer__sitemap-link{
-						margin-left: 1.7rem;
+						margin-left: .8rem;
 					}
 					.footer__sitemap-apk{
 						margin-top: .9rem;
@@ -635,7 +635,7 @@
 		color: #fff !important;
 		border-radius: 0;
 		position: fixed;
-		bottom: 85px;
+		bottom: 35px;
 		right: 15px;
 		z-index: 9;
 		cursor: pointer;

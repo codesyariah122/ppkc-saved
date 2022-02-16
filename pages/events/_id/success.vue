@@ -52,10 +52,10 @@
 		methods: {
 			IsLoggedIn(){
 				if(!this.token.accessToken){
-					this.Alert('error', `Anda tidak dapat izin mengakses halaman ini`)
+					this.Alert('error', `Anda tidak dapat izin untuk mengakses halaman ini`)
 					setTimeout(() => {
 						this.$router.push({
-							path: '/'
+							path: `/detail/event/${this.$route.params.id}`
 						})
 					}, 900)
 				}
