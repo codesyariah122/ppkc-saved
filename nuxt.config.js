@@ -42,7 +42,9 @@ export default {
       {
         rel: 'stylesheet',
         href: 'https://fonts.googleapis.com/css?family=Open+Sans'
-      }
+      },
+      { rel: 'stylesheet', type: 'text/css', href: '/assets/glightbox/glightbox.min.css'},
+      { rel: 'stylesheet', type: 'text/css', href: '/assets/css/video.css'}
     ],
     script: [
       {
@@ -54,6 +56,10 @@ export default {
         async: 'true',
         'custom-element': 'amp-ad'
       },
+      {
+        src: '/assets/glightbox/glightbox.min.js',
+        type: 'text/javascript'
+      }
     ]
   },
 
@@ -74,7 +80,8 @@ export default {
       '~assets/scss/berita.scss',
       '~assets/scss/auth.scss',
       '~assets/scss/profile.scss',
-      '~assets/scss/event-detail-login.scss'
+      '~assets/scss/event-detail-login.scss',
+      '~assets/scss/event-test.scss'
     ]
   },
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins

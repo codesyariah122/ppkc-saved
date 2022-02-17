@@ -108,7 +108,7 @@ export default {
 
     getNextTestimoni() {
       window.onscroll = () => {
-        if (!this.loading && !this.end && !this.error) {
+        if (!this.loading && !this.end && !this.error && this.$route.path == '/ppkc/testimoni') {
           if (
             this.$refs.testimoni_square.getBoundingClientRect().bottom <= 450
           ) {

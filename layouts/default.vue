@@ -2,7 +2,8 @@
 	<div>
 		<LayoutsNavigation :token="token" :profiles="profiles" :slug="slug" :event_id="event_id" :event_path="event_path"/>
 		<Nuxt/>
-		<LayoutsFooter/>
+
+		<LayoutsFooter v-if="$route.name !== 'detail-event-id-slug' || !token.accessToken"/>
 
 		<!-- Scrolling back to top page -->
 		<GlobalsToTop/>
@@ -37,7 +38,8 @@
 		},
 
 		mounted(){
-			this.UserProfileData()
+			this.UserProfileData(),
+			console.log(this.$route.name)
 		},
 
 		methods: {

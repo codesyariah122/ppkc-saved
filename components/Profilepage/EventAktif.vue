@@ -2,8 +2,8 @@
   <div>
     <hr class="mt-5">
     <mdb-container  v-if="status_pendaftaran !== 'Menunggu Konfirmasi' &&status_pendaftaran !== 'Daftar'" :class="`${$device.isDesktop ? 'mt-5' : ''}`">
-      <mdb-row class="justify-content-center mt-2 mb-5">
-        <mdb-col lg="12" col="12">
+      <mdb-row lg="12" class="justify-content-center mt-2 mb-5">
+        <mdb-col col="12">
           <mdb-tooltip trigger="hover" :options="{placement: 'top'}">
             <span slot="tip"> Kembali ke halaman profile</span>
             <nuxt-link :to="`/profile/${profiles}`" class="btn__tooltip" slot="reference">
@@ -20,7 +20,7 @@
           <div v-for="(item, index) in pelatihans" :key="item.id">
             <b-button v-b-toggle="`collapse-${item.id}`" class="btn__pelatihan" @click="ToggleFile">
               <mdb-row class="row justify-content-between">
-                <mdb-col md="6">  
+                <mdb-col md="8">  
                   {{item.id == 1 ? item.title : `Pelatihan ${item.id}`}} 
                 </mdb-col>
                 <mdb-col md="1">
@@ -45,12 +45,12 @@
                  </mdb-row>
                </b-button>
 
-               <b-collapse :id="`collapse-${c.id}-inner`" class="collapse__category-event-2 mb-3">
+               <b-collapse v-model="visible" :id="`collapse-${c.id}-inner`" class="collapsed collapse__category-event-2 mb-3">
                 <b-card>
                   <div v-for="(d, index) in c.details" :key="d.id">
                     <b-list-group class="list__modul">
                       <b-list-group-item id="navbar__event-detail">
-                        <a class="font-weight-bold" :href="`#item-${d.kategori}`" @click="ShowField(d, d.kategori == 3 || d.kategori == 4 ? d.id : d.kategori, d.kategori)">
+                        <a class="font-weight-bold" :href="`#item-${d.kategori}`" @click="ShowField(d, d.kategori == 3 || d.kategori == 4 || d.kategori == 6 ? d.id : d.kategori, d.kategori)">
                           <mdb-icon :icon="FilterIcon(d.kategori)" /> {{d.title}}
                         </a>
                       </b-list-group-item>
@@ -64,10 +64,10 @@
            </div>
          </mdb-col>
 
-         <mdb-col col="12" md="8" class="content__event-pelatihan">
+         <mdb-col  md="8" class="content__event-pelatihan">
           <div v-if="loading">
             <div class="text-center">
-              <div class="spinner-border text-primary" role="status" style="width:150px; height:150px;">
+              <div class="spinner-border text-primary" role="status" style="width:120px; height:120px; margin-top: 10rem;">
                 <span class="sr-only">Loading...</span>
               </div>
             </div>
@@ -75,10 +75,16 @@
           <!-- Show file event -->
           <div v-else>
             <mdb-row>
-              <mdb-col md="10">
+              <mdb-col md="12" class="column__content">
+                <mdb-tooltip v-if="show_close" trigger="hover" :options="{placement: 'bottom'}" class="float-right">
+                  <span slot="tip"> Close {{type == 3 || type == 4 ? 'Test' : 'File'}} </span>
+                  <a slot="reference" class="icon__close" @click="ToggleFile">
+                    <mdb-icon  icon="times-circle" size="lg" />
+                  </a>
+                </mdb-tooltip>
                 <div v-if="show_file" data-spy="scroll" data-target="#navbar__event-detail" data-offset="0">
 
-                  <div v-if="type == 1" :id="`#item-${type}`" class="embed__file">
+                  <div v-if="type == 1" class="embed__file">
                     <h5 class="type__name">{{type_name}}</h5>
                     <h2>{{detailed_data.title}}</h2>
                     <div v-if="yt_link" class="mt-5 mb-5">
@@ -98,19 +104,23 @@
                     </div>
                   </div>
 
-                  <div v-else-if="type == 2" :id="`#item-${type}`" class="embed__file">
+                  <div v-else-if="type == 2" class="embed__file">
                     <h5 class="type__name">{{type_name}}</h5>
                     <h2>{{detailed_data.title}}</h2>
                     <object :data="detailed.file_pdf" type="application/pdf" width="100%" :height="`${$device.isDesktop ? '800px' : '500px'}`">
                     </object>
                   </div>
 
-                  <div v-else-if="type == 3" :id="`#item-${type}`" class="embed__file">
-                    <EventTestPreTest :id_test="id_test" :type_name="type_name"/>
+                  <div v-else-if="type == 3" class="embed__file">
+                    <h5 class="type__name">{{type_name}}</h5>
+                    <h2>{{detailed_data.title}}</h2>
+                    <EventTestPreTest :id_test="id_test" :type_name="type_name" :token="token" :api_url="api_url"/>
                   </div>
 
-                  <div v-else-if="type == 4" :id="`#item-${type}`" class="embed__file">
-                    <EventTestPostTest :id_test="id_test" :type_name="type_name"/>
+                  <div v-else-if="type == 4" class="embed__file">
+                    <h5 class="type__name">{{type_name}}</h5>
+                    <h2>{{detailed_data.title}}</h2>
+                    <EventTestPostTest :id_test="id_test" :type_name="type_name" :token="token" :api_url="api_url"/>
                   </div>
 
                   <div v-else-if="type == 5" class="embed__file">
@@ -118,35 +128,22 @@
                     <h2>{{detailed_data.title}}</h2>
                     <object :data="detailed.file_pdf" type="application/pdf" width="100%" :height="`${$device.isDesktop ? '700px' : '500px'}`">
                     </object>
-
                   </div>
 
-                  <div v-else-if="type == 6" :id="`#item-${type}`">
-                    <EventWebinar :id_test="id_test" :detailed_data="detailed_data"/>
+                  <div v-else-if="type == 6" class="embed__file">
+                    <h5 class="type__name">{{type_name}}</h5>
+                    <h2>{{detailed_data.title}}</h2>
+                    <EventWebinar :id_webinar="id_webinar" :token="token" :api_url="api_url"/>
                   </div>
                 </div>
               </mdb-col>
-              <mdb-col v-if="show_close" md="2">
-                <mdb-tooltip trigger="hover" :options="{placement: 'bottom'}">
-                  <span slot="tip"> Close File </span>
-                    <mdb-btn color="primary" slot="reference" @click="ToggleFile">
-                      <mdb-icon icon="window-close" size="lg"/>
-                    </mdb-btn>
-                </mdb-tooltip>
-              </mdb-col>
+             
             </mdb-row>
           </div>
         </mdb-col>
       </mdb-row>
     </mdb-container>
-    
-    <!-- debuging -->
-    <!-- <pre class="mt-5">
-      {{events}}
-    </pre> -->
-    <!-- <pre class="mt-5">
-      {{pelatihans}}
-    </pre> -->
+  
   </div>
 </template>
 
@@ -171,8 +168,10 @@
         tgl: '',
         start: '',
         end: '',
+        visible: false,
         show_file:false,
         id_test: '',
+        id_webinar: '',
         type_name: '',
         show_close: false
       }
@@ -185,6 +184,8 @@
 
     methods: {
       // Event Aktif Yang Diikuti
+
+
       EventAktif(){
         this.loading = true
         this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
@@ -229,6 +230,31 @@
           break;
           default:
           return 'No type here'
+        }
+      },
+
+      FileType(type){
+        switch(type){
+          case 1:
+          this.type_name = 'Video Materi';
+          break;
+          case 2:
+          this.type_name = 'File Materi'
+          break;
+          case 3:
+          this.type_name = 'Pre Test'
+          break;
+          case 4:
+          this.type_name = 'Post Test'
+          break;
+          case 5:
+          this.type_name = 'File'
+          break;
+          case 6:
+          this.type_name = 'Video Webinar'
+          break;
+          default:
+          this.type_name = 'No type here'
         }
       },
 
@@ -287,6 +313,7 @@
         this.FileType(type)
 
         this.id_test = id_kategori
+        this.id_webinar = id_kategori
 
         setTimeout(() => {
           this.loading = false
@@ -299,30 +326,7 @@
         // console.log(this.detailed);
       },
 
-      FileType(type){
-        switch(type){
-          case 1:
-          this.type_name = 'Video Materi';
-          break;
-          case 2:
-          this.type_name = 'File Materi'
-          break;
-          case 3:
-          this.type_name = 'Pre Test'
-          break;
-          case 4:
-          this.type_name = 'Post Test'
-          break;
-          case 5:
-          this.type_name = 'File'
-          break;
-          case 6:
-          this.type_name = 'Video Webinar'
-          break;
-          default:
-          this.type_name = 'No type here'
-        }
-      },
+      
 
       UserProfileData(){
         if(this.token){         

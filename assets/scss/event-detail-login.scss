@@ -8,7 +8,7 @@
 	.pelatihan__box{
 		// background-color: rgba(220, 220, 211, 0.3);
 		background-color: $default;
-		height: 100%;
+		height: 100vh;
 		margin-bottom: 3rem;	
 		.nav__event-pelatihan {
 			.btn__pelatihan {
@@ -16,7 +16,8 @@
 				border:0;
 				color: $color-primary;
 				font-weight: 700;
-				width: 320px;
+				width: 345px;
+				text-align: left;
 				&:hover{
 					color: $color-primary;
 				}
@@ -29,12 +30,11 @@
 					border:0;
 					color: $color-primary;
 					font-weight: 400;
-					width: 320px;
-					font-size: 14px;
+					width: 345px;
 					&:hover{
 						color: $bg-second-primary;
 						font-weight:600;
-						font-size:16px;
+						font-size:11px;
 					}
 				}
 
@@ -45,7 +45,7 @@
 						border:0;
 						color:$default;
 						font-weight: 600;
-						width: 320px;
+						width: 345px;
 						&:hover{
 							color: $default;
 							font-weight:700;
@@ -56,7 +56,7 @@
 						background-color:$color-primary!important;
 						color:$default;
 						font-weight: 500;
-						width: 325px;
+						width: 345px;
 						margin-left: .3rem;
 						margin-top: .4rem;
 						.list__modul{
@@ -120,6 +120,13 @@
 				width: 80%;
 				margin-left: 3rem;
 			}
+			.column__content{
+				.icon__close{
+					font-size:31px;
+					color: $bg-second-primary;
+					border-radius: 120px;
+				}
+			}
 			.embed__file{
 				height: 100vh;
 				margin-bottom: 37rem;
@@ -130,6 +137,7 @@
 					font-weight: 600;
 					text-align: center;
 					margin-bottom: 1.5rem;
+					font-size: 16px;
 				}
 				h2{
 					color: $color-primary;
@@ -140,12 +148,10 @@
 				h4{
 					color: $color-primary;
 				}
-				object {
-					margin-left: -11px;
-				}
+				
 				margin-top: 1rem;
 				height: 500px;
-				margin-left: -11px;
+				margin-left: 3rem;
 			}
 		}
 	}
