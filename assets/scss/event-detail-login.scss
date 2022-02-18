@@ -81,34 +81,34 @@
 						}
 					}
 
-					// .collapse__category-event-3{
-					// 	margin-top: -.3rem;
-					// 	margin-left: .3rem;
-					// 	.card{
-					// 		background-color:$color-primary!important;
-					// 		color:$default;
-					// 		font-weight: 500;
-					// 		width: 320px;
-					// 		.list__modul{
-					// 			margin-top: -.8rem;		
-					// 			h5{
-					// 				font-size:23px;
-					// 				margin-left: 1rem;
-					// 				font-weight: 700;
-					// 				border-bottom:2px solid $default;
-					// 			}
-					// 			.list-group-item{
-					// 				background-color:$color-primary!important;
-					// 				border:0;
-					// 				a{
-					// 					color: $default;
-					// 					font-size:16px;
-					// 					font-weight: 500;
-					// 				}
-					// 			}
-					// 		}
-					// 	}
-					// }
+					.collapse__category-event-3{
+						margin-top: -.3rem;
+						margin-left: .3rem;
+						.card{
+							background-color:$color-primary!important;
+							color:$default;
+							font-weight: 500;
+							width: 320px;
+							.list__modul{
+								margin-top: -.8rem;		
+								h5{
+									font-size:23px;
+									margin-left: 1rem;
+									font-weight: 700;
+									border-bottom:2px solid $default;
+								}
+								.list-group-item{
+									background-color:$color-primary!important;
+									border:0;
+									a{
+										color: $default;
+										font-size:16px;
+										font-weight: 500;
+									}
+								}
+							}
+						}
+					}
 				}
 			}
 			
@@ -138,12 +138,14 @@
 					text-align: center;
 					margin-bottom: 1.5rem;
 					font-size: 16px;
+					margin-left: 1rem;
 				}
 				h2{
 					color: $color-primary;
 					font-weight:600;
 					line-height: 21px;
-					margin-bottom: 1.5rem;
+					margin-bottom: 2.5rem;
+					margin-left: 1rem;
 				}
 				h4{
 					color: $color-primary;
@@ -152,6 +154,17 @@
 				margin-top: 1rem;
 				height: 500px;
 				margin-left: 3rem;
+
+				.webinar__content{
+					.list-group{
+						margin-top: 1rem;
+						margin-left: -2.5rem;
+						.list-group-item{
+							border:0;
+							margin-bottom: -1rem;
+						}
+					}
+				}
 			}
 		}
 	}

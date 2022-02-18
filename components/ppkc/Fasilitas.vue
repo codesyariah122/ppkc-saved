@@ -17,17 +17,22 @@
         >
           <h5>{{ item.nama }}</h5>
           <mdb-row v-if="item.list_foto.length > 0">
-            <mdb-col md="4" v-for="n in item.list_foto" :key="n.id">
-              <img
+            <mdb-col md="4" v-for="n in item.list_foto" :key="n.id" class="hover__image-wrap">
+                <img
                 :src="n.foto_url"
-                class="img-fluid"
+                class="img-fluid image"
                 style="
-                  height: 200px;
-                  width: 100%;
-                  object-fit: cover;
-                  margin-top: 16px;
+                height: 200px;
+                width: 100%;
+                object-fit: cover;
+                margin-top: 16px;
                 "
-              />
+                />
+                <div class="overlay">
+                  <a :data-gall="n.foto_url" :href="n.foto_url" class="fasilitas icon" title="Lihat Foto">
+                    <mdb-icon icon="search-plus" />
+                  </a>
+                </div>
             </mdb-col>
           </mdb-row>
         </mdb-col>
@@ -44,7 +49,23 @@ export default {
       berita__list_style: this.$device.isDesktop
         ? "margin-top: 8rem;"
         : "margin-top: 6rem;",
-    };
+    }
   },
-};
+
+  mounted(){
+    this.VenoBox()
+  },
+
+  methods: {
+    VenoBox(){
+      new VenoBox({
+        selector: '.fasilitas',
+        numeration: true,
+        infinigall: true,
+        share: ['facebook', 'twitter', 'linkedin', 'pinterest', 'download'],
+        spinner: 'rotating-plane'
+      })
+    }
+  }
+}
 </script>

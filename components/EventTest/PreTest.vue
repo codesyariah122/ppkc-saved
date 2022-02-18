@@ -14,6 +14,11 @@
 			<!-- <pre>
 				{{lists}}
 			</pre> -->
+			<mdb-row  col="12" class="row justify-content-start mb-2">
+				<small class="text-info">
+					*.Selesaikan No.1 Terlebih Dahulu
+				</small>
+			</mdb-row>
 			<mdb-row v-for="(item, index) in lists" col="12" class="row justify-content-center" :key="item.id">
 				<mdb-col lg="12" class="test__content">
 					<h4> Soal {{item.urutan}} </h4>
@@ -23,57 +28,58 @@
 						method="POST"
 						class="is-not-results"
 						>
-							<fieldset>
-								<div class="answers">
-									<div
-									class="answer"
-									v-for="option in item.pilihans"
-									:value="option.id"
-									:key="option.id"
-									>
-										<input
-										type="radio"
-										v-model="item.id"
-										:value="option.id"
-										:id="option.id"
-										required @change="ChangeJawaban(item.id, item.jawaban)"
-										>
-										<label
-										:for="option.id"
-										class="answer__item"
-										>
-										{{option.jawaban}}
-										</label>
-									</div>
-								</div>
-							</fieldset>
-						</form>
-					</div>
-				</mdb-col>
-			</mdb-row>
+						<fieldset>
+							<div class="answers">
+								<div
+								class="answer"
+								v-for="option in item.pilihans"
+								:value="option.id"
+								:key="option.id"
+								>
+								<input v-if="soal_active || item.urutan == 1"
+								type="radio"
+								v-model="item.id"
+								:value="option.id"
+								:id="option.id"
+								required @change="ChangeJawaban(option.ujian_id, index, option.id, item.urutan)">
 
-			<mdb-row col="12" class="row justify-content-center">
-				<mdb-col lg="12">
-					<div class="mb-2 ">
-						<a
-						href=""
-						class="btn btn-primary btn-md rounded btn-block"
-						@click.prevent="SubmitTest"
-						>
-						<div v-if="loading">
-							<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-							Loading...
-						</div>
-						<div v-else>
-							Submit <mdb-icon far icon="paper-plane" />
-						</div>
-						</a>
-					</div>
-				</mdb-col>
-			</mdb-row>
-		</mdb-container>
+								<label
+								:for="option.id"
+								class="answer__item"
+								>
+								{{option.jawaban}}
+							</label>
 
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</mdb-col>
+</mdb-row>
+
+<mdb-row col="12" class="row justify-content-center">
+	<mdb-col lg="12">
+		<div class="mb-2 ">
+			<a
+			href=""
+			class="btn btn-primary btn-md rounded btn-block"
+			@click.prevent="SubmitTest"
+			>
+			<div v-if="loading">
+				<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+				Loading...
+			</div>
+			<div v-else>
+				Submit <mdb-icon far icon="paper-plane" />
+			</div>
+		</a>
 	</div>
+</mdb-col>
+</mdb-row>
+</mdb-container>
+
+</div>
 </template>
 
 <script>
@@ -93,7 +99,8 @@
 					status: null,
 					message: ''
 				},
-				save_test: localStorage.getItem(`finish-test-${this.id_test}`) ? JSON.parse(localStorage.getItem(`finish-test-${this.id_test}`)) : ''
+				save_test: localStorage.getItem(`finish-test-${this.id_test}`) ? JSON.parse(localStorage.getItem(`finish-test-${this.id_test}`)) : '',
+				soal_active: false
 			}
 		},
 
@@ -113,7 +120,7 @@
 					this.tests = data
 					this.field.soal = this.field.soal.length < 1 ? this.lists.map(d => d.id) : this.field.jawaban.shift()
 
-					this.field.jawaban = this.field.jawaban.length < 1 ? this.lists.map(d => d.jawaban) : this.field.jawaban.shift()
+					// this.field.jawaban = this.field.jawaban.length < 1 ? this.lists.map(d => d.jawaban) : this.field.jawaban.shift()
 				})
 				.catch(err => console.log(err))
 				.finally(() => {
@@ -125,11 +132,13 @@
 			SubmitTest(){
 				this.loading = true
 				this.$swal({
-					title: 'Apakah sudah yakin dengan jawaban anda?',
+					title: 'Apakah Anda yakin ingin mengumpulkan jawaban ?',
+					html:
+					`Anda telah mengisi <b>${this.field.jawaban.length}</b> dari <b>${this.field.soal.length} soal</b>`,
 					showDenyButton: true,
 					showCancelButton: false,
-					confirmButtonText: 'Save',
-					denyButtonText: `Don't save`,
+					confirmButtonText: 'Ya, Kumpulkan jawaban saya',
+					denyButtonText: `Tidak`,
 				}).then((result) => {
 					/* Read more about isConfirmed, isDenied below */
 					if (result.isConfirmed) {
@@ -144,19 +153,19 @@
 			KirimJawaban(soal, jawaban){
 				const url = `${this.api_url}/web/event/1/pretest/${this.id_test}`
 				this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
-
-				if(jawaban.length > 2){				
+				// console.log(jawaban.length)
+				if(jawaban.length >= 2){			
 					this.$axios.post(url, {
 						ujian: JSON.stringify(soal),
 						jawaban: JSON.stringify(jawaban)
 					})
 					.then(({data}) => {
 					// console.log(data)
-						if(data.message == "Berhasil menyimpan hasil test"){
-							this.success.message = data.message
-							this.$swal(data.message, '', 'success')
-						}
-					})
+					if(data.message == "Berhasil menyimpan hasil test"){
+						this.success.message = data.message
+						this.$swal(data.message, '', 'success')
+					}
+				})
 					.catch(err => {
 						this.loading = false
 						this.success.status = false
@@ -179,14 +188,17 @@
 
 			},
 
-			ChangeJawaban(id_soal, id_jawaban){
-				// console.log(this.field.jawaban.length)
-				this.field.soal.push(id_soal)
-				if(this.field.jawaban > 1){
-					this.field.jawaban.shift()
+			ChangeJawaban(id_soal, position, id_jawaban, urutan){
+				
+				this.soal_active = urutan ? true : null
+				
+
+				if(this.field.jawaban.length > 1){
+					this.field.jawaban.splice(position, 1, id_jawaban)
 				}else{
 					this.field.jawaban.push(id_jawaban)
 				}
+				console.log(this.field.jawaban)
 			}
 		}
 	}

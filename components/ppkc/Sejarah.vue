@@ -40,9 +40,25 @@ export default {
       berita__list_style: this.$device.isDesktop
         ? "margin-top: 8rem;"
         : "margin-top: 6rem;",
-    };
+    }
   },
-};
+
+  mounted(){
+    this.VenoBox()
+  },
+
+  methods: {
+    VenoBox(){
+      new VenoBox({
+        selector: '.sejarah',
+        numeration: true,
+        infinigall: true,
+        share: ['facebook', 'twitter', 'linkedin', 'pinterest', 'download'],
+        spinner: 'rotating-plane'
+      })
+    }
+  }
+}
 </script>
 
 <style scoped>

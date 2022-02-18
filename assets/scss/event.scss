@@ -3,11 +3,13 @@
 	.card__content-events{
 		.card{
 			margin-bottom: 2rem;
-
+			@include card_rounded_mobile;
+			
 			.badge__category{
 				color: $color-primary!important;
+				font-size: 12px;
 			}
-			@include card_rounded_mobile;
+
 		}
 	}
 	.jumbotron__event{
@@ -33,7 +35,60 @@
 // Desktop
 @media (min-width: 992px) {
 	.webinar__list{
+		.card__content-events{
+			.webinar__content{
+				.card{
+					.event__image-wrap{
+						position: relative;
+						.overlay__event-img {
+							position: absolute;
+							top: 0;
+							bottom: 0;
+							left: 0;
+							right: 0;
+							width: 290px;
+							height:290px;
+							opacity: 0;
+							transition: .3s ease;
+							background-color: rgba(205, 209, 228, 0.9);
+						}
 
+						&:hover .overlay__event-img {
+							opacity: 1;
+						}
+
+						.icon {
+							color: white;
+							font-weight: 700;
+							font-size: 100px;
+							position: absolute;
+							top: 50%;
+							left: 50%;
+							transform: translate(-50%, -50%);
+							-ms-transform: translate(-50%, -50%);
+							text-align: center;
+						}
+
+						.fa-zoom:hover {
+							color: #eee;
+						}
+					}
+					height: 90%;
+					// img{
+					// 	object-fit: cover;
+					// 	max-height: 55rem;
+					// 	border-radius:0;
+					// }
+					p{
+						font-size:14px;
+					}
+					span{
+						font-size:12px;
+						color:$default-gray;
+					}
+				}
+			}
+		}
 		.jumbotron__event{
 			background-image: linear-gradient(to bottom right, $color-primary, $bg-second-primary);
 			color:$default;
@@ -75,75 +130,105 @@
 			line-height:19.07px;
 			text-align: justify;
 		}
-		.col-1{			
-			img{
-				object-fit: cover;
-				height: 190px;
-				width: 289px;
-				margin-left: 1rem;
+		.col-1{
+			.event__image-wrap{
+				margin-top: 1rem;
+				position: relative;
+			.overlay__event-img {
+				position: absolute;
+				top: 13%;
+				bottom: 0;
+				left: -3%;
+				right: 0;
+				height:323px;
+				width: 320px;
+				opacity: 0;
+				transition: .3s ease;
+				background-color: rgba(205, 209, 228, 0.9);
 			}
-		}
-		.col-2{
-			width: 304px;
-			height: 435px;
-			h1{
-				margin-top: 2rem;
-				width: 300px;
-				margin-left: 1rem;
-				color:$color-primary;
-				font-size:21px;
-				font-weight:600;
-				line-height: 21px;
-			}
-			h4{
-				margin-left: 1rem;
-				font-size: 18px;
-				font-weight: 600;
-				line-height: 33px;
-			}
-		}
 
-		.inside__first{
-			width:304px;
-			margin-left: .1rem;
-			h5{
-				font-size: 16px;
-				font-weight: 600;
-				color:$color-primary;
+			&:hover .overlay__event-img {
+				opacity: 1;
 			}
-		}
 
-		.inside__second{
-			width:304px;
-			margin-left: .1rem;
-			button{
-				width:100%;
-				font-weight: 600;
-				.not__allowed{
-					background-color: $button-gray!important;
-				}
+			.icon {
+				color: white;
+				font-weight: 700;
+				font-size: 100px;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				-ms-transform: translate(-50%, -50%);
+				text-align: center;
+			}
+
+			.fa-zoom:hover {
+				color: #eee;
 			}
 		}
 	}
-
-	.event__detail-profile{
-		.alert{
-			margin-top: 10rem;
+	.col-2{
+		width: 304px;
+		height: 435px;
+		h1{
+			margin-top: 2rem;
+			width: 300px;
+			margin-left: 1rem;
+			color:$color-primary;
+			font-size:21px;
+			font-weight:600;
+			line-height: 21px;
 		}
-	}
-
-	.event__detail-list{
-		position:relative;
-		margin-top:7rem;
-		margin-left: .2rem;
-		height: 100%;
 		h4{
-			color: $color-primary;
-			font-size:24px;
-			font-weight: 700;
-			line-height: 32.68px;
+			margin-left: 1rem;
+			font-size: 18px;
+			font-weight: 600;
+			line-height: 33px;
 		}
 	}
+
+	.inside__first{
+		width:304px;
+		margin-left: .1rem;
+		h5{
+			font-size: 16px;
+			font-weight: 600;
+			color:$color-primary;
+		}
+	}
+
+	.inside__second{
+		width:304px;
+		margin-left: .1rem;
+		button{
+			width:100%;
+			font-weight: 600;
+			.not__allowed{
+				background-color: $button-gray!important;
+			}
+		}
+	}
+}
+
+.event__detail-profile{
+	.alert{
+		margin-top: 2rem;
+	}
+}
+
+.event__detail-list{
+	position:relative;
+	margin-top:7rem;
+	margin-left: .2rem;
+	height: 100%;
+	h4{
+		color: $color-primary;
+		font-size:24px;
+		font-weight: 700;
+		line-height: 32.68px;
+	}
+}
 }
 
 // Desktop
@@ -188,7 +273,7 @@
 				h4{
 					margin-left: 7rem;
 					font-size: 21px;
-					font-weight: 600;
+					font-weight: 800;
 					line-height: 33px;
 				}
 			}

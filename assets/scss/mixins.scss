@@ -167,9 +167,16 @@
 	}
 	.card-title, h4{
 		color: $default-black;
-		font-size:20px;
+		font-size:16px;
 		font-weight:700;
 		line-height: 27.24px;
+	}
+	p{
+		font-size: 12px;
+	}
+	span{
+		color: $default-gray;
+		font-size: 10px;
 	}
 	.card-body{
 		.idr__color {
@@ -386,13 +393,15 @@
 		position: relative;
 		background-color: $testimoni-card;
 		border-radius: 10px;
-		color: #fff;
+		color: $default;
 		height: 230px;
+		margin-top: 1rem;
 		.quote__txt {
-			font-size: 18px;
-			font-weight:400;  
+			font-size: 18px!important;
+			font-weight:600;  
 			line-height: 27.24px;
 			margin-bottom: 0;
+			color:$default;
 		}
 	}
 
@@ -516,6 +525,53 @@
 			a{
 				color:$color-primary!important;
 			}
+		}
+	}
+}
+
+
+@mixin hover_image_display{
+	.hover__image-wrap{
+		position: relative;
+		width: 100%;
+		max-width: 400px;
+		.image {
+			display: block;
+			width: 100%;
+			height: auto;
+		}
+
+		.overlay {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			height: 230px;
+			width: 100%;
+			opacity: 0;
+			transition: .3s ease;
+			background-color: rgba(205, 209, 228, 0.9);
+		}
+
+		&:hover .overlay {
+			opacity: 1;
+		}
+
+		.icon {
+			color: white;
+			font-weight: 700;
+			font-size: 100px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			-ms-transform: translate(-50%, -50%);
+			text-align: center;
+		}
+
+		.fa-zoom:hover {
+			color: #eee;
 		}
 	}
 }

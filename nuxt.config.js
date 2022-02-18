@@ -44,7 +44,7 @@ export default {
         href: 'https://fonts.googleapis.com/css?family=Open+Sans'
       },
       { rel: 'stylesheet', type: 'text/css', href: '/assets/glightbox/glightbox.min.css'},
-      { rel: 'stylesheet', type: 'text/css', href: '/assets/css/video.css'}
+      { rel: 'stylesheet', type: 'text/css', href: '/assets/venobox/dist/venobox.min.css'}
     ],
     script: [
       {
@@ -59,13 +59,18 @@ export default {
       {
         src: '/assets/glightbox/glightbox.min.js',
         type: 'text/javascript'
-      }
+      },
+      {
+        src: '/assets/venobox/dist/venobox.min.js',
+        type: 'text/javascript'
+      },
     ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     // 'bootstrap-css-only/css/bootstrap.min.css',
+    '~assets/css/video.css',
     'mdbvue/lib/mdbvue.css',
     'mdbvue/lib/css/mdb.min.css'
   ],

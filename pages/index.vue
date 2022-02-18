@@ -44,19 +44,19 @@ export default {
   data() {
     return {
       bg_image: this.$device.isMobile ? HeroImageMobile : HeroImage,
-      items: [],
-    };
+      items: []
+    }
   },
 
   async asyncData({ $axios }) {
     const lists = await $axios.$get("/web/home");
     return {
-      lists,
-    };
+      lists
+    }
   },
 
   mounted() {
-    this.CarouselItem();
+    this.CarouselItem()
   },
 
   methods: {
@@ -89,9 +89,9 @@ export default {
         {
           img: true,
           src: "https://api.ppkc-online.com/image-banner/banner7.jpeg",
-        },
-      ];
-    },
-  },
+        }
+      ]
+    }
+  }
 };
 </script>

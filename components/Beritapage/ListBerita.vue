@@ -30,20 +30,14 @@
                     :key="item.id" :style="`${$device.isMobile ? 'margin-bottom: 2rem;' : ''}`"
                   >
                     <mdb-card>
-                      <mdb-view hover>
-                        <a :href="`/detail/berita/${item.id}/${$slug(item.judul)}`">
-                          <mdb-card-image
-                            :src="item.foto_url"
-                            alt="Card image cap"
-                            class="img-fluid"
-                          />
-                          <mdb-mask
-                            flex-center
-                            waves
-                            overlay="white-slight"
-                          ></mdb-mask>
-                        </a>
-                      </mdb-view>
+                      <div class="event__image-wrap">
+                        <mdb-card-image :src="item.foto_url" alt="Card image cap"></mdb-card-image>
+                        <div class="overlay__event-img">
+                          <a :data-gall="item.foto_url" :href="item.foto_url" class="lists-berita icon" title="Lihat Foto">
+                            <mdb-icon icon="search-plus" />
+                          </a>
+                        </div>
+                      </div>
                       <mdb-card-body>
                         <mdb-card-title
                           class="truncate"
@@ -114,13 +108,18 @@ export default {
     };
   },
 
+  beforeMount(){
+    this.VenoBox()
+  },
+
   mounted() {
-    this.getNextBerita();
+    this.getNextBerita(),
+    this.VenoBox()
   },
 
   methods: {
     LoadBerita() {
-      this.$emit("load-more-berita");
+      this.$emit("load-more-berita")
     },
 
     getNextBerita() {
@@ -130,10 +129,20 @@ export default {
             this.$emit("load-more-berita");
           }
         }
-      };
+      }
     },
-  },
-};
+
+    VenoBox(){
+      new VenoBox({
+        selector: '.lists-berita',
+        numeration: true,
+        infinigall: true,
+        share: ['facebook', 'twitter', 'linkedin', 'pinterest', 'download'],
+        spinner: 'rotating-plane'
+      })
+    }
+  }
+}
 </script>
 
 <style lang="css">

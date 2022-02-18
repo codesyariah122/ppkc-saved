@@ -4,15 +4,16 @@
     <mdb-row>
       <mdb-col v-if="testiIndex <= lists.length" v-for="testiIndex in testiToShow" col="12" md="6" :key="lists[testiIndex-1].id">
         <mdb-card class="card__testimoni-content">
-          <mdb-container class="mt-2 mb-2">
+          <mdb-container class="mt-4 mb-2">
             <blockquote class="post__quote"> 
               <mdb-icon icon="quote-left"/><br>
-              <span class="quote__txt">
+              <p class="quote__txt">
                 {{lists[testiIndex-1].testimoni}}
-              </span>
-              <p class="profile__name">
-                {{lists[testiIndex-1].konsumen ? lists[testiIndex-1].konsumen : 'PPKC Visitor'}}
               </p>
+              </h3>
+              <h3 class="profile__name">
+                {{lists[testiIndex-1].konsumen ? lists[testiIndex-1].konsumen : 'PPKC Visitor'}}
+              </h3>
             </blockquote>
           </mdb-container>
         </mdb-card>

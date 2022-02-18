@@ -3,45 +3,46 @@
 		<mdb-container>
 			<mdb-row class="row justify-content-center mb-5 webinar__content">
 				<mdb-col id="show-event" v-for="list in lists" class="col-md-4 d-flex align-items-stretch" md="4" xs="12" sm="12" :key="list.kegiatan_id">
-					<mdb-card :style="`${$device.isMobile ? 'max-width:350px;margin-bottom: 2rem;' : ''}`">
-						<mdb-view hover>
-							<a :href="`/detail/event/${list.kegiatan_id}/${$slug(list.kegiatan_title)}`">
-								<mdb-card-image
-								:src="list.photo"
-								alt="Card image cap" class="img-fluid"/>
-								<mdb-mask flex-center waves overlay="white-slight"></mdb-mask>
-							</a>
-						</mdb-view>
+					<mdb-card :style="`${$device.isMobile ? 'max-width:335px;margin-bottom: 2rem;' : ''}`">
+						<div class="event__image-wrap">
+							<mdb-card-image :src="list.photo" alt="Card image cap"></mdb-card-image>
+							<div class="overlay__event-img">
+								<a :data-gall="list.photo" :href="list.photo" class="list-events icon" title="Lihat Foto">
+									<mdb-icon icon="search-plus" />
+								</a>
+							</div>
+						</div>
 						<mdb-card-body>
-							<mdb-badge class="badge btn-outline-primary mb-4" style="color:#004899!important;">{{list.kategori_value}}</mdb-badge>
-
-						<!-- <p>
-							{{list.kegiatan_id}}
-						</p> -->
-
-						<mdb-card-title>{{list.kegiatan_title}}</mdb-card-title>
-
-						<span class="mt-2">{{$moment(list.tgl_awal).format("LL")}} - {{$moment(list.tgl_akhir).format("LL")}}</span>
-						<br>
-						
-						<span class="mt-2 idr__color">
-							{{$format(list.harga)}}
-						</span>
+							<mdb-badge class="badge btn-outline-primary mb-2" style="color:#004899!important;">{{list.kategori_value}}</mdb-badge>
 
 
-						<div v-if="$route.path === '/events'">
-							<nuxt-link  :to="{name: `detail-event-id-slug`, params: {id: list.kegiatan_id, slug: $slug(list.kegiatan_title)}}" class="btn btn-outline-primary mt-3 mb-2 btn-block" color="primary">Detail Event</nuxt-link>
-						</div>
+							<mdb-card-title>{{list.kegiatan_title}}</mdb-card-title>
 
-						<div v-else>
-							<mdb-btn v-if="data_event || token.accessToken" color="primary" size="md" class="btn btn-outline-primary mt-3 mb-2 btn-block" @click="RegistrasiEvent(list.kegiatan_id)">Daftar</mdb-btn>
+							<p class="mt-2 text-gray">
+								{{list.kegiatan_desc}}
+							</p>
 
-							<nuxt-link v-else :to="{name: `detail-event-id-slug`, params: {id: list.kegiatan_id, slug: $slug(list.kegiatan_title)}}" class="btn btn-outline-primary mt-3 mb-2 btn-block" color="primary">Detail Event</nuxt-link>
-						</div>
-					</mdb-card-body>
-				</mdb-card>
-			</mdb-col>
-		</mdb-row>
+							<span >{{$moment(list.tgl_awal).format("LL")}} - {{$moment(list.tgl_akhir).format("LL")}}</span>
+							<br>
+
+							<span class="idr__color">
+								{{$format(list.harga)}}
+							</span>
+
+
+							<div v-if="$route.path === '/events'">
+								<nuxt-link  :to="{name: `detail-event-id-slug`, params: {id: list.kegiatan_id, slug: $slug(list.kegiatan_title)}}" class="btn btn-outline-primary mt-2 mb-5 btn-block" color="primary">Detail Event</nuxt-link>
+							</div>
+
+							<div v-else>
+								<mdb-btn v-if="data_event || token.accessToken" color="primary" size="md" class="btn btn-outline-primary mt-3 mb-5 btn-block" @click="RegistrasiEvent(list.kegiatan_id)">Daftar</mdb-btn>
+
+								<nuxt-link v-else :to="{name: `detail-event-id-slug`, params: {id: list.kegiatan_id, slug: $slug(list.kegiatan_title)}}" class="btn btn-outline-primary mt-3 mb-5 btn-block" color="primary">Detail Event</nuxt-link>
+							</div>
+						</mdb-card-body>
+					</mdb-card>
+				</mdb-col>
+			</mdb-row>
 		</mdb-container>
 	</div>
 </template>
@@ -50,9 +51,22 @@
 	export default{
 		props: ['lists', 'listToShow', 'token', 'data_event'],
 
+		mounted(){
+			this.VenoBox()
+		},
+
 		methods: {
 			RegistrasiEvent(id){
 				this.$emit('registrasi-event', id)
+			},
+			VenoBox(){
+				new VenoBox({
+					selector: '.list-events',
+					numeration: true,
+					infinigall: true,
+					share: ['facebook', 'twitter', 'linkedin', 'pinterest', 'download'],
+					spinner: 'rotating-plane'
+				})
 			}
 		}
 	}

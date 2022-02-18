@@ -2,7 +2,14 @@
 	<div>
 		<mdb-row>
 			<mdb-col md="3" sm="12" xs="12" class="col-1">
-				<img :src="details.photo" class="rounded">
+				<div class="event__image-wrap">
+					<img :src="details.photo" class="rounded image">
+					<div class="overlay__event-img">
+						<a :data-gall="details.photo" :href="details.photo" class="event-lists icon" title="Lihat Foto">
+							<mdb-icon icon="search-plus" />
+						</a>
+					</div>
+				</div>
 			</mdb-col>
 
 			<mdb-col md="9" sm="12" xs="12" col="12" class="col-2">
@@ -88,10 +95,24 @@
 	export default{
 		props: ['loading', 'details', 'data_event', 'status_pendaftaran', 'token'],
 
+		mounted(){
+			this.VenoBox()
+		},
+
 		methods: {
 			RegistrasiEvent(id){
 				// alert(id)
 				this.$emit('registrasi-event', id)
+			},
+
+			VenoBox(){
+				new VenoBox({
+					selector: '.event-lists',
+					numeration: true,
+					infinigall: true,
+					share: ['facebook', 'twitter', 'linkedin', 'pinterest', 'download'],
+					spinner: 'rotating-plane'
+				})
 			}
 		}
 	}

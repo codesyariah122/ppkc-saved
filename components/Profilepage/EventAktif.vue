@@ -29,7 +29,7 @@
               </mdb-row>
             </b-button>
 
-            <b-collapse :id="`collapse-${item.id}`" class="collapse__category-event-1">
+            <b-collapse v-model="item.id == 1 ? visible : false" :id="`collapse-${item.id}`" class="collapse__category-event-1">
               <div v-for="(c, index) in item.categories"  :key="c.id">
                 <b-button v-b-toggle="`collapse-${c.id}-inner`" size="sm" class="btn__category-1" @click="ShowCategory(c.id)">
                   <mdb-row class="row justify-content-between">
@@ -45,7 +45,7 @@
                  </mdb-row>
                </b-button>
 
-               <b-collapse v-model="visible" :id="`collapse-${c.id}-inner`" class="collapsed collapse__category-event-2 mb-3">
+               <b-collapse v-model="item.id == 1 ? visible : false" :id="`collapse-${c.id}-inner`" class="collapse__category-event-2 mb-3">
                 <b-card>
                   <div v-for="(d, index) in c.details" :key="d.id">
                     <b-list-group class="list__modul">
@@ -87,21 +87,7 @@
                   <div v-if="type == 1" class="embed__file">
                     <h5 class="type__name">{{type_name}}</h5>
                     <h2>{{detailed_data.title}}</h2>
-                    <div v-if="yt_link" class="mt-5 mb-5">
-                      <div class="text-center">
-                        <div class="spinner-grow text-danger" style="width: 5rem; height: 5rem;" role="status">
-                          <span class="sr-only">Loading...</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div v-else>
-                      <b-embed 
-                      type="iframe"
-                      aspect="16by9"
-                      :src="detailed.video"
-                      allowfullscreen 
-                      ></b-embed>
-                    </div>
+                    <EventpageVideoSection :video="detailed.video"/>
                   </div>
 
                   <div v-else-if="type == 2" class="embed__file">
@@ -143,7 +129,7 @@
         </mdb-col>
       </mdb-row>
     </mdb-container>
-  
+
   </div>
 </template>
 
@@ -155,7 +141,6 @@
     data(){
       return {
         loading: null,
-        yt_link: null,
         profiles: [],
         pelatihans: [],
         kegiataan: [],
@@ -168,7 +153,7 @@
         tgl: '',
         start: '',
         end: '',
-        visible: false,
+        visible: true,
         show_file:false,
         id_test: '',
         id_webinar: '',
@@ -184,8 +169,6 @@
 
     methods: {
       // Event Aktif Yang Diikuti
-
-
       EventAktif(){
         this.loading = true
         this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
@@ -200,6 +183,7 @@
           this.loading=false
         }, 900)
       },
+
 
       ToggleFile(){
         if(this.show_file || this.show_close){
@@ -307,7 +291,6 @@
 
         const format_yt  = this.detailed.video ? this.$ytString(this.detailed.video) : ''
 
-        this.yt_link = format_yt  == 'https://www.youtube.com/embed/' ? true : false
         this.type = type
 
         this.FileType(type)
@@ -319,14 +302,9 @@
           this.loading = false
         }, 900)
 
-        setTimeout(() => {
-          this.yt_link=false
-        }, 5500)
 
         // console.log(this.detailed);
       },
-
-      
 
       UserProfileData(){
         if(this.token){         
