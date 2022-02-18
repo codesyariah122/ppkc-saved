@@ -68,67 +68,6 @@
 
 <script>
 export default {
-  props: ["bg"],
-  data() {
-    return {
-      items: [
-        {
-          img: true,
-          src: "https://api.ppkc-online.com/image-banner/banner1.jpeg",
-        },
-        {
-          img: true,
-          src: "https://api.ppkc-online.com/image-banner/banner2.jpeg",
-        },
-        {
-          img: true,
-          src: "https://api.ppkc-online.com/image-banner/banner3.jpeg",
-        },
-        {
-          img: true,
-          src: "https://api.ppkc-online.com/image-banner/banner4.jpeg",
-        },
-        {
-          img: true,
-          src: "https://api.ppkc-online.com/image-banner/banner5.jpeg",
-        },
-        {
-          img: true,
-          src: "https://api.ppkc-online.com/image-banner/banner6.jpeg",
-        },
-        {
-          img: true,
-          src: "https://api.ppkc-online.com/image-banner/banner7.jpeg",
-        },
-      ],
-    };
-  },
-};
+  props: ["bg", "items"]
+}
 </script>
-
-<style lang="css">
-.carousel-inner {
-  max-height: 500px;
-}
-
-.banner {
-  position: relative;
-}
-.banner img {
-  width: 100%;
-}
-.banner .container {
-  z-index: 1000;
-  max-width: 1000px;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 75%;
-  text-align: left;
-  transform: translateY(-50%);
-}
-.carousel {
-  border-radius: 55px 55px 55px 55px;
-  overflow: hidden;
-}
-</style>
