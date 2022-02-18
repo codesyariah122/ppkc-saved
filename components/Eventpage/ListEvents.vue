@@ -22,7 +22,7 @@
 							</div>
 						</div>
 						<mdb-card-body>
-							<mdb-badge class="badge btn-outline-primary mb-2" style="color:#004899!important;">{{list.kategori_value}}</mdb-badge>
+							<mdb-badge class="badge btn-outline-primary mb-3" style="color:#004899!important;">{{list.kategori_value}}</mdb-badge>
 
 
 							<mdb-card-title>{{list.kegiatan_title}}</mdb-card-title>
@@ -40,13 +40,13 @@
 
 
 							<div v-if="$route.path === '/events'">
-								<nuxt-link  :to="{name: `detail-event-id-slug`, params: {id: list.kegiatan_id, slug: $slug(list.kegiatan_title)}}" class="btn btn-outline-primary mt-2 mb-5 btn-block" color="primary">Detail Event</nuxt-link>
+								<nuxt-link  :to="{name: `detail-event-id-slug`, params: {id: list.kegiatan_id, slug: $slug(list.kegiatan_title)}}" class="btn btn-outline-primary mt-3 mb-3 btn-block" color="primary">Detail Event</nuxt-link>
 							</div>
 
 							<div v-else>
-								<mdb-btn v-if="data_event || token.accessToken" color="primary" size="md" class="btn btn-outline-primary mt-3 mb-5 btn-block" @click="RegistrasiEvent(list.kegiatan_id)">Daftar</mdb-btn>
+								<mdb-btn v-if="data_event || token.accessToken" color="primary" size="md" class="btn btn-outline-primary mt-3 mb-3 btn-block" @click="RegistrasiEvent(list.kegiatan_id)">Daftar</mdb-btn>
 
-								<nuxt-link v-else :to="{name: `detail-event-id-slug`, params: {id: list.kegiatan_id, slug: $slug(list.kegiatan_title)}}" class="btn btn-outline-primary mt-3 mb-5 btn-block" color="primary">Detail Event</nuxt-link>
+								<nuxt-link v-else :to="{name: `detail-event-id-slug`, params: {id: list.kegiatan_id, slug: $slug(list.kegiatan_title)}}" class="btn btn-outline-primary mt-3 mb-3 btn-block" color="primary">Detail Event</nuxt-link>
 							</div>
 						</mdb-card-body>
 					</mdb-card>

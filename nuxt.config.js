@@ -74,7 +74,21 @@ export default {
     'mdbvue/lib/mdbvue.css',
     'mdbvue/lib/css/mdb.min.css'
   ],
-  
+  styleResources: {
+    scss: [
+      '~assets/scss/variables.scss',
+      '~assets/scss/mixins.scss',
+      '~assets/scss/layout.scss',
+      '~assets/scss/global.scss',
+      '~assets/scss/main.scss',
+      '~assets/scss/event.scss',
+      '~assets/scss/berita.scss',
+      '~assets/scss/auth.scss',
+      '~assets/scss/profile.scss',
+      '~assets/scss/event-detail-login.scss',
+      '~assets/scss/event-test.scss'
+    ]
+  },
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     {src: '~/plugins/format-currency', ssr: false},
@@ -94,26 +108,9 @@ export default {
     '@nuxtjs/svg',
     '@nuxtjs/moment'
   ],
-
-  styleResources: {
-    scss: [
-      '~assets/scss/variables.scss',
-      '~assets/scss/mixins.scss',
-      '~assets/scss/layout.scss',
-      '~assets/scss/global.scss',
-      '~assets/scss/main.scss',
-      '~assets/scss/event.scss',
-      '~assets/scss/berita.scss',
-      '~assets/scss/auth.scss',
-      '~assets/scss/profile.scss',
-      '~assets/scss/event-detail-login.scss',
-      '~assets/scss/event-test.scss'
-    ]
+  device: {
+    refreshOnResize: true
   },
-  
-  // device: {
-  //   refreshOnResize: true
-  // },
 
   moment: {
     timezone: true,

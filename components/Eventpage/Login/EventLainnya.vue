@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="event__list-lainnya">
 		<mdb-col lg="12" xs="12" sm="12" class="mt-5 mb-2">
 			<hr/>
 		</mdb-col>
