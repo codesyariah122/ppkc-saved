@@ -9,6 +9,7 @@
     --vbox-share-background: #101010;
     --vbox-share-width:  'auto';
     --vbox-share-radius:  0;
+    --vbox-padding: 0;
 }
 
 /* ------ venobox.css --------*/
@@ -41,15 +42,10 @@
 
 .vbox-share, .vbox-title{
     line-height: 1;
-    overflow: hidden;
     position: fixed;
     z-index: 98;
-    display: flex;
-    align-items:center;
-    justify-content: center;
     text-align: center;
     margin: 0 auto;
-    border-radius: 5em;
     color: var(--vbox-tools-color);
 }
 .vbox-title{
@@ -57,7 +53,11 @@
     background-color: var(--vbox-title-background);
     width: var(--vbox-title-width);
     border-radius: var(--vbox-title-radius);
-    padding: 12px 1.5em;
+    padding: 12px 54px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
 }
 .vbox-share{
     font-size: 24px;
@@ -66,20 +66,24 @@
     width: var(--vbox-share-width);
     border-radius: var(--vbox-share-radius);
 }
-.vbox-share button.vbox-share-mobile,
-.vbox-share button.vbox-share-mobile:hover,
-.vbox-share button.vbox-share-mobile:active,
-.vbox-share button.vbox-share-mobile:focus{
+.vbox-link-btn,
+button.vbox-link-btn,
+button.vbox-link-btn:hover,
+button.vbox-link-btn:active,
+button.vbox-link-btn:focus{
     border: none !important;
     background: none !important;
     box-shadow: none !important;
     color: inherit !important;
-    padding: 6px .35em;
+    padding: 6px 12px;
     outline: none;
+    display: inline-block;
+    cursor: pointer;
 }
 .vbox-share a{
     color: inherit !important;
-    padding: 6px .35em;
+    padding: 6px 12px;
+    display: inline-block;
 }
 
 .vbox-share svg{
@@ -90,12 +94,10 @@
 .vbox-close{
     cursor: pointer;
     position: fixed;
-    top: -1px;
+    top: 0;
     right: 0;
     z-index: 99;
-    width: 50px;
-    height: 40px;
-    padding: 6px;
+    padding: 6px 15px;
     color: #000;
     color: var(--vbox-tools-color);
     border: 0;
@@ -115,19 +117,17 @@
     position: fixed;
     left: 0;
     top: 0;
-    height: 40px;
     overflow: hidden;
-    line-height: 28px;
+    line-height: 1;
     font-size: 12px;
     z-index: 99;
     display: flex;
     align-items:center;
     color: var(--vbox-tools-color);
-/*    background-color: var(--vbox-tools-background);
-*/}
+}
 .vbox-num{
     display: inline-block;
-    margin: 6px 15px;
+    padding: 12px 15px;
 }
 /* ----- Social share ----- */
 
@@ -191,7 +191,7 @@
     transform: rotate(45deg);
     right: 10px;
 }
-
+/* ----- Aspect ratio ----- */
 .venoratio, .vbox-inline {
     position: relative;
     width: 100%;
@@ -208,6 +208,7 @@
   left: 0;
   width: 100%;
   height: 100%;
+  padding: var(--vbox-padding);
 }
 .venoratio-1x1 {
   --vb-aspect-ratio: 100%;
@@ -216,14 +217,17 @@
   --vb-aspect-ratio: calc(3 / 4 * 100%);
 }
 .venoratio-16x9 {
-    --vb-aspect-ratio: calc(9 / 16 * 100%);
+  --vb-aspect-ratio: calc(9 / 16 * 100%);
 }
 .venoratio-21x9 {
   --vb-aspect-ratio: calc(9 / 21 * 100%);
 }
+.venoratio-full {
+  --vb-aspect-ratio: calc(100vh - 100px);
+}
 
 .vbox-child.venoratio, .vbox-child.vbox-inline{
-    max-width: 1400px;
+    max-width: 100%;
 }
 .vbox-open{
     overflow: hidden;
@@ -266,6 +270,7 @@
     box-shadow: 0 0 12px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
     max-width: 100%;
     text-align: initial;
+    padding: var(--vbox-padding);
 }
 .vbox-child img{
     -webkit-user-select: none;
@@ -273,9 +278,13 @@
     -moz-user-select: none;
     -o-user-select: none;
     user-select: none;
+    display: block;
 }
 .vbox-grab .vbox-child img{
     cursor: grab;
+}
+.vbox-child > iframe{
+    border: none !important;
 }
 .vbox-content.swipe-left{
     margin-left: -200px !important;
@@ -310,6 +319,43 @@
     -o-transform: translateZ(-1px);
     transform: translateZ(-1px);
     z-index: 0;
+}
+
+.vbox-tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.vbox-tooltip .vbox-tooltip-text {
+  visibility: hidden;
+  color: #fff;
+  text-align: center;
+  padding: 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+  margin-bottom: 2px;
+  font-family: sans-serif;
+}
+.vbox-top .vbox-tooltip .vbox-tooltip-text{
+  bottom: auto;
+  top: 100%;
+  margin-bottom: 0;
+  margin-top: 2px;
+}
+
+.vbox-tooltip-inner{
+    padding: 5px 10px;
+    background-color: rgba(0, 0, 0, 0.9);
+    border-radius: 6px;
+    font-size: 10px;
+}
+.vbox-tooltip:hover .vbox-tooltip-text {
+  visibility: visible;
+  opacity: 1;
 }
 
 /* ---------- preloader ----------

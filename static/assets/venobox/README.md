@@ -1,10 +1,14 @@
 # VenoBox
 
-Responsive modal window javaScript plugin
+[![venobox (latest)](https://img.shields.io/npm/v/venobox/latest.svg)](https://www.npmjs.com/package/venobox)
+[![venobox (downloads)](https://img.shields.io/npm/dy/vanilla-lazyload.svg)](https://www.npmjs.com/package/venobox)
+[![](https://data.jsdelivr.com/v1/package/npm/venobox/badge)](https://www.jsdelivr.com/package/npm/venobox)
 
-Just another responsive lightbox plugin, suitable for images, inline contents, iFrames, Google Maps, Vimeo and YouTube videos.
+Responsive modal window javaScript plugin, touch swipe gallery
 
-The big difference compared to many others plugins like this is that VenoBox calculates the max width of the image displayed and preserves its height if is taller than the window (so in small devices you can scroll down the content, avoiding vertical microscopic resized images).
+Just another responsive lightbox plugin, suitable for images, inline contents, iFrames, videos.
+
+The big difference compared to many others plugins is that VenoBox calculates the max width of the image displayed and preserves its height if is taller than the window (so in small devices you can scroll down the content, avoiding vertical microscopic resized images).
 
 Demo: https://veno.es/venobox/
 
@@ -14,24 +18,23 @@ Demo: https://veno.es/venobox/
 
 This package can be installed with:
 - [npm](https://www.npmjs.com/package/venobox): `npm install venobox`
-- [bower](https://bower.io/search/?q=venobox): `bower install venobox`
 - [composer](https://packagist.org/packages/nicolafranchini/venobox): `composer require nicolafranchini/venobox`
 
 ### Static HTML
 
 Download the [latest release](https://github.com/nicolafranchini/VenoBox/releases)
-or get the sources from [CDNJS](https://cdnjs.com/libraries/venobox)
+or get the sources from [jsDelivr](https://cdn.jsdelivr.net/npm/venobox@latest/dist/)
 
-Put the required stylesheet at the [top](https://developer.yahoo.com/performance/rules.html#css_top) of your markup:
+Put the required stylesheet into your `<head>` to load our CSS:
 
 ```html
-<link rel="stylesheet" href="dist/venobox.min.css" />
+<link rel="stylesheet" href="venobox/dist/venobox.min.css" />
 ```
 
-Put the script at the [bottom](https://developer.yahoo.com/performance/rules.html#js_bottom) of your markup:
+Include the script near the end of your pages, right before the closing `</body>` tag:
 
 ```html
-<script src="dist/venobox.min.js"></script>
+<script src="venobox/dist/venobox.min.js"></script>
 ```
 
 
