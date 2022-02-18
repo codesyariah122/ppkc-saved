@@ -1,7 +1,16 @@
 <template>
 	<div class="mt-2 card__content-events">
 		<mdb-container>
-			<mdb-row class="row justify-content-center mb-5 webinar__content">
+			<mdb-row v-if="loading" class="d-flex justify-content-center mt-2 mb-5" col="12">
+				<mdb-col lg="12">
+					<center>						
+						<div class="spinner-border text-primary" style="width:7rem; height: 7rem;" role="status">
+							<span class="sr-only">Loading...</span>
+						</div>
+					</center>
+				</mdb-col>
+			</mdb-row>
+			<mdb-row v-else class="row justify-content-center mb-5 webinar__content">
 				<mdb-col id="show-event" v-for="list in lists" class="col-md-4 d-flex align-items-stretch" md="4" xs="12" sm="12" :key="list.kegiatan_id">
 					<mdb-card :style="`${$device.isMobile ? 'max-width:335px;margin-bottom: 2rem;' : ''}`">
 						<div class="event__image-wrap">
@@ -49,7 +58,7 @@
 
 <script>
 	export default{
-		props: ['lists', 'listToShow', 'token', 'data_event'],
+		props: ['loading', 'lists', 'listToShow', 'token', 'data_event'],
 
 		mounted(){
 			this.VenoBox()
