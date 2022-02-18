@@ -44,7 +44,7 @@ export default {
         href: 'https://fonts.googleapis.com/css?family=Open+Sans'
       },
       { rel: 'stylesheet', type: 'text/css', href: '/assets/glightbox/glightbox.min.css'},
-      { rel: 'stylesheet', type: 'text/css', href: '/assets/venobox/dist/venobox.min.css'}
+      { rel: 'stylesheet', type: 'text/css', href: '/assets/venobox/dev/venobox.min.css'}
     ],
     script: [
       {
@@ -61,7 +61,7 @@ export default {
         type: 'text/javascript'
       },
       {
-        src: '/assets/venobox/dist/venobox.min.js',
+        src: '/assets/venobox/dev/venobox.min.js',
         type: 'text/javascript'
       },
     ]
