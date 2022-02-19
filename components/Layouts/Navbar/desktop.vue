@@ -58,8 +58,8 @@
               <mdb-dropdown-item>
                 <nuxt-link
                   :to="{
-                    name: 'profile-slug',
-                    params: { slug: $username(slug) },
+                    name: 'profile-name',
+                    params: { name: $username(slug) },
                   }"
                   class="text-center"
                 >
@@ -109,7 +109,7 @@ export default {
   },
 
   mounted() {
-    console.log(this.event_id ? this.event_id : "no event -");
+    console.log(this.event_id ? this.event_id : "-");
   },
 
   methods: {

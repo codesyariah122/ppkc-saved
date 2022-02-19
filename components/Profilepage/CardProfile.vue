@@ -6,8 +6,8 @@
 				<mdb-row class="d-flex justify-content-between">
 			
 					<mdb-col sm="6" md="4" class="col__img-profile">
-						<!-- <img v-if="profiles.photo" :src="profiles.photo" class="img-fluid rounded-circle"/> -->
-						<img :src="require('~/assets/images/profile/user-profile.svg')" class="img-fluid rounded-circle">
+						<img v-if="profiles.photo !== 'https://api.ppkc-online.com/image-profiles/null'" :src="profiles.photo" class="img-fluid rounded-circle"/>
+						<!-- <img :src="require('~/assets/images/profile/user-profile.svg')" class="img-fluid rounded-circle"> -->
 					</mdb-col>
 					<mdb-col sm="6" md="4" class="col__data-profile">
 						<h4>{{profiles.nama}}</h4>

@@ -44,7 +44,7 @@
 					this.Alert('success', `Anda sedang login`)
 					setTimeout(() => {
 						this.$router.push({
-							name: 'profile-slug',
+							name: 'profile-name',
 							params: {
 								slug: this.username
 							}
@@ -101,10 +101,10 @@
 					}else{
 						// console.log("no event data")
 						this.$router.push({
-							name: 'profile-slug',
-							params: {
-								slug: this.$username(this.profiles.nama)
-							}
+							path: `/profile/${this.$username(res.user.nama)}`,
+							// params: {
+							// 	slug: this.$username(res.user.nama)
+							// }
 						})
 					}
 

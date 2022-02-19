@@ -38,8 +38,7 @@
 		},
 
 		mounted(){
-			this.UserProfileData(),
-			console.log(this.$route.name)
+			this.UserProfileData()
 		},
 
 		methods: {

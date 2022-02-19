@@ -127,6 +127,8 @@ export default {
         if (!this.loading && !this.end && !this.error) {
           if (this.$refs.berita_square.getBoundingClientRect().bottom <= 450) {
             this.$emit("load-more-berita");
+          }else{
+            console.log("out")
           }
         }
       }

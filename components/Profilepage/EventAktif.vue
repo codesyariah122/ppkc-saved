@@ -21,7 +21,7 @@
             <b-button v-b-toggle="`collapse-${item.id}`" class="btn__pelatihan" @click="ToggleFile">
               <mdb-row class="row justify-content-between">
                 <mdb-col md="8">  
-                  {{item.id == 1 ? item.title : `Pelatihan ${item.id}`}} 
+                  {{item.title}} 
                 </mdb-col>
                 <mdb-col md="1">
                   <mdb-icon icon="plus-circle" size="lg"/>
@@ -29,7 +29,7 @@
               </mdb-row>
             </b-button>
 
-            <b-collapse v-model="item.id == 1 ? visible : false" :id="`collapse-${item.id}`" class="collapse__category-event-1">
+            <b-collapse v-if="index ==0" v-model="visible" :id="`collapse-${item.id}`" class="collapse__category-event-1">
               <div v-for="(c, index) in item.categories"  :key="c.id">
                 <b-button v-b-toggle="`collapse-${c.id}-inner`" size="sm" class="btn__category-1" @click="ShowCategory(c.id)">
                   <mdb-row class="row justify-content-between">
@@ -45,7 +45,7 @@
                  </mdb-row>
                </b-button>
 
-               <b-collapse v-model="item.id == 1 ? visible : false" :id="`collapse-${c.id}-inner`" class="collapse__category-event-2 mb-3">
+               <b-collapse v-model="c.urutan == 1 ? visible : false" :id="`collapse-${c.id}-inner`" class="collapse__category-event-2 mb-3">
                 <b-card>
                   <div v-for="(d, index) in c.details" :key="d.id">
                     <b-list-group class="list__modul">
@@ -129,6 +129,10 @@
         </mdb-col>
       </mdb-row>
     </mdb-container>
+
+    <!-- <pre>
+      {{pelatihans}}
+    </pre> -->
 
   </div>
 </template>

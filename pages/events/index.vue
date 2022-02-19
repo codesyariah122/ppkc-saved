@@ -58,7 +58,7 @@
 						this.categories = res.data.list_jenis_kegiatan
 						this.$refs.eventChild.ResetForm()
 
-						// console.log(res.data.list_kegiatan_terdekat.length)
+						console.log(res.data.list_kegiatan_terdekat.length)
 						if(res.data.list_kegiatan_terdekat.length > 0){
 							this.empty=false
 							this.lists = res.data.list_kegiatan_terdekat

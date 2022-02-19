@@ -28,7 +28,7 @@
 		},
 
 		mounted(){
-			console.log(this.categories)
+			console.log(this.categories ? true : false)
 		},
 
 		methods: {
