@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<Profilepage :profiles="profiles" :genders="genders" :jobs="jobs" :studs="studs" :works="works" :maritals="maritals" :pelatihans="pelatihans" :categories="categories" :api_url="api_url" @load-event-follow="EventYangDiikuti" :empty_filter="empty_filter" :loading="loading"/>
+		<Profilepage :profiles="profiles" :genders="genders" :jobs="jobs" :studs="studs" :works="works" :maritals="maritals" :pelatihans="pelatihans" :categories="categories" :api_url="api_url" @load-event-follow="EventYangDiikuti" :empty_filter="empty_filter" :loading="loading" :token="token" />
 	</div>
 </template>
 

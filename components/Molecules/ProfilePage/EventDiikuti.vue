@@ -80,15 +80,14 @@
 									<mdb-badge size="sm" class="badge btn-success mb-2 badge__category text-white" >{{item.status_pendaftaran_value}}</mdb-badge>
 								</mdb-col>
 							</mdb-row>
-							<mdb-row class="d-flex justify-content-start mb-3">
-
+							<!-- <mdb-row class="d-flex justify-content-start mb-3">
 								<mdb-col md="3">
-									<span>Kategori : </span> 
+									<span>Kategori : </span>
 								</mdb-col>
 								<mdb-col md="1">
-									<mdb-badge size="sm" class="badge btn-primary mb-4 badge__category text-white" >{{categories[index].value}}</mdb-badge>
+									<mdb-badge v-if="index+1" size="sm" class="badge btn-primary mb-4 badge__category text-white" >{{categories[index].value}}</mdb-badge>
 								</mdb-col>
-							</mdb-row>
+							</mdb-row> -->
 							<mdb-row>
 								<mdb-col md="6">
 									<h4 class="orange-text">{{$format(item.harga)}}</h4>

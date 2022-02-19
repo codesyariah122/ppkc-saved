@@ -29,7 +29,7 @@
               </mdb-row>
             </b-button>
 
-            <b-collapse v-if="index ==0" v-model="visible" :id="`collapse-${item.id}`" class="collapse__category-event-1">
+            <b-collapse v-if="index == 0" v-model="visible" :id="`collapse-${item.id}`" class="collapse__category-event-1">
               <div v-for="(c, index) in item.categories"  :key="c.id">
                 <b-button v-b-toggle="`collapse-${c.id}-inner`" size="sm" class="btn__category-1" @click="ShowCategory(c.id)">
                   <mdb-row class="row justify-content-between">
@@ -45,7 +45,7 @@
                  </mdb-row>
                </b-button>
 
-               <b-collapse v-model="c.urutan == 1 ? visible : false" :id="`collapse-${c.id}-inner`" class="collapse__category-event-2 mb-3">
+               <b-collapse v-if="index == 0" v-model="visible" :id="`collapse-${c.id}-inner`" class="collapse__category-event-2 mb-3">
                 <b-card>
                   <div v-for="(d, index) in c.details" :key="d.id">
                     <b-list-group class="list__modul">

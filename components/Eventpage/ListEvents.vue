@@ -11,7 +11,13 @@
 				</mdb-col>
 			</mdb-row>
 			<mdb-row v-else class="row justify-content-center mb-5 webinar__content">
-				<mdb-col id="show-event" v-for="list in lists" class="col-md-4 d-flex align-items-stretch" md="4" xs="12" sm="12" :key="list.kegiatan_id">
+				<mdb-col v-if="lists.length < 1" lg="12" xs="12" sm="12">
+					<mdb-alert color="primary" class="text-center">
+						Belum ada event terdekat
+					</mdb-alert>
+				</mdb-col>
+
+				<mdb-col v-else id="show-event" v-for="list in lists" class="col-md-4 d-flex align-items-stretch" md="4" xs="12" sm="12" :key="list.kegiatan_id">
 					<mdb-card :style="`${$device.isMobile ? 'max-width:335px;margin-bottom: 2rem;' : ''}`">
 						<div class="event__image-wrap">
 							<mdb-card-image :src="list.photo" alt="Card image cap"></mdb-card-image>

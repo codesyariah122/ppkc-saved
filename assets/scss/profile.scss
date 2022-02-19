@@ -5,10 +5,58 @@
 	.card__profile-page{
 		.profile__info-data{
 			.col__img-profile{
-				img{
-					max-width: 150px;
-					margin-left: 3.5rem;
-				}
+				.hover__image-wrap{
+					position: relative;
+					width: 100%;
+					max-width: 400px;
+					.image {
+						display: block;
+						width: 100%;
+						height: auto;
+						max-width: 150px;
+						margin-left: -1rem;
+					}
+
+					.overlay {
+						position: absolute;
+						top: 0;
+						bottom: 0;
+						left: -7%;
+						right: 0;
+							// height: 100px;
+							// width: 100%;
+							max-width: 140px;
+							border-radius:80%;
+							opacity: 0;
+							transition: .3s ease;
+							background-color: rgba(205, 209, 228, 0.9);
+						}
+
+						&:hover .overlay {
+							opacity: 1;
+							border-radius:70%;
+						}
+
+						.icon {
+							color: white;
+							font-weight: 700;
+							font-size: 70px;
+							position: absolute;
+							top: 50%;
+							left: 50%;
+							transform: translate(-50%, -50%);
+							-ms-transform: translate(-50%, -50%);
+							text-align: center;
+						}
+
+						.fa-zoom:hover {
+							color: #eee;
+						}
+					}
+				// img{
+				// 	max-width: 150px;
+				// 	margin-left: 3.5rem;
+				// }
 			}
 			.col__data-profile{
 				margin-top: 1rem;				
@@ -152,11 +200,56 @@
 		.card__profile-page{
 			.profile__info-data{
 				width: 100%;
-				.col__img-profile{				
-					img{
-						max-width: 130px;
-						margin-left: -1rem;
-					}
+				.col__img-profile{
+					.hover__image-wrap{
+						position: relative;
+						width: 100%;
+						max-width: 400px;
+						.image {
+							display: block;
+							width: 100%;
+							height: auto;
+							max-width: 130px;
+							margin-left: -1rem;
+						}
+
+						.overlay {
+							position: absolute;
+							top: 0;
+							bottom: 0;
+							left: -7%;
+							right: 0;
+							// height: 100px;
+							// width: 100%;
+							max-width: 140px;
+							border-radius:80%;
+							opacity: 0;
+							transition: .3s ease;
+							background-color: rgba(205, 209, 228, 0.9);
+						}
+
+						&:hover .overlay {
+							opacity: 1;
+							border-radius:70%;
+						}
+
+						.icon {
+							color: white;
+							font-weight: 700;
+							font-size: 70px;
+							position: absolute;
+							top: 50%;
+							left: 50%;
+							transform: translate(-50%, -50%);
+							-ms-transform: translate(-50%, -50%);
+							text-align: center;
+						}
+
+						.fa-zoom:hover {
+							color: #eee;
+						}
+					}		
+					
 				}
 				.col__data-profile{
 					margin-left: -15rem;

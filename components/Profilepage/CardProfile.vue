@@ -6,8 +6,15 @@
 				<mdb-row class="d-flex justify-content-between">
 			
 					<mdb-col sm="6" md="4" class="col__img-profile">
-						<img v-if="profiles.photo !== 'https://api.ppkc-online.com/image-profiles/null'" :src="profiles.photo" class="img-fluid rounded-circle"/>
-						<!-- <img :src="require('~/assets/images/profile/user-profile.svg')" class="img-fluid rounded-circle"> -->
+						<div class="hover__image-wrap">
+							<img v-if="profiles.photo !== 'https://api.ppkc-online.com/image-profiles/null'" :src="profiles.photo" class="img-fluid image rounded-circle"/>
+							<img v-else :src="require('~/assets/images/profile/user-profile.svg')" class="img-fluid image rounded-circle">
+							<div class="overlay">
+								<a :data-gall="profiles.photo ? profiles.photo : `${require('~/assets/images/profile/user-profile.svg')}`" :href="profiles.photo ? profiles.photo : `${require('~/assets/images/profile/user-profile.svg')}`" class="profiles-avatar icon" title="Lihat Foto">
+									<mdb-icon icon="search-plus" />
+								</a>
+							</div>
+						</div>
 					</mdb-col>
 					<mdb-col sm="6" md="4" class="col__data-profile">
 						<h4>{{profiles.nama}}</h4>
@@ -47,7 +54,20 @@
 			}
 		},
 
+		mounted(){
+			this.VenoBox()
+		},
+
 		methods: {
+			VenoBox(){
+				new VenoBox({
+					selector: '.profiles-avatar',
+					numeration: true,
+					infinigall: true,
+					share: ['facebook', 'twitter', 'linkedin', 'pinterest', 'download'],
+					spinner: 'rotating-plane'
+				})
+			},
 			LogoutProfile(){
 				this.$swal({
 					title: `Keluar sebagai ${this.profiles.nama}?`,

@@ -11,7 +11,7 @@
 			</b-tab>
 
 			<b-tab title="Sertifikat">
-				<p>I'm the tab with the very, very long title</p>
+				<EventSertifikat/>
 			</b-tab>
 		</b-tabs>
 	</div>
