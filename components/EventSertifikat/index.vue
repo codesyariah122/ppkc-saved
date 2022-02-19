@@ -43,5 +43,7 @@
 </template>
 
 <script>
-	export default{}
+	export default{
+		props: ['categories', 'loading', 'FilterEventChild']
+	}
 </script>
