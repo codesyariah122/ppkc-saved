@@ -612,13 +612,17 @@ export default {
     this.UserProfileData();
   },
 
+  mounted(){
+    this.IsLoggedIn()
+  },
+
   methods: {
     IsLoggedIn() {
       if (!this.token.accessToken) {
         this.$swal({
           icon: "error",
           title: "Oops...",
-          text: "Sesi login telah habis!",
+          text: "Anda tidak memiliki hak akses ke halaman ini!",
         });
         setTimeout(() => {
           this.$router.push({
