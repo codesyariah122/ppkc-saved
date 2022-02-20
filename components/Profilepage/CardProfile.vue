@@ -81,6 +81,7 @@
 					if (result.isConfirmed) {
 						this.$store.dispatch('config/storeConfigAuth', '')
 						this.$store.dispatch('config/setEventToLogin', '')
+						this.$store.dispatch('config/setProfileLogout', JSON.stringify({logout: true, username: this.$username(this.profiles.nama)}))
 						this.$swal(
 							'Logout!',
 							`Anda berhasil keluar dari profile ${this.profiles.nama}.`,

@@ -34,14 +34,46 @@ export default {
   },
 
   beforeMount() {
-    this.ConfigApiUrl();
+    this.ConfigApiUrl(),
+    this.CheckToken()
   },
 
   mounted() {
-    this.EventDataLogin();
+    this.EventDataLogin(),
+    this.UserProfileData(),
+    this.IsLoggedIn()
   },
 
   methods: {
+    IsLoggedIn(){
+      if(this.token.accessToken){
+        this.Alert('success', `Anda sedang login`)
+        setTimeout(() => {
+          this.$router.push({
+            name: 'profile-name',
+            params: {
+              name: this.$username(this.username)
+            }
+          })
+        }, 900)
+      }
+    },
+    CheckToken(){
+      this.$store.dispatch('config/checkAuthLogin', 'token')
+    },
+    UserProfileData(){
+      if(this.token){         
+        const url = `${this.api_url}/web/user`
+        this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
+        this.$axios.get(url)
+        .then(({data}) => {
+          this.profiles = data.user
+          this.username = this.$username(data.user.nama)
+        })
+        .catch(err => console.log(err.response ? err.response : ''))
+      }
+    },
+
     Register(params) {
       this.loading = true;
       const url = `${this.api_url}/web/auth/register`;
@@ -65,7 +97,7 @@ export default {
           this.profiles = res.user;
 
           this.$router.push({
-            path: "/",
+            path: "/auth/login",
           });
           // redirect
         })
@@ -124,6 +156,9 @@ export default {
     event_data() {
       return this.$store.getters["config/ConfigEventDataLogin"];
     },
+    token(){
+      return this.$store.getters['config/ConfigCheckLogin']
+    }
   },
 };
 </script>

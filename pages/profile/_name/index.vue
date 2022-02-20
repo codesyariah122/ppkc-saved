@@ -35,7 +35,8 @@
 
 		mounted(){
 			this.CheckToken(),
-			this.IsLoggedIn()
+			this.IsLoggedIn(),
+			this.CheckLogout()
 		},
 
 		methods: {
@@ -45,19 +46,24 @@
 					this.$swal({
 						icon: 'error',
 						title: 'Oops...',
-						text: 'Sesi login telah habis!',
+						text: 'Anda tidak mempunyai hak akses ke halaman ini! / sesi login telah habis, silahkan login kembali',
 					})
 					setTimeout(() => {
 						this.$router.push({
 							name: 'auth-login'
 						})
-					}, 900)
+					}, 1300)
 				}
 			},
 
 			CheckToken(){
 				this.$store.dispatch('config/checkAuthLogin', 'token')
 			},
+
+			CheckLogout(){
+				this.$store.dispatch('config/getProfileLogout', 'logout')
+			},
+
 			ConfigApiUrl(){
 				const api_url = process.env.NUXT_ENV_API_URL
 				this.$store.dispatch('config/storeConfigApiUrl', api_url)
@@ -121,6 +127,9 @@
 			},
 			api_url(){
 				return this.$store.getters['config/ConfigApiUrl']
+			},
+			logout_data(){
+				return this.$store.getters['config/ConfigProfileDataLogout']
 			}
 		}
 	}

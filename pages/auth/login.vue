@@ -7,6 +7,7 @@
 				</mdb-col>
 			</mdb-row>
 		</mdb-container>
+
 	</div>
 </template>
 
@@ -35,7 +36,8 @@
 		mounted(){
 			this.EventDataLogin(),
 			this.UserProfileData(),
-			this.IsLoggedIn()
+			this.IsLoggedIn(),
+			this.CheckLogout()
 		},
 
 		methods: {
@@ -46,10 +48,10 @@
 						this.$router.push({
 							name: 'profile-name',
 							params: {
-								slug: this.username
+								name: this.$username(this.username)
 							}
 						})
-					}, 900)
+					}, 1500)
 				}
 			},
 
@@ -69,8 +71,12 @@
 					.catch(err => console.log(err.response ? err.response : ''))
 				}
 			},
+			CheckLogout(){
+				this.$store.dispatch('config/getProfileLogout', 'logout')
+			},
 
 			Login(params){
+				this.$store.dispatch('config/setProfileLogout', JSON.stringify({logout: false}))
 				this.loading = true
 				const url = `${this.api_url}/web/auth/login`
 				const event_id = this.event_data.event_id ? this.event_data.event_id : false
@@ -85,7 +91,6 @@
 					}
 					const alert_data = `Halo, Selamat Datang ${res.user.nama}, Login berhasil !`
 					this.Alert('success', alert_data)
-
 					// store access token
 					this.ConfigAuthLogin(JSON.stringify(res.token))
 
@@ -166,6 +171,9 @@
 			token(){
 				return this.$store.getters['config/ConfigCheckLogin']
 			},
+			logout_data(){
+				return this.$store.getters['config/ConfigProfileDataLogout']
+			}
 		}
 	}
 </script>

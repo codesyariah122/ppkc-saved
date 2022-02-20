@@ -2,6 +2,8 @@
 // 2 februari 2022 | codesyariah122
 // Login page styling
 .auth__content{
+	overflow-x:hidden;
+	height: 100vh;
 	.card__login{
 		border-radius:8px;
 		top:90px;
@@ -19,7 +21,7 @@
 		height: 550px;
 		background: $bg-primary;
 		color:$default;
-		@include inside_card_auth_desktop;
+		@include inside_card_auth_mobile;
 	}
 
 	.card__registrasi-event{
@@ -68,7 +70,8 @@
 // Desktop
 @media (min-width: 992px) {
 	.auth__content{
-		 height: 100%;
+		 height: 100vh;
+		 overflow-x:hidden;
 		.card__login{
 			border-radius:8px;
 			top:100px;

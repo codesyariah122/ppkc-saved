@@ -6,7 +6,9 @@ export const state = () => ({
 		token: {},
 		profiles:{},
 		event:{},
-		event_data: {}
+		event_data: {},
+		logout: {},
+		logout_data: {}
 	},
 })
 
@@ -36,6 +38,14 @@ export const mutations = {
 
 	CONFIG_GET_EVENT_LOGIN(state, name){
 		state.config.event_data = localStorage.getItem(name) ? JSON.parse(localStorage.getItem(name)) : ''
+	},
+
+	CONFIG_SET_PROFILE_LOGOUT(state, data){
+		state.config.logout = localStorage.setItem('logout', data)
+	},
+
+	CONFIG_GET_PROFILE_LOGOUT(state, name){
+		state.config.logout_data = localStorage.getItem(name) ? JSON.parse(localStorage.getItem(name)) : ''
 	}
 }
 
@@ -59,6 +69,14 @@ export const actions = {
 
 	getEventDataToLogin({commit}, name){
 		commit('CONFIG_GET_EVENT_LOGIN', name)
+	},
+
+	setProfileLogout({commit}, name){
+		commit('CONFIG_SET_PROFILE_LOGOUT', name)
+	},
+
+	getProfileLogout({commit}, name){
+		commit('CONFIG_GET_PROFILE_LOGOUT', name)
 	}
 
 }	
@@ -80,5 +98,13 @@ export const getters = {
 
 	ConfigEventDataLogin(state){
 		return state.config.event_data
+	},
+
+	ConfigProfileLogout(state){
+		return state.config.logout
+	},
+
+	ConfigProfileDataLogout(state){
+		return state.config.logout_data
 	}
 }
