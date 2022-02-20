@@ -16,7 +16,7 @@
 			</pre> -->
 			<mdb-row  col="12" class="row justify-content-start mb-2">
 				<small class="text-info">
-					*.Selesaikan No.1 Terlebih Dahulu
+					*.Selesaikan  Soal No.1 Terlebih Dahulu
 				</small>
 			</mdb-row>
 			<mdb-row v-for="(item, index) in lists" col="12" class="row justify-content-center" :key="item.id">

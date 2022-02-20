@@ -130,9 +130,9 @@
       </mdb-row>
     </mdb-container>
 
-    <pre>
+    <!-- <pre>
       {{pelatihans}}
-    </pre>
+    </pre> -->
 
   </div>
 </template>
