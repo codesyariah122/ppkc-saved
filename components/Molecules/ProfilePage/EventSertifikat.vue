@@ -38,6 +38,38 @@
 				</form>
 			</mdb-col>
 		</mdb-row>
+		<mdb-row v-if="loading" class="row justify-content-center">
+			<div class="spinner-grow text-primary mt-3" size="md" style="width: 5rem; height: 5rem; background: coral;" role="status">
+				<span class="sr-only">Loading...</span>
+			</div>
+		</mdb-row>
+
+		<mdb-row v-else>
+			<mdb-card v-if="sertifikats.length === 0" class="card-body" style="width: 100%; margin-top: 1rem;">
+				<mdb-row>
+					<mdb-col lg="12" xs="12" sm="12">
+						<mdb-alert color="warning" v-if="p1" @closeAlert="p1=false" dismiss>
+							<strong>Oopps!</strong> Belum ada event yang anda ikuti.
+						</mdb-alert>
+					</mdb-col>
+				</mdb-row>
+			</mdb-card>
+
+			<mdb-card v-else v-for="(item, index) in sertifikats" class="card-body" style="width: 100%; margin-top: 1rem;" :key="item.id">
+				<mdb-row>
+					<mdb-col lg="12" xs="12" sm="12">
+						<mdb-card-title>{{item.title}}</mdb-card-title>
+						<small class="mt-2">
+							{{$moment(item.date_start).format("LL")}} - {{$moment(item.date_end).format("LL")}}
+						</small>
+					</mdb-col>
+					<mdb-col lg="12" xs="12" sm="12">
+						<mdb-btn size="sm" outline="primary"><mdb-icon icon="download" /> Unduh Sertifikat</mdb-btn>
+					</mdb-col>
+				</mdb-row>
+			</mdb-card>
+
+		</mdb-row>
 	</div>
 </template>
 
@@ -58,9 +90,9 @@
 		methods: {
 			SampleSertifikatData(){
 				this.sertifikats = [
-					{id:1, title: 'pelatihan manajemen pelayanan IGD di rumah sakit'},
-					{id:2, title: 'pelatihan instruktur senam hamil dan nifas dini'},
-					{id:3, title: 'pelatihan perawatan spa untuk bayi dan balita'}
+					{id:1, title: 'pelatihan manajemen pelayanan IGD di rumah sakit', date_start: new Date(2022, 11, 24, 10, 33, 30, 0), date_end: new Date(2018, 11, 24, 10, 33, 30, 0)},
+					{id:2, title: 'pelatihan instruktur senam hamil dan nifas dini', date_start: new Date(2022, 11, 24, 10, 33, 30, 0), date_end: new Date(2018, 11, 24, 10, 33, 30, 0)},
+					{id:3, title: 'pelatihan perawatan spa untuk bayi dan balita',date_start: new Date(2022, 11, 24, 10, 33, 30, 0), date_end: new Date(2018, 11, 24, 10, 33, 30, 0)}
 				]
 			}
 		}

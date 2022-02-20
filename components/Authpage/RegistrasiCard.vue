@@ -91,7 +91,7 @@
 				</mdb-btn>
 			</div> -->
 
-      <mdb-row class="row justify-content-center white-text">
+      <mdb-row class="row justify-content-center white-text mb-3 mt-5">
         <mdb-col v-if="show_alert" lg="12" xs="12" sm="12">
           <mdb-alert color="danger" dismiss>
             <strong>Ooops!</strong> {{ validation }}
@@ -106,19 +106,19 @@
         : 'justify-content-center black-text'
       }`"
       >
-      <mdb-col md="12" xs="12" sm="12" lg="12">
-        <h6
-        :class="`${
-          $device.isMobile
-          ? 'text-center mt-5 mb-5'
-          : 'text-center mt-5 mb-5'
-        }`"
-        >
-        Sudah punya Akun ?
-        <nuxt-link to="/auth/login">Masuk Sekarang</nuxt-link>
-      </h6>
-    </mdb-col>
-  </mdb-row>
+        <mdb-col md="12" xs="12" sm="12" lg="12">
+          <h6
+          :class="`${
+            $device.isMobile
+            ? 'text-center mt-1 mb-5'
+            : 'text-center mt-4 mb-5'
+          }`"
+          >
+          Sudah punya Akun ?
+          <nuxt-link to="/auth/login">Masuk Sekarang</nuxt-link>
+        </h6>
+      </mdb-col>
+    </mdb-row>
 </mdb-card-body>
 </mdb-card>
 </template>

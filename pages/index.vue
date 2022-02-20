@@ -48,6 +48,15 @@ export default {
     }
   },
 
+  head:{
+    script: [
+      // {
+      //   src: 'https://widget.tochat.be/bundle.js?key=93ba0156-969f-4e9c-b1c8-0c25aafde170',
+      //   defer: true
+      // }
+    ]
+  },
+
   async asyncData({ $axios }) {
     const lists = await $axios.$get("/web/home");
     return {
