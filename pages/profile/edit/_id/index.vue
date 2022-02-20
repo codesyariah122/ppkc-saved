@@ -232,7 +232,7 @@ export default {
         this.$swal({
           icon: "error",
           title: "Oops...",
-          text: "Sesi login telah habis!",
+          text: "Anda tidak mempunyai hak akses ke halaman ini!",
         });
         setTimeout(() => {
           this.$router.push({
