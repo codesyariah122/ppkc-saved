@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div ref="testimoni_square" class="card__list" :style="berita__list_style">
+    <div ref="testimoni_square" class="card__list testimoni__list" :style="berita__list_style">
       <mdb-container>
         <!-- header -->
         <mdb-row class="row justify-content-center header__ppkc-list-page">
@@ -18,42 +18,30 @@
         </mdb-row>
 
         <!-- show card berita -->
-        <mdb-row class="row justify-content-center mb-5 webinar__content">
-          <mdb-col lg="6" xs="6" sm="6">
-            <div class="card__list">
-              <div class="mt-5 card__content">
-                <div class="testimoni__list">
-                  <mdb-row>
-                    <mdb-col
-                      v-for="item in lists"
-                      col="12"
-                      md="12"
-                      :key="item.id"
-                      class="col__testimoni"
-                    >
-                      <mdb-card
-                        class="card__testimoni-content"
-                        style="min-height: 230px !important"
-                      >
-                        <mdb-container class="mt-4">
-                          <blockquote class="post__quote">
-                            <mdb-icon icon="quote-left" /><br />
-                            <span class="quote__txt">
-                              {{ item.testimoni }}
-                            </span>
-                            <p class="profile__name">
-                              {{ item.konsumen }}
-                            </p>
-                          </blockquote>
-                        </mdb-container>
-                      </mdb-card>
-                    </mdb-col>
-                  </mdb-row>
-                </div>
-              </div>
-            </div>
-          </mdb-col>
-        </mdb-row>
+        <mdb-row col="12" class="row justify-content-center mb-5 mt-5">
+          <mdb-col
+          v-for="item in lists"
+          md="4" xs="12" sm="12"
+          :key="item.id"
+          class="col__testimoni"
+          >
+            <mdb-card
+            class="card__testimoni-content"
+            >
+            <mdb-container class="mt-4 mb-5">
+              <blockquote class="post__quote">
+                <mdb-icon icon="quote-left" /><br />
+                <span class="quote__txt">
+                  {{ item.testimoni }}
+                </span>
+                <h3 class="profile__name">
+                  {{ item.konsumen }}
+                </h3>
+              </blockquote>
+            </mdb-container>
+          </mdb-card>
+        </mdb-col>
+      </mdb-row>
 
         <mdb-row v-if="loading" class="row justify-content-center">
           <mdb-col lg="12" xs="12" sm="12">
@@ -122,3 +110,10 @@ export default {
   },
 };
 </script>
+<style lang="scss">
+@include card_testimonial_mobile;
+
+@media (min-width: 992px) {
+  @include card_testimonial_desktop;
+}
+</style>

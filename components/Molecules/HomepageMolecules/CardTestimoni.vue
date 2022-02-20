@@ -10,7 +10,6 @@
               <p class="quote__txt">
                 {{lists[testiIndex-1].testimoni}}
               </p>
-              </h3>
               <h3 class="profile__name">
                 {{lists[testiIndex-1].konsumen ? lists[testiIndex-1].konsumen : 'PPKC Visitor'}}
               </h3>
