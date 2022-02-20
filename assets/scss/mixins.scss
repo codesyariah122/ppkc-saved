@@ -578,4 +578,61 @@
 	}
 }
 
+@mixin filtering_form_data{
+
+	margin-left: 5rem;
+		select{
+			border: 1px solid $primary-button!important;
+			border-sizing: border-box!important;
+			background: $default!important;
+			color: $primary-button!important;
+			border-radius: 5px!important;
+			height:33.7px!important;
+			width:180px!important;
+			font-size: 12px!important;
+			margin-bottom: 1rem!important;
+		}
+		button{
+			margin-top:-.1em!important;
+			width: 185px!important;
+			left:-.3rem!important;
+			height: 33px!important;
+			border-radius:4px!important;
+			font-size:10px!important;
+			background-color: $primary-button!important;
+		}
+		h4{
+			color:$color-primary;
+			font-size: 20px;
+			font-weight: 700;
+			line-height: 27px;
+			text-transform: capitalize;
+		}
+	
+	@media (min-width: 992px) {
+		margin-left: 25rem;
+		select{
+			border: 1px solid $primary-button!important;
+			border-sizing: border-box!important;
+			background: $default!important;
+			color: $primary-button!important;
+			border-radius: 5px!important;
+			height:33.7px!important;
+			width:107px!important;
+			font-size: 10px!important;
+			margin-bottom: 1rem!important;
+		}
+		button{
+			margin-top:.1em!important;
+			width: 150px!important;
+			left:.1rem!important;
+			height: 33px!important;
+			border-radius:4px!important;
+			font-size:10px!important;
+			background-color: $primary-button!important;
+			text-align: left!important;
+		}
+	}
+}
+
 // End auth component base on auth.scss

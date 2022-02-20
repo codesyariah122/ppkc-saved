@@ -10,7 +10,7 @@
 							<img v-if="profiles.photo !== 'https://api.ppkc-online.com/image-profiles/null'" :src="profiles.photo" class="img-fluid image rounded-circle"/>
 							<img v-else :src="require('~/assets/images/profile/user-profile.svg')" class="img-fluid image rounded-circle">
 							<div class="overlay">
-								<a :data-gall="profiles.photo ? profiles.photo : `${require('~/assets/images/profile/user-profile.svg')}`" :href="profiles.photo ? profiles.photo : `${require('~/assets/images/profile/user-profile.svg')}`" class="profiles-avatar icon" title="Lihat Foto">
+								<a :data-gall="profiles.photo ? profiles.photo : `${require('~/assets/images/profile/user-profile.svg')}`" :href="profiles.photo ? profiles.photo : `${require('~/assets/images/profile/user-profile.svg')}`" class="profiles-avatar icon" title="Lihat Foto Profile">
 									<mdb-icon icon="search-plus" />
 								</a>
 							</div>

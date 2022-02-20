@@ -5,7 +5,7 @@
 				<div class="event__image-wrap">
 					<img :src="events.kegiatan.photo" class="rounded image">
 					<div class="overlay__event-img">
-						<a :data-gall="events.kegiatan.photo" :href="events.kegiatan.photo" class="event-details icon" title="Lihat Foto">
+						<a :data-gall="events.kegiatan.photo" :href="events.kegiatan.photo" class="event-details icon" :title="details.kegiatan_title">
 							<mdb-icon icon="search-plus" />
 						</a>
 					</div>

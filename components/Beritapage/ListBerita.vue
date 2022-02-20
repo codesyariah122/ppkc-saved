@@ -33,7 +33,7 @@
                       <div class="event__image-wrap">
                         <mdb-card-image :src="item.foto_url" alt="Card image cap"></mdb-card-image>
                         <div class="overlay__event-img">
-                          <a :data-gall="item.foto_url" :href="item.foto_url" class="lists-berita icon" title="Lihat Foto">
+                          <a :data-gall="item.foto_url" :href="item.foto_url" class="lists-berita icon" :title="item.judul">
                             <mdb-icon icon="search-plus" />
                           </a>
                         </div>
@@ -106,10 +106,6 @@ export default {
           ? "margin-top: 15rem;"
           : "margin-top: 5rem;",
     };
-  },
-
-  beforeMount(){
-    this.VenoBox()
   },
 
   mounted() {

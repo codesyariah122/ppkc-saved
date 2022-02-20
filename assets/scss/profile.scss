@@ -122,50 +122,6 @@
 					list-style: none;
 				}
 			}
-
-			.row__form-filter{
-				margin-left: -17rem;
-				margin-top: -2rem;
-				width:100%;
-				.form__filter-profile-tabs{
-					.select__1{
-						margin-left: -52px;
-					}
-					.select__2{
-						margin-left: -50px;
-						margin-top: 3rem;
-					}
-					select{
-						border: 1px solid $primary-button;
-						border-sizing: border-box;
-						background: $default;
-						color: $primary-button;
-						border-radius: 5px;
-						height:33.7px;
-						width:160px;
-						font-size: 10px;
-						margin-bottom: 1rem;
-						margin-left: 200px;
-					}
-					button{
-						margin-top:100px;
-						width: 250px;
-						left:60px;
-						height: 30px;
-						border-radius:4px;
-						font-size:10px;
-						background-color: $primary-button!important;
-					}
-				}
-				.form__filter-caption{
-					left:220px;
-					color: $color-primary;
-					font-size: 14px;
-					line-height: 19px;
-					font-weight: 700;
-					top:5px;
-				}
-			}
 		}
 
 		.card{
@@ -335,51 +291,6 @@
 				margin-left: -9rem;
 			}
 
-			.row__form-filter{
-				margin-left: 8rem!important;
-				margin-top: -2rem;
-				width:100%;
-				.form__filter-profile-tabs{
-					.select__1{
-						margin-left: -23rem!important;
-					}
-					.select__2{
-						margin-left: -24.3rem!important;
-						// margin-top: 0rem!important;
-					}
-					select{
-						border: 1px solid $primary-button!important;
-						border-sizing: border-box!important;
-						background: $default!important;
-						color: $primary-button!important;
-						border-radius: 5px!important;
-						height:33.7px!important;
-						width:150px!important;
-						font-size: 10px!important;
-						margin-bottom: 1rem!important;
-						margin-left: 200px!important;
-					}
-					button{
-						// margin-top:-5.5rem!important;
-						margin-top:1em!important;
-						width: 180px!important;
-						left:.1rem!important;
-						height: 33px!important;
-						border-radius:4px!important;
-						font-size:10px!important;
-						background-color: $primary-button!important;
-					}
-				}
-				.form__filter-caption{
-					left:250px!important;
-					color: $color-primary;
-					font-size: 14px!important;
-					line-height: 19px!important;
-					font-weight: 700!important;
-					top:5px!important;
-				}
-			}
-
 			.btn__link-event{
 				margin-top:5px;
 				margin-left: -2px;
@@ -387,4 +298,9 @@
 			}
 		}
 	}
+}
+
+
+.filtering__form-data{
+	@include filtering_form_data;
 }

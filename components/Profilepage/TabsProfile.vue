@@ -11,7 +11,7 @@
 			</b-tab>
 
 			<b-tab title="Sertifikat">
-				<EventSertifikat :FilterEventChild="FilterEventChild" :categories="categories" :loading="loading"/>
+				<MoleculesProfilePageEventSertifikat :FilterEventChild="FilterEventChild" :categories="categories" :loading="loading"/>
 			</b-tab>
 		</b-tabs>
 	</div>

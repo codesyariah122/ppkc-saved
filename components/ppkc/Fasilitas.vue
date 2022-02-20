@@ -8,7 +8,7 @@
         </mdb-col>
 
         <mdb-col
-          v-for="item in lists.list_data"
+          v-for="(item, indx) in lists.list_data"
           :key="item.id"
           lg="12"
           xs="12"
@@ -17,7 +17,7 @@
         >
           <h5>{{ item.nama }}</h5>
           <mdb-row v-if="item.list_foto.length > 0">
-            <mdb-col md="4" v-for="n in item.list_foto" :key="n.id" class="hover__image-wrap">
+            <mdb-col md="4" v-for="(n, indxs) in item.list_foto" :key="n.id" class="hover__image-wrap">
                 <img
                 :src="n.foto_url"
                 class="img-fluid image"
@@ -29,7 +29,7 @@
                 "
                 />
                 <div class="overlay">
-                  <a :data-gall="n.foto_url" :href="n.foto_url" class="fasilitas icon" title="Lihat Foto">
+                  <a :data-gall="n.foto_url" :href="n.foto_url" class="fasilitas icon" :title="`Lihat Foto ${item.nama} ${indxs+1}`">
                     <mdb-icon icon="search-plus" />
                   </a>
                 </div>

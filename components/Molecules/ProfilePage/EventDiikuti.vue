@@ -1,30 +1,29 @@
 <template>
 	<div>
-		<b-row align-h="end" class="row__form-filter">
-			<b-col cols="4" class="form__filter-caption">
-				Filter
-			</b-col>
-			<b-col cols="5" class="form__filter-profile-tabs">
-				<form @submit.prevent="FilterEventChild">			
-					<b-row class="d-flex justify-content-center">
-						<b-col cols="4" xs="12" sm="12" lg="12" class="select__1">
+		<mdb-row cols="12" class="justify-content-end filtering__form-data">
+			<mdb-col md="2">
+				<h4>Filter</h4>
+			</mdb-col>
+			<mdb-col md="10">
+				<form @submit.prevent="FilterEventChild">
+					<mdb-row>
+						<mdb-col md="3">
 							<select selected :value="undefined" @change="ChangeCategoryChild($event)">
 								<option value="">Jenis Pelatihan</option>
 								<option v-for="(item, index) in categories" :value="item.code">
 									{{item.value}}
 								</option>
 							</select>
-						</b-col>
-
-						<b-col cols="4" xs="12" sm="12" lg="12" class="select__2">
+						</mdb-col>
+						<mdb-col md="3">
 							<select selected :value="undefined" @change="ChangeMonthChild($event)">
 								<option value="">Bulan Pelatihan</option>
 								<option v-for="(month, index) in $moment.months()" :value="index + 1">
 									{{month}}
 								</option>
 							</select>
-						</b-col>
-						<b-col cols="4" xs="12" sm="12" lg="12">
+						</mdb-col>
+						<mdb-col md="4">
 							<mdb-btn size="sm" type="submit">
 								<div v-if="loading">
 									<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -34,11 +33,11 @@
 									<mdb-icon icon="filter" size="lg"/> Terapkan Filter		
 								</div>
 							</mdb-btn>
-						</b-col>
-					</b-row>
+						</mdb-col>
+					</mdb-row>
 				</form>
-			</b-col>
-		</b-row>
+			</mdb-col>
+		</mdb-row>
 
 		<mdb-row v-if="loading" class="row justify-content-center">
 			<div class="spinner-grow text-primary mt-3" size="md" style="width: 5rem; height: 5rem; background: coral;" role="status">
