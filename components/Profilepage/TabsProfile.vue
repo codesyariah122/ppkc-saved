@@ -1,16 +1,16 @@
 <template>
 	<div>
 		<b-tabs content-class="mt-4" fill>
-			<b-tab title="Akun" active>
-				<mdb-card>
+			<b-tab title="Akun" active class="font-weight-bold">
+				<mdb-card class="content__tabs">
 					<ProfileInfo :profiles="profiles" :studs="studs" :works="works"/>
 				</mdb-card>
 			</b-tab>
-			<b-tab title="Event yang diikuti">
+			<b-tab title="Event yang diikuti" class="font-weight-bold">
 				<MoleculesProfilePageEventDiikuti :FilterEventChild="FilterEventChild" :loading="loading" :categories="categories" :pelatihans="pelatihans"/>
 			</b-tab>
 
-			<b-tab title="Sertifikat">
+			<b-tab title="Sertifikat" class="font-weight-bold">
 				<MoleculesProfilePageEventSertifikat :FilterEventChild="FilterEventChild" :categories="categories" :loading="loading"/>
 			</b-tab>
 		</b-tabs>

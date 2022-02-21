@@ -77,6 +77,27 @@
 	.tabs__detail-profile{
 		margin-top:2rem;
 		// width: 100%;
+		.content__tabs{
+			margin-top: -2.5rem;
+			background-color: $second-default;
+			.profile__info{
+				margin-left: -1rem;
+				ul li{
+					h6{
+						color: $gray;
+						font-weight:900!important;
+						font-size:15px;
+					}
+					p{
+						font-size: 14px;
+						color:$default-gray;
+					}
+					.info__context{
+						margin-top: -.5rem;
+					}
+				}
+			}
+		}
 		.tabs {
 			.nav-tabs {
 				width: 100%;
@@ -155,6 +176,7 @@
 
 		.card__profile-page{
 			.profile__info-data{
+				background-color: $second-default;
 				width: 100%;
 				.col__img-profile{
 					.hover__image-wrap{
@@ -235,6 +257,26 @@
 		}
 		.tabs__detail-profile{
 			margin-top:2rem;
+			.content__tabs{
+				margin-top: -2.5rem;
+				background-color: $second-default;
+				.profile__info{
+					ul li{
+						h6{
+							color: $gray;
+							font-weight:900!important;
+							font-size:15px;
+						}
+						p{
+							font-size: 14px;
+							color:$default-gray;
+						}
+						.info__context{
+							margin-top: -.5rem;
+						}
+					}
+				}
+			}
 			.nav-tabs {
 				width: 50%!important;
 				margin-left: -1rem;
@@ -247,7 +289,6 @@
 				margin-bottom: 3rem;
 				font-weight: 700;
 				line-height: 31px;
-				font-size: 15px;
 				&:after{
 					content:'';
 					display: block;
@@ -261,9 +302,9 @@
 
 			.nav-link{
 				color:$color-primary!important;
-				font-weight: 700;
-				line-height: 31px;
-				font-size: 16px;
+				font-weight: 700!important;
+				line-height: 31px!important;
+				font-size: 21px!important;
 			}
 
 			.nav-item.show .nav-link {
