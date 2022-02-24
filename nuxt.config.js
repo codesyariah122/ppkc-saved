@@ -17,12 +17,15 @@ export default {
       }
     },
     body: true,
+  // Global page headers: https://go.nuxtjs.dev/config-head
+  head: {
+    bodyAttrs: {
+      'class': 'd-flex flex-column min-vh-100'  
+    },
     htmlAttrs: {
       lang: 'en',
       amp: true
     },
-  // Global page headers: https://go.nuxtjs.dev/config-head
-  head: {
     title: 'PPKC - Pusat Pengembangan Kesehatan Carolus',
     meta: [
     { charset: 'utf-8' },
@@ -63,14 +66,13 @@ export default {
     {
       src: '/assets/venobox/dev/venobox.min.js',
       type: 'text/javascript'
-    },
+    }
     ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     // 'bootstrap-css-only/css/bootstrap.min.css',
-    '~assets/css/video.css',
     'mdbvue/lib/mdbvue.css',
     'mdbvue/lib/css/mdb.min.css'
     ],
@@ -106,8 +108,8 @@ export default {
     '~assets/scss/berita.scss',
     '~assets/scss/auth.scss',
     '~assets/scss/profile.scss',
-    '~assets/scss/event-detail-login.scss',
-    '~assets/scss/event-test.scss'
+    '~assets/scss/event-test.scss',
+    '~assets/scss/sidebar-event.scss'
     ]
   },
 

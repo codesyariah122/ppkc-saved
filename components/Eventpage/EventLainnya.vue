@@ -1,12 +1,12 @@
 <template>
 	<div>
-		<mdb-row class="row justify-content-center">
+		<mdb-row v-if="lists.length > 1" class="row justify-content-center">
 			<mdb-col lg="12" xs="12" sm="12">
 				<h4>Event Lainnya</h4>
 			</mdb-col>
 
 			<!-- Pagination option components & info -->
-			<mdb-pagination v-if="lists.length > 1" color="blue" md class="mt-3">
+			<mdb-pagination color="blue" md class="mt-3">
 				<b-pagination 
 				v-model="currentPage"
 				:total-rows="lists.length"
@@ -14,7 +14,7 @@
 				@change="LoadEvent" aria-controls="show-event" align="center"></b-pagination>
 			</mdb-pagination>
 
-			<mdb-col lg="12" xs="12" sm="12" class="mt-3 mb-5">
+			<mdb-col  lg="12" xs="12" sm="12" class="mt-3 mb-5">
 				<mdb-badge pill color="light-blue">
 					Page: {{currentPage}}
 				</mdb-badge>

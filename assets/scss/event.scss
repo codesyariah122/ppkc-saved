@@ -81,6 +81,7 @@
 		.card__content-events{
 			.webinar__content{
 				.card{
+					height:auto;
 					@include card_rounded_desktop;
 					.event__image-wrap{
 						position: relative;
@@ -290,6 +291,7 @@
 		margin-top: 4rem;
 		.event__detail-content{
 			height: 100%;
+			width: 100%;
 			.idr__color {
 				color: $idr-color;
 				font-weight: 700;
@@ -304,18 +306,23 @@
 				text-align: justify;
 			}
 			.col-1{
-				// width: 100%;
+				width: 100%;
 				margin-top: -1.7rem;
 				.event__image-wrap{
+					margin-top: 3rem;
 					position: relative;
+					img{
+						width: 450px;
+						height: 450px;
+					}
 					.overlay__event-img {
 						position: absolute;
-						top: 13%;
+						top: 0;
 						bottom: 0;
-						left: -3%;
+						left: 0;
 						right: 0;
-						height:323px;
-						width: 320px;
+						height:450px;
+						width: 450px;
 						opacity: 0;
 						transition: .3s ease;
 						background-color: rgba(205, 209, 228, 0.9);
@@ -351,6 +358,7 @@
 			}
 			.col-2{
 				margin-top: 3rem;
+				text-transform: capitalize;
 				h1{
 					width: 550px;
 					margin-left: 7rem;		

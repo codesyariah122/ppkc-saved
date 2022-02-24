@@ -33,7 +33,7 @@
 
 							<mdb-card-title>{{list.kegiatan_title}}</mdb-card-title>
 
-							<p class="mt-2 text-gray">
+							<p class="mt-2 text-gray text-truncate">
 								{{list.kegiatan_desc}}
 							</p>
 

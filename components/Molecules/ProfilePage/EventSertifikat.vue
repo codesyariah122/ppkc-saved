@@ -79,7 +79,8 @@
 
 		data(){
 			return {
-				sertifikats: []
+				sertifikats: [],
+				p1: true
 			}
 		},
 

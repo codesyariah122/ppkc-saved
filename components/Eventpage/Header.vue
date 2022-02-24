@@ -54,7 +54,7 @@
 
 		<!-- Pagination list -->
 		<mdb-container class="mt-5 mb-5">
-			<mdb-row v-if="lists.length > 1" class="row justify-content-center mt-5 mb-5">
+			<mdb-row v-if="lists.length > 3" class="row justify-content-center mt-5 mb-5">
 				<mdb-col lg="12" xs="12" sm="12">
 					<mdb-alert color="info" class="text-center">
 						Silahkan gunakan tombol halaman dibawah untuk melihat daftar event lainnya.

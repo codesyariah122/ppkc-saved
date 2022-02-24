@@ -1,11 +1,15 @@
 <template>
 	<div class="profile__info">
-
+		<div v-if="loading">
+			<b-skeleton animation="wave" width="85%"></b-skeleton>
+			<b-skeleton animation="wave" width="55%"></b-skeleton>
+			<b-skeleton animation="wave" width="70%"></b-skeleton>
+		</div>
 		<!-- <pre>
 			{{works}}
 		</pre> -->
 
-		<ul class="mt-3">
+		<ul v-else class="mt-3">
 			<li v-if="profiles.phone == null || profiles.no_anggota == null" class="mb-3 mt-2">
 				<mdb-alert color="warning" v-if="p1" @closeAlert="p1=false" dismiss>
 					<strong>Halo {{profiles.nama}}</strong> profile anda belum lengkap silahkan edit profile.
@@ -53,7 +57,7 @@
 
 <script>
 	export default{
-		props: ['works', 'studs', 'profiles'],
+		props: ['loading', 'works', 'studs', 'profiles'],
 
 		data(){
 			return {

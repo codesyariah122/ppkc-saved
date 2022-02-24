@@ -1,14 +1,20 @@
 <template>
 	<div>
-		<b-card>
+		<b-card v-if="loading">
+			<b-skeleton animation="wave" width="85%"></b-skeleton>
+			<b-skeleton animation="wave" width="55%"></b-skeleton>
+			<b-skeleton animation="wave" width="70%"></b-skeleton>
+		</b-card>
+
+		<b-card v-else>
 			<mdb-container class="profile__info-data">	
 
 				<mdb-row class="d-flex justify-content-between">
 			
-					<mdb-col sm="6" md="4" class="col__img-profile">
+					<mdb-col md="4" class="col__img-profile">
 						<div class="hover__image-wrap">
 							<img v-if="profiles.photo !== 'https://api.ppkc-online.com/image-profiles/null'" :src="profiles.photo" class="img-fluid image rounded-circle"/>
-							<img v-else :src="require('~/assets/images/profile/user-profile.svg')" class="img-fluid image rounded-circle">
+							<img v-else src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="img-fluid image rounded-circle">
 							<div class="overlay">
 								<a :data-gall="profiles.photo ? profiles.photo : `${require('~/assets/images/profile/user-profile.svg')}`" :href="profiles.photo ? profiles.photo : `${require('~/assets/images/profile/user-profile.svg')}`" class="profiles-avatar icon" title="Lihat Foto Profile">
 									<mdb-icon icon="search-plus" />
@@ -16,29 +22,37 @@
 							</div>
 						</div>
 					</mdb-col>
-					<mdb-col sm="6" md="4" class="col__data-profile">
+					<mdb-col md="4" class="col__data-profile">
 						<h4>{{profiles.nama}}</h4>
 						<ul>
 							<li class="mb-2"> 
 								<a :href="`mailto:${profiles.email}`">
-									<mdb-icon far icon="envelope-open" /> {{profiles.email}}
+									<mdb-icon far icon="envelope-open" size="md" /> {{profiles.email}}
 								</a> 
 							</li>
-							<li> 
-								<mdb-badge color="info"><mdb-icon icon="phone" /> {{profiles.phone}}</mdb-badge>
+							<li>
+								<a href="!#">
+									<mdb-icon icon="phone" size="md" /> {{profiles.phone}}
+								</a>
 							</li>
 						</ul>
 					</mdb-col>
 
-					<mdb-col sm="6" md="4" class="profile__options-page">
-						<mdb-btn outline="primary" size="sm" >
-							<a :href="`/profile/edit/${profiles.id}`">
-								<mdb-icon icon="user-cog" size="lg" /> Edit
-							</a>
-						</mdb-btn>
-						<mdb-btn color="deep-orange" size="sm" @click="LogoutProfile">
-							<mdb-icon icon="sign-out-alt" size="lg"/> Logout
-						</mdb-btn>
+					<mdb-col md="4" class="profile__options-page">
+						<mdb-row class="d-flex justify-content-center">
+							<mdb-col sm="6">
+								<mdb-btn outline="primary" size="sm" >
+									<a :href="`/profile/edit/${profiles.id}`">
+										<mdb-icon icon="user-cog" size="sm" /> Edit Profile
+									</a>
+								</mdb-btn>
+							</mdb-col>
+							<mdb-col sm="6">
+								<mdb-btn color="deep-orange" size="sm" @click="LogoutProfile">
+									<mdb-icon icon="sign-out-alt" size="sm"/> Logout
+								</mdb-btn>
+							</mdb-col>
+						</mdb-row>
 					</mdb-col>
 				</mdb-row>
 			</mdb-container>
@@ -48,7 +62,7 @@
 
 <script>
 	export default{
-		props: ['profiles'],
+		props: ['profiles', 'loading'],
 
 		data(){
 			return {

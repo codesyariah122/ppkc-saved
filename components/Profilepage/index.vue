@@ -3,7 +3,7 @@
 		<mdb-container>
 			<mdb-row class="row justify-content-center card__profile-page">
 				<mdb-col lg="12" xs="12" sm="12">
-					<CardProfile :profiles="profiles"/>
+					<CardProfile :profiles="profiles" :loading="loading"/>
 				</mdb-col>
 			</mdb-row>
 

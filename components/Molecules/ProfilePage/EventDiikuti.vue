@@ -2,7 +2,7 @@
 	<div>
 		<mdb-row cols="12" class="justify-content-end filtering__form-data">
 			<mdb-col md="2">
-				<h4>Filter</h4>
+				<h5>Filter</h5>
 			</mdb-col>
 			<mdb-col md="10">
 				<form @submit.prevent="FilterEventChild">
@@ -40,9 +40,11 @@
 		</mdb-row>
 
 		<mdb-row v-if="loading" class="row justify-content-center">
-			<div class="spinner-grow text-primary mt-3" size="md" style="width: 5rem; height: 5rem; background: coral;" role="status">
-				<span class="sr-only">Loading...</span>
-			</div>
+			<mdb-col lg="12" xs="12" sm="12">
+				<b-skeleton animation="throb" width="85%"></b-skeleton>
+				<b-skeleton animation="throb" width="55%"></b-skeleton>
+				<b-skeleton animation="throb" width="70%"></b-skeleton>
+			</mdb-col>
 		</mdb-row>
 
 		<div v-else>
@@ -66,6 +68,7 @@
 							<small>
 								{{$moment(item.tanggal_awal).format("LL")}} - {{$moment(item.tanggal_akhir).format("LL")}}
 							</small>
+							
 							<mdb-row class="d-flex justify-content-start">
 								<mdb-col md="12">
 									<blockquote class="blockquote-footer">
@@ -79,14 +82,7 @@
 									<mdb-badge size="sm" class="badge btn-success mb-2 badge__category text-white" >{{item.status_pendaftaran_value}}</mdb-badge>
 								</mdb-col>
 							</mdb-row>
-							<!-- <mdb-row class="d-flex justify-content-start mb-3">
-								<mdb-col md="3">
-									<span>Kategori : </span>
-								</mdb-col>
-								<mdb-col md="1">
-									<mdb-badge v-if="index+1" size="sm" class="badge btn-primary mb-4 badge__category text-white" >{{categories[index].value}}</mdb-badge>
-								</mdb-col>
-							</mdb-row> -->
+			
 							<mdb-row>
 								<mdb-col md="6">
 									<h4 class="orange-text">{{$format(item.harga)}}</h4>
@@ -108,10 +104,11 @@
 
 <script>
 	export default{
-		props: ['FilterEventChild', 'loading', 'categories', 'pelatihans'],
+		props: ['FilterEventChild', 'loading', 'categories', 'pelatihans', 'profiles'],
 		data(){
 			return {
-				p1: true
+				p1: true,
+				username: this.$username(this.profiles.nama)
 			}
 		}
 	}

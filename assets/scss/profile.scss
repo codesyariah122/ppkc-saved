@@ -70,6 +70,7 @@
 				}
 				li{
 					margin-left: -2.5rem;
+					font-size: 12px;
 				}
 			}
 		}
@@ -175,8 +176,8 @@
 		margin-top: 7rem;
 
 		.card__profile-page{
+			background-color: $second-default;
 			.profile__info-data{
-				background-color: $second-default;
 				width: 100%;
 				.col__img-profile{
 					.hover__image-wrap{
@@ -248,9 +249,12 @@
 
 			.profile__options-page{
 				margin-top:2rem;
-				margin-left:5rem;
+				margin-left:6rem;
 				button{
-					text-align: left;
+					text-align: center;
+					width: 130px;
+					text-transform: capitalize;
+					font-size: 11px;
 					// width:100px;
 				}
 			}
@@ -293,7 +297,7 @@
 					content:'';
 					display: block;
 					border-bottom: 3px solid #0B63DC;
-					width:100%;
+					width:90%!important;
 					margin:auto;
 					padding-bottom: 5px;
 					margin-bottom: -8px;
@@ -304,7 +308,7 @@
 				color:$color-primary!important;
 				font-weight: 700!important;
 				line-height: 31px!important;
-				font-size: 21px!important;
+				font-size: 18px!important;
 			}
 
 			.nav-item.show .nav-link {

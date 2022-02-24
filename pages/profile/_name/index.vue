@@ -70,7 +70,8 @@
 			},
 
 			UserProfileData(){
-				if(this.token){					
+				if(this.token){
+					this.loading=true					
 					const url = `${this.api_url}/web/user`
 					this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
 					this.$axios.get(url)
@@ -83,6 +84,11 @@
 						this.maritals = data.statusPernikahan
 					})
 					.catch(err => console.log(err.response ? err.response : ''))
+					.finally(() => {
+						setTimeout(() => {
+							this.loading=false
+						},1500)
+					})
 				}
 			},
 
@@ -104,7 +110,9 @@
 				.catch(err => console.log(err))
 
 				.finally(() => {
-					this.loading=false
+					setTimeout(() => {
+						this.loading=false
+					}, 1500)
 				})
 			},
 
