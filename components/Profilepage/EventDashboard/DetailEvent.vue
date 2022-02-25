@@ -64,7 +64,7 @@
 								Loading...
 							</div>
 							<div v-else>
-								<mdb-btn disabled color="success" size="md" block> 
+								<mdb-btn disabled color="success" size="md" block class="text-white"> 
 									<mdb-icon icon="check" size="lg"/> {{status_pendaftaran}}
 								</mdb-btn>
 							</div>
@@ -77,6 +77,71 @@
 		</div>
 	</div>
 </template>
+
+<style lang="scss">
+	.event__detail-content{
+		.col-1{
+			.event__image-wrap{
+				img{
+					width:375px;
+					height: 370px;
+				}
+				position: relative;
+				.overlay__event-img {
+					position: absolute;
+					top: 0;
+					bottom: 0;
+					left: 0;
+					right: 0;
+					width: 355px;
+					height:375px;
+					opacity: 0;
+					transition: .3s ease;
+					background-color: rgba(205, 209, 228, 0.9);
+				}
+
+				&:hover .overlay__event-img {
+					opacity: 1;
+				}
+
+				.icon {
+					color: white;
+					font-weight: 700;
+					font-size: 100px;
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+					-ms-transform: translate(-50%, -50%);
+					text-align: center;
+				}
+
+				.fa-zoom:hover {
+					color: #eee;
+				}
+			}
+		}
+		.col-2{
+			h4{
+				font-size: 18px;
+				font-weight: 600;
+			}
+			h6{
+				font-size: 16px;
+				font-weight: 600;
+			}
+			.inside__first{
+				h5{
+					font-size: 14px;
+					font-weight: 600;
+				}
+				p{
+					font-size:12px;
+				}
+			}
+		}
+	}
+</style>
 
 <script>
 	export default{

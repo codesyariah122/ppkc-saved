@@ -20,7 +20,7 @@ export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     bodyAttrs: {
-      'class': 'd-flex flex-column min-vh-100'  
+      'class': 'docs-page'  
     },
     htmlAttrs: {
       lang: 'en',
@@ -109,7 +109,7 @@ export default {
     '~assets/scss/auth.scss',
     '~assets/scss/profile.scss',
     '~assets/scss/event-test.scss',
-    '~assets/scss/sidebar-event.scss'
+    '~assets/scss/docs-event.scss'
     ]
   },
 

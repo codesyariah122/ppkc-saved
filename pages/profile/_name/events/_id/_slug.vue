@@ -1,33 +1,143 @@
 <template>
-	<article>
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col">
-					<ProfilepageEventDashboardDetailEvent :details="details" :loading="loading" :status_pendaftaran="status_pendaftaran"/>
-				</div>
+	<div>
+		<div class="docs-wrapper">
+			<ProfilepageEventDashboardSidebar :loading="loading" :username="username" :pelatihans="pelatihans" :scrolledToBottom="scrolledToBottom" @show-field="ShowField" @toggle-file="ToggleFile"/>
+
+			<div class="docs-content">
+				<div class="container">
+
+					<!-- Sidebar Toggler -->
+					<MoleculesProfilePageTogglerSidebar/>
+
+					<article v-if="!show_file" class="docs-article mt-5" id="section-1">
+						<header  class="docs-header">
+							<section class="docs-intro">
+								<ProfilepageEventDashboardDetailEvent :details="details" :loading="loading" :status_pendaftaran="status_pendaftaran"/>
+							</section><!--//docs-intro-->
+						</header>
+
+						<section class="docs-section mt-2" id="item-1-1">
+							<div class="callout-block callout-block-info">
+								<div class="content">
+									<h2 class="callout-title">
+										<span class="callout-icon-holder me-1">
+											<i class="fas fa-info-circle"></i>
+										</span>
+										Welcome {{profiles.nama}}
+									</h2>
+									<p>
+										<strong>Selamat Datang di Dashboard Pelatihan PPKC</strong> <br>
+										Untuk mengakses materi pelatihan silahkan click/tap tombol menu pelatihan di sebelah kiri.
+									</p>
+								</div>
+							</div>
+						</section><!--//section-->
+
+					</article>
+
+					<article v-else class="docs-article mt-5" id="section-2">
+						<div v-if="loading_file">
+							<b-card>
+								<b-skeleton animation="throb" width="85%"></b-skeleton>
+								<b-skeleton animation="throb" width="55%"></b-skeleton>
+								<b-skeleton animation="throb" width="70%"></b-skeleton>
+							</b-card>
+						</div>
+
+						<div v-else>
+							<div v-if="type == 1" class="embed__file">
+								<header class="docs-header">
+									<section class="docs-intro">
+										<h5 class="type__name">{{type_name}}</h5>
+										<h2>{{detailed_data.title}}</h2>
+									</section><!--//docs-intro-->
+								</header>
+								<section class="docs-section mt-2" id="item-1-1">
+									<EventpageVideoSection :video="detailed.video"/>
+								</section>
+							</div>
+
+							<div v-else-if="type == 2" class="embed__file">
+								<header class="docs-header">
+									<section class="docs-intro">
+										<h5 class="type__name">{{type_name}}</h5>
+										<h2>{{detailed_data.title}}</h2>
+									</section><!--//docs-intro-->
+								</header>
+								<section class="docs-section mt-2" id="item-1-1">
+									<object :data="detailed.file_pdf" type="application/pdf" width="100%" :height="`${$device.isDesktop ? '800px' : '600px'}`">
+									</object>
+								</section>
+							</div>
+
+							<div v-else-if="type == 3" class="embed__file">
+								<header class="docs-header">
+									<section class="docs-intro">
+										<h5 class="type__name">{{type_name}}</h5>
+										<h2>{{detailed_data.title}}</h2>
+									</section><!--//docs-intro-->
+								</header>
+								<section class="docs-section mt-2" id="item-1-1">
+									<EventTestPreTest :id_test="id_test" :type_name="type_name" :token="token" :api_url="api_url"/>
+								</section>
+							</div>
+
+							<div v-else-if="type == 4" class="embed__file">
+								<header class="docs-header">
+									<section class="docs-intro">
+										<h5 class="type__name">{{type_name}}</h5>
+										<h2>{{detailed_data.title}}</h2>
+									</section><!--//docs-intro-->
+								</header>
+								<section class="docs-section mt-2" id="item-1-1">
+									<EventTestPostTest :id_test="id_test" :type_name="type_name" :token="token" :api_url="api_url"/>
+								</section>
+							</div>
+
+							<div v-else-if="type == 5" class="embed__file">
+								<header class="docs-header">
+									<section class="docs-intro">
+										<h5 class="type__name">{{type_name}}</h5>
+										<h2>{{detailed_data.title}}</h2>
+									</section><!--//docs-intro-->
+								</header>
+								<section class="docs-section mt-2" id="item-1-1">
+									<object :data="detailed.file_pdf" type="application/pdf" width="100%" :height="`${$device.isDesktop ? '800px' : '600px'}`">
+									</object>
+								</section>
+							</div>
+
+							<div v-else-if="type == 6" class="embed__file">
+								<header class="docs-header">
+									<section class="docs-intro">
+										<h5 class="type__name">{{type_name}}</h5>
+										<h2>{{detailed_data.title}}</h2>
+									</section><!--//docs-intro-->
+								</header>
+								<section class="docs-section mt-2" id="item-1-1">
+									<EventWebinar :id_webinar="id_webinar" :token="token" :api_url="api_url"/>
+								</section>
+							</div>
+						</div>
+					</article>
+
+					<footer class="footer mt-5">
+						<div class="container text-center py-5">
+							<small class="copyright">Template Copyright &copy; <a href="https://new.ppkc-online.com" target="_blank">PPKC Caroulus</a></small>
+							<ul class="social-list list-unstyled pt-4 mb-0">
+								<li class="list-inline-item"><a href="#"><i class="fab fa-github fa-fw"></i></a></li> 
+								<li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
+								<li class="list-inline-item"><a href="#"><i class="fab fa-slack fa-fw"></i></a></li>
+								<li class="list-inline-item"><a href="#"><i class="fab fa-product-hunt fa-fw"></i></a></li>
+								<li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f fa-fw"></i></a></li>
+								<li class="list-inline-item"><a href="#"><i class="fab fa-instagram fa-fw"></i></a></li>
+							</ul><!--//social-list-->
+						</div>
+					</footer>
+				</div> 
 			</div>
-			<div :class="`row ${scrolledToBottom ? 'fixed-content': ''}`">
-				<div class="col-4">
-
-					<ProfilepageEventDashboardSidebar :profiles="profiles" :loading="loading" :username="username" :pelatihans="pelatihans" :scrolledToBottom="scrolledToBottom" @show-field="ShowField" @toggle-file="ToggleFile"/>
-
-				</div>
-				<div class="col-8">
-					<div v-if="loading">
-						<b-card>
-							<b-skeleton animation="wave" width="85%"></b-skeleton>
-							<b-skeleton animation="wave" width="55%"></b-skeleton>
-							<b-skeleton animation="wave" width="70%"></b-skeleton>
-						</b-card>
-					</div>
-					<div v-else class="content-section">
-						<h2>Content Section</h2>
-					</div>
-				</div>
-			</div>
-		</div>
-	</article>
-
+		</div><!--//docs-wrapper-->
+	</div>
 </template>
 
 <script>
@@ -47,6 +157,7 @@
 				status_pendaftaran: '',
 				empty_filter: false,
 				loading: null,
+				loading_file:null,
 				show_file:false,
 				pelatihans: [],
 				kegiataan: [],
@@ -92,11 +203,11 @@
 					let bottomOfWindow = window.pageYOffset
 
 					if (bottomOfWindow > 220) {
-				        this.scrolledToBottom = true
-				    }else{
-				    	this.scrolledToBottom = false
-				    }
-			 	}
+						this.scrolledToBottom = true
+					}else{
+						this.scrolledToBottom = false
+					}
+				}
 			},
 
 			IsLoggedIn(){
@@ -184,7 +295,8 @@
 				})
 			},
 			ShowField(raw, id_kategori='', type){
-				this.loading = true
+				console.log("OKKKk")
+				this.loading_file = true
 				this.show_file = true
 				this.show_close = true
 				this.detailed_data = raw
@@ -223,7 +335,7 @@
 				this.id_test = id_kategori
 				this.id_webinar = id_kategori
 				setTimeout(() => {
-					this.loading = false
+					this.loading_file = false
 				}, 900)
 			},
 

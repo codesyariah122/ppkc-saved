@@ -1,12 +1,26 @@
 <template>
 	<div>
-		<!-- <LayoutsNavigation :token="token" :profiles="profiles" :slug="slug" :event_id="data_event_path.event_id" :event_path="data_event_path.event_path" :style="style"/> -->
+		
+		<LayoutsNavigation :token="token" :profiles="profiles" :slug="slug" :event_id="data_event_path.event_id" :event_path="data_event_path.event_path" :style="style"/>
 
 		<Nuxt/>
 
 	</div>
 </template>
 
+<style lang="scss">
+	.navbar-collapse{
+		.navbar-nav{
+			.nav-item{
+				.nav-link{
+					a{
+						text-decoration: none!important;
+					}
+				}
+			}
+		}
+	}
+</style>
 
 <script>
 	export default {
@@ -29,7 +43,13 @@
 		head:{
 			link: [
 				{ rel: 'stylesheet', type: 'text/css', href: '/assets/glightbox/glightbox.min.css'},
-				{ rel: 'stylesheet', type: 'text/css', href: '/assets/venobox/dev/venobox.min.css'}
+				{ rel: 'stylesheet', type: 'text/css', href: '/assets/venobox/dev/venobox.min.css'},
+				{ rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap'},
+				{ rel: 'stylesheet', href: ''},
+				{ rel: 'stylesheet', href: '/assets/docs/bootstrap/css/bootstrap.min.css'},
+				{ rel: 'stylesheet', href: '//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.2/styles/atom-one-dark.min.css'},
+				{ rel: 'stylesheet', href: '/assets/docs/plugins/simplelightbox/simple-lightbox.min.css'},
+				{ rel: 'stylesheet', href: '/assets/docs/css/theme.css'}
 			],
 			
 			script: [
@@ -39,6 +59,39 @@
 				},
 				{
 					src: '/assets/venobox/dev/venobox.min.js',
+					type: 'text/javascript'
+				},
+				{
+					src: '/assets/docs/plugins/popper.min.js',
+					type: 'text/javascript'
+				},
+				{
+					src: '/assets/docs/fontawesome/js/all.min.js',
+					type: 'text/javascript'
+				},
+				{
+					src: '/assets/docs/plugins/bootstrap/js/bootstrap.min.js',
+					type: 'text/javascript'
+				},
+				{
+					src: '/assets/docs/plugins/smoothscroll.min.js',
+					type: 'text/javascript'
+				},
+				
+				{
+					src: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js',
+					type: 'text/javascript'
+				},
+				{
+					src: '/assets/docs/js/highlight-custom.js',
+					type: 'text/javascript'
+				},
+				{
+					src: '/assets/docs/plugins/simplelightbox/simple-lightbox.min.js',
+					type: 'text/javascript'
+				},
+				{
+					src: '/assets/docs/plugins/gumshoe/gumshoe.polyfills.min.js',
 					type: 'text/javascript'
 				}
 			]

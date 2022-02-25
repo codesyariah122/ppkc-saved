@@ -1,78 +1,57 @@
 <template>
-	<div class="sidebar-item">
-		<div :class="`${scrolledToBottom ? 'fixed-sidebar': ''}`">
-			<div v-for="(item, index) in pelatihans" :key="item.id">
-				<b-button v-b-toggle="`collapse-${item.id}`" class="btn__pelatihan shadow-none" @click="ToggleFile">
-					<mdb-row class="row justify-content-between">
-						<mdb-col md="8">  
-							{{item.title}}
-						</mdb-col>
-						<mdb-col md="1">
-							<mdb-icon :icon="`${show_collapse == false ? 'plus-circle' : 'minus-circle'}`" size="lg"/>
-						</mdb-col>
-					</mdb-row>
-				</b-button>
+	<div id="docs-sidebar" class="docs-sidebar">
+		<nav id="docs-nav" class="docs-nav navbar shadow-none">
+			<ul class="section-items list-unstyled nav flex-column pb-3">
+				<li class="nav-item__sidebar section-title"><a class="nav-link__sidebar scrollto active" href="#section-1"><span class="theme-icon-holder me-2"><i class="fas fa-map-signs"></i></span>Introduction</a></li>
+				<li class="nav-item__sidebar"><a class="nav-link__sidebar scrollto" href="#item-1-1">Section Item 1.1</a></li>
+				<b-dropdown-divider style="list-style: none;margin-top: .5rem;"></b-dropdown-divider>
+				<div v-for="(item, index) in pelatihans" :key="item.id" class="collapse__docs">
+					<b-button v-b-toggle="`collapse-${item.id}`" class="btn__pelatihan shadow-none nav-item__sidebar section-title" @click="ToggleFile">
+						<mdb-row class="row justify-content-between">
+							<mdb-col md="9">  
+								{{item.title}}
+							</mdb-col>
+							<mdb-col md="1">
+								<mdb-icon :icon="`${show_collapse == false ? 'plus-circle' : 'minus-circle'}`" size="lg"/>
+							</mdb-col>
+						</mdb-row>
+					</b-button>
 
-				<b-collapse :id="`collapse-${item.id}`" class="collapse__category-event mb-3 shadow-none">
-					<b-card class="shadow-none">
-						<div v-for="(c, index) in item.categories"  :key="c.id">
-							<div v-for="(d, index) in c.details" :key="d.id">
-								<b-list-group class="list__modul">
-									<b-list-group-item id="navbar__event-detail">
-										<mdb-icon :icon="FilterIcon(d.kategori)"/>&nbsp; <a class="font-weight-bold link__text" :href="`#item-${d.kategori}`" @click="ShowField(d, d.kategori == 3 || d.kategori == 4 || d.kategori == 6 ? d.id : d.kategori, d.kategori)">
-											{{d.title}}
-										</a>
-									</b-list-group-item>
-								</b-list-group>
-							</div>
-						</div>
-					</b-card>
-				</b-collapse>
-			</div>
-			<div class="col-lg-12 mt-3">
-				<div class="row profile__collapse">
-					<div class="col-md-3">
-						<img v-if="profiles.photo !== 'https://api.ppkc-online.com/image-profiles/null'" :src="profiles.photo" class="img-fluid image rounded-circle"/>
-						<img v-else src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="img-fluid image rounded-circle">
-					</div>
-					<div class="col-md-5">
-						<b-button v-b-toggle="'collapse-2'" class="m-1 shadow-none"> 
-							<div class="row justify-content-between">
-								<div class="col-md-9">
-									{{profiles.nama}} 
-								</div>
-								<div class="col-sm-1">
-									<mdb-icon icon="angle-down" size="lg"/>
+					<b-collapse :id="`collapse-${item.id}`" class="collapse__category-event mb-3 shadow-none">
+						<b-card class="shadow-none">
+							<div v-for="(c, index) in item.categories"  :key="c.id">
+								<div v-for="(d, index) in c.details" :key="d.id">
+									<b-list-group class="list__modul">
+										<b-list-group-item class="list-unstyled" @click="ShowField(d, d.kategori == 3 || d.kategori == 4 || d.kategori == 6 ? d.id : d.kategori, d.kategori)">
+											<mdb-icon :icon="FilterIcon(d.kategori)"/>&nbsp; <a class="font-weight-bold link__text" :href="`#item-${d.kategori}`" @click="ShowField(d, d.kategori == 3 || d.kategori == 4 || d.kategori == 6 ? d.id : d.kategori, d.kategori)">
+												{{d.title}}
+											</a>
+										</b-list-group-item>
+									</b-list-group>
 								</div>
 							</div>
-						</b-button>
-						<b-collapse id="collapse-2" class="shadow-none">
-							<b-card class="shadow-none">
-								<ul>
-									<li>
-										<nuxt-link :to="`/profile/${username}`"><mdb-icon icon="user-md" size="md"/> Profile</nuxt-link>
-									</li>
-									<li>
-										<a href="#!" @click="LogoutProfile"><mdb-icon icon="sign-out-alt" size="md"/> Logout</a>
-									</li>
-								</ul>
-							</b-card>
-						</b-collapse>
-					</div>
+						</b-card>
+					</b-collapse>
 				</div>
-			</div>
-		</div>
-	</div>
+			</ul>
+
+		</nav><!--//docs-nav-->
+	</div><!--//docs-sidebar-->
 </template>
 
 <script>
 	export default {
-		props: ['pelatihans', 'profiles', 'username', 'loading', 'scrolledToBottom'],
+		props: ['pelatihans', 'profiles', 'username', 'loading', 'scrolledToBottom', 'details'],
 
 		data(){
 			return {
 				show_collapse: false
 			}
+		},
+
+		mounted(){
+			this.SetupSidebar(),
+			this.SidebarLink()
 		},
 
 		methods: {
@@ -139,7 +118,64 @@
 						}, 900)
 					}
 				})
-			}
+			},
+
+			SetupSidebar(){
+				const sidebar = document.getElementById('docs-sidebar');
+				let w = window.innerWidth;
+				window.onload=function() 
+				{ 
+					if(w >= 1200) {
+						console.log('larger');
+						sidebar.classList.remove('sidebar-hidden');
+						sidebar.classList.add('sidebar-visible');
+
+					} else {
+						console.log('smaller');
+						sidebar.classList.remove('sidebar-visible');
+						sidebar.classList.add('sidebar-hidden');
+					} 
+				}
+
+				window.onresize=function() 
+				{ 
+					if(w >= 1200) {
+						console.log('larger');
+						sidebar.classList.remove('sidebar-hidden');
+						sidebar.classList.add('sidebar-visible');
+
+					} else {
+						console.log('smaller');
+						sidebar.classList.remove('sidebar-visible');
+						sidebar.classList.add('sidebar-hidden');
+					} 
+				}
+				
+			},
+
+			SidebarLink(){
+				const sidebarLinks = document.querySelectorAll('#docs-sidebar .scrollto');
+				sidebarLinks.forEach((sidebarLink) => {
+					sidebarLink.addEventListener('click', (e) => {
+						console.log(e)
+
+						e.preventDefault();
+
+						var target = sidebarLink.getAttribute("href").replace('#', '');
+						var sidebar = document.getElementById('docs-sidebar');
+
+						document.getElementById(target).scrollIntoView({ behavior: 'smooth' });
+						if (sidebar.classList.contains('sidebar-visible') && window.innerWidth < 1200){
+
+							sidebar.classList.remove('sidebar-visible');
+							sidebar.classList.add('sidebar-hidden');
+						} 
+
+					});
+
+				});
+			},
+
 		}
 	}
 </script>
