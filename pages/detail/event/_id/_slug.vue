@@ -7,7 +7,7 @@
 					<EventpageLoginDetailEvent :loading="loading" :details="details" :data_event="data_event" :status_pendaftaran="status_pendaftaran" :token="token" @registrasi-event="RegistrasiEvent" :profiles="profiles"/>
 				</mdb-col>
 				<mdb-col v-else lg="12">
-					<EventpageDetailEventNoAuth :events="events" />
+					<EventpageDetailEventNoAuth :events="events" :loading="loading"/>
 				</mdb-col>
 			</mdb-row>
 			
@@ -92,6 +92,7 @@
 			CheckLogout(){
 				this.$store.dispatch('config/getProfileLogout', 'logout')
 			},
+
 			DetailEventProfileLogin(){
 				if(this.token.accessToken){
 					const url = `${this.api_url}/web/event/${this.$route.params.id}`

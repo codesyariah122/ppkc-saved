@@ -1,16 +1,33 @@
 <template>
 	<div>
 		<b-card v-if="loading">
-			<b-skeleton animation="wave" width="85%"></b-skeleton>
-			<b-skeleton animation="wave" width="55%"></b-skeleton>
-			<b-skeleton animation="wave" width="70%"></b-skeleton>
+			<b-row>
+				<b-col cols="2">
+					<b-skeleton type="avatar"></b-skeleton>
+				</b-col>
+				<b-col cols="4">
+					<b-skeleton animation="wave" width="85%"></b-skeleton>
+					<b-skeleton animation="wave" width="55%"></b-skeleton>
+					<b-skeleton animation="wave" width="70%"></b-skeleton>
+				</b-col>
+				<b-col cols="6">
+					<b-row>
+						<b-col cols="3">
+							<b-skeleton animation="wave" width="85%"></b-skeleton>
+						</b-col>
+						<b-col cols="3">
+							<b-skeleton animation="wave" width="55%"></b-skeleton>
+						</b-col>
+					</b-row>				
+				</b-col>
+			</b-row>
 		</b-card>
 
 		<b-card v-else>
 			<mdb-container class="profile__info-data">	
 
 				<mdb-row class="d-flex justify-content-between">
-			
+
 					<mdb-col md="4" class="col__img-profile">
 						<div class="hover__image-wrap">
 							<img v-if="profiles.photo !== 'https://api.ppkc-online.com/image-profiles/null'" :src="profiles.photo" class="img-fluid image rounded-circle"/>

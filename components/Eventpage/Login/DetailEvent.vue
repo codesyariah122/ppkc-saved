@@ -3,9 +3,16 @@
 		<mdb-row v-if="loading" col="12" class="mt-5">
 			<mdb-col lg="12">
 				<b-card>
-					<b-skeleton animation="wave" width="85%"></b-skeleton>
-					<b-skeleton animation="wave" width="55%"></b-skeleton>
-					<b-skeleton animation="wave" width="70%"></b-skeleton>
+					<b-row>
+						<b-col cols="4">
+							<b-skeleton-img></b-skeleton-img>
+						</b-col>
+						<b-col cols="8">							
+							<b-skeleton animation="wave" width="85%"></b-skeleton>
+							<b-skeleton animation="wave" width="55%"></b-skeleton>
+							<b-skeleton animation="wave" width="70%"></b-skeleton>
+						</b-col>
+					</b-row>
 				</b-card>
 			</mdb-col>
 		</mdb-row>

@@ -72,13 +72,20 @@
               </mdb-dropdown-item>
             </mdb-dropdown-menu>
           </mdb-dropdown>
-          <mdb-btn
-            v-else
-            @click="GoToLogin"
-            class="my__btn-primary ml-4 rounded"
+          <div v-else>
+            <a v-if="path == '/auth/login'"
+            href="/auth/registrasi"
+            class="my__btn-primary ml-4 rounded btn btn-primary"
             size="md"
-            >Masuk</mdb-btn
-          >
+            >Daftar</a
+            >
+            <a v-else
+            href="/auth/login"
+            class="my__btn-primary ml-4 rounded btn btn-primary"
+            size="md"
+            >Masuk</a
+            >
+          </div>
           <!-- end check -->
         </mdb-navbar-toggler>
       </mdb-container>
@@ -105,11 +112,13 @@ export default {
         { id: 7, name: "Fasilitator", link: "/ppkc/fasilitator" },
         { id: 8, name: "Yayasan & Direksi", link: "/ppkc/yayasan-direksi" },
       ],
+      path: this.$route.path
     };
   },
 
   mounted() {
-    console.log(this.event_id ? this.event_id : "-");
+    console.log(this.event_id ? this.event_id : "-"),
+    console.log(this.path)
   },
 
   methods: {
@@ -127,6 +136,10 @@ export default {
       } else {
         this.$router.push({ name: "auth-login" });
       }
+    },
+
+    GoToRegistrasi(){
+      this.$router.push({ name: "auth-registrasi" });
     },
 
     SetEventLogin(data) {

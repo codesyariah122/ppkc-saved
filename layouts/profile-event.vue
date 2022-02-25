@@ -46,9 +46,7 @@
 				{ rel: 'stylesheet', type: 'text/css', href: '/assets/venobox/dev/venobox.min.css'},
 				{ rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap'},
 				{ rel: 'stylesheet', href: ''},
-				{ rel: 'stylesheet', href: '/assets/docs/bootstrap/css/bootstrap.min.css'},
 				{ rel: 'stylesheet', href: '//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.2/styles/atom-one-dark.min.css'},
-				{ rel: 'stylesheet', href: '/assets/docs/plugins/simplelightbox/simple-lightbox.min.css'},
 				{ rel: 'stylesheet', href: '/assets/docs/css/theme.css'}
 			],
 			
@@ -78,18 +76,6 @@
 					type: 'text/javascript'
 				},
 				
-				{
-					src: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js',
-					type: 'text/javascript'
-				},
-				{
-					src: '/assets/docs/js/highlight-custom.js',
-					type: 'text/javascript'
-				},
-				{
-					src: '/assets/docs/plugins/simplelightbox/simple-lightbox.min.js',
-					type: 'text/javascript'
-				},
 				{
 					src: '/assets/docs/plugins/gumshoe/gumshoe.polyfills.min.js',
 					type: 'text/javascript'

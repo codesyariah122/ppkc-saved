@@ -1,9 +1,14 @@
 <template>
 	<div id="docs-sidebar" class="docs-sidebar">
-		<nav id="docs-nav" class="docs-nav navbar shadow-none">
+		<div v-if="loading">
+			<b-skeleton animation="throb" width="85%"></b-skeleton>
+			<b-skeleton animation="throb" width="55%"></b-skeleton>
+			<b-skeleton animation="throb" width="70%"></b-skeleton>
+		</div>
+		<nav v-else id="docs-nav" class="docs-nav navbar shadow-none">
 			<ul class="section-items list-unstyled nav flex-column pb-3">
 				<li class="nav-item__sidebar section-title"><a class="nav-link__sidebar scrollto active" href="#section-1"><span class="theme-icon-holder me-2"><i class="fas fa-map-signs"></i></span>Introduction</a></li>
-				<li class="nav-item__sidebar"><a class="nav-link__sidebar scrollto" href="#item-1-1">Section Item 1.1</a></li>
+				<li class="nav-item__sidebar"><a class="nav-link__sidebar scrollto" href="#item-1-1">Section Item</a></li>
 				<b-dropdown-divider style="list-style: none;margin-top: .5rem;"></b-dropdown-divider>
 				<div v-for="(item, index) in pelatihans" :key="item.id" class="collapse__docs">
 					<b-button v-b-toggle="`collapse-${item.id}`" class="btn__pelatihan shadow-none nav-item__sidebar section-title" @click="ToggleFile">

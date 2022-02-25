@@ -17,7 +17,14 @@
 						</header>
 
 						<section class="docs-section mt-2" id="item-1-1">
-							<div class="callout-block callout-block-info">
+							<div v-if="loading" class="mb-5">
+								<b-card>
+									<b-skeleton animation="wave" width="85%"></b-skeleton>
+									<b-skeleton animation="wave" width="55%"></b-skeleton>
+									<b-skeleton animation="wave" width="70%"></b-skeleton>
+								</b-card>
+							</div>
+							<div v-else class="callout-block callout-block-info">
 								<div class="content">
 									<h2 class="callout-title">
 										<span class="callout-icon-holder me-1">
@@ -48,19 +55,28 @@
 							<div v-if="type == 1" class="embed__file">
 								<header class="docs-header">
 									<section class="docs-intro">
-										<h5 class="type__name">{{type_name}}</h5>
+										<mdb-badge color="primary" class="mb-2">{{type_name}}</mdb-badge>
 										<h2>{{detailed_data.title}}</h2>
 									</section><!--//docs-intro-->
 								</header>
 								<section class="docs-section mt-2" id="item-1-1">
-									<EventpageVideoSection :video="detailed.video"/>
+									<div v-if="link_yt">
+										<center>
+											<b-col cols="12" class="mt-3">
+												<b-skeleton-img no-aspect height="150px"></b-skeleton-img>
+											</b-col>
+										</center>
+									</div>
+									<div v-else>
+										<EventpageVideoSection :video="detailed.video"/>
+									</div>
 								</section>
 							</div>
 
 							<div v-else-if="type == 2" class="embed__file">
 								<header class="docs-header">
 									<section class="docs-intro">
-										<h5 class="type__name">{{type_name}}</h5>
+										<mdb-badge color="primary" class="mb-2">{{type_name}}</mdb-badge>
 										<h2>{{detailed_data.title}}</h2>
 									</section><!--//docs-intro-->
 								</header>
@@ -73,11 +89,11 @@
 							<div v-else-if="type == 3" class="embed__file">
 								<header class="docs-header">
 									<section class="docs-intro">
-										<h5 class="type__name">{{type_name}}</h5>
+										<mdb-badge color="success" class="mb-2">{{type_name}}</mdb-badge>
 										<h2>{{detailed_data.title}}</h2>
 									</section><!--//docs-intro-->
 								</header>
-								<section class="docs-section mt-2" id="item-1-1">
+								<section class="docs-section" id="item-1-1">
 									<EventTestPreTest :id_test="id_test" :type_name="type_name" :token="token" :api_url="api_url"/>
 								</section>
 							</div>
@@ -85,11 +101,11 @@
 							<div v-else-if="type == 4" class="embed__file">
 								<header class="docs-header">
 									<section class="docs-intro">
-										<h5 class="type__name">{{type_name}}</h5>
+										<mdb-badge color="success" class="mb-2">{{type_name}}</mdb-badge>
 										<h2>{{detailed_data.title}}</h2>
 									</section><!--//docs-intro-->
 								</header>
-								<section class="docs-section mt-2" id="item-1-1">
+								<section class="docs-section" id="item-1-1">
 									<EventTestPostTest :id_test="id_test" :type_name="type_name" :token="token" :api_url="api_url"/>
 								</section>
 							</div>
@@ -97,7 +113,7 @@
 							<div v-else-if="type == 5" class="embed__file">
 								<header class="docs-header">
 									<section class="docs-intro">
-										<h5 class="type__name">{{type_name}}</h5>
+										<mdb-badge color="primary" class="mb-2">{{type_name}}</mdb-badge>
 										<h2>{{detailed_data.title}}</h2>
 									</section><!--//docs-intro-->
 								</header>
@@ -110,7 +126,7 @@
 							<div v-else-if="type == 6" class="embed__file">
 								<header class="docs-header">
 									<section class="docs-intro">
-										<h5 class="type__name">{{type_name}}</h5>
+										<mdb-badge color="info" class="mb-2">{{type_name}}</mdb-badge>
 										<h2>{{detailed_data.title}}</h2>
 									</section><!--//docs-intro-->
 								</header>
@@ -175,6 +191,7 @@
 				id_test: '',
 				id_webinar: '',
 				type_name: '',
+				link_yt: '',
 				show_close: false,
 				scrolledToBottom:false,
 				hideHeader: false
@@ -329,7 +346,9 @@
 					obj[key] = raw[key];
 					return obj;
 				}, {});
-				const format_yt  = this.detailed.video ? this.$ytString(this.detailed.video) : ''
+				const yt_link  = this.detailed.video ? this.$ytString(this.detailed.video) : ''
+				this.link_yt = yt_link ? true : false
+
 				this.type = type
 				this.FileType(type)
 				this.id_test = id_kategori
@@ -337,6 +356,9 @@
 				setTimeout(() => {
 					this.loading_file = false
 				}, 900)
+				setTimeout(() => {
+					this.link_yt = false
+				}, 1500)
 			},
 
 			UserProfileData(){

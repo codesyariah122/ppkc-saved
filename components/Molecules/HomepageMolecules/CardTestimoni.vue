@@ -1,8 +1,8 @@
 <template>
 	<div>
     <!-- Testimoni content -->
-    <mdb-row>
-      <mdb-col v-if="testiIndex <= lists.length" v-for="testiIndex in testiToShow" col="12" md="6" :key="lists[testiIndex-1].id">
+    <mdb-row col="12">
+      <mdb-col v-if="testiIndex <= lists.length" v-for="testiIndex in testiToShow" md="6" :key="lists[testiIndex-1].id">
         <mdb-card class="card__testimoni-content">
           <mdb-container class="mt-4 mb-2">
             <blockquote class="post__quote"> 

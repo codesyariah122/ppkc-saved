@@ -344,22 +344,28 @@
 // Desktop
 @media (min-width: 992px) {
 	.berita__list{
+		width: 100%;
 		background-image: linear-gradient(to bottom left, $bg-primary, $bg-second-primary);
-
+		height: auto;
 		@include header_inside_list_desktop($default);
-		.col__berita{
+		.card__berita-list{
+			margin-right: -15rem;
+			margin-left: -10rem;
+			border-radius:8px!important;
 			.card{
-				margin-top: 2rem;
-				filter: drop-shadow(5px 5px 10px $bg-fourt);
-				width: 317px;
-				img{
-					max-width: 317px;
-					// height: 200px;
-					object-fit: contain;
+				.card-title{
+					color:$color-primary;
+					font-weight: 600;
 				}
-				@include card_rounded_desktop;
+				max-width: 300px;
+				height: 330px;
+				border-radius:8px;
+				img{
+					border-radius:8px!important;
+				}
 			}
 		}
+
 	}
 }
 // End berita component

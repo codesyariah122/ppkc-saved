@@ -1,7 +1,7 @@
 <template>
 	<div class="berita__list">
 		<mdb-container>
-			<mdb-row class="row justify-content-between">
+			<mdb-row class="justify-content-between" col="12">
 				<!-- colomn header berita -->
 				<mdb-col class="header__inside-content" md="3">
 					<h1 class="mb-3">Berita</h1>
@@ -16,7 +16,7 @@
 				</mdb-col>
 
 				<!-- column card berita -->
-				<mdb-col class="col__berita mt-3 mb-5" md="9">
+				<mdb-col col="12" class="col__berita mt-3 mb-3" md="9">
 					<!-- Card berita components -->
 					<CardBerita :lists="lists" ref="childBerita"/>	
 				</mdb-col>
