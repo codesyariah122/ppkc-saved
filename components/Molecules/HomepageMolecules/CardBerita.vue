@@ -2,7 +2,7 @@
 	<div>
 		<mdb-row col="12" class="slider__berita">
 
-			<mdb-col v-if="listsIndex <= lists.length" v-for="listsIndex in listsToShow" md="5" class="card__berita-list">
+			<mdb-col v-if="listsIndex <= lists.length" v-for="listsIndex in listsToShow" md="5" class="card__berita-list"  :key="lists[listsIndex-1].id">
 				<mdb-card>
 					<mdb-card-image :src="lists[listsIndex-1].foto_url" alt="Card image cap"></mdb-card-image>
 					<mdb-card-body>

@@ -10,6 +10,7 @@
 <script>
 	export default{
 		props: ['token', 'profiles', 'slug', 'event_id', 'event_path'],
+		
 
 		methods: {
 			LogoutProfile(){

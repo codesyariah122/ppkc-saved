@@ -33,9 +33,9 @@
 					<mdb-dropdown-toggle tag="a" navLink slot="toggle" size="md"><mdb-icon far icon="user-circle" /> Profile</mdb-dropdown-toggle>
 					<mdb-dropdown-menu>
 						<mdb-dropdown-item>
-							<nuxt-link :to="{name: 'profile-name', params: {name: $username(slug)}}" class="text-center">
-								<mdb-icon icon="user-md" /> {{profiles.nama}}
-							</nuxt-link>
+							<a :href="`/profile/${$username(slug)}`" class="text-center">
+								<mdb-icon icon="user-md" /> {{ profiles.nama }}
+							</a>
 						</mdb-dropdown-item>
 						<div class="dropdown-divider"></div>
 						<mdb-dropdown-item @click="Logout" class="text-center">

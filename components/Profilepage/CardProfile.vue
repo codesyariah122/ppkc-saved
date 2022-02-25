@@ -28,7 +28,7 @@
 
 				<mdb-row class="d-flex justify-content-between">
 
-					<mdb-col md="4" class="col__img-profile">
+					<mdb-col md="3" class="col__img-profile">
 						<div class="hover__image-wrap">
 							<img v-if="profiles.photo !== 'https://api.ppkc-online.com/image-profiles/null'" :src="profiles.photo" class="img-fluid image rounded-circle"/>
 							<img v-else src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="img-fluid image rounded-circle">
@@ -39,7 +39,7 @@
 							</div>
 						</div>
 					</mdb-col>
-					<mdb-col md="4" class="col__data-profile">
+					<mdb-col md="5" class="col__data-profile">
 						<h4>{{profiles.nama}}</h4>
 						<ul>
 							<li class="mb-2"> 

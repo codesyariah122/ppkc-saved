@@ -10,6 +10,11 @@
 	.nav-link {
 		@include navbar_desktop;
 	}
+	.dropdown-menu{
+		a{
+			text-decoration: none;
+		}
+	}
 	.my__btn-primary{
 		@include button_primary;
 	}

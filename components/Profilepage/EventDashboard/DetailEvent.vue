@@ -20,7 +20,7 @@
 					<div class="event__image-wrap">
 						<img :src="details.photo" class="rounded image img-fluid" width="300">
 						<div class="overlay__event-img">
-							<a :data-gall="details.photo" :href="details.photo" class="event-profile icon" :title="details.kegiatan_title">
+							<a :data-gall="details.photo" :href="details.photo" class="event__detail-profile icon" :title="details.kegiatan_title">
 								<mdb-icon icon="search-plus" />
 							</a>
 						</div>
@@ -154,14 +154,14 @@
 	export default{
 		props: ['details', 'loading', 'status_pendaftaran'],
 
-		beforeMount(){
+		mounted(){
 			this.VenoBox()
 		},
 
 		methods: {
 			VenoBox(){
 				new VenoBox({
-					selector: '.event-profile',
+					selector: '.event__detail-profile',
 					numeration: true,
 					infinigall: true,
 					share: ['facebook', 'twitter', 'linkedin', 'pinterest', 'download'],

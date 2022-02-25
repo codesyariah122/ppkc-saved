@@ -22,7 +22,7 @@
 				<div class="event__image-wrap">
 					<img :src="details.photo" class="rounded image">
 					<div class="overlay__event-img">
-						<a :data-gall="details.photo" :href="details.photo" class="event-details icon" :title="details.kegiatan_title">
+						<a :data-gall="details.photo" :href="details.photo" class="event__details-login icon" :title="details.kegiatan_title">
 							<mdb-icon icon="search-plus" />
 						</a>
 					</div>
@@ -142,7 +142,7 @@
 
 			VenoBox(){
 				new VenoBox({
-					selector: '.event-details',
+					selector: '.event__details-login',
 					numeration: true,
 					infinigall: true,
 					share: ['facebook', 'twitter', 'linkedin', 'pinterest', 'download'],

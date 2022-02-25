@@ -56,7 +56,7 @@
             </mdb-dropdown-toggle>
             <mdb-dropdown-menu>
               <mdb-dropdown-item>
-                <nuxt-link
+                <!-- <nuxt-link
                   :to="{
                     name: 'profile-name',
                     params: { name: $username(slug) },
@@ -64,7 +64,10 @@
                   class="text-center"
                 >
                   <mdb-icon icon="user-md" /> {{ profiles.nama }}
-                </nuxt-link>
+                </nuxt-link> -->
+                <a :href="`/profile/${$username(slug)}`" class="text-center">
+                  <mdb-icon icon="user-md" /> {{ profiles.nama }}
+                </a>
               </mdb-dropdown-item>
               <div class="dropdown-divider"></div>
               <mdb-dropdown-item @click="Logout" class="text-center">
@@ -116,10 +119,6 @@ export default {
     };
   },
 
-  mounted() {
-    console.log(this.event_id ? this.event_id : "-"),
-    console.log(this.path)
-  },
 
   methods: {
     Logout() {

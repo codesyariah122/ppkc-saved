@@ -30,11 +30,11 @@
 										<span class="callout-icon-holder me-1">
 											<i class="fas fa-info-circle"></i>
 										</span>
-										Welcome {{profiles.nama}}
+										{{ucapan}} {{profiles.nama}}
 									</h2>
 									<p>
 										<strong>Selamat Datang di Dashboard Pelatihan PPKC</strong> <br>
-										Untuk mengakses materi pelatihan silahkan click/tap tombol menu pelatihan di sebelah kiri.
+										Untuk mengakses materi pelatihan silahkan click /tap tombol humberger menu <mdb-icon icon="bars" class="text-primary" size="lg" style="color: blue!important;" />, kemudian akan muncul slide menu pelatihan yang anda ikuti dari sebelah kiri.
 									</p>
 								</div>
 							</div>
@@ -81,7 +81,7 @@
 									</section><!--//docs-intro-->
 								</header>
 								<section class="docs-section mt-2" id="item-1-1">
-									<object :data="detailed.file_pdf" type="application/pdf" width="100%" :height="`${$device.isDesktop ? '800px' : '600px'}`">
+									<object :data="detailed.file_pdf" type="application/pdf" width="100%" :height="`${$device.isDesktop ? '900px' : '600px'}`">
 									</object>
 								</section>
 							</div>
@@ -118,7 +118,7 @@
 									</section><!--//docs-intro-->
 								</header>
 								<section class="docs-section mt-2" id="item-1-1">
-									<object :data="detailed.file_pdf" type="application/pdf" width="100%" :height="`${$device.isDesktop ? '800px' : '600px'}`">
+									<object :data="detailed.file_pdf" type="application/pdf" width="100%" :height="`${$device.isDesktop ? '900px' : '600px'}`">
 									</object>
 								</section>
 							</div>
@@ -131,7 +131,10 @@
 									</section><!--//docs-intro-->
 								</header>
 								<section class="docs-section mt-2" id="item-1-1">
-									<EventWebinar :id_webinar="id_webinar" :token="token" :api_url="api_url"/>
+									<mdb-alert v-if="api_url=='https://api.ppkc-online.com/api/v1'" color="danger">
+										<mdb-icon icon="info-circle" /> video webinar tidak tersedia
+									</mdb-alert>
+									<EventWebinar v-else :id_webinar="id_webinar" :token="token" :api_url="api_url"/>
 								</section>
 							</div>
 						</div>
@@ -194,7 +197,8 @@
 				link_yt: '',
 				show_close: false,
 				scrolledToBottom:false,
-				hideHeader: false
+				hideHeader: false,
+				ucapan: ''
 			}
 		},
 
@@ -211,7 +215,8 @@
 			this.DetailEventProfileLogin(),
 			this.StatusPembayaran(),
 			this.scroll(),
-			this.VenoBox()
+			this.VenoBox(),
+			this.WelcomeText()
 		},
 
 		methods: {
@@ -354,6 +359,7 @@
 				this.id_test = id_kategori
 				this.id_webinar = id_kategori
 				setTimeout(() => {
+					window.scrollTo(0, 0);
 					this.loading_file = false
 				}, 900)
 				setTimeout(() => {
@@ -411,6 +417,17 @@
 					})
 				}
 			},
+
+			WelcomeText(){
+				var h=(new Date()).getHours();
+				var m=(new Date()).getMinutes();
+				var s=(new Date()).getSeconds();
+				if (h >= 4 && h < 10) this.ucapan = "Selamat Pagi,";
+				if (h >= 10 && h < 15) this.ucapan = "Selamat Siang,";
+				if (h >= 15 && h < 18) this.ucapan =  "Selamat Sore,";
+				if (h >= 18 || h < 4) this.ucapan = "Selamat Malam,";
+			},
+
 			VenoBox(){
 				new VenoBox({
 					selector: '.event-detail',

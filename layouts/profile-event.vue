@@ -8,19 +8,7 @@
 	</div>
 </template>
 
-<style lang="scss">
-	.navbar-collapse{
-		.navbar-nav{
-			.nav-item{
-				.nav-link{
-					a{
-						text-decoration: none!important;
-					}
-				}
-			}
-		}
-	}
-</style>
+
 
 <script>
 	export default {
@@ -45,8 +33,6 @@
 				{ rel: 'stylesheet', type: 'text/css', href: '/assets/glightbox/glightbox.min.css'},
 				{ rel: 'stylesheet', type: 'text/css', href: '/assets/venobox/dev/venobox.min.css'},
 				{ rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap'},
-				{ rel: 'stylesheet', href: ''},
-				{ rel: 'stylesheet', href: '//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.2/styles/atom-one-dark.min.css'},
 				{ rel: 'stylesheet', href: '/assets/docs/css/theme.css'}
 			],
 			

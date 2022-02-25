@@ -11,7 +11,7 @@
 				<li class="nav-item__sidebar"><a class="nav-link__sidebar scrollto" href="#item-1-1">Section Item</a></li>
 				<b-dropdown-divider style="list-style: none;margin-top: .5rem;"></b-dropdown-divider>
 				<div v-for="(item, index) in pelatihans" :key="item.id" class="collapse__docs">
-					<b-button v-b-toggle="`collapse-${item.id}`" class="btn__pelatihan shadow-none nav-item__sidebar section-title" @click="ToggleFile">
+					<b-button v-b-toggle="`collapse-${item.id}`" class="active btn__pelatihan shadow-none nav-item__sidebar nav-link__sidebar section-title" @click="ToggleFile">
 						<mdb-row class="row justify-content-between">
 							<mdb-col md="9">  
 								{{item.title}}
@@ -28,7 +28,7 @@
 								<div v-for="(d, index) in c.details" :key="d.id">
 									<b-list-group class="list__modul">
 										<b-list-group-item class="list-unstyled" @click="ShowField(d, d.kategori == 3 || d.kategori == 4 || d.kategori == 6 ? d.id : d.kategori, d.kategori)">
-											<mdb-icon :icon="FilterIcon(d.kategori)"/>&nbsp; <a class="font-weight-bold link__text" :href="`#item-${d.kategori}`" @click="ShowField(d, d.kategori == 3 || d.kategori == 4 || d.kategori == 6 ? d.id : d.kategori, d.kategori)">
+											<mdb-icon :icon="FilterIcon(d.kategori)"/>&nbsp; <a class="link__text" :href="`#item-${d.kategori}`" @click="ShowField(d, d.kategori == 3 || d.kategori == 4 || d.kategori == 6 ? d.id : d.kategori, d.kategori)">
 												{{d.title}}
 											</a>
 										</b-list-group-item>
@@ -159,11 +159,12 @@
 			},
 
 			SidebarLink(){
-				const sidebarLinks = document.querySelectorAll('#docs-sidebar .scrollto');
+				const sidebarLinks = document.querySelectorAll('#docs-nav .scrollto');
+				console.log(sidebarLinks)
 				sidebarLinks.forEach((sidebarLink) => {
 					sidebarLink.addEventListener('click', (e) => {
 						console.log(e)
-
+						console.log("check")
 						e.preventDefault();
 
 						var target = sidebarLink.getAttribute("href").replace('#', '');

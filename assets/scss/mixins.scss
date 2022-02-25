@@ -12,6 +12,7 @@
 	line-height: 21.79px;
 	a{
 		color: $nav-item;
+		text-decoration: none;
 		&:hover{
 			color:$color-secondary!important;
 		}
