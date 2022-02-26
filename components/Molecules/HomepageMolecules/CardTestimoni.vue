@@ -1,8 +1,8 @@
 <template>
 	<div>
     <!-- Testimoni content -->
-    <mdb-row col="12">
-      <mdb-col v-if="testiIndex <= lists.length" v-for="testiIndex in testiToShow" md="6" :key="lists[testiIndex-1].id">
+    <mdb-row col="12" class="slider__testimoni">
+      <mdb-col v-if="testiIndex <= lists.length" v-for="testiIndex in testiToShow" md="5" :key="lists[testiIndex-1].id" class="col__testimoni-card">
         <mdb-card class="card__testimoni-content">
           <mdb-container class="mt-4 mb-2">
             <blockquote class="post__quote"> 
@@ -29,10 +29,30 @@
     props: ['lists'],
     data(){
       return {
-        testiToShow: 2,
+        testiToShow: 6,
         profile_default: DefaultProfile,
         null_foto: null,
         default_dua:'https://i.imgur.com/RCwPA3O.jpg'
+      }
+    },
+
+    mounted(){
+      this.TnsSlider()
+    },
+    methods: {
+      TnsSlider(){
+        tns({
+          "container": ".slider__testimoni",
+          "items": 2,
+          "center": true,
+          "slideBy": 'page',
+          "loop": false,
+          "swipeAngle": true,
+          "mouseDrag": true,
+          "speed": 400,
+          "nav": false,
+          "controls": false,
+        });
       }
     }
 	}

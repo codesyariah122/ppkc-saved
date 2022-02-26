@@ -385,10 +385,11 @@
 @media (min-width: 992px) {
 	.testimoni__list{
 		@include header_inside_list_desktop($color-primary);
+		width: 100%;
 		.col__testimoni{
-			.card{
-				height: 270px;
-				@include card_rounded_desktop;
+			.col__testimoni-card{
+				margin-left: -10rem;
+				margin-right: -15rem;
 			}
 		}
 	}
