@@ -3,7 +3,7 @@
 		<mdb-row col="12" class="slider__berita">
 
 			<mdb-col v-if="listsIndex <= lists.length" v-for="listsIndex in listsToShow" md="5" class="card__berita-list"  :key="lists[listsIndex-1].id">
-				<mdb-card>
+				<mdb-card class="mt-2">
 					<mdb-card-image :src="lists[listsIndex-1].foto_url" alt="Card image cap"></mdb-card-image>
 					<mdb-card-body>
 						<mdb-card-title>{{lists[listsIndex-1].judul}}</mdb-card-title>
@@ -32,7 +32,7 @@
 			TnsSlider(){
 				tns({
 					"container": ".slider__berita",
-					"items": 2,
+					"items": this.$device.isDesktop ? 2 : 1,
 					"center": true,
 					"slideBy": 'page',
 					"loop": false,
@@ -40,7 +40,7 @@
 					"mouseDrag": true,
 					"speed": 400,
 					"nav": false,
-					"controls": false,
+					"controls": this.$device.isDesktop ? false : true,
 				});
 			}
 		}

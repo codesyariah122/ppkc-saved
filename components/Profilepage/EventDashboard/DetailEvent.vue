@@ -18,7 +18,7 @@
 			<mdb-row class="event__detail-content">
 				<mdb-col md="5" sm="12" xs="12" class="col-1">
 					<div class="event__image-wrap">
-						<img :src="details.photo" class="rounded image img-fluid" width="300">
+						<img :src="details.photo" :class="`${$device.isDesktop ? 'img-fluid' : 'img-responsive'}`">
 						<div class="overlay__event-img">
 							<a :data-gall="details.photo" :href="details.photo" class="event__detail-profile icon" :title="details.kegiatan_title">
 								<mdb-icon icon="search-plus" />
@@ -89,6 +89,70 @@
 	.event__detail-content{
 		.col-1{
 			.event__image-wrap{
+				margin-bottom: 1rem;
+				img{
+					width: 250px;
+					height: 250px;
+				}
+				position: relative;
+				.overlay__event-img {
+					position: absolute;
+					top: 0;
+					bottom: 0;
+					left: 0;
+					right: 0;
+					width: 250px;
+					height:250px;
+					opacity: 0;
+					transition: .3s ease;
+					background-color: rgba(205, 209, 228, 0.9);
+				}
+
+				&:hover .overlay__event-img {
+					opacity: 1;
+				}
+
+				.icon {
+					color: white;
+					font-weight: 700;
+					font-size: 100px;
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+					-ms-transform: translate(-50%, -50%);
+					text-align: center;
+				}
+
+				.fa-zoom:hover {
+					color: #eee;
+				}
+			}
+		}
+		.col-2{
+			h4{
+				font-size: 18px;
+				font-weight: 600;
+			}
+			h6{
+				font-size: 16px;
+				font-weight: 600;
+			}
+			.inside__first{
+				h5{
+					font-size: 14px;
+					font-weight: 600;
+				}
+				p{
+					font-size:12px;
+				}
+			}
+		}
+	}
+@media (min-width: 992px) {
+	.event__detail-content{
+		.col-1{
+			.event__image-wrap{
 				img{
 					width:375px;
 					height: 370px;
@@ -148,6 +212,7 @@
 			}
 		}
 	}
+}
 </style>
 
 <script>

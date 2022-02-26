@@ -2,8 +2,8 @@
 	<div>
     <!-- Testimoni content -->
     <mdb-row col="12" class="slider__testimoni">
-      <mdb-col v-if="testiIndex <= lists.length" v-for="testiIndex in testiToShow" md="5" :key="lists[testiIndex-1].id" class="col__testimoni-card">
-        <mdb-card class="card__testimoni-content">
+      <mdb-col v-if="testiIndex <= lists.length" v-for="testiIndex in testiToShow" md="5" sm="4" xs="4" :key="lists[testiIndex-1].id" class="col__testimoni-card">
+        <mdb-card class="card__testimoni-content mt-2">
           <mdb-container class="mt-4 mb-2">
             <blockquote class="post__quote"> 
               <mdb-icon icon="quote-left"/><br>
@@ -43,7 +43,7 @@
       TnsSlider(){
         tns({
           "container": ".slider__testimoni",
-          "items": 2,
+          "items": this.$device.isDesktop ? 2 : 1,
           "center": true,
           "slideBy": 'page',
           "loop": false,
@@ -51,7 +51,7 @@
           "mouseDrag": true,
           "speed": 400,
           "nav": false,
-          "controls": false,
+          "controls": this.$device.isDesktop ? false : true,
         });
       }
     }

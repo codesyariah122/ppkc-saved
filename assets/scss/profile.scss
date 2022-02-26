@@ -1,7 +1,7 @@
 // Styling Profile page
 // mobile
 .profile__page{
-	margin-top:7rem;
+	margin-top:5rem!important;
 	.card__profile-page{
 		.profile__info-data{
 			.col__img-profile{
@@ -25,7 +25,7 @@
 						right: 0;
 							// height: 100px;
 							// width: 100%;
-							max-width: 140px;
+							max-width: 155px;
 							border-radius:80%;
 							opacity: 0;
 							transition: .3s ease;

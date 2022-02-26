@@ -34,12 +34,11 @@
 									</h2>
 									<p>
 										<strong>Selamat Datang di Dashboard Pelatihan PPKC</strong> <br>
-										Untuk mengakses materi pelatihan silahkan click /tap tombol humberger menu <mdb-icon icon="bars" class="text-primary" size="lg" style="color: blue!important;" />, kemudian akan muncul slide menu pelatihan yang anda ikuti dari sebelah kiri.
+										Untuk mengakses materi pelatihan silahkan click /tap tombol humberger menu <mdb-icon icon="bars" class="text-primary" size="lg" style="color: blue!important;" />, &nbsp;&nbsp; kemudian akan muncul slide menu pelatihan yang anda ikuti dari sebelah kiri.
 									</p>
 								</div>
 							</div>
 						</section><!--//section-->
-
 					</article>
 
 					<article v-else class="docs-article mt-5" id="section-2">

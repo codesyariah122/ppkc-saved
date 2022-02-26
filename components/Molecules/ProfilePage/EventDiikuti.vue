@@ -89,9 +89,10 @@
 								</mdb-col>
 							</mdb-row>
 						</mdb-col>
-
+						
 						<mdb-col lg="12" xs="12" sm="12">
-							<nuxt-link :to="`/detail/event/${item.kegiatan_id}/${$slug(item.kegiatan_title)}`" size="sm" class="btn btn-outline-primary font-weight-bold btn__link-event">Lihat Detail Pelatihan</nuxt-link>
+							<!-- <nuxt-link :to="`/detail/event/${item.kegiatan_id}/${$slug(item.kegiatan_title)}`" size="sm" class="btn btn-outline-primary font-weight-bold btn__link-event">Lihat Detail Pelatihan</nuxt-link> -->
+							<nuxt-link :to="`/profile/${username}/events/${item.kegiatan_id}/${$slug(item.kegiatan_title)}`" size="sm" class="btn btn-outline-primary font-weight-bold btn__link-event">Lihat Detail Pelatihan</nuxt-link>
 						</mdb-col>
 					</mdb-row>
 				</mdb-container>

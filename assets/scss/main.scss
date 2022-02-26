@@ -217,8 +217,8 @@
 					bottom: 0;
 					left: 0;
 					right: 0;
-					width: 290px;
-					height:200px;
+					width: 330px;
+					height:165px;
 					opacity: 0;
 					transition: .3s ease;
 					background-color: rgba(205, 209, 228, 0.9);
@@ -325,20 +325,38 @@
 .berita__list{
 	background-image: linear-gradient(to bottom right, $bg-primary, $bg-second-primary);
 	@include header_inside_list_mobile($default);
-	.col__berita{
-		.card{
-			margin-top: 1rem;
-			filter: drop-shadow(5px 5px 10px $bg-fourt);
-			width: 333px;
-			// height: 370px;
-			margin-bottom:1rem;
-			img{
-				max-width: 333px;
-				object-fit: contain;
+	// .col__berita{
+	// 	.card{
+	// 		margin-top: 1rem;
+	// 		filter: drop-shadow(5px 5px 10px $bg-fourt);
+	// 		width: 333px;
+	// 		// height: 370px;
+	// 		margin-bottom:1rem;
+	// 		img{
+	// 			max-width: 333px;
+	// 			object-fit: contain;
+	// 		}
+	// 		@include card_rounded_mobile;
+	// 	}
+	// }
+	.card__berita-list{
+			margin-right: -2rem;
+			margin-left: .5rem;
+			border-radius:8px!important;
+			.card{
+				.card-title{
+					color:$color-primary;
+					font-weight: 600;
+					font-size:16px;
+				}
+				max-width: 300px;
+				height: 330px;
+				border-radius:8px;
+				img{
+					border-radius:8px!important;
+				}
 			}
-			@include card_rounded_mobile;
 		}
-	}
 }
 
 // Desktop
@@ -372,11 +390,19 @@
 
 // Testimoni component
 .testimoni__list{
+	width: 100%;
 	@include header_inside_list_mobile($color-primary);
+	// .col__testimoni{
+	// 	.card{
+	// 		margin-bottom: 2rem;
+	// 		@include card_rounded_mobile;
+	// 	}
+	// }
 	.col__testimoni{
-		.card{
-			margin-bottom: 2rem;
-			@include card_rounded_mobile;
+		width: 100%;
+		.col__testimoni-card{
+			margin-left: -.2rem;
+			margin-right: -.5rem;
 		}
 	}
 }

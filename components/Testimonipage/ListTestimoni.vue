@@ -23,10 +23,10 @@
           v-for="item in lists"
           md="4" xs="12" sm="12"
           :key="item.id"
-          class="col__testimoni"
+          class="col__testimoni-card"
           >
             <mdb-card
-            class="card__testimoni-content"
+            class="card__testimoni-content mb-3"
             >
             <mdb-container class="mt-4 mb-5">
               <blockquote class="post__quote">
