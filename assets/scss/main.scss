@@ -368,7 +368,7 @@
 		@include header_inside_list_desktop($default);
 		.card__berita-list{
 			margin-right: -15rem;
-			margin-left: -10rem;
+			margin-left: -8rem;
 			border-radius:8px!important;
 			.card{
 				.card-title{
@@ -413,9 +413,10 @@
 		@include header_inside_list_desktop($color-primary);
 		width: 100%;
 		.col__testimoni{
+			width: 100%;
 			.col__testimoni-card{
-				margin-left: -10rem;
-				margin-right: -15rem;
+				margin-left: -8rem;
+				margin-right: -12rem;
 			}
 		}
 	}

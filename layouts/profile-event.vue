@@ -30,7 +30,6 @@
 			link: [
 				{ rel: 'stylesheet', type: 'text/css', href: '/assets/glightbox/glightbox.min.css'},
 				{ rel: 'stylesheet', type: 'text/css', href: '/assets/venobox/dev/venobox.min.css'},
-				{ rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap'},
 				{ rel: 'stylesheet', href: '/assets/docs/css/theme.css'}
 			],
 			

@@ -9,36 +9,37 @@
 					<!-- Sidebar Toggler -->
 					<MoleculesProfilePageTogglerSidebar/>
 
-					<article v-if="!show_file" class="docs-article mt-5" id="section-1">
+					<article v-if="!show_file" class="docs-article">
 						<header  class="docs-header">
-							<section class="docs-intro">
+							<section class="docs-section mt-2" id="item-1-1">
+								<div v-if="loading" class="mb-5">
+									<b-card>
+										<b-skeleton animation="wave" width="85%"></b-skeleton>
+										<b-skeleton animation="wave" width="55%"></b-skeleton>
+										<b-skeleton animation="wave" width="70%"></b-skeleton>
+									</b-card>
+								</div>
+								<div v-else class="callout-block callout-block-info">
+									<div class="content">
+										<h2 class="callout-title">
+											<span class="callout-icon-holder me-1">
+												<i class="fas fa-info-circle"></i>
+											</span>
+											{{ucapan}} {{profiles.nama}}
+										</h2>
+										<p>
+											<strong>Selamat Datang di Dashboard Pelatihan PPKC</strong> <br>
+											Untuk mengakses materi pelatihan silahkan click /tap tombol humberger menu <mdb-icon icon="bars" class="text-primary" size="lg" style="color: blue!important;" />, &nbsp;&nbsp; kemudian akan muncul slide menu pelatihan yang anda ikuti dari sebelah kiri.
+										</p>
+									</div>
+								</div>
+							</section><!--//section-->
+							<section class="docs-intro mt-5" id="section-1">
 								<ProfilepageEventDashboardDetailEvent :details="details" :loading="loading" :status_pendaftaran="status_pendaftaran"/>
 							</section><!--//docs-intro-->
 						</header>
 
-						<section class="docs-section mt-2" id="item-1-1">
-							<div v-if="loading" class="mb-5">
-								<b-card>
-									<b-skeleton animation="wave" width="85%"></b-skeleton>
-									<b-skeleton animation="wave" width="55%"></b-skeleton>
-									<b-skeleton animation="wave" width="70%"></b-skeleton>
-								</b-card>
-							</div>
-							<div v-else class="callout-block callout-block-info">
-								<div class="content">
-									<h2 class="callout-title">
-										<span class="callout-icon-holder me-1">
-											<i class="fas fa-info-circle"></i>
-										</span>
-										{{ucapan}} {{profiles.nama}}
-									</h2>
-									<p>
-										<strong>Selamat Datang di Dashboard Pelatihan PPKC</strong> <br>
-										Untuk mengakses materi pelatihan silahkan click /tap tombol humberger menu <mdb-icon icon="bars" class="text-primary" size="lg" style="color: blue!important;" />, &nbsp;&nbsp; kemudian akan muncul slide menu pelatihan yang anda ikuti dari sebelah kiri.
-									</p>
-								</div>
-							</div>
-						</section><!--//section-->
+						
 					</article>
 
 					<article v-else class="docs-article mt-5" id="section-2">
@@ -186,7 +187,6 @@
 				empty_filter: false,
 				loading: null,
 				loading_file:null,
-				show_file:false,
 				pelatihans: [],
 				kegiataan: [],
 				categories:'',

@@ -10,7 +10,10 @@
 				<li class="nav-item__sidebar section-title"><a class="nav-link__sidebar scrollto active" href="#section-1"><span class="theme-icon-holder me-2"><i class="fas fa-map-signs"></i></span>Introduction</a></li>
 				<li class="nav-item__sidebar"><a class="nav-link__sidebar scrollto" href="#item-1-1">Halo, {{profiles.nama}}</a></li>
 				<b-dropdown-divider style="list-style: none;margin-top: .5rem;"></b-dropdown-divider>
-				<div v-for="(item, index) in pelatihans" :key="item.id" class="collapse__docs">
+				<div v-if="loading">
+					<mdb-spinner big multicolor />
+				</div>
+				<div v-else v-for="(item, index) in pelatihans" :key="item.id" class="collapse__docs">
 					<b-button v-b-toggle="`collapse-${item.id}`" class="active btn__pelatihan shadow-none nav-item__sidebar nav-link__sidebar section-title" @click="ToggleFile">
 						<mdb-row col="12" class="row justify-content-between">
 							<mdb-col md="9" xs="8" sm="8">  
@@ -127,6 +130,7 @@
 
 			SetupSidebar(){
 				const sidebar = document.getElementById('docs-sidebar');
+				sidebar.classList.add('sidebar-visible');
 				let w = window.innerWidth;
 				window.onload=function() 
 				{ 
