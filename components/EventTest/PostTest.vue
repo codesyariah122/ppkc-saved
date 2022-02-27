@@ -98,7 +98,7 @@
 					status: null,
 					message: ''
 				},
-				save_test: localStorage.getItem(`finish-test-${this.id_test}`) ? JSON.parse(localStorage.getItem(`finish-test-${this.id_test}`)) : '',
+				save_test: {},
 				soal_active: false,
 				profiles: [],
 				username: ''
@@ -189,8 +189,10 @@
 					})
 					.finally(() => {
 						this.success.status = true
-						const save_test = localStorage.setItem(`finish-test-${this.id_test}`, JSON.stringify({status: this.success.status, message: 'Anda sudah menyelesaikan sesi post test'}))
+						const save_test = localStorage.setItem(`finish-post-test-${this.id_test}-${this.$username(this.profiles.nama)}`, JSON.stringify({status: this.success.status, user_id: this.profiles.id, message: 'Anda sudah menyelesaikan sesi post test', profile: this.profiles}))
 						this.loading = false
+						this.save_test = localStorage.getItem(`finish-post-test-${this.id_test}-${this.$username(this.profiles.nama)}`) ? JSON.parse(localStorage.getItem(`finish-post-test-${this.id_test}-${this.$username(this.profiles.nama)}`)) : ''
+						window.scrollTo(0, 0)
 					})
 				}else{					
 					this.$swal({
