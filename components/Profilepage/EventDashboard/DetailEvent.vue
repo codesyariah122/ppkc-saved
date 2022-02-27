@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div v-if="loading" class="mb-5 mt-3">
+		<div v-if="loading" class="mb-5 mt-5">
 			<b-card>
 				<b-row>
 					<b-col cols="6">
