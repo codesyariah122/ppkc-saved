@@ -23,7 +23,7 @@
 			</li>
 			<li>
 				<strong class="text-primary font-weight-bold">Pekerjaan</strong> <br>
-				<h6 class="font-weight-bold text-capitalize">
+				<h6>
 					{{works.jabatan}}
 				</h6>
 					<p class="info__context">
@@ -35,7 +35,7 @@
 			</li>
 			<li>
 				<strong class="text-primary font-weight-bold">Pendidikan</strong> <br>
-				<h6 class="font-weight-bold text-capitalize">
+				<h6>
 					{{studs.nama_institusi}}
 				</h6> 
 				<p class="info__context">

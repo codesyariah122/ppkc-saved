@@ -1,7 +1,7 @@
 // Styling Profile page
 // mobile
 .profile__page{
-	margin-top:5rem!important;
+	margin-top:6rem!important;
 	.card__profile-page{
 		.profile__info-data{
 			.col__img-profile{
@@ -269,10 +269,10 @@
 						h6{
 							color: $gray;
 							font-weight:900!important;
-							font-size:15px;
+							font-size:14px!important;
 						}
 						p{
-							font-size: 14px;
+							font-size: 13px!important;
 							color:$default-gray;
 						}
 						.info__context{

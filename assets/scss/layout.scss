@@ -2,6 +2,12 @@
 // navigation component
 .nav-link {
 	@include navbar_mobile;
+	text-decoration: none!important;
+}
+.dropdown-menu{
+	a{
+		text-decoration: none!important;
+	}
 }
 .btn__login{
 	@include button_primary;

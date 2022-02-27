@@ -19,7 +19,7 @@
 						<mdb-dropdown-toggle tag="a" navLink  slot="toggle"  waves-fixed>
 							Tetang PPKC
 						</mdb-dropdown-toggle>
-						<mdb-dropdown-menu :class="`${$device.isDesktop ? 'mt-4' : 'mt-2'}`">
+						<mdb-dropdown-menu :class="`${$device.isDesktop ? 'mt-4' : ''}`">
 							<mdb-dropdown-item v-for="item in links" :key="item.id">
 								<nuxt-link :to="item.link">
 									{{item.name}}

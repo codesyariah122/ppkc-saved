@@ -1,10 +1,11 @@
 .docs-wrapper{
+	margin-top: -7rem!important;
 	.docs-sidebar{
 		margin-top: -.9rem;
 		width:250px;
 		.docs-nav{
+			overflow-x: hidden;
 			.collapse__docs{
-				overflow: hidden!important;
 				border:0;
 				width: 250px;
 				.btn__pelatihan{
@@ -66,18 +67,30 @@
 				.embed__file{
 					.docs-header{
 						.docs-intro{
-							.type__name{
-								.type__name{
-									border: 2px solid $color-primary!important;
-									width:25%;
-									color: $color-primary;
-									font-weight: 600;
-									text-align: center;
-									margin-bottom: 1.5rem;
-									font-size: 16px;
-									margin-left: 1rem;
-								}
+							h2{
+								font-size: 18px;
+								font-weight: 700;
+								color:$color-primary;
 							}
+							.type__name{
+								border: 2px solid $color-primary!important;
+								width: 30%;
+								color: $color-primary;
+								font-weight: 500;
+								text-align: center;
+								margin-bottom: 1rem;
+								font-size: 12px;
+								margin-left: -.1rem;
+							}
+						}
+					}
+					.docs-section{
+						width: 100%;
+						margin-left: auto !important;
+						margin-right: auto !important;
+						overflow: hidden;
+						.pre__test{
+							margin-top: -3rem;
 						}
 					}
 				}
@@ -152,22 +165,34 @@
 			.container{
 				.docs-article{
 					.embed__file{
+						margin-left:1.5rem;
 						.docs-header{
+							margin-left: 1rem;
 							.docs-intro{
+								h2{
+									font-size: 21px;
+									font-weight:700;	
+									color: $color-primary;
+								}
 								.type__name{
-									.type__name{
-										border: 2px solid $color-primary!important;
-										width:25%;
-										color: $color-primary;
-										font-weight: 600;
-										text-align: center;
-										margin-bottom: 1.5rem;
-										font-size: 16px;
-										margin-left: 1rem;
-									}
+									border: 2px solid $color-primary!important;
+									width:15%;
+									color: $color-primary;
+									font-weight: 500;
+									text-align: center;
+									margin-bottom: 1.5rem;
+									font-size: 16px;
+									margin-left: -.2rem;
 								}
 							}
 						}
+
+						.docs-section{
+							.pre__test{
+								margin-top: -3rem;
+							}
+						}
+
 					}
 				}
 			}

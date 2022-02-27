@@ -1,10 +1,10 @@
 <template>
 	<div class="pre__test">
-		<mdb-container v-if="save_test.status ? save_test.status : success.status" class="success__test">
+		<mdb-container v-if="save_test.user_id == profiles.id ? save_test.status : success.status" class="success__test">
 			<mdb-row col="12" class="row justify-content-center">
 				<mdb-col lg="12">
 					<mdb-alert :color="`${save_test.status ? 'info' : 'success'}`">
-						{{save_test.message ? save_test.message :  success.message}}
+						Halo, {{save_test.profile.nama}}. {{save_test.message ? save_test.message :  success.message}}
 					</mdb-alert>
 				</mdb-col>
 			</mdb-row>
@@ -99,15 +99,31 @@
 					message: ''
 				},
 				save_test: localStorage.getItem(`finish-test-${this.id_test}`) ? JSON.parse(localStorage.getItem(`finish-test-${this.id_test}`)) : '',
-				soal_active: false
+				soal_active: false,
+				profiles: [],
+				username: ''
 			}
 		},
 
 		mounted(){
-			this.PreTest()
+			this.PreTest(),
+			this.UserProfileData()
 		},
 
 		methods: {
+			UserProfileData(){
+				if(this.token){					
+					const url = `${this.api_url}/web/user`
+					this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
+					this.$axios.get(url)
+					.then(({data}) => {
+						this.profiles = data.user
+						this.username = this.$username(data.user.nama)
+					})
+					.catch(err => console.log(err.response ? err.response : ''))
+				}
+			},
+
 			PreTest(){
 				this.loading = true
 				const url = `${this.api_url}/web/event/1/pretest/list/${this.id_test}`

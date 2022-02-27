@@ -5,8 +5,9 @@
 				<mdb-tooltip trigger="hover" :options="{placement: 'bottom'}">
 					<span slot="tip"> {{close_show ? 'Tutup Menu Pelatihan' : 'Buka Menu Pelatihan'}} </span>
 					<mdb-btn id="docs-sidebar-toggler" class="toggler" gradient="blue" slot="reference" color="primary" @click="SidebarToggler(); close_show = !close_show;">
-						<mdb-icon v-if="close_show" far icon="window-close" size="lg"/>
-						<mdb-icon v-else icon="bars" size="lg"/>		
+						<!-- <mdb-icon :icon="close_show ? 'window-close' : 'bars'" size="lg"/> -->
+						<i v-if="close_show" class="fas fa-times"></i>
+						<i v-else class="fas fa-bars"></i>
 					</mdb-btn>
 				</mdb-tooltip>
 			</mdb-col>
@@ -16,6 +17,7 @@
 
 <style lang="scss">
 	.toggler{
+		z-index: 9999;
 		&:hover{
 			color:$bg-fourt!important;
 		}

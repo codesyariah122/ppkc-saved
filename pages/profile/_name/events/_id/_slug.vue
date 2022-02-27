@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="docs-wrapper">
-			<ProfilepageEventDashboardSidebar :loading="loading" :username="username" :pelatihans="pelatihans" :scrolledToBottom="scrolledToBottom" @show-field="ShowField" @toggle-file="ToggleFile"/>
+			<ProfilepageEventDashboardSidebar :loading="loading" :username="username" :pelatihans="pelatihans" :scrolledToBottom="scrolledToBottom" @show-field="ShowField" @toggle-file="ToggleFile" :profiles="profiles"/>
 
 			<div class="docs-content">
 				<div class="container">
@@ -54,7 +54,8 @@
 							<div v-if="type == 1" class="embed__file">
 								<header class="docs-header">
 									<section class="docs-intro">
-										<mdb-badge color="primary" class="mb-2">{{type_name}}</mdb-badge>
+										<!-- <mdb-badge color="primary" class="mb-2">{{type_name}}</mdb-badge> -->
+										<h5 class="type__name">{{type_name}}</h5>
 										<h2>{{detailed_data.title}}</h2>
 									</section><!--//docs-intro-->
 								</header>
@@ -75,20 +76,24 @@
 							<div v-else-if="type == 2" class="embed__file">
 								<header class="docs-header">
 									<section class="docs-intro">
-										<mdb-badge color="primary" class="mb-2">{{type_name}}</mdb-badge>
+										<!-- <mdb-badge color="primary" class="mb-2">{{type_name}}</mdb-badge> -->
+										<h5 class="type__name">{{type_name}}</h5>
 										<h2>{{detailed_data.title}}</h2>
 									</section><!--//docs-intro-->
 								</header>
 								<section class="docs-section mt-2" id="item-1-1">
-									<object :data="detailed.file_pdf" type="application/pdf" width="100%" :height="`${$device.isDesktop ? '900px' : '600px'}`">
-									</object>
+									<div class="embed-responsive embed-responsive-1by1">
+										<object :data="detailed.file_pdf" type="application/pdf" width="100%" :height="`${$device.isDesktop ? '900px' : '600px'}`">
+										</object>
+									</div>
 								</section>
 							</div>
 
 							<div v-else-if="type == 3" class="embed__file">
 								<header class="docs-header">
 									<section class="docs-intro">
-										<mdb-badge color="success" class="mb-2">{{type_name}}</mdb-badge>
+										<!-- <mdb-badge color="success" class="mb-2">{{type_name}}</mdb-badge> -->
+										<h5 class="type__name">{{type_name}}</h5>
 										<h2>{{detailed_data.title}}</h2>
 									</section><!--//docs-intro-->
 								</header>
@@ -100,7 +105,8 @@
 							<div v-else-if="type == 4" class="embed__file">
 								<header class="docs-header">
 									<section class="docs-intro">
-										<mdb-badge color="success" class="mb-2">{{type_name}}</mdb-badge>
+										<!-- <mdb-badge color="success" class="mb-2">{{type_name}}</mdb-badge> -->
+										<h5 class="type__name">{{type_name}}</h5>
 										<h2>{{detailed_data.title}}</h2>
 									</section><!--//docs-intro-->
 								</header>
@@ -112,20 +118,24 @@
 							<div v-else-if="type == 5" class="embed__file">
 								<header class="docs-header">
 									<section class="docs-intro">
-										<mdb-badge color="primary" class="mb-2">{{type_name}}</mdb-badge>
+										<!-- <mdb-badge color="primary" class="mb-2">{{type_name}}</mdb-badge> -->
+										<h5 class="type__name">{{type_name}}</h5>
 										<h2>{{detailed_data.title}}</h2>
 									</section><!--//docs-intro-->
 								</header>
 								<section class="docs-section mt-2" id="item-1-1">
-									<object :data="detailed.file_pdf" type="application/pdf" width="100%" :height="`${$device.isDesktop ? '900px' : '600px'}`">
-									</object>
+									<div class="embed-responsive embed-responsive-1by1">
+										<object :data="detailed.file_pdf" type="application/pdf" width="100%" :height="`${$device.isDesktop ? '900px' : '600px'}`">
+										</object>
+									</div>
 								</section>
 							</div>
 
 							<div v-else-if="type == 6" class="embed__file">
 								<header class="docs-header">
 									<section class="docs-intro">
-										<mdb-badge color="info" class="mb-2">{{type_name}}</mdb-badge>
+										<!-- <mdb-badge color="info" class="mb-2">{{type_name}}</mdb-badge> -->
+										<h5 class="type__name">{{type_name}}</h5>
 										<h2>{{detailed_data.title}}</h2>
 									</section><!--//docs-intro-->
 								</header>
