@@ -16,10 +16,10 @@
 				<div v-else v-for="(item, index) in pelatihans" :key="item.id" class="collapse__docs">
 					<b-button v-b-toggle="`collapse-${item.id}`" class="active btn__pelatihan shadow-none nav-item__sidebar nav-link__sidebar section-title" @click="ToggleFile">
 						<mdb-row col="12" class="row justify-content-between">
-							<mdb-col md="9" xs="8" sm="8">  
+							<mdb-col md="9" xs="8" sm="6">  
 								{{item.title}}
 							</mdb-col>
-							<mdb-col md="1" xs="2" sm="2">
+							<mdb-col md="1" xs="2" sm="6">
 								<mdb-icon :icon="`${show_collapse == false ? 'plus-circle' : 'minus-circle'}`" size="lg"/>
 							</mdb-col>
 						</mdb-row>
