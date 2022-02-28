@@ -15,6 +15,13 @@
 					</b-row>
 				</b-card>
 			</mdb-col>
+			<mdb-col lg="12">
+				<b-progress :max="max" height="2rem" :striped="true" show-progress :animated="true">
+					<b-progress-bar :value="value" variant="success">
+						<h5 v-if="value > 0">Loading</h5>
+					</b-progress-bar>
+				</b-progress>
+			</mdb-col>
 		</mdb-row>
 
 		<mdb-row v-else>
@@ -78,8 +85,8 @@
 							Loading...
 						</div>
 						<div v-else>
-							<mdb-btn @click="RegistrasiEvent(details.kegiatan_id)" gradient="blue" size="md">
-								<mdb-icon far icon="calendar-plus" /> {{status_pendaftaran}}
+							<mdb-btn @click="CheckKonfirmasi(details.kegiatan_id)" gradient="blue" size="md">
+								<mdb-icon far icon="calendar-plus" size="lg"/> {{status_pendaftaran}}
 							</mdb-btn>
 						</div>
 					</mdb-col>
@@ -90,8 +97,8 @@
 							Loading...
 						</div>
 						<div v-else>
-							<mdb-btn @click="RegistrasiEvent(details.kegiatan_id)" disabled color="info" size="md"> 
-								<mdb-icon icon="check" /> {{status_pendaftaran}}
+							<mdb-btn @click="RegistrasiEvent(details.kegiatan_id)" color="info" size="md"> 
+								<mdb-icon icon="check" size="lg"/> {{status_pendaftaran == 'Menunggu Konfirmasi' ? 'Check Status' : status_pendaftaran}}
 							</mdb-btn>
 						</div>
 					</mdb-col>
@@ -123,7 +130,16 @@
 	export default{
 		props: ['loading', 'profiles', 'details', 'data_event', 'status_pendaftaran', 'token'],
 
+		data(){
+			return {
+				timer: 0,
+				value: 0,
+				max: 100,
+			}
+		},
+
 		mounted(){
+			this.startTimer(),
 			this.VenoBox()
 		},
 
@@ -134,10 +150,27 @@
 				this.$emit('registrasi-event', id)
 			},
 
+			CheckConfirmasi(id){
+				this.$router.push({
+					name: 'events-id-success',
+					params: {
+						id: id
+					}
+				})
+			},
+
 			ProfileEvent(username, id_event, slug){
 				this.$router.push({
 					path: `/profile/${username}/events/${id_event}/${slug}`
 				})
+			},
+
+			startTimer() {
+				let vm = this;
+				let timer = setInterval(function() {
+					vm.value += 6;
+					if (vm.value >= vm.max) clearInterval(timer);
+				}, 100);
 			},
 
 			VenoBox(){

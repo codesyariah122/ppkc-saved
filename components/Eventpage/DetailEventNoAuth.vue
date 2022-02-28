@@ -65,8 +65,8 @@
 
 				<mdb-row class="inside__second mt-3">
 					<mdb-col>
-						<mdb-btn size="md" color="blue-grey" disabled class="mb-3 not__allowed">
-							<mdb-icon far icon="calendar-plus" size="lg"/> Daftar
+						<mdb-btn size="md" color="blue-grey" class="mb-3" @click="GoToLogin">
+							<mdb-icon icon="sign-in-alt" size="lg"/> Daftar
 						</mdb-btn>
 					</mdb-col>
 				</mdb-row>
@@ -93,7 +93,32 @@
 					share: ['facebook', 'twitter', 'linkedin', 'pinterest', 'download'],
 					spinner: 'rotating-plane'
 				})
+			},
+
+			GoToLogin() {
+				if (this.event_id === this.$route.params.id) {
+					const data = {
+						event_id: this.event_id,
+						event_path: this.event_path,
+					};
+					this.SetEventLogin(data);
+				} else {
+					this.$router.push({ name: "auth-login" });
+				}
+			},
+
+			SetEventLogin(data) {
+				this.$store.dispatch("config/setEventToLogin", JSON.stringify(data));
+				this.$router.push({
+					name: "auth-login",
+				});
+			},
+		},
+
+		computed: {
+			set_event() {
+				return this.$store.getters["config/ConfigSetEventLogin"];
 			}
-		}
+		},
 	}
 </script>

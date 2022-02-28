@@ -44,6 +44,13 @@
 
 					<article v-else class="docs-article mt-5" id="section-2">
 						<div v-if="loading_file">
+							<div v-if="type_name !== 'Pre Test' && type_name !== 'Post Test' ">								
+								<b-progress :max="max" height="2rem" :striped="true" show-progress :animated="true" class="mb-3">
+									<b-progress-bar :value="value" variant="success">
+										<h5 v-if="value > 0" class="text-white">Loading</h5>
+									</b-progress-bar>
+								</b-progress>
+							</div>
 							<b-card>
 								<b-skeleton animation="throb" width="85%"></b-skeleton>
 								<b-skeleton animation="throb" width="55%"></b-skeleton>
@@ -63,6 +70,11 @@
 								<section class="docs-section mt-2" id="item-1-1">
 									<div v-if="link_yt">
 										<center>
+											<b-progress :max="max" height="2rem" :striped="true" show-progress :animated="true" class="mb-3">
+												<b-progress-bar :value="value" variant="success">
+													<h5 v-if="value > 0" class="text-white">Loading</h5>
+												</b-progress-bar>
+											</b-progress>
 											<b-col cols="12" class="mt-3">
 												<b-skeleton-img no-aspect height="150px"></b-skeleton-img>
 											</b-col>
@@ -210,7 +222,10 @@
 				show_close: false,
 				scrolledToBottom:false,
 				hideHeader: false,
-				ucapan: ''
+				ucapan: '',
+				timer: 0,
+				value: 0,
+				max: 200
 			}
 		},
 
@@ -318,7 +333,7 @@
 				})
 			},
 			ShowField(raw, id_kategori='', type){
-				console.log("OKKKk")
+				window.scrollTo(0, 0);
 				this.loading_file = true
 				this.show_file = true
 				this.show_close = true
@@ -354,18 +369,26 @@
 				}, {});
 				const yt_link  = this.detailed.video ? this.$ytString(this.detailed.video) : ''
 				this.link_yt = yt_link ? true : false
-
+				this.startTimer()
 				this.type = type
 				this.FileType(type)
 				this.id_test = id_kategori
 				this.id_webinar = id_kategori
 				setTimeout(() => {
-					window.scrollTo(0, 0);
 					this.loading_file = false
 				}, 900)
 				setTimeout(() => {
 					this.link_yt = false
-				}, 1500)
+				}, 2500)
+			},
+
+			startTimer() {
+				let vm = this;
+				let timer = setInterval(function() {
+					vm.value += 6;
+					if (vm.value >= vm.max) clearInterval(timer);
+				}, 100);
+				vm.value = 0
 			},
 
 			UserProfileData(){

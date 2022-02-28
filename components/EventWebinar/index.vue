@@ -2,22 +2,27 @@
 	<div class="embed__file">
 		<mdb-container>
 			<mdb-row col="12" class="webinar__content">
-				<mdb-col lg="12">
-					<mdb-col lg="12">
-						<b-embed
-						type="iframe"
-						aspect="16by9"
-						:src="`https://www.youtube-nocookie.com/embed/${details.url}?autoplay=0&version=3&enablejsapi=1&showinfo=0&controls=0&rel=0&showinfo=0&disablekb=1&iv_load_policy=3&modestbranding=0`"
-						allowfullscreen
-						></b-embed>
+				<mdb-col v-if="loading" lg="12">
+					<b-progress :max="max" height="2rem" :striped="true" show-progress :animated="true" class="mb-3">
+						<b-progress-bar :value="value" variant="success">
+							<h5 v-if="value > 0" class="text-white">Loading</h5>
+						</b-progress-bar>
+					</b-progress>
+					<b-skeleton-img></b-skeleton-img>
+				</mdb-col>
+				<mdb-col v-else lg="12">
+					<b-embed
+					type="iframe"
+					aspect="16by9"
+					:src="`https://www.youtube-nocookie.com/embed/${details.url}?autoplay=0&version=3&enablejsapi=1&showinfo=0&controls=0&rel=0&showinfo=0&disablekb=1&iv_load_policy=3&modestbranding=0`"
+					allowfullscreen
+					></b-embed>
 
-
-						<div id="ytplayer"></div>
+					<div id="ytplayer"></div>
 						<!-- <div class="embed-responsive embed-responsive-16by9">
 							<iframe :src="details.url" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 						</div> -->
 						<!-- <video-embed ref="youtube" :src="details.url"></video-embed> -->
-					</mdb-col>
 				</mdb-col>
 
 				<!-- Informasi webinar -->
@@ -60,12 +65,18 @@
 
 		data(){
 			return{
-				details: {}
+				details: {},
+				loading: null,
+				timer: 0,
+				value: 0,
+				max: 100
+
 			}
 		},
 
 		mounted(){
-			this.WebinarDetail()
+			this.WebinarDetail(),
+			this.startTimer()
 		},
 
 		methods: {
@@ -84,11 +95,11 @@
 					controls: '0',
 					showinfo: '0',
 					autoplay:'0',
-					iv_load_policy:'3',
-
+					iv_load_policy:'3'
 				});
 			},
 			WebinarDetail(){
+				this.loading = true
 				const url = `${this.api_url}/web/webinar/${this.id_webinar}`
 				this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
 				this.$axios
@@ -99,6 +110,19 @@
 				.catch(err => {
 					console.log(err.message)
 				})
+				.finally(() => {
+					setTimeout(() => {
+						this.loading = false
+					}, 1500)
+				})
+			},
+
+			startTimer() {
+				let vm = this;
+				let timer = setInterval(function() {
+					vm.value += 6;
+					if (vm.value >= vm.max) clearInterval(timer);
+				}, 100);
 			},
 
 			LightBox(video){

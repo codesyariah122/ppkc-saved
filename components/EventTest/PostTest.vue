@@ -14,68 +14,82 @@
 			<!-- <pre>
 				{{lists}}
 			</pre> -->
-			<mdb-row  col="12" class="row justify-content-start mb-2">
-				<small class="text-info">
-					*.Selesaikan  Soal No.1 Terlebih Dahulu
-				</small>
-			</mdb-row>
-			<mdb-row v-for="(item, index) in lists" col="12" class="row justify-content-center" :key="item.id">
-				<mdb-col lg="12" class="test__content">
-					<h4> Soal {{item.urutan}} </h4>
-					<p> {{item.pertanyaan}} </p>
-					<div class="test-answers">
-						<form
-						method="POST"
-						class="is-not-results"
-						>
-							<fieldset>
-								<div class="answers">
-									<div
-									class="answer"
-									v-for="option in item.pilihans"
-									:value="option.id"
-									:key="option.id"
-									>
-										<input v-if="soal_active || item.urutan == 1"
-										type="radio"
-										v-model="item.id"
-										:value="option.id"
-										:id="option.id"
-										required @change="ChangeJawaban(option.ujian_id, index, option.id, item.urutan)"
-										>
-										<label
-										:for="option.id"
-										class="answer__item"
-										>
-										{{option.jawaban}}
-										</label>
-									</div>
-								</div>
-							</fieldset>
-						</form>
-					</div>
-				</mdb-col>
-			</mdb-row>
+			<div v-if="loading_soal">
+				<mdb-row col="12" class="row justify-content-center">
+					<mdb-col lg="12">
+						<b-progress :max="max" height="2rem" :striped="true" show-progress :animated="true" class="mb-3">
+							<b-progress-bar :value="value" variant="success">
+								<h5 v-if="value > 0" class="text-white">Loading</h5>
+							</b-progress-bar>
+						</b-progress>
+					</mdb-col>
+				</mdb-row>
+			</div>
 
-			<mdb-row col="12" class="row justify-content-center">
-				<mdb-col lg="12">
-					<div class="mb-2 ">
-						<a
-						href=""
-						class="btn btn-primary btn-md rounded btn-block"
-						@click.prevent="SubmitTest"
-						>
-						<div v-if="loading">
-							<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-							Loading...
+			<div v-else>
+				<mdb-row  col="12" class="row justify-content-start mb-2">
+					<small class="text-info">
+						*.Selesaikan  Soal No.1 Terlebih Dahulu
+					</small>
+				</mdb-row>
+				<mdb-row v-for="(item, index) in lists" col="12" class="row justify-content-center" :key="item.id">
+					<mdb-col lg="12" class="test__content">
+						<h4> Soal {{item.urutan}} </h4>
+						<p> {{item.pertanyaan}} </p>
+						<div class="test-answers">
+							<form
+							method="POST"
+							class="is-not-results"
+							>
+								<fieldset>
+									<div class="answers">
+										<div
+										class="answer"
+										v-for="option in item.pilihans"
+										:value="option.id"
+										:key="option.id"
+										>
+											<input v-if="soal_active || item.urutan == 1"
+											type="radio"
+											v-model="item.id"
+											:value="option.id"
+											:id="option.id"
+											required @change="ChangeJawaban(option.ujian_id, index, option.id, item.urutan)"
+											>
+											<label
+											:for="option.id"
+											class="answer__item"
+											>
+											{{option.jawaban}}
+											</label>
+										</div>
+									</div>
+								</fieldset>
+							</form>
 						</div>
-						<div v-else>
-							Submit <mdb-icon far icon="paper-plane" />
+					</mdb-col>
+				</mdb-row>
+
+				<mdb-row col="12" class="row justify-content-center">
+					<mdb-col lg="12">
+						<div class="mb-2 ">
+							<a
+							href=""
+							class="btn btn-primary btn-md rounded btn-block"
+							@click.prevent="SubmitTest"
+							>
+							<div v-if="loading_answer">
+								<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+								loading_answer...
+							</div>
+							<div v-else>
+								Submit <mdb-icon far icon="paper-plane" />
+							</div>
+							</a>
 						</div>
-						</a>
-					</div>
-				</mdb-col>
-			</mdb-row>
+					</mdb-col>
+				</mdb-row>
+			</div>
 		</mdb-container>
 
 	</div>
@@ -87,7 +101,8 @@
 
 		data(){
 			return {
-				loading: null,
+				loading_soal: null,
+				loading_answer: null,
 				tests: [],
 				lists: [],
 				field: {
@@ -101,7 +116,10 @@
 				save_test: {},
 				soal_active: false,
 				profiles: [],
-				username: ''
+				username: '',
+				timer: 0,
+				value: 0,
+				max: 100
 			}
 		},
 
@@ -125,7 +143,7 @@
 			},
 
 			PreTest(){
-				this.loading = true
+				this.loading_soal = true
 				const url = `${this.api_url}/web/event/1/pretest/list/${this.id_test}`
 				this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
 				this.$axios
@@ -139,13 +157,18 @@
 				})
 				.catch(err => console.log(err))
 				.finally(() => {
-					this.loading=false
+					this.save_test = localStorage.getItem(`finish-pre-test-${this.id_test}-${this.username}`) ? JSON.parse(localStorage.getItem(`finish-pre-test-${this.id_test}-${this.$username(this.profiles.nama)}`)) : ''
+					this.startTimer()
+					setTimeout(() => {
+						this.loading_soal=false
+					}, 1500)
 				})
 			},
 
 
 			SubmitTest(){
-				this.loading = true
+				window.scrollTo(0, 0)
+				this.loading_soal = true
 				this.$swal({
 					title: 'Apakah Anda yakin ingin mengumpulkan jawaban ?',
 					html:
@@ -159,13 +182,15 @@
 					if (result.isConfirmed) {
 						this.KirimJawaban(this.field.soal, this.field.jawaban)
 					} else if (result.isDenied) {
-						this.loading = false
+						this.loading_soal = false
 						this.$swal('Changes are not saved', '', 'info')
 					}
 				})
 			},
 
 			KirimJawaban(soal, jawaban){
+				window.scrollTo(0, 0)
+				this.loading_answer=true
 				const url = `${this.api_url}/web/event/1/pretest/${this.id_test}`
 				this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
 				// console.log(jawaban.length)
@@ -182,7 +207,7 @@
 						}
 					})
 					.catch(err => {
-						this.loading = false
+						this.loading_answer = false
 						this.success.status = false
 						this.success.message = err.message
 						console.log(err.message)
@@ -190,9 +215,13 @@
 					.finally(() => {
 						this.success.status = true
 						const save_test = localStorage.setItem(`finish-post-test-${this.id_test}-${this.$username(this.profiles.nama)}`, JSON.stringify({status: this.success.status, user_id: this.profiles.id, message: 'Anda sudah menyelesaikan sesi post test', profile: this.profiles}))
-						this.loading = false
+						this.loading_answer = false
 						this.save_test = localStorage.getItem(`finish-post-test-${this.id_test}-${this.$username(this.profiles.nama)}`) ? JSON.parse(localStorage.getItem(`finish-post-test-${this.id_test}-${this.$username(this.profiles.nama)}`)) : ''
-						window.scrollTo(0, 0)
+						this.startTimer()
+						setTimeout(() => {
+							this.loading_answer = false
+							this.loading_soal = false
+						}, 2500)
 					})
 				}else{					
 					this.$swal({
@@ -200,8 +229,21 @@
 						title: 'Oops...',
 						text: 'Anda belum menjawab apapun!',
 					})
-					this.loading = false
+					this.startTimer()
+					setTimeout(() => {
+						this.loading_answer = false
+						this.loading_soal = false
+					}, 1500)
 				}
+			},
+
+			startTimer() {
+				let vm = this;
+				let timer = setInterval(function() {
+					vm.value += 6;
+					if (vm.value >= vm.max) clearInterval(timer);
+				}, 100);
+				vm.value = 0
 			},
 
 			ChangeJawaban(id_soal, position, id_jawaban, urutan){

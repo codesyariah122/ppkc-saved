@@ -100,8 +100,8 @@
 							bottom: 0;
 							left: 0;
 							right: 0;
-							width: 290px;
-							height:290px;
+							width: 350px;
+							height:350px;
 							opacity: 0;
 							transition: .3s ease;
 							background-color: rgba(205, 209, 228, 0.9);
@@ -297,7 +297,7 @@
 // Desktop
 @media (min-width: 992px) {
 	.event__detail{
-		margin-top: 4rem;
+		margin-top: 7rem;
 		.event__detail-content{
 			height: 100%;
 			width: 100%;

@@ -74,9 +74,6 @@ export default {
       {
         src: '/assets/js/tiny-slider.js',
         type: 'text/javascript'
-      },
-      {
-        src: 'https://www.youtube.com/player_api'
       }
     ]
   },
@@ -95,7 +92,6 @@ export default {
   {src: '~/plugins/mdb-vue', ssr: false},
   {src: '~/plugins/vue2-leaflet', mode: 'client', ssr: false },
   { src: '~/plugins/sweetalert', ssr: false},
-  { src: '~/plugins/video-embed'}
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

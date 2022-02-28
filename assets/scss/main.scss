@@ -80,7 +80,7 @@
 
 @media (min-width: 992px) {
 	.banner{
-		z-index: -1;
+		z-index: 1;
 		.jumbotron__home{
 			margin-top: 3.5rem;
 			width: $bg-jumbo-width;
@@ -100,7 +100,7 @@
 			margin-top: -5rem;
 			border-radius:50%;
 			background-color: $color-primary;
-			z-index: 9999!important;
+			z-index: 1!important;
 		}
 		.carousel-indicators{
 			z-index: 9999;
