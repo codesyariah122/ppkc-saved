@@ -5,7 +5,7 @@
 				<b-embed
 				type="iframe"
 				aspect="16by9"
-				:src="video"
+				:src="`https://www.youtube-nocookie.com/embed/${video}?autoplay=0&version=3&enablejsapi=1&showinfo=0&controls=0&rel=0&showinfo=0&disablekb=1&iv_load_policy=3&modestbranding=0`"
 				allowfullscreen
 				></b-embed>
 			</mdb-col>

@@ -5,13 +5,12 @@
 				<mdb-tooltip trigger="hover" :options="{placement: 'bottom'}">
 					<span slot="tip"> {{close_show ? 'Tutup Menu Pelatihan' : 'Buka Menu Pelatihan'}} </span>
 					<mdb-btn id="docs-sidebar-toggler" class="toggler" gradient="blue" slot="reference" color="primary" @click="SidebarToggler(); close_show = !close_show;">
-						<mdb-icon icon="bars" size="lg"/>
-						<!-- <div v-if="close_show">
+						<div v-if="close_show || $device.isDesktop">
 							X
 						</div>
 						<div v-else>
 							Menu
-						</div> -->
+						</div>
 						<!-- <i v-if="close_show" class="fas fa-times"></i>
 						<i v-else class="fas fa-bars"></i> -->
 					</mdb-btn>
@@ -44,19 +43,7 @@
 				close_show: true
 			}
 		},
-		
 		methods: {
-			scroll () {
-				window.onscroll = () => {
-					let bottomOfWindow = window.pageYOffset
-					console.log(bottomOfWindow)
-					if (bottomOfWindow > 0) {
-						this.close_show = true
-					}else{
-						this.close_show = false
-					}
-				}
-			},
 			SidebarToggler(){
 				const sidebar = document.getElementById('docs-sidebar');
 				if (sidebar.classList.contains('sidebar-visible')) {

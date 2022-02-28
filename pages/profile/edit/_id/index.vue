@@ -222,8 +222,8 @@ export default {
     this.UserProfileData();
   },
 
-  mounted(){
-    this.IsLoggedIn()
+  mounted() {
+    this.IsLoggedIn();
   },
 
   methods: {

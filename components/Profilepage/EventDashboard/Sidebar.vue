@@ -25,7 +25,7 @@
 						</mdb-row>
 					</b-button>
 
-					<b-collapse v-model="visible" :id="`collapse-${item.id}`" class="collapse__category-event mb-3 shadow-none" :data-id-collapse="`collapse-${index}`">
+					<b-collapse :id="`collapse-${item.id}`" class="collapse__category-event mb-3 shadow-none">
 						<b-card class="shadow-none">
 							<div v-for="(c, index) in item.categories"  :key="c.id">
 								<div v-for="(d, index) in c.details" :key="d.id">
@@ -53,8 +53,7 @@
 
 		data(){
 			return {
-				show_collapse: false,
-				visible: true
+				show_collapse: false
 			}
 		},
 
@@ -64,7 +63,6 @@
 		},
 
 		methods: {
-
 			FilterIcon(type){
 				switch(type){
 					case 1:
