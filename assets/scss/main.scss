@@ -80,7 +80,7 @@
 
 @media (min-width: 992px) {
 	.banner{
-		
+		z-index: -1;
 		.jumbotron__home{
 			margin-top: 3.5rem;
 			width: $bg-jumbo-width;
@@ -282,7 +282,7 @@
 				margin-bottom: 5rem;
 			}
 			.card {
-				height: 450px;
+				height: auto;
 				.event__image-wrap{
 					position: relative;
 					width: 350px;
