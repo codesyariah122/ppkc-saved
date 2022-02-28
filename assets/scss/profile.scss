@@ -2,6 +2,7 @@
 // mobile
 .profile__page{
 	margin-top:6rem!important;
+	font-family: 'Poppins', sans-serif;
 	.card__profile-page{
 		.profile__info-data{
 			.col__img-profile{
@@ -86,14 +87,17 @@
 				ul li{
 					h6{
 						color: $gray;
-						font-weight:900!important;
+						font-weight:600!important;
 						font-size:15px;
 					}
 					p{
-						font-size: 14px;
 						color:$default-gray;
+						font-weight: 500;
+						font-size: 15px!important;
 					}
 					.info__context{
+						font-weight: 500;
+						font-size: 15px!important;
 						margin-top: -.5rem;
 					}
 				}

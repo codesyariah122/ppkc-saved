@@ -16,37 +16,33 @@
 				</mdb-alert>
 			</li>
 			<li class="mb-3">
-				<strong class="text-primary text-uppercase font-weight-bold">Nira</strong> <br>
+				<strong class="text-primary text-uppercase">Nira</strong> <br>
 				<p>
 					{{profiles.no_anggota}}
 				</p>
 			</li>
 			<li>
-				<strong class="text-primary font-weight-bold">Pekerjaan</strong> <br>
+				<strong class="text-primary">Pekerjaan</strong> <br>
 				<h6>
 					{{works.jabatan}}
 				</h6>
-					<p class="info__context">
-						<small>
-						{{works.nama_perusahaan}} <br>
-						{{works.alamat_perusahaan}}
-					</small>
+				<p class="info__context">
+					{{works.nama_perusahaan}} <br>
+					{{works.alamat_perusahaan}}
 				</p>
 			</li>
 			<li>
-				<strong class="text-primary font-weight-bold">Pendidikan</strong> <br>
+				<strong class="text-primary">Pendidikan</strong> <br>
 				<h6>
 					{{studs.nama_institusi}}
 				</h6> 
 				<p class="info__context">
-					<small>
-						{{studs.jenjang_value}} - {{studs.jurusan}} <br>
-						{{$moment(studs.mulai_pend).format("Y")}} - {{$moment(studs.akhir_pend).format("Y")}}
-					</small>
+					{{studs.jenjang_value}} - {{studs.jurusan}} <br>
+					{{$moment(studs.mulai_pend).format("Y")}} - {{$moment(studs.akhir_pend).format("Y")}}
 				</p>
 			</li>
 			<li>
-				<strong class="text-primary font-weight-bold">Domisili</strong> <br>
+				<strong class="text-primary">Domisili</strong> <br>
 				<p>
 					{{profiles.kabupaten_name}}, {{profiles.propinsi_name}}
 				</p>

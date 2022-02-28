@@ -209,6 +209,7 @@
 	.card__content{
 		.card{
 			margin-bottom: 2rem;
+
 			.event__image-wrap{
 				position: relative;
 				.overlay__event-img {
@@ -281,11 +282,11 @@
 				margin-bottom: 5rem;
 			}
 			.card {
-				// width:310px;
-				// height: 470px;
-				img{
-					width: 500px;
-					height: 200px;
+				height: 450px;
+				.event__image-wrap{
+					position: relative;
+					width: 350px;
+					height: 250px;
 					object-fit: cover;
 				}
 				.card-body{					

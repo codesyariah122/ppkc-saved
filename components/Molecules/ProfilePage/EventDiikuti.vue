@@ -65,15 +65,15 @@
 					<mdb-row>
 						<mdb-col lg="12" xs="12" sm="12">
 							<mdb-card-title>{{item.kegiatan_title}}</mdb-card-title>
-							<small>
+							<small style="font-weight:600; margin-bottom: 1rem;">
 								{{$moment(item.tanggal_awal).format("LL")}} - {{$moment(item.tanggal_akhir).format("LL")}}
 							</small>
 							
 							<mdb-row class="d-flex justify-content-start">
 								<mdb-col md="12">
-									<blockquote class="blockquote-footer">
+									<p class="blockquote-footer">
 										{{item.kegiatan_desc}}
-									</blockquote>
+									</p>
 								</mdb-col>
 								<mdb-col md="3">
 									<span>Status : </span> 

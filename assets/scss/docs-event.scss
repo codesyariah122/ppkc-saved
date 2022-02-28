@@ -3,6 +3,19 @@
 	.docs-sidebar{
 		margin-top: -.9rem;
 		width:250px;
+		scrollbar-color: $scroll-bar-color $scroll-bar-bg;
+		scrollbar-width: auto;
+		&:-webkit-scrollbar {
+			width: 21px;
+		}
+		&:-webkit-scrollbar-track {
+			background: $scroll-bar-bg;
+		}
+		&:-webkit-scrollbar-thumb {
+			background-color: $scroll-bar-color;
+			border-radius: 6px;
+			border: 11px solid $scroll-bar-bg;
+		}
 		.docs-nav{
 			overflow-x: hidden;
 			.collapse__docs{
@@ -103,6 +116,19 @@
 		.docs-sidebar{	
 			margin-top: -.7rem;
 			width:300px!important;
+			scrollbar-color: $scroll-bar-color $scroll-bar-bg;
+			scrollbar-width: auto;
+			&:-webkit-scrollbar {
+				width: 21px;
+			}
+			&:-webkit-scrollbar-track {
+				background: $scroll-bar-bg;
+			}
+			&:-webkit-scrollbar-thumb {
+				background-color: $scroll-bar-color;
+				border-radius: 6px;
+				border: 11px solid $scroll-bar-bg;
+			}
 			.docs-nav{
 				.collapse__docs{
 					overflow: hidden!important;

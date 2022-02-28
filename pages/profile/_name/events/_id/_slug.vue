@@ -141,10 +141,13 @@
 									</section><!--//docs-intro-->
 								</header>
 								<section class="docs-section mt-2" id="item-1-1">
-									<mdb-alert v-if="api_url=='https://api.ppkc-online.com/api/v1'" color="danger">
+									<!-- <pre>
+										{{api_url}}
+									</pre> -->
+									<!-- <mdb-alert v-if="api_url=='https://api.ppkc-online.com/api/v1'" color="danger">
 										<mdb-icon icon="info-circle" /> video webinar tidak tersedia
-									</mdb-alert>
-									<EventWebinar v-else :id_webinar="id_webinar" :token="token" :api_url="api_url"/>
+									</mdb-alert> -->
+									<EventWebinar :id_webinar="id_webinar" :token="token" :api_url="api_url"/>
 								</section>
 							</div>
 						</div>
@@ -223,23 +226,12 @@
 			this.EventAktif(),
 			this.DetailEventProfileLogin(),
 			this.StatusPembayaran(),
-			this.scroll(),
 			this.VenoBox(),
 			this.WelcomeText()
 		},
 
 		methods: {
-			scroll () {
-				window.onscroll = () => {
-					let bottomOfWindow = window.pageYOffset
-
-					if (bottomOfWindow > 220) {
-						this.scrolledToBottom = true
-					}else{
-						this.scrolledToBottom = false
-					}
-				}
-			},
+			
 
 			IsLoggedIn(){
 				if(!this.token.accessToken){

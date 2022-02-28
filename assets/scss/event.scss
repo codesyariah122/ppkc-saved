@@ -81,7 +81,16 @@
 		.card__content-events{
 			.webinar__content{
 				.card{
-					height:auto;
+					width: 350px;
+					img{
+						width: 500px;
+						object-fit: cover;
+					}
+					.card-body{					
+						.badge__category{
+							color: $color-primary!important;
+						}
+					}
 					@include card_rounded_desktop;
 					.event__image-wrap{
 						position: relative;

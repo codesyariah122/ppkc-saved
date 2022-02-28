@@ -32,16 +32,10 @@
                     <mdb-card>
                       <div class="event__image-wrap">
                         <mdb-card-image :src="item.foto_url" alt="Card image cap"></mdb-card-image>
-                        <div class="overlay__event-img">
-                          <a :data-gall="item.foto_url" :href="item.foto_url" class="lists-berita icon" :title="item.judul">
-                            <mdb-icon icon="search-plus" />
-                          </a>
-                        </div>
                       </div>
                       <mdb-card-body>
                         <mdb-card-title
-                          class="truncate"
-                          style="padding-top: 16px; min-height: 100px"
+                          class="truncate mb-5"
                           >{{ item.judul }}</mdb-card-title
                         >
                         <nuxt-link
@@ -109,8 +103,7 @@ export default {
   },
 
   mounted() {
-    this.getNextBerita(),
-    this.VenoBox()
+    this.getNextBerita()
   },
 
   methods: {
@@ -128,16 +121,6 @@ export default {
           }
         }
       }
-    },
-
-    VenoBox(){
-      new VenoBox({
-        selector: '.lists-berita',
-        numeration: true,
-        infinigall: true,
-        share: ['facebook', 'twitter', 'linkedin', 'pinterest', 'download'],
-        spinner: 'rotating-plane'
-      })
     }
   }
 }
