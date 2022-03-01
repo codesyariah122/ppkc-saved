@@ -19,6 +19,9 @@
         <mdb-navbar-nav right>
           <mdb-nav-item active waves-fixed to="/"> Home </mdb-nav-item>
           <mdb-nav-item waves-fixed to="/events"> Events </mdb-nav-item>
+          <mdb-nav-item v-if="token.accessToken" waves-fixed>
+              <nuxt-link :to="`/profile/${$username(slug)}/events`">Akses Pelatihan</nuxt-link>
+            </mdb-nav-item>
           <mdb-dropdown tag="li" class="nav-item">
             <mdb-dropdown-toggle tag="a" navLink slot="toggle" waves-fixed>
               Tetang PPKC
