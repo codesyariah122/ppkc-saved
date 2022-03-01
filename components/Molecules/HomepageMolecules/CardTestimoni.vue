@@ -51,7 +51,7 @@
           "mouseDrag": true,
           "speed": 400,
           "nav": false,
-          "controls": this.$device.isDesktop ? false : true,
+          "controls": this.$device.isDesktop ? false : false
         });
       }
     }

@@ -61,6 +61,21 @@
         </b-row>
       </b-container>
     </b-jumbotron>
+    <div class="banner">
+      
+      <mdb-carousel
+      :interval="8000"
+      slide
+      :items="items"
+      controlls
+      indicators
+      fade
+      dark
+      class="jumbotron__home"
+      customClass="rounded"
+      >
+      </mdb-carousel>
+    </div>
   </div>
 </template>
 

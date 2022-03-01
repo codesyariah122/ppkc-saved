@@ -44,7 +44,6 @@
 	position: relative;
 }
 @mixin jumbotron_mobile($color) {
-
 	.container{
 		margin-top: 6rem;
 		@include container_jumbotron();
@@ -608,7 +607,7 @@
 		h5{
 			color:$color-primary;
 			font-size: 16px;
-			font-weight: 700;
+			font-weight: 800;
 			line-height: 27px;
 			text-transform: capitalize;
 		}

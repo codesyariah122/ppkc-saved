@@ -33,12 +33,40 @@
 }
 
 .banner{
-	position: relative;
-	img{
-		object-fit: cover;
-		max-width: 100%;
+	z-index: 1;
+	.jumbotron__home{
+		margin-top: 3.5rem;
+		width: $bg-jumbo-width;
+		max-height: $bg-jumbo-height;
+		position:relative;
+
+		@include jumbotron_mobile($default);
 	}
-	
+	position: relative;
+	// img{
+	// 	object-fit: cover;
+	// 	max-width: 100%;
+	// }
+	.carousel-control-prev-icon,
+	.carousel-control-next-icon {
+		height: 40px !important;
+		width: 40px !important;
+		margin-top: -.5rem;
+		border-radius:50%;
+		background-color: $color-primary;
+		z-index: 1!important;
+	}
+	.carousel-indicators{
+		z-index: 9999;
+		li{
+			width: 10px;
+			height: 10px;
+			background-color: linear-gradient(to top, $color-primary, $bg-second-primary);
+		}
+		.active{
+			background-color: $bg-second-primary !important;	
+		}
+	}
 	.container{
 		z-index: 1000;
 		max-width: 1000px;

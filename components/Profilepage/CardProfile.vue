@@ -26,7 +26,7 @@
     <b-card v-else>
       <mdb-container class="profile__info-data">
         <mdb-row class="d-flex justify-content-between">
-          <mdb-col md="3" class="col__img-profile">
+          <mdb-col md="3" xs="12" sm="12" class="col__img-profile">
             <div class="hover__image-wrap">
               <img
                 v-if="

@@ -3,7 +3,9 @@
 	.card__content-events{
 			.webinar__content{
 				.card{
-					@include card_rounded_desktop;
+					width: 325px;
+					height: auto!important;
+					@include card_rounded_mobile;
 					.event__image-wrap{
 						position: relative;
 						.overlay__event-img {
@@ -40,11 +42,7 @@
 						}
 					}
 					height: 90%;
-					// img{
-					// 	object-fit: cover;
-					// 	max-height: 55rem;
-					// 	border-radius:0;
-					// }
+					
 					p{
 						font-size:14px;
 					}
@@ -168,7 +166,7 @@
 // Detail-slug component
 // Event detail slug components
 .event__detail{
-	margin-top: 1rem;
+	margin-top: 2rem;
 	.event__detail-content{
 		height: 700px;
 		.idr__color {
@@ -186,15 +184,20 @@
 		}
 		.col-1{
 			.event__image-wrap{
-				margin-top: 1rem;
 				position: relative;
+				img{
+					object-fit: contain;
+					width: 325px;
+					height: 435px;
+					border-radius: 8px!important;
+				}
 				.overlay__event-img {
 					position: absolute;
-					top: 13%;
+					top: 10%;
 					bottom: 0;
 					left: -3%;
 					right: 0;
-					height:325px;
+					height:337px;
 					width: 325px;
 					opacity: 0;
 					transition: .3s ease;
@@ -220,12 +223,6 @@
 				.fa-zoom:hover {
 					color: #eee;
 				}
-			}
-			img{
-				object-fit: contain;
-				width: 325px;
-				height: 435px;
-				border-radius: 8px!important;
 			}
 		}
 		.col-2{
@@ -261,6 +258,7 @@
 		.inside__second{
 			width:304px;
 			margin-left: .1rem;
+			margin-bottom: 10rem;
 			button{
 				width:100%;
 				font-weight: 600;
