@@ -41,9 +41,9 @@ export default {
 
   beforeMount() {
     this.ConfigApiUrl(),
-      this.UserProfileData(),
-      this.EventYangDiikuti(),
-      this.EventCategories();
+    this.UserProfileData(),
+    this.EventYangDiikuti(),
+    this.EventCategories()
   },
 
   mounted() {
@@ -138,7 +138,7 @@ export default {
     },
     api_url() {
       return this.$store.getters["config/ConfigApiUrl"];
-    },
-  },
-};
+    }
+  }
+}
 </script>

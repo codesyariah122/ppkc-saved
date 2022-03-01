@@ -24,6 +24,9 @@
             <mdb-nav-item waves-fixed>
               <nuxt-link to="/events"> Events </nuxt-link>
             </mdb-nav-item>
+            <mdb-nav-item v-if="token.accessToken" waves-fixed>
+              <nuxt-link :to="`/profile/${$username(slug)}/events`">Akses Pelatihan</nuxt-link>
+            </mdb-nav-item>
             <mdb-dropdown tag="li" class="nav-item">
               <mdb-dropdown-toggle
                 tag="a"
@@ -52,7 +55,10 @@
             style="font-size: 31px !important"
           >
             <mdb-dropdown-toggle tag="a" navLink slot="toggle">
-              <mdb-icon far icon="user-circle" /> Profile
+              <!-- <mdb-icon far icon="user-circle" size="lg"/>  -->
+              <b-img v-if="profiles.photo" :src="profiles.photo" rounded="circle" alt="Circle image" width="30"></b-img>
+              <b-img v-else v-bind="mainProps" rounded="circle" alt="Circle image"></b-img>
+              {{profiles.nama}}
             </mdb-dropdown-toggle>
             <mdb-dropdown-menu :class="`${$device.isDesktop ? 'mt-2' : ''}`">
               <mdb-dropdown-item>
@@ -66,7 +72,7 @@
                   <mdb-icon icon="user-md" /> {{ profiles.nama }}
                 </nuxt-link> -->
                 <a :href="`/profile/${$username(slug)}`" class="text-center">
-                  <mdb-icon icon="user-md" /> {{ profiles.nama }}
+                  <mdb-icon icon="user-md" /> Profile
                 </a>
               </mdb-dropdown-item>
               <div class="dropdown-divider"></div>
@@ -115,7 +121,8 @@ export default {
         { id: 7, name: "Fasilitator", link: "/ppkc/fasilitator" },
         { id: 8, name: "Yayasan & Direksi", link: "/ppkc/yayasan-direksi" },
       ],
-      path: this.$route.path
+      path: this.$route.path,
+      mainProps: { blank: true, blankColor: '#777', width: 75, height: 75, class: 'm1' }
     };
   },
 

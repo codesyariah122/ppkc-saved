@@ -3,21 +3,19 @@
 		<mdb-container>
 			
 			<mdb-row col="12" class="d-flex align-items-stretch mb-5 webinar__content">
-				<mdb-col v-if="loading" lg="12">
-					<center>						
-						<b-card>
-							<b-row>
-								<b-col cols="12" class="mb-3">
-									<b-skeleton-img></b-skeleton-img>
-								</b-col>
-								<b-col cols="12">
-									<b-skeleton animation="wave" width="85%"></b-skeleton>
-									<b-skeleton animation="wave" width="55%"></b-skeleton>
-									<b-skeleton animation="wave" width="70%"></b-skeleton>
-								</b-col>
-							</b-row>
-						</b-card>
-					</center>
+				<mdb-col v-if="loading" v-for="(item, index) in lists" lg="12" :key="item.id">
+					<b-card>
+						<b-row>
+							<b-col cols="12" class="mb-3">
+								<b-skeleton-img></b-skeleton-img>
+							</b-col>
+							<b-col cols="12">
+								<b-skeleton animation="wave" width="85%"></b-skeleton>
+								<b-skeleton animation="wave" width="55%"></b-skeleton>
+								<b-skeleton animation="wave" width="70%"></b-skeleton>
+							</b-col>
+						</b-row>
+					</b-card>
 				</mdb-col>
 				<div v-else>
 					<center>
