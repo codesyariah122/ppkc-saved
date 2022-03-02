@@ -220,7 +220,7 @@ import moment from "moment";
 
 export default {
   name: "pendidikan-id",
-  layout: "default",
+  layout: "profile",
 
   data() {
     return {

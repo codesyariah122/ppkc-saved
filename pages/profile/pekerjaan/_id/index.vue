@@ -213,7 +213,7 @@ import moment from "moment";
 
 export default {
   name: "pekerjaan-id",
-  layout: "default",
+  layout: "profile",
 
   data() {
     return {
