@@ -47,11 +47,15 @@
           "center": true,
           "slideBy": 'page',
           "loop": false,
+          "autoplay": false,
+          "speed": 400,
+          "autoplayButtonOutput": false,
           "swipeAngle": true,
           "mouseDrag": true,
-          "speed": 400,
+          "lazyload": false,
           "nav": false,
-          "controls": this.$device.isDesktop ? false : false
+          "controls": true,
+          "controlsText": ['<span class="fas fa-chevron-circle-left"></span>', '<span class="fas fa-chevron-circle-right"></span>'],
         });
       }
     }
@@ -60,7 +64,30 @@
 
 <style lang="scss">
 @include card_testimonial_mobile;
-
+.tns-outer {
+  position: relative;
+}
+[data-controls] {
+  border: 0;
+  padding: 0;
+  font-size: 40px;
+  position: absolute;
+  top: 50%;
+  margin-top: -18px;
+  z-index: 1;
+  background: transparent;
+  color:$color-primary;
+}
+button[disabled]{
+  color: $default-gray!important;
+  cursor: not-allowed;
+}
+[data-controls="prev"] {
+  left: -8px;
+}
+[data-controls="next"] {
+  right: 5px;
+}
 @media (min-width: 992px) {
   @include card_testimonial_desktop;
 }

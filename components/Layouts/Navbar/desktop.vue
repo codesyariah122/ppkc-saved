@@ -37,7 +37,7 @@
               >
                 Tentang PPKC
               </mdb-dropdown-toggle>
-              <mdb-dropdown-menu :class="`${$device.isDesktop ? 'mt-2' : ''}`">
+              <mdb-dropdown-menu :class="`${$device.isDesktop ? 'mt-3' : ''}`">
                 <mdb-dropdown-item v-for="item in links" :key="item.id">
                   <nuxt-link :to="item.link">
                     {{ item.name }}

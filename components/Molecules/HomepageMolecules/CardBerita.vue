@@ -1,7 +1,6 @@
 <template>
 	<div>
 		<mdb-row col="12" class="slider__berita">
-
 			<mdb-col v-if="listsIndex <= lists.length" v-for="listsIndex in listsToShow" md="5" class="card__berita-list"  :key="lists[listsIndex-1].id">
 				<mdb-card class="mt-2">
 					<mdb-card-image :src="lists[listsIndex-1].foto_url" alt="Card image cap"></mdb-card-image>
@@ -35,13 +34,45 @@
 					"center": true,
 					"slideBy": 'page',
 					"loop": false,
+					"autoplay": false,
+					"speed": 400,
+					"autoplayButtonOutput": false,
 					"swipeAngle": true,
 					"mouseDrag": true,
+					"lazyload": false,
 					"speed": 400,
 					"nav": false,
-					"controls": this.$device.isDesktop ? false : false,
+					"controls": true,
+					"controlsText": ['<span class="fas fa-chevron-circle-left"></span>', '<span class="fas fa-chevron-circle-right"></span>'],
 				});
 			}
 		}
 	}
 </script>
+
+<style lang="scss">
+	.tns-outer {
+		position: relative;
+	}
+	[data-controls] {
+		border: 0;
+		padding: 0;
+		font-size: 40px;
+		position: absolute;
+		top: 50%;
+		margin-top: -18px;
+		z-index: 1;
+		background: transparent;
+		color: $color-primary;
+	}
+	button[disabled]{
+		color: $default-gray!important;
+		cursor: not-allowed;
+	}
+	[data-controls="prev"] {
+		left: -8px;
+	}
+	[data-controls="next"] {
+		right: 5px;
+	}
+</style>

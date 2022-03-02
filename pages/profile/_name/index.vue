@@ -1,6 +1,8 @@
 <template>
 	<div>
-		<Profilepage :profiles="profiles" :genders="genders" :jobs="jobs" :studs="studs" :works="works" :maritals="maritals" :pelatihans="pelatihans" :categories="categories" :api_url="api_url" @load-event-follow="EventYangDiikuti" :empty_filter="empty_filter" :loading="loading" :token="token" />
+		<Profilepage v-if="token.accessToken" :profiles="profiles" :genders="genders" :jobs="jobs" :studs="studs" :works="works" :maritals="maritals" :pelatihans="pelatihans" :categories="categories" :api_url="api_url" @load-event-follow="EventYangDiikuti" :empty_filter="empty_filter" :loading="loading" :token="token" />
+
+		<ProfilepagePublicProfile profiles="profiles" :genders="genders" :jobs="jobs" :studs="studs" :works="works" :maritals="maritals" :pelatihans="pelatihans" :categories="categories" :api_url="api_url" @load-event-follow="EventYangDiikuti" :empty_filter="empty_filter" :loading="loading" :token="token" />
 	</div>
 </template>
 
@@ -35,7 +37,6 @@
 
 		mounted(){
 			this.CheckToken(),
-			this.IsLoggedIn(),
 			this.CheckLogout()
 		},
 

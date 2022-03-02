@@ -369,9 +369,14 @@
 	// 	}
 	// }
 	.card__berita-list{
-			margin-right: -2rem;
-			margin-left: .5rem;
+			margin-right: -2.5rem;
+			margin-left: 1rem;
 			border-radius:8px!important;
+			.controls{
+				ul li{
+					list-style: none;
+				}
+			}
 			.card{
 				.card-title{
 					color:$color-primary;
