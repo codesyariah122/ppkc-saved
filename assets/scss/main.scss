@@ -353,6 +353,7 @@
 // Berita component
 .berita__list{
 	background-image: linear-gradient(to bottom right, $bg-primary, $bg-second-primary);
+
 	@include header_inside_list_mobile($default);
 	// .col__berita{
 	// 	.card{
@@ -405,6 +406,7 @@
 			margin-left: -8rem;
 			border-radius:8px!important;
 			.card{
+				width:100%;
 				margin-top: 2rem;
 				.card-title{
 					color:$color-primary;

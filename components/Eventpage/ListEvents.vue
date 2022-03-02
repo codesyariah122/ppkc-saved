@@ -28,7 +28,8 @@
 				<mdb-col v-else id="show-event" v-for="list in lists" md="4" xs="12" sm="12" :key="list.kegiatan_id">
 					<mdb-card>
 						<div class="event__image-wrap">
-							<mdb-card-image :src="list.photo" alt="Card image cap"></mdb-card-image>
+							<mdb-card-image v-if="list.photo == 'https://api.ppkc-online.com/image-kegiatans/null'" :src="require('~/assets/images/homepage/default.jpg')" alt="No image found"></mdb-card-image>
+							<mdb-card-image v-else :src="list.photo" :alt="list.kegiatan_title" ></mdb-card-image>
 							<div class="overlay__event-img">
 								<a :data-gall="list.photo" :href="list.photo" class="list-events icon" title="Lihat Foto">
 									<mdb-icon icon="search-plus" />

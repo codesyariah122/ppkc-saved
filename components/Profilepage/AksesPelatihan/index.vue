@@ -160,11 +160,11 @@
 		.jumbotron{
 			background-color: $jumbotron-bg;
 			h1{
-				font-size: 4rem;
+				font-size: 2rem;
 				font-weight: 800;
 			}
 			p{
-				font-size: 21px;
+				font-size: 18px;
 				font-weight: 400;
 			}
 			.card{

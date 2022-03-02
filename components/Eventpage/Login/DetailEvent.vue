@@ -85,7 +85,7 @@
 							Loading...
 						</div>
 						<div v-else>
-							<mdb-btn @click="CheckKonfirmasi(details.kegiatan_id)" gradient="blue" size="md">
+							<mdb-btn @click="CheckConfirmasi(details.kegiatan_id)" gradient="blue" size="md">
 								<mdb-icon far icon="calendar-plus" size="lg"/> {{status_pendaftaran}}
 							</mdb-btn>
 						</div>
@@ -152,7 +152,7 @@
 
 			CheckConfirmasi(id){
 				this.$router.push({
-					name: 'events-id-success',
+					name: 'events-id-registrasi',
 					params: {
 						id: id
 					}

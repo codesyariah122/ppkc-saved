@@ -21,21 +21,21 @@
         <mdb-row col="12" class="row justify-content-center mb-5 mt-5">
           <mdb-col
           v-for="item in lists"
-          md="4" xs="12" sm="12"
+          lg="8" xs="12" sm="12"
           :key="item.id"
           class="col__testimoni-card"
           >
             <mdb-card
             class="card__testimoni-content mb-3"
             >
-            <mdb-container class="mt-4 mb-5">
+            <mdb-container class="mt-2">
               <blockquote class="post__quote">
-                <mdb-icon icon="quote-left" /><br />
+                <mdb-icon icon="quote-left" size="lg"/><br />
                 <span class="quote__txt">
                   {{ item.testimoni }}
                 </span>
                 <h3 class="profile__name">
-                  {{ item.konsumen }}
+                  - {{ item.konsumen }}
                 </h3>
               </blockquote>
             </mdb-container>

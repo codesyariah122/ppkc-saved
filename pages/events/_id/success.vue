@@ -12,14 +12,14 @@
 			</mdb-row>
 			<mdb-row v-else col="12" class="justify-content-center">
 				<mdb-col lg="12">
-					<h1 v-if="status_pendaftaran" class="text-center">
-						{{status_pendaftaray}} pembayaran
+					<h1 v-if="data_pendaftaran.status_pendaftaran_value" class="text-center">
+						{{data_pendaftaran.status_pendaftaran_value}} pembayaran
 					</h1>
 					<h1 v-else class="text-center">
 						Menunggu konfirmasi pembayaran
 					</h1>
 				</mdb-col>
-				<mdb-col lg="12" class="mt-5">
+				<mdb-col v-if="checks || status_pendaftaran" lg="12" class="mt-5">
 					<center>
 						<b-button v-b-toggle.collapse-1 variant="primary">Lihat Bukti pembayaran anda <mdb-icon icon="binoculars" size="lg" /> </b-button>
 						<b-collapse id="collapse-1" class="mt-2">
@@ -118,7 +118,8 @@
 				timer: 0,
 				value: 0,
 				max: 100,
-				status_pendaftaran:''
+				status_pendaftaran:'',
+				data_pendaftaran: []
 			}
 		},
 
@@ -159,8 +160,9 @@
 				this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
 				this.$axios.get(url)
 				.then(({data}) => {
-					// console.log(data)
-					data.kegiatan.map(d => this.status_pendaftaran = d.status_pendaftaran_value)
+					console.log(data)
+					this.data_pendaftaran = data.kegiatan
+					// data.kegiatan.map(d => this.status_pendaftaran = d.status_pendaftaran_value)
 				})
 				.catch(err => console.log(err))
 				.finally(() => {

@@ -2,7 +2,7 @@
 	<div>
     <!-- Testimoni content -->
     <mdb-row col="12" class="slider__testimoni">
-      <mdb-col v-if="testiIndex <= lists.length" v-for="testiIndex in testiToShow" md="5" sm="4" xs="4" :key="lists[testiIndex-1].id" class="col__testimoni-card">
+      <mdb-col v-if="testiIndex <= lists.length" v-for="testiIndex in testiToShow" :md="`${lists.length <= 2 ? '12' : '5'}`" sm="4" xs="4" :key="lists[testiIndex-1].id" class="col__testimoni-card">
         <mdb-card class="card__testimoni-content mt-2">
           <mdb-container class="mt-4 mb-2">
             <blockquote class="post__quote"> 
@@ -11,7 +11,7 @@
                 {{lists[testiIndex-1].testimoni}}
               </p>
               <h3 class="profile__name">
-                {{lists[testiIndex-1].konsumen ? lists[testiIndex-1].konsumen : 'PPKC Visitor'}}
+               - {{lists[testiIndex-1].konsumen ? lists[testiIndex-1].konsumen : 'PPKC Visitor'}}
               </h3>
             </blockquote>
           </mdb-container>

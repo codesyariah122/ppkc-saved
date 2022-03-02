@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<mdb-row col="12" class="slider__berita">
-			<mdb-col v-if="listsIndex <= lists.length" v-for="listsIndex in listsToShow" md="5" class="card__berita-list"  :key="lists[listsIndex-1].id">
+			<mdb-col v-if="listsIndex <= lists.length" v-for="listsIndex in listsToShow" :md="`${lists.length <= 2 ? '12' : '5'}`" xs="5" sm="5" class="card__berita-list"  :key="lists[listsIndex-1].id">
 				<mdb-card class="mt-2">
 					<mdb-card-image :src="lists[listsIndex-1].foto_url" alt="Card image cap"></mdb-card-image>
 					<mdb-card-body>

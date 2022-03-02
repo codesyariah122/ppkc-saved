@@ -16,7 +16,7 @@
 				</mdb-col>
 
 				<!-- column card berita -->
-				<mdb-col col="12" class="col__berita mt-3 mb-3" md="9">
+				<mdb-col v-if="lists.length > 0" md="9" xs="12" sm="12" class="col__berita mt-3 mb-3">
 					<!-- Card berita components -->
 					<CardBerita :lists="lists" ref="childBerita"/>	
 				</mdb-col>

@@ -16,11 +16,8 @@
                 lists[listIndex - 1].kegiatan_title
               )}`"
             >
-              <mdb-card-image
-                :src="lists[listIndex - 1].photo"
-                alt="Card image cap"
-                class="img-fluid"
-              />
+              <mdb-card-image v-if="lists[listIndex - 1].photo == 'https://api.ppkc-online.com/image-kegiatans/null'" :src="require('~/assets/images/homepage/default.jpg')" alt="No image found"></mdb-card-image>
+              <mdb-card-image v-else :src="lists[listIndex - 1].photo" :alt="lists[listIndex-1].kegiatan_title" class="img-fluid"/>
               <mdb-mask flex-center waves overlay="white-slight"></mdb-mask>
             </a>
           </mdb-view>

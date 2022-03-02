@@ -400,9 +400,10 @@
 		background-color: $testimoni-card;
 		border-radius: 10px;
 		color: $default;
-		width: 350px!important;
-		height: 270px!important;
+		width:100%;
+		height: auto!important;
 		margin-top: 1rem;
+		
 		.quote__txt {
 			font-size: 18px!important;
 			font-weight:600;  
