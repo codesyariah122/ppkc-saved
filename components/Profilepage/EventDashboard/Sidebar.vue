@@ -89,11 +89,13 @@
 			},
 
 			ShowField(raw, id_kategori='', type){
+				window.scrollTo(0, 0)
 				this.$emit('show-field', raw, id_kategori, type)
 			},
 
 			ToggleFile(){
 				// this.show_collapse = !this.show_collapse
+				window.scrollTo(0, 0)
 				this.$emit('toggle-file')
 			},
 

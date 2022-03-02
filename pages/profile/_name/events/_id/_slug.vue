@@ -159,7 +159,7 @@
 									<!-- <mdb-alert v-if="api_url=='https://api.ppkc-online.com/api/v1'" color="danger">
 										<mdb-icon icon="info-circle" /> video webinar tidak tersedia
 									</mdb-alert> -->
-									<EventWebinar :id_webinar="id_webinar" :token="token" :api_url="api_url"/>
+									<EventWebinar :id_webinar="id_webinar" :token="token" :api_url="api_url" :profiles="profiles" :details="details"/>
 								</section>
 							</div>
 						</div>
@@ -333,7 +333,7 @@
 				})
 			},
 			ShowField(raw, id_kategori='', type){
-				window.scrollTo(0, 0);
+				window.scrollTo(0, 0)
 				this.loading_file = true
 				this.show_file = true
 				this.show_close = true
@@ -376,6 +376,7 @@
 				this.id_webinar = id_kategori
 				setTimeout(() => {
 					this.loading_file = false
+					window.scrollTo(0, 0)
 				}, 900)
 				setTimeout(() => {
 					this.link_yt = false
