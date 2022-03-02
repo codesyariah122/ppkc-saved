@@ -47,14 +47,14 @@
 				<mdb-row class="inside__first mt-3">
 
 					<mdb-col v-if="data_event || token.accessToken" md="12" class="mt-2 mb-3">
-						<mdb-badge color="success">{{status_pendaftaran}}</mdb-badge>
+						<mdb-badge v-if="status_pendaftaran  !== 'Daftar'" color="success">{{status_pendaftaran}}</mdb-badge>
 					</mdb-col>
 
 					<mdb-col md="4">
 						<h5>Jenis kegiatan</h5>
-						<p>
+						<mdb-badge color="success">
 							{{details.kategori_value}}
-						</p>
+						</mdb-badge>
 					</mdb-col>
 					<mdb-col md="4">
 						<h5>Nilai SKP</h5>
