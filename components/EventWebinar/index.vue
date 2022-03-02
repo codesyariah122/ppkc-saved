@@ -84,7 +84,7 @@
 				</mdb-col>
 			</mdb-row>
 
-			<mdb-row v-else-if="webinar_checkout">
+			<mdb-row v-else-if="webinar_checkout || !webinar_checkin">
 				<mdb-col lg="12" xs="12" sm="12">
 					<mdb-alert color="info">
 						<mdb-icon icon="info-circle" /> Silahkan klik tombol checkin di bawah untuk mengakses webinar anda !
