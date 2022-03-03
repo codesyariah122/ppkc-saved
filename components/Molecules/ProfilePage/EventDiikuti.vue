@@ -166,7 +166,6 @@
 				this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
 				this.$axios.get(url)
 				.then(({data}) => {
-					console.log(data.list_data)
 					if(data.list_data.length > 0){
 						this.pelatihans = data.list_data
 					}else{
@@ -188,8 +187,6 @@
 
 				FetchData(url)
 				.then((data) => {
-					// console.log(data)
-					// Ambil categories event
 					this.categories = data.list_jenis_kegiatan
 				})
 				.catch(err => console.log(err))

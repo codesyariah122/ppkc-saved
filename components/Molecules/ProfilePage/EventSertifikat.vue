@@ -25,11 +25,11 @@
 						</mdb-col>
 						<mdb-col md="4">
 							<mdb-btn size="sm" type="submit">
-								<div v-if="loading">
+								<!-- <div v-if="loading">
 									<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
 									Loading...
-								</div>
-								<div v-else>
+								</div> -->
+								<div>
 									<mdb-icon icon="filter" size="lg"/> Terapkan Filter		
 								</div>
 							</mdb-btn>
@@ -38,13 +38,13 @@
 				</form>
 			</mdb-col>
 		</mdb-row>
-		<mdb-row v-if="loading" class="row justify-content-center">
+		<!-- <mdb-row v-if="loading" class="row justify-content-center">
 			<div class="spinner-grow text-primary mt-3" size="md" style="width: 5rem; height: 5rem; background: coral;" role="status">
 				<span class="sr-only">Loading...</span>
 			</div>
-		</mdb-row>
+		</mdb-row> -->
 
-		<mdb-row v-else>
+		<mdb-row>
 			<mdb-card v-if="sertifikats.length === 0" class="card-body" style="width: 100%; margin-top: 1rem;">
 				<mdb-row>
 					<mdb-col lg="12" xs="12" sm="12">
@@ -75,7 +75,7 @@
 
 <script>
 	export default{
-		props: ['categories', 'loading'],
+		props: ['categories'],
 
 		data(){
 			return {

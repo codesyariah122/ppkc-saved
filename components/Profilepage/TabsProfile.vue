@@ -17,7 +17,7 @@
 			</b-tab>
 
 			<b-tab title="Sertifikat" class="font-weight-bold">
-				<!-- <MoleculesProfilePageEventSertifikat :categories="categories" :loading="loading"/> -->
+				<MoleculesProfilePageEventSertifikat :categories="categories" :loading="loading"/>
 			</b-tab>
 		</b-tabs>
 	</div>
