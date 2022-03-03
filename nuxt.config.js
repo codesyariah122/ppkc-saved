@@ -102,7 +102,8 @@ export default {
   '@nuxtjs/device',
   '@nuxtjs/style-resources',
   '@nuxtjs/svg',
-  '@nuxtjs/moment'
+  '@nuxtjs/moment',
+  '@nuxtjs/color-mode'
   ],
 
   styleResources: {

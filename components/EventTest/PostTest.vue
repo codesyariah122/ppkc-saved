@@ -28,11 +28,11 @@
 
 			<div v-else>
 				<mdb-row  col="12" class="row justify-content-start mb-2">
-					<small class="text-info">
+					<!-- <small class="text-info">
 						*.Selesaikan  Soal No.1 Terlebih Dahulu
-					</small>
+					</small> -->
 				</mdb-row>
-				<mdb-row v-for="(item, index) in lists" col="12" class="row justify-content-center" :key="item.id">
+				<mdb-row v-for="(item, index) in lists" col="12" class="row justify-content-center" >
 					<mdb-col lg="12" class="test__content">
 						<h4> Soal {{item.urutan}} </h4>
 						<p> {{item.pertanyaan}} </p>
@@ -47,11 +47,11 @@
 										class="answer"
 										v-for="option in item.pilihans"
 										:value="option.id"
-										:key="option.id"
+										
 										>
 											<input v-if="soal_active || item.urutan == 1"
 											type="radio"
-											v-model="item.id"
+											
 											:value="option.id"
 											:id="option.id"
 											required @change="ChangeJawaban(option.ujian_id, index, option.id, item.urutan)"

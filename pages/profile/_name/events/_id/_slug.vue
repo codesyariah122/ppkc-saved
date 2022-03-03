@@ -9,6 +9,8 @@
 					<!-- Sidebar Toggler -->
 					<MoleculesProfilePageTogglerSidebar/>
 
+					<!-- <ColorModePicker/> -->
+
 					<article v-if="!show_file" class="docs-article">
 						<header  class="docs-header">
 							<section class="docs-section mt-2" id="item-1-1">
@@ -192,10 +194,14 @@
 </template>
 
 <script>
+	import ColorModePicker from '@/components/Globals/ColorModePicker'
+
 	export default{
 		name: 'profile-events-id-slug',
 		layout: 'profile-event',
-
+		components: {
+			ColorModePicker
+		},
 		data(){
 			return {
 				profiles: {},
