@@ -3,13 +3,13 @@
 		<mdb-container>
 			<mdb-row class="row justify-content-center card__profile-page">
 				<mdb-col lg="12" xs="12" sm="12">
-					<CardProfile :profiles="profiles" :loading="loading"/>
+					<CardProfile :profiles="profiles" :studs="studs" :works="works" :loading="loading" :maritals="maritals"/>
 				</mdb-col>
 			</mdb-row>
 
 			<mdb-row class="row justify-content-center tabs__detail-profile">
 				<mdb-col lg="12" xs="12" sm="12">
-					<TabsProfile :profiles="profiles" :works="works ? works : '-'" :studs="studs ? studs : '-'" :categories="categories" :pelatihans="pelatihans" :loading="loading" :field="field" @filter-event-child="FilterEvent" @change-category-child="ChangeCategory" @change-month-child="ChangeMonth" loading_filter="loading_filter" :empty_filter="empty_filter"/>
+					<TabsProfile :profiles="profiles" :categories="categories" :api_url="api_url" :token="token" :studs="studs" :works="works"/>
 				</mdb-col>
 			</mdb-row>
 
@@ -23,31 +23,11 @@
 	import TabsProfile from './TabsProfile'
 
 	export default {
-		props: ['profiles', 'genders', 'studs', 'jobs', 'works', 'maritals', 'pelatihans', 'categories', 'api_url', 'empty_filter', 'loading', 'loading_filter'],
+		props: ['profiles', 'genders', 'studs', 'jobs', 'works', 'maritals',  'categories', 'api_url', 'token', 'loading'],
 
 		components: {
 			CardProfile,
 			TabsProfile
-		},
-		data(){
-			return {
-				field: {}
-			}
-		},
-
-		methods: {
-			FilterEvent(){
-				console.log(this.field)
-				this.$emit('load-event-follow', 0, this.field.category, this.field.month)
-			},
-
-			ChangeCategory(e){
-				this.field.category = e.target.value
-			},
-
-			ChangeMonth(e){
-				this.field.month = e.target.value
-			}
 		}
 	}
 </script>

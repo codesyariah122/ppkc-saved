@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<Profilepage :profiles="profiles" :genders="genders" :jobs="jobs" :studs="studs" :works="works" :maritals="maritals" :pelatihans="pelatihans" :categories="categories" :api_url="api_url" @load-event-follow="EventYangDiikuti" :empty_filter="empty_filter" :loading="loading" :token="token" :loading_filter="loading_filter"/>
+		<Profilepage :profiles="profiles" :genders="genders" :jobs="jobs" :studs="studs" :works="works" :maritals="maritals"  :categories="categories" :api_url="api_url" :loading="loading" :token="token" />
 	</div>
 </template>
 
@@ -19,11 +19,10 @@
 				studs: {},
 				works: [],
 				maritals: [],
-				pelatihans:[],
 				categories: [],
 				empty_filter: false,
 				loading: null,
-				loading_filter: null
+				start_submit: null
 			}
 		},
 
@@ -34,7 +33,6 @@
 		},
 
 		mounted(){
-			this.EventYangDiikuti(),
 			this.CheckToken(),
 			this.IsLoggedIn(),
 			this.CheckLogout()
@@ -78,8 +76,8 @@
 					this.$axios.get(url)
 					.then(({data}) => {
 						this.profiles = data.user
-						this.works = data.pekerjaan
-						this.studs = data.pendidikan
+						this.works = data.pekerjaan ? data.pekerjaan : ''
+						this.studs = data.pendidikan ? data.pendidikan : ''
 						this.genders = data.jenisKelamins
 						this.jobs = data.statusPekerjaans
 						this.maritals = data.statusPernikahan
@@ -93,30 +91,7 @@
 				}
 			},
 
-			EventYangDiikuti(page=0, category='', month=''){
-				// console.log(month)
-				this.loading_filter=true
-				const url = `${this.api_url}/web/kegiatan/saya/list/page?start=${page}&jenis_pelatihan=${category}&bulan_pelatihan=${month}`
-				this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
-				this.$axios.get(url)
-				.then(({data}) => {
-					console.log(data.list_data)
-					if(data.list_data.length > 0){
-						this.pelatihans = data.list_data
-					}else{
-						this.empty_filter = true
-						this.pelatihans = []
-					}
-				})
 
-				.catch(err => console.log(err))
-
-				.finally(() => {
-					setTimeout(() => {
-						this.loading_filter=false
-					}, 1500)
-				})
-			},
 
 			EventCategories(page=1,keyword='',category='',month=''){
 				const url = `${this.api_url}/web/event/paging?keyword=${keyword?keyword:''}&page=${page?page:1}&jenis_pelatihan=${category?category:''}&bulan_pelatihan=${month?month:''}`

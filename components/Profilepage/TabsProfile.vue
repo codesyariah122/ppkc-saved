@@ -13,11 +13,11 @@
 				</mdb-card>
 			</b-tab>
 			<b-tab title="Event yang diikuti" class="font-weight-bold">
-				<MoleculesProfilePageEventDiikuti :FilterEventChild="FilterEventChild"  @change-category-child="ChangeCategoryChild" @change-month-child="ChangeMonthChild" :loading="loading" :categories="categories" :pelatihans="pelatihans" :profiles="profiles"/>
+				<EventDiikuti :profiles="profiles" :categories="categories"/>
 			</b-tab>
 
 			<b-tab title="Sertifikat" class="font-weight-bold">
-				<MoleculesProfilePageEventSertifikat :FilterEventChild="FilterEventChild" :categories="categories" :loading="loading"/>
+				<!-- <MoleculesProfilePageEventSertifikat :categories="categories" :loading="loading"/> -->
 			</b-tab>
 		</b-tabs>
 	</div>
@@ -25,30 +25,14 @@
 
 <script>
 	import ProfileInfo from '@/components/Molecules/ProfilePage/ProfileInfo'
+	import EventDiikuti from '@/components/Molecules/ProfilePage/EventDiikuti'
 
 	export default{
-		props: ['profiles', 'studs', 'works', 'pelatihans', 'categories', 'loading', 'field'],
+		props: ['profiles', 'studs', 'works', 'categories', 'api_url', 'token','loading'],
 		
 		components: {
-			ProfileInfo
-		},
-
-		// mounted(){
-		// 	console.log(this.categories ? true : false)
-		// },
-
-		methods: {
-			FilterEventChild(){
-				this.$emit('filter-event-child')
-			},
-
-			ChangeCategoryChild(e){
-				this.$emit('change-category-child', e)
-			},
-
-			ChangeMonthChild(e){
-				this.$emit('change-month-child', e)
-			}
+			ProfileInfo,
+			EventDiikuti
 		}
 	}
 </script>

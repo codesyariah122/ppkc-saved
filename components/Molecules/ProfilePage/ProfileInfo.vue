@@ -89,8 +89,8 @@
 
     data() {
       return {
-        p1: true,
-      };
-    },
-  };
+        p1: true
+      }
+    }
+  }
 </script>

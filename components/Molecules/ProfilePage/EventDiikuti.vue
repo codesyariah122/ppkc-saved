@@ -5,10 +5,10 @@
 				<h5>Filter</h5>
 			</mdb-col>
 			<mdb-col md="10">
-				<form @submit.prevent="FilterEventChild">
+				<form @submit.prevent="FilterEvent">
 					<mdb-row>
 						<mdb-col md="3">
-							<select selected :value="undefined" @change="ChangeCategoryChild($event)">
+							<select selected :value="undefined" @change="ChangeCategory($event)">
 								<option value="">Jenis Pelatihan</option>
 								<option v-for="(item, index) in categories" :value="item.code">
 									{{item.value}}
@@ -16,7 +16,7 @@
 							</select>
 						</mdb-col>
 						<mdb-col md="3">
-							<select selected :value="undefined" @change="ChangeMonthChild($event)">
+							<select selected :value="undefined" @change="ChangeMonth($event)">
 								<option value="">Bulan Pelatihan</option>
 								<option v-for="(month, index) in $moment.months()" :value="index + 1">
 									{{month}}
@@ -30,7 +30,7 @@
 									Loading...
 								</div>
 								<div v-else>
-									<mdb-icon icon="filter" size="lg"/> Terapkan Filter		
+									<mdb-icon icon="filter" size="lg"/> Terapkan Filter	
 								</div>
 							</mdb-btn>
 						</mdb-col>
@@ -47,80 +47,173 @@
 			</mdb-col>
 		</mdb-row>
 
-		<div v-else>
-
-			<mdb-card v-if="pelatihans.length == 0" class="card-body" style="width: 100%; margin-top: 1rem;">
-				<mdb-row>
-					<mdb-col lg="12" xs="12" sm="12">
-						<mdb-alert color="warning" v-if="p1" @closeAlert="FilterEventChild(); p1=false" dismiss>
-							<strong>Oopps!</strong> tidak ada event yang anda ikuti.
-						</mdb-alert>
-					</mdb-col>
-				</mdb-row>
-			</mdb-card>
-
-			<mdb-card v-else v-for="(item, index) in pelatihans" class="card-body" style="width: 100%; margin-top: 1rem;" :key="item.id">
-				<mdb-container>
-
+		<mdb-row v-else>
+			<mdb-col lg="12">
+				<mdb-card v-if="empty_filter" class="card-body" style="width: 100%; margin-top: 1rem;">
 					<mdb-row>
 						<mdb-col lg="12" xs="12" sm="12">
-							<mdb-card-title>{{item.kegiatan_title}}</mdb-card-title>
-							<small>
-								{{$moment(item.tanggal_awal).format("LL")}} - {{$moment(item.tanggal_akhir).format("LL")}}
-							</small>
-							
-							<mdb-row class="d-flex justify-content-start">
-								<mdb-col md="12">
-									<blockquote class="blockquote-footer">
-										{{item.kegiatan_desc}}
-									</blockquote>
-								</mdb-col>
-								<mdb-col md="3">
-									<span>Status : </span> 
-								</mdb-col>
-								<mdb-col md="1">
-									<mdb-badge size="sm" class="badge btn-success mb-2 badge__category text-white" >{{item.status_pendaftaran_value}}</mdb-badge>
-								</mdb-col>
-							</mdb-row>
-			
-							<mdb-row>
-								<mdb-col md="6">
-									<h4 class="orange-text">{{$format(item.harga)}}</h4>
-								</mdb-col>
-							</mdb-row>
-						</mdb-col>
-						
-						<mdb-col lg="12" xs="12" sm="12">
-							<!-- <nuxt-link :to="`/detail/event/${item.kegiatan_id}/${$slug(item.kegiatan_title)}`" size="sm" class="btn btn-outline-primary font-weight-bold btn__link-event">Lihat Detail Pelatihan</nuxt-link> -->
-							<nuxt-link :to="`/profile/${username}/events/${item.kegiatan_id}/${$slug(item.kegiatan_title)}`" size="sm" class="btn btn-outline-primary font-weight-bold btn__link-event">Akses Pelatihan</nuxt-link>
+							<mdb-alert color="warning" v-if="p1" @closeAlert="EventYangDiikuti(0, '','');p1=false" dismiss>
+								<strong>Oopps!</strong> tidak ada event yang anda ikuti.
+							</mdb-alert>
 						</mdb-col>
 					</mdb-row>
-				</mdb-container>
-			</mdb-card>
+				</mdb-card>
 
-		</div>
+				<mdb-card v-else v-for="(item, index) in pelatihans" class="card-body" style="width: 100%; margin-top: 1rem;" :key="item.id">
+					<mdb-container>
+						<mdb-row>
+							<mdb-col lg="12" xs="12" sm="12">
+								<mdb-card-title>{{item.kegiatan_title}}</mdb-card-title>
+								<small>
+									{{$moment(item.tanggal_awal).format("LL")}} - {{$moment(item.tanggal_akhir).format("LL")}}
+								</small>
+
+								<mdb-row class="d-flex justify-content-start">
+									<mdb-col md="12">
+										<blockquote class="blockquote-footer">
+											{{item.kegiatan_desc}}
+										</blockquote>
+									</mdb-col>
+									<mdb-col md="3">
+										<span>Status : </span> 
+									</mdb-col>
+									<mdb-col md="1">
+										<mdb-badge size="sm" class="badge btn-success mb-2 badge__category text-white" >{{item.status_pendaftaran_value}}</mdb-badge>
+									</mdb-col>
+								</mdb-row>
+
+								<mdb-row>
+									<mdb-col md="6">
+										<h4 class="orange-text">{{$format(item.harga)}}</h4>
+									</mdb-col>
+								</mdb-row>
+							</mdb-col>
+
+							<mdb-col lg="12" xs="12" sm="12">
+								<!-- <nuxt-link :to="`/detail/event/${item.kegiatan_id}/${$slug(item.kegiatan_title)}`" size="sm" class="btn btn-outline-primary font-weight-bold btn__link-event">Lihat Detail Pelatihan</nuxt-link> -->
+								<nuxt-link :to="`/profile/${username}/events/${item.kegiatan_id}/${$slug(item.kegiatan_title)}`" size="sm" class="btn btn-outline-primary font-weight-bold btn__link-event">Akses Pelatihan</nuxt-link>
+							</mdb-col>
+						</mdb-row>
+					</mdb-container>
+				</mdb-card>
+			</mdb-col>
+
+		</mdb-row>
 
 	</div>
 </template>
 
 <script>
+	import {FetchData} from '@/helpers'
 	export default{
-		props: ['FilterEventChild', 'loading', 'categories', 'pelatihans', 'profiles', 'loading_filter'],
+		props: ['profiles'],
 		data(){
 			return {
+				pelatihans:[],
+				categories: [],
 				p1: true,
-				username: this.$username(this.profiles.nama)
+				username: '',
+				field: {},
+				loading_filter: null,
+				empty_filter: null
 			}
 		},
 
+		beforeMount(){
+			this.ConfigApiUrl(),
+			this.UserProfileData(),
+			this.EventYangDiikuti()
+		},
+		mounted(){
+			this.CheckToken(),
+			this.EventCategories()
+		},
+
 		methods: {
-			ChangeMonthChild(e){
-				this.$emit('change-month-child', e)
+			ConfigApiUrl(){
+				const api_url = process.env.NUXT_ENV_API_URL
+				this.$store.dispatch('config/storeConfigApiUrl', api_url)
 			},
 
-			ChangeCategoryChild(e){
-				this.$emit('change-category-child', e)
+			CheckToken(){
+				this.$store.dispatch('config/checkAuthLogin', 'token')
+			},
+
+			UserProfileData(){
+				if(this.token){
+					this.loading=true					
+					const url = `${this.api_url}/web/user`
+					this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
+					this.$axios.get(url)
+					.then(({data}) => {
+						this.username = this.$username(data.user.nama)
+					})
+					.catch(err => console.log(err.response ? err.response : ''))
+					.finally(() => {
+						setTimeout(() => {
+							this.loading=false
+						},1500)
+					})
+				}
+			},
+
+			EventYangDiikuti(page=0, category='', month=''){
+				// category = this.field.category  ? this.field.category  : ''
+				// month = this.field.month ? this.field.month : ''
+				this.loading_filter = true
+				this.empty_filter = false
+				const url = `${this.api_url}/web/kegiatan/saya/list/page?start=${page}&jenis_pelatihan=${category}&bulan_pelatihan=${month}`
+				this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
+				this.$axios.get(url)
+				.then(({data}) => {
+					console.log(data.list_data)
+					if(data.list_data.length > 0){
+						this.pelatihans = data.list_data
+					}else{
+						this.empty_filter = true
+					}
+				})
+
+				.catch(err => console.log(err))
+
+				.finally(() => {
+					setTimeout(() => {
+						this.loading_filter=false
+					}, 1500)
+				})
+			},
+
+			EventCategories(page=1,keyword='',category='',month=''){
+				const url = `${this.api_url}/web/event/paging?keyword=${keyword?keyword:''}&page=${page?page:1}&jenis_pelatihan=${category?category:''}&bulan_pelatihan=${month?month:''}`
+
+				FetchData(url)
+				.then((data) => {
+					// console.log(data)
+					// Ambil categories event
+					this.categories = data.list_jenis_kegiatan
+				})
+				.catch(err => console.log(err))
+			},
+
+			FilterEvent(){
+				this.EventYangDiikuti(0, this.field.category, this.field.month)
+			},
+
+			ChangeCategory(e){
+				this.field.category = e.target.value
+			},
+
+			ChangeMonth(e){
+				this.field.month = e.target.value
 			}
+		},
+		computed: {
+			token(){
+				return this.$store.getters['config/ConfigCheckLogin']
+			},
+			api_url(){
+				return this.$store.getters['config/ConfigApiUrl']
+			},
 		}
 	}
 </script>

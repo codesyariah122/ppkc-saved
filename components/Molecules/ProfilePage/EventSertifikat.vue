@@ -5,7 +5,7 @@
 				<h4>Filter</h4>
 			</mdb-col>
 			<mdb-col md="10">
-				<form @submit.prevent="FilterEventChild">
+				<form @submit.prevent="FilterSertifikat">
 					<mdb-row>
 						<mdb-col md="3">
 							<select selected :value="undefined" @change="ChangeCategoryChild($event)">
@@ -75,7 +75,7 @@
 
 <script>
 	export default{
-		props: ['categories', 'loading', 'FilterEventChild'],
+		props: ['categories', 'loading'],
 
 		data(){
 			return {
@@ -89,6 +89,7 @@
 		},
 
 		methods: {
+			FilterSertifikat(){},
 			SampleSertifikatData(){
 				this.sertifikats = [
 					{id:1, title: 'pelatihan manajemen pelayanan IGD di rumah sakit', date_start: new Date(2022, 11, 24, 10, 33, 30, 0), date_end: new Date(2018, 11, 24, 10, 33, 30, 0)},
