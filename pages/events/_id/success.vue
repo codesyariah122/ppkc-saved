@@ -73,10 +73,10 @@
 			position: absolute;
 			top: 12px;
 			bottom: 0;
-			left: 330px;
+			left: 404px;
 			right: 0;
-			height:480px;
-			width: 450px;
+			height:auto;
+			width: 300px;
 			opacity: 0;
 			transition: .3s ease;
 			background-color: rgba(205, 209, 228, 0.9);

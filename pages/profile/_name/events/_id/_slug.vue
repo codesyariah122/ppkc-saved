@@ -31,6 +31,7 @@
 											<strong>Selamat Datang di Dashboard Pelatihan PPKC</strong> <br>
 											Untuk mengakses materi pelatihan silahkan click /tap tombol humberger menu <mdb-icon icon="bars" class="text-primary" size="lg" style="color: blue!important;" />, &nbsp;&nbsp; kemudian akan muncul slide menu pelatihan yang anda ikuti dari sebelah kiri.
 										</p>
+										
 									</div>
 								</div>
 							</section><!--//section-->
@@ -95,7 +96,10 @@
 									</section><!--//docs-intro-->
 								</header>
 								<section class="docs-section mt-2" id="item-1-1">
-									<div class="embed-responsive embed-responsive-1by1">
+									<mdb-alert v-if="detailed.file_pdf == 'https://api.ppkc-online.com/file-pelatihan/null'" color="danger">
+										Not found!
+									</mdb-alert>
+									<div v-else class="embed-responsive embed-responsive-1by1">
 										<object :data="detailed.file_pdf" type="application/pdf" width="100%" :height="`${$device.isDesktop ? '900px' : '600px'}`">
 										</object>
 									</div>
@@ -137,7 +141,10 @@
 									</section><!--//docs-intro-->
 								</header>
 								<section class="docs-section mt-2" id="item-1-1">
-									<div class="embed-responsive embed-responsive-1by1">
+									<mdb-alert v-if="detailed.file_pdf == 'https://api.ppkc-online.com/file-pelatihan/null'" color="danger">
+										Not found!
+									</mdb-alert>
+									<div v-else class="embed-responsive embed-responsive-1by1">
 										<object :data="detailed.file_pdf" type="application/pdf" width="100%" :height="`${$device.isDesktop ? '900px' : '600px'}`">
 										</object>
 									</div>
