@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<Profilepage :profiles="profiles" :genders="genders" :jobs="jobs" :studs="studs" :works="works" :maritals="maritals" :pelatihans="pelatihans" :categories="categories" :api_url="api_url" @load-event-follow="EventYangDiikuti" :empty_filter="empty_filter" :loading="loading" :token="token" />
+		<Profilepage :profiles="profiles" :genders="genders" :jobs="jobs" :studs="studs" :works="works" :maritals="maritals" :pelatihans="pelatihans" :categories="categories" :api_url="api_url" @load-event-follow="EventYangDiikuti" :empty_filter="empty_filter" :loading="loading" :token="token" :loading_filter="loading_filter"/>
 	</div>
 </template>
 
@@ -22,18 +22,19 @@
 				pelatihans:[],
 				categories: [],
 				empty_filter: false,
-				loading: null
+				loading: null,
+				loading_filter: null
 			}
 		},
 
 		beforeMount(){
 			this.ConfigApiUrl(),
 			this.UserProfileData(),
-			this.EventYangDiikuti(),
 			this.EventCategories()
 		},
 
 		mounted(){
+			this.EventYangDiikuti(),
 			this.CheckToken(),
 			this.IsLoggedIn(),
 			this.CheckLogout()
@@ -94,15 +95,16 @@
 
 			EventYangDiikuti(page=0, category='', month=''){
 				// console.log(month)
-				this.loading=true
+				this.loading_filter=true
 				const url = `${this.api_url}/web/kegiatan/saya/list/page?start=${page}&jenis_pelatihan=${category}&bulan_pelatihan=${month}`
+				this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
 				this.$axios.get(url)
 				.then(({data}) => {
-					// console.log(data.list_data)
+					console.log(data.list_data)
 					if(data.list_data.length > 0){
 						this.pelatihans = data.list_data
 					}else{
-						this.empty_filter = false
+						this.empty_filter = true
 						this.pelatihans = []
 					}
 				})
@@ -111,7 +113,7 @@
 
 				.finally(() => {
 					setTimeout(() => {
-						this.loading=false
+						this.loading_filter=false
 					}, 1500)
 				})
 			},

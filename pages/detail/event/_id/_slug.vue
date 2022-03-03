@@ -1,5 +1,5 @@
 <template>
-	<div :class="`${$device.isDesktop ? 'event__detail mb-5' : 'event__detail'}`">
+	<div :class="`${$device.isDesktop ? 'event__detail mb-5' : 'event__detail mb-5'}`">
 		<mdb-container>
 			<!-- Event detail content -->
 			<mdb-row class="row event__detail-content">

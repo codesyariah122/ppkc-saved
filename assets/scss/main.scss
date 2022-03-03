@@ -353,22 +353,22 @@
 // Berita component
 .berita__list{
 	background-image: linear-gradient(to bottom right, $bg-primary, $bg-second-primary);
-
 	@include header_inside_list_mobile($default);
-	// .col__berita{
-	// 	.card{
-	// 		margin-top: 1rem;
-	// 		filter: drop-shadow(5px 5px 10px $bg-fourt);
-	// 		width: 333px;
-	// 		// height: 370px;
-	// 		margin-bottom:1rem;
-	// 		img{
-	// 			max-width: 333px;
-	// 			object-fit: contain;
-	// 		}
-	// 		@include card_rounded_mobile;
-	// 	}
-	// }
+	.col__berita{
+		width: 100%;
+		// .card{
+		// 	margin-top: 1rem;
+		// 	filter: drop-shadow(5px 5px 10px $bg-fourt);
+		// 	width: 333px;
+		// 	// height: 370px;
+		// 	margin-bottom:1rem;
+		// 	img{
+		// 		max-width: 333px;
+		// 		object-fit: contain;
+		// 	}
+		// 	@include card_rounded_mobile;
+		// }
+	}
 	.card__berita-list{
 			margin-right: -2.5rem;
 			margin-left: 1rem;

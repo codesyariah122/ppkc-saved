@@ -25,7 +25,7 @@
 						</mdb-col>
 						<mdb-col md="4">
 							<mdb-btn size="sm" type="submit">
-								<div v-if="loading">
+								<div v-if="loading_filter">
 									<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
 									Loading...
 								</div>
@@ -39,7 +39,7 @@
 			</mdb-col>
 		</mdb-row>
 
-		<mdb-row v-if="loading" class="row justify-content-center">
+		<mdb-row v-if="loading_filter" class="row justify-content-center">
 			<mdb-col lg="12" xs="12" sm="12">
 				<b-skeleton animation="throb" width="85%"></b-skeleton>
 				<b-skeleton animation="throb" width="55%"></b-skeleton>
@@ -49,11 +49,11 @@
 
 		<div v-else>
 
-			<mdb-card v-if="pelatihans.length === 0" class="card-body" style="width: 100%; margin-top: 1rem;">
+			<mdb-card v-if="pelatihans.length == 0" class="card-body" style="width: 100%; margin-top: 1rem;">
 				<mdb-row>
 					<mdb-col lg="12" xs="12" sm="12">
-						<mdb-alert color="warning" v-if="p1" @closeAlert="p1=false" dismiss>
-							<strong>Oopps!</strong> Belum ada event yang anda ikuti.
+						<mdb-alert color="warning" v-if="p1" @closeAlert="FilterEventChild(); p1=false" dismiss>
+							<strong>Oopps!</strong> tidak ada event yang anda ikuti.
 						</mdb-alert>
 					</mdb-col>
 				</mdb-row>
@@ -105,11 +105,21 @@
 
 <script>
 	export default{
-		props: ['FilterEventChild', 'loading', 'categories', 'pelatihans', 'profiles'],
+		props: ['FilterEventChild', 'loading', 'categories', 'pelatihans', 'profiles', 'loading_filter'],
 		data(){
 			return {
 				p1: true,
 				username: this.$username(this.profiles.nama)
+			}
+		},
+
+		methods: {
+			ChangeMonthChild(e){
+				this.$emit('change-month-child', e)
+			},
+
+			ChangeCategoryChild(e){
+				this.$emit('change-category-child', e)
 			}
 		}
 	}

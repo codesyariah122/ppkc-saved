@@ -13,7 +13,7 @@
 				</mdb-card>
 			</b-tab>
 			<b-tab title="Event yang diikuti" class="font-weight-bold">
-				<MoleculesProfilePageEventDiikuti :FilterEventChild="FilterEventChild" :loading="loading" :categories="categories" :pelatihans="pelatihans" :profiles="profiles"/>
+				<MoleculesProfilePageEventDiikuti :FilterEventChild="FilterEventChild"  @change-category-child="ChangeCategoryChild" @change-month-child="ChangeMonthChild" :loading="loading" :categories="categories" :pelatihans="pelatihans" :profiles="profiles"/>
 			</b-tab>
 
 			<b-tab title="Sertifikat" class="font-weight-bold">
@@ -33,9 +33,9 @@
 			ProfileInfo
 		},
 
-		mounted(){
-			console.log(this.categories ? true : false)
-		},
+		// mounted(){
+		// 	console.log(this.categories ? true : false)
+		// },
 
 		methods: {
 			FilterEventChild(){

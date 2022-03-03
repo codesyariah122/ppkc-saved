@@ -12,10 +12,10 @@
         </b-col>
         <b-col cols="6">
           <b-row>
-            <b-col cols="3">
+            <b-col cols="6">
               <b-skeleton animation="wave" width="85%"></b-skeleton>
             </b-col>
-            <b-col cols="3">
+            <b-col cols="6">
               <b-skeleton animation="wave" width="55%"></b-skeleton>
             </b-col>
           </b-row>
