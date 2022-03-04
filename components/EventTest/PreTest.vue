@@ -75,7 +75,7 @@
 									
 										<input v-if="soal_active || item.urutan == 1"
 											type="radio"
-											v-model="item.ujian_id"
+											v-model="item.jawaban"
 											:value="option.id"
 											:id="option.id"
 											required @change="ChangeJawaban(option.ujian_id, index, option.id, item.urutan)"/>
@@ -177,12 +177,6 @@
 			},
 
 			WaktuPelatihan(){
-				this.pelatihans.map(d => {
-					this.waktu.tgl = d.tanggal
-					this.waktu.jam_awal = d.jam_awal
-					this.waktu.jam_akhir = d.jam_akhir
-				})
-
 				const filtering = this.pelatihans.map(d=> {
 					return d.categories[1].details[0]
 				})

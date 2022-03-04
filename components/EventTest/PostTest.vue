@@ -27,7 +27,26 @@
 			</div>
 
 			<div v-else>
-				<mdb-row v-for="(item, index) in lists" col="12" class="row justify-content-center" >
+				<mdb-row col="12" class="row justify-content-center mb-2 mt-2">
+					<mdb-col lg="12" xs="12" sm="12">
+						<blockquote class="blockquote-footer">
+							Waktu pelaksanaan test
+						</blockquote>
+						<ul style="list-style: none; margin-top:-.5rem;">
+							<li>
+								<strong>Tanggal : <time> {{$moment(waktu.tgl).format("LL")}} </time></strong>
+							</li>
+							<li>
+								<strong>Waktu awal : <time> {{$moment(waktu.jam_awal, "HH:mm:ss").format("hh:mm A")}} </time></strong>
+							</li>
+							<li>
+								<strong>Waktu akhir : <time> {{$moment(waktu.jam_akhir, "HH:mm:ss").format("hh:mm A")}} </time></strong>
+							</li>
+						</ul>
+					</mdb-col>
+				</mdb-row>
+
+				<mdb-row v-for="(item, index) in lists" col="12" class="row justify-content-center" :key="item.ujian_id">
 					<mdb-col lg="12" class="test__content">
 						<h4> Soal {{item.urutan}} </h4>
 						<p> {{item.pertanyaan}} </p>
@@ -41,12 +60,12 @@
 									<div
 									class="answer"
 									v-for="option in item.pilihans"
-									:value="option.id"
+									:key="option.id"
 
 									>
 										<input v-if="soal_active || item.urutan == 1"
 										type="radio"
-
+										v-model="item.jawaban"
 										:value="option.id"
 										:id="option.id"
 										required @change="ChangeJawaban(option.ujian_id, index, option.id, item.urutan)"
@@ -91,7 +110,7 @@
 
 <script>
 	export default{
-		props: ['id_test', 'token', 'api_url'],
+		props: ['id_test', 'token', 'api_url', 'pelatihans'],
 
 		data(){
 			return {
@@ -107,6 +126,12 @@
 					status: null,
 					message: ''
 				},
+				waktu: {
+					tgl: '',
+					jam_awal: '',
+					jam_akhir: ''
+				},
+				data_posttest: [],
 				save_test: {},
 				soal_active: false,
 				profiles: [],
@@ -118,8 +143,9 @@
 		},
 
 		mounted(){
-			this.PreTest(),
-			this.UserProfileData()
+			this.posttest(),
+			this.UserProfileData(),
+			this.WaktuPelatihan()
 		},
 
 		methods: {
@@ -136,9 +162,22 @@
 				}
 			},
 
-			PreTest(){
+			WaktuPelatihan(){
+				const filtering = this.pelatihans.map(d=> {
+					return d.categories[1].details[0]
+				})
+
+				this.data_posttest = filtering.filter(d => d.title === 'Soal Posttest')
+
+				this.waktu.tgl = this.data_posttest[0].tanggal_posttest
+				this.waktu.jam_awal = this.data_posttest[0].jam_awal_posttest
+				this.waktu.jam_akhir = this.data_posttest[0].jam_akhir_posttest
+
+			},
+
+			posttest(){
 				this.loading_soal = true
-				const url = `${this.api_url}/web/event/1/pretest/list/${this.id_test}`
+				const url = `${this.api_url}/web/event/1/posttest/list/${this.id_test}`
 				this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
 				this.$axios
 				.get(url)
@@ -185,7 +224,7 @@
 			KirimJawaban(soal, jawaban){
 				window.scrollTo(0, 0)
 				this.loading_answer=true
-				const url = `${this.api_url}/web/event/1/pretest/${this.id_test}`
+				const url = `${this.api_url}/web/event/1/posttest/${this.id_test}`
 				this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
 				// console.log(jawaban.length)
 				if(jawaban.length >= 2){
