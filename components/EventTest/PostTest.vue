@@ -27,11 +27,6 @@
 			</div>
 
 			<div v-else>
-				<mdb-row  col="12" class="row justify-content-start mb-2">
-					<!-- <small class="text-info">
-						*.Selesaikan  Soal No.1 Terlebih Dahulu
-					</small> -->
-				</mdb-row>
 				<mdb-row v-for="(item, index) in lists" col="12" class="row justify-content-center" >
 					<mdb-col lg="12" class="test__content">
 						<h4> Soal {{item.urutan}} </h4>
@@ -41,53 +36,52 @@
 							method="POST"
 							class="is-not-results"
 							>
-								<fieldset>
-									<div class="answers">
-										<div
-										class="answer"
-										v-for="option in item.pilihans"
-										:value="option.id"
-										
-										>
-											<input v-if="soal_active || item.urutan == 1"
-											type="radio"
-											
-											:value="option.id"
-											:id="option.id"
-											required @change="ChangeJawaban(option.ujian_id, index, option.id, item.urutan)"
-											>
-											<label
-											:for="option.id"
-											class="answer__item"
-											>
-											{{option.jawaban}}
-											</label>
-										</div>
-									</div>
-								</fieldset>
-							</form>
-						</div>
-					</mdb-col>
-				</mdb-row>
+							<fieldset>
+								<div class="answers">
+									<div
+									class="answer"
+									v-for="option in item.pilihans"
+									:value="option.id"
 
-				<mdb-row col="12" class="row justify-content-center">
-					<mdb-col lg="12">
-						<div class="mb-2 ">
-							<a
-							href=""
-							class="btn btn-primary btn-md rounded btn-block"
-							@click.prevent="SubmitTest"
-							>
-							<div v-if="loading_answer">
-								<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-								loading_answer...
+									>
+										<input v-if="soal_active || item.urutan == 1"
+										type="radio"
+
+										:value="option.id"
+										:id="option.id"
+										required @change="ChangeJawaban(option.ujian_id, index, option.id, item.urutan)"
+										>
+												<label
+												:for="option.id"
+												class="answer__item"
+												>
+													{{option.jawaban}}
+												</label>
+											</div>
+										</div>
+									</fieldset>
+								</form>
 							</div>
-							<div v-else>
-								Submit <mdb-icon far icon="paper-plane" />
-							</div>
+						</mdb-col>
+
+						<mdb-col lg="12">
+							<div class="mb-2 ">
+								<a
+								href=""
+								class="btn btn-primary btn-md rounded btn-block"
+								@click.prevent="SubmitTest"
+								>
+								<div v-if="loading_answer">
+									<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+									loading_answer...
+								</div>
+								<div v-else>
+									Submit <mdb-icon far icon="paper-plane" />
+								</div>
 							</a>
 						</div>
 					</mdb-col>
+
 				</mdb-row>
 			</div>
 		</mdb-container>

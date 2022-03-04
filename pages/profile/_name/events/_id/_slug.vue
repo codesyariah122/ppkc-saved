@@ -117,7 +117,7 @@
 									</section><!--//docs-intro-->
 								</header>
 								<section class="docs-section" id="item-1-1">
-									<EventTestPreTest :id_test="id_test" :type_name="type_name" :token="token" :api_url="api_url"/>
+									<EventTestPreTest :id_test="id_test" :type_name="type_name" :token="token" :api_url="api_url" :pelatihans="pelatihans"/>
 								</section>
 							</div>
 
