@@ -44,6 +44,22 @@
 							</li>
 						</ul>
 					</mdb-col>
+
+					<mdb-col lg="12" xs="12" sm="12" class="mt-5">
+						<h2 style="text-transform: uppercase;text-align: center;margin-bottom: 2rem;">rencana tindak lanjut (rtl)</h2>
+						<mdb-list-group style="margin-bottom: 3rem;">
+							<mdb-list-group-item>
+								Nama 			: Ratih Annatri
+							</mdb-list-group-item>
+							<mdb-list-group-item>
+								Instansi		: Siloam Hospitals Bogor
+							</mdb-list-group-item>
+							<mdb-list-group-item>
+								Nama Pelatihan	: Pelatihan Kepala Ruang - SCT
+							</mdb-list-group-item>
+						</mdb-list-group>
+						<EventTestTableRTL/>
+					</mdb-col>
 				</mdb-row>
 
 				<mdb-row v-for="(item, index) in lists" col="12" class="row justify-content-center" :key="item.ujian_id">
@@ -61,11 +77,11 @@
 									class="answer"
 									v-for="option in item.pilihans"
 									:key="option.id"
-
+									:value="option.id"
 									>
 										<input v-if="soal_active || item.urutan == 1"
 										type="radio"
-										v-model="item.jawaban"
+										v-model="item.ujian_id"
 										:value="option.id"
 										:id="option.id"
 										required @change="ChangeJawaban(option.ujian_id, index, option.id, item.urutan)"
@@ -163,16 +179,11 @@
 			},
 
 			WaktuPelatihan(){
-				const filtering = this.pelatihans.map(d=> {
-					return d.categories[1].details[0]
+				this.pelatihans.map(d => {
+					this.waktu.tgl = d.tanggal
+					this.waktu.jam_awal = d.jam_awal
+					this.waktu.jam_akhir = d.jam_akhir
 				})
-
-				this.data_posttest = filtering.filter(d => d.title === 'Soal Posttest')
-
-				this.waktu.tgl = this.data_posttest[0].tanggal_posttest
-				this.waktu.jam_awal = this.data_posttest[0].jam_awal_posttest
-				this.waktu.jam_akhir = this.data_posttest[0].jam_akhir_posttest
-
 			},
 
 			posttest(){

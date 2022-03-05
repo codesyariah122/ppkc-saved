@@ -45,7 +45,7 @@
 						<mdb-col md="4">
 							<h5>Nilai SKP</h5>
 							<p>
-								{{details.nomor_skp ? details.nomor_skp : '-'}}
+								{{details.nomor_skp ? details.nomor_skp : '--'}}
 							</p>
 						</mdb-col>
 						<mdb-col md="12">

@@ -117,7 +117,7 @@
 									</section><!--//docs-intro-->
 								</header>
 								<section class="docs-section" id="item-1-1">
-									<EventTestPreTest :id_test="id_test" :type_name="type_name" :token="token" :api_url="api_url" :pelatihans="pelatihans"/>
+									<EventTestPreTest :id_test="id_test" :type_name="type_name" :token="token" :api_url="api_url" :pelatihans="pelatihans" :details="details"/>
 								</section>
 							</div>
 
@@ -432,6 +432,7 @@
 					this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
 					this.$axios.get(url)
 					.then(({data}) => {
+						console.log(data)
 						this.details = data.kegiatan
 					})
 					.catch(err => console.log(err))

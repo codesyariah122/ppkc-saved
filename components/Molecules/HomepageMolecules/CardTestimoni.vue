@@ -31,8 +31,7 @@
       return {
         testiToShow:4,
         profile_default: DefaultProfile,
-        null_foto: null,
-        default_dua:'https://i.imgur.com/RCwPA3O.jpg'
+        null_foto: null
       }
     },
 
