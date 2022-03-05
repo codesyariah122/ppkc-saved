@@ -68,14 +68,20 @@
         </mdb-dropdown-menu>
       </mdb-dropdown>
 
-      <mdb-btn
-      v-else
-      size="sm"
-      @click="$router.push({ path: '/auth/login' })"
-      block
-      class="my__btn-primary mt-4 rounded"
-      >Masuk</mdb-btn
-      >
+      <div v-else>
+        <a v-if="path == '/auth/login'"
+        href="/auth/registrasi"
+        class="my__btn-primary ml-4 rounded btn btn-primary"
+        size="md"
+        >Daftar</a
+        >
+        <a v-else
+        href="/auth/login"
+        class="my__btn-primary ml-4 rounded btn btn-primary"
+        size="md"
+        >Masuk</a
+        >
+      </div>
       <!-- end check -->
     </mdb-navbar-toggler>
   </mdb-navbar>
