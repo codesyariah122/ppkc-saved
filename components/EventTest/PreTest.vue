@@ -1,5 +1,6 @@
 <template>
 	<div class="pre__test">
+		
 		<mdb-container v-if="save_test.user_id == profiles.id ? save_test.status : success.status" class="success__test">
 
 			<!-- <pre>
@@ -31,11 +32,11 @@
 
 			<div v-else>
 				
-				<!-- <mdb-row  col="12" class="row justify-content-start mb-2">
+				<mdb-row  col="12" class="row justify-content-start mb-2">
 					<small class="text-info">
-						*.Selesaikan soal No.1 Terlebih Dahulu
+						*.Selesaikan setiap soal yang muncul
 					</small>
-				</mdb-row> -->
+				</mdb-row>
 				
 				<mdb-row col="12" class="row justify-content-center mb-2 mt-2">
 					<mdb-col lg="12" xs="12" sm="12">
@@ -56,11 +57,17 @@
 					</mdb-col>
 				</mdb-row>
 
+				<mdb-row col="12" class="row justify-content-center mb-3">
+					<mdb-col lg="12" xs="12" sm="12">
+						<h4 class="text-info">Total soal : {{config.totalItem}}</h4>
+					</mdb-col>
+				</mdb-row>
 
-				<mdb-row v-for="(item, index) in lists" col="12" class="row justify-content-center" :key="item.ujian_id">
+
+				<mdb-row col="12" class="row justify-content-center" v-if="listIndex <= lists.length" v-for="(listIndex, index) in config.perItem">
 					<mdb-col lg="12" class="test__content">
-						<h4> Soal {{item.urutan}} </h4>
-						<p> {{item.pertanyaan}} </p>
+						<h4> Soal {{lists[listIndex-1].urutan}} </h4>
+						<p> {{lists[listIndex-1].pertanyaan}} </p>
 						<div class="test-answers">
 							<form
 							method="POST"
@@ -70,56 +77,61 @@
 								<div class="answers">
 									<div
 									class="answer"
-									v-for="option in item.pilihans" :key="option.id"
+									v-for="(option, indx) in lists[listIndex-1].pilihans" :key="option.id"
 									:value="option.id"
 									>
-									
-										<input v-if="soal_active || item.urutan == 1"
-											type="radio"
-											v-model="item.ujian_id"
-											:value="option.id"
-											:id="option.id"
-											required @change="ChangeJawaban(option.ujian_id, index, option.id, item.urutan)"/>
-
-												<label
-													:for="option.id"
-													class="answer__item"
-													>
-													{{option.jawaban}}
-												</label>
-
-											</div>
-										</div>
-									</fieldset>
-								</form>
+									<input 
+									type="radio"
+									v-model="lists[listIndex-1].ujian_id"
+									:value="option.id"
+									:id="option.id"
+									required @change="ChangeJawaban(option.ujian_id, index, option.id, lists[listIndex-1].urutan)"/>
+									<label
+									:for="option.id"
+									class="answer__item"
+									>
+									{{option.jawaban}}
+								</label> 
 							</div>
-						</mdb-col>
-					</mdb-row>
-
-				<mdb-row col="12" class="row justify-content-center">
-						<mdb-col lg="12">
-							<div class="mb-2 ">
-								<a
-								href=""
-								class="btn btn-primary btn-md rounded btn-block"
-								@click.prevent="SubmitTest"
-								>
-								<div v-if="loading_answer">
-									<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-									loading_answer...
-								</div>
-								<div v-else>
-									Submit <mdb-icon far icon="paper-plane" />
-								</div>
-							</a>
 						</div>
-					</mdb-col>
-				</mdb-row>
-
+					</fieldset>
+				</form>
 			</div>
-		</mdb-container>
+		</mdb-col>
 
-	</div>
+	</mdb-row>
+
+
+	<mdb-row v-if="config.currentItem == config.lastItem" col="12" class="row justify-content-center">
+		<mdb-col lg="12">
+			<div class="mb-2 ">
+				<a
+				href=""
+				class="btn btn-primary btn-md rounded btn-block"
+				@click.prevent="SubmitTest"
+				>
+				<div v-if="loading_answer">
+					<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+					loading_answer...
+				</div>
+				<div v-else>
+					Submit <mdb-icon far icon="paper-plane" />
+				</div>
+			</a>
+		</div>
+	</mdb-col>
+
+	<mdb-col lg="12" xs="12" sm="12">
+		<small>
+			Terjawab {{config.currentItem}} - {{config.lastItem}} soal
+		</small>
+	</mdb-col>
+</mdb-row>
+
+</div>
+</mdb-container>
+
+</div>
 </template>
 
 <script>
@@ -132,6 +144,13 @@
 				loading_answer: null,
 				tests: [],
 				lists: [],
+				config: {
+					loadingSoal: null,
+					totalItem: '',
+					perItem:1,
+					currentItem: null,
+					lastItem: null
+				},
 				field: {
 					soal:[],
 					jawaban:[]
@@ -144,6 +163,10 @@
 					tgl: '',
 					jam_awal: '',
 					jam_akhir: ''
+				},
+				change:{
+					choice: ['A', 'B', 'C', 'D'],
+					urutan: 1
 				},
 				data_pretest: [],
 				save_test: {},
@@ -163,6 +186,21 @@
 		},
 
 		methods: {
+
+			ChangeJawaban(id_soal, position, id_jawaban, urutan){
+				console.log(urutan)
+				this.config.perItem += 1
+				this.soal_active = urutan ? true : null
+				
+				localStorage.setItem('urutan_soal', urutan)
+				this.config.currentItem = localStorage.getItem('urutan_soal')
+				if(this.field.jawaban.length > 1){
+					this.field.jawaban.splice(position, 1, id_jawaban)
+				}else{
+					this.field.jawaban.push(id_jawaban)
+				}
+				console.log(this.field.jawaban)
+			},
 
 			UserProfileData(){
 				if(this.token){					
@@ -186,15 +224,20 @@
 			},
 
 			PreTest(){
+				localStorage.setItem('urutan_soal', 1)
 				this.loading_soal = true
+				this.save_test = localStorage.getItem(`finish-pre-test-${this.id_test}-${this.username}`) ? JSON.parse(localStorage.getItem(`finish-pre-test-${this.id_test}-${this.username}`)) : ''
 				const url = `${this.api_url}/web/event/1/pretest/list/${this.id_test}`
 				this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
 				this.$axios
 				.get(url)
 				.then(({data}) => {
 					this.lists = data.list_data
+					this.config.totalItem = data.list_data.length
 					this.tests = data.pelatihan
 					this.field.soal = this.field.soal.length < 1 ? this.lists.map(d => d.id) : this.field.jawaban.shift()
+					this.config.lastItem = data.list_data.length
+					this.config.currentItem = localStorage.getItem('urutan_soal')
 
 					// this.field.jawaban = this.field.jawaban.length < 1 ? this.lists.map(d => d.jawaban) : this.field.jawaban.shift()
 				})
@@ -235,7 +278,7 @@
 				window.scrollTo(0, 0)
 				const url = `${this.api_url}/web/event/1/pretest/${this.id_test}`
 				this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
-				// console.log(jawaban.length)
+
 				if(jawaban.length >= 2){		
 					this.$axios.post(url, {
 						ujian: JSON.stringify(soal),
@@ -286,18 +329,6 @@
 					if (vm.value >= vm.max) clearInterval(timer);
 				}, 100);
 				vm.value = 0
-			},
-
-			ChangeJawaban(id_soal, position, id_jawaban, urutan){
-				
-				this.soal_active = urutan ? true : null
-				
-				if(this.field.jawaban.length > 1){
-					this.field.jawaban.splice(position, 1, id_jawaban)
-				}else{
-					this.field.jawaban.push(id_jawaban)
-				}
-				console.log(this.field.jawaban)
 			}
 		}
 	}
