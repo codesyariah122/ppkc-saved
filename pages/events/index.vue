@@ -41,12 +41,10 @@
 			FetchListEvent(keyword, page, category, month, loadingBtn=null){
 				this.loading = true
 				this.loadingBtn = loadingBtn
-				console.log(category)
 
 				const url = `${this.api_url}/web/event/paging?keyword=${keyword ? keyword : ''}&page=${page ? page : 1}&jenis_pelatihan=${category ? category : ''}&bulan_pelatihan=${month ? month : ''}`
 				this.$axios.get(url)
 				.then(({data}) => {
-					console.log(data)
 					this.categories = data.list_jenis_kegiatan
 					this.$refs.eventChild.ResetForm()
 					if(data.list_kegiatan_terdekat.length > 0){
