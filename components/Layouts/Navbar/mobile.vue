@@ -47,10 +47,19 @@
         >
         <mdb-dropdown-menu>
           <mdb-dropdown-item>
+              <nuxt-link
+               :to="{
+                name: 'profile-name',
+                params: { name: $username(slug) },
+              }"
+              class="text-center"
+              >
+              <mdb-icon icon="user-md" /> {{ profiles.nama }}
+            </nuxt-link>
             <!-- <mdb-icon far icon="user-circle" size="lg"/>  -->
-            <a :href="`/profile/${$username(slug)}`" class="text-center">
+            <!-- <a :href="`/profile/${$username(slug)}`" class="text-center">
               <mdb-icon icon="user-md" /> Profile
-            </a>
+            </a> -->
           </mdb-dropdown-item>
           <div class="dropdown-divider"></div>
           <mdb-dropdown-item @click="Logout" class="text-center">

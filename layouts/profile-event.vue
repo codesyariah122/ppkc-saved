@@ -1,10 +1,7 @@
 <template>
 	<div>
-		
 		<LayoutsNavigation :token="token" :profiles="profiles" :slug="slug" :event_id="data_event_path.event_id" :event_path="data_event_path.event_path" :style="style"/>
-
 		<Nuxt/>
-
 	</div>
 </template>
 
@@ -30,7 +27,8 @@
 			link: [
 				{ rel: 'stylesheet', type: 'text/css', href: '/assets/glightbox/glightbox.min.css'},
 				{ rel: 'stylesheet', type: 'text/css', href: '/assets/venobox/dev/venobox.min.css'},
-				{ rel: 'stylesheet', href: '/assets/docs/css/theme.css'}
+				{ rel: 'stylesheet', href: '/assets/docs/css/theme.css'},
+				{ rel: 'stylesheet', type: 'text/css', href: require('~/assets/css/main.css') }
 			],
 			
 			script: [
@@ -46,10 +44,10 @@
 					src: '/assets/docs/plugins/popper.min.js',
 					type: 'text/javascript'
 				},
-				{
-					src: '/assets/docs/fontawesome/js/all.min.js',
-					type: 'text/javascript'
-				},
+				// {
+				// 	src: '/assets/docs/fontawesome/js/all.min.js',
+				// 	type: 'text/javascript'
+				// },
 				{
 					src: '/assets/docs/plugins/bootstrap/js/bootstrap.min.js',
 					type: 'text/javascript'

@@ -72,7 +72,6 @@
 							</b-col>
 						</b-row>
 					</b-container>
-
 				</b-jumbotron>
 			</b-col>
 		</b-row>

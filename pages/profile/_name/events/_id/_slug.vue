@@ -31,7 +31,7 @@
 										</h2>
 										<p>
 											<strong>Selamat Datang di Dashboard Pelatihan PPKC</strong> <br>
-											Untuk mengakses materi pelatihan silahkan click /tap tombol humberger menu <mdb-icon icon="bars" class="text-primary" size="lg" style="color: blue!important;" />, &nbsp;&nbsp; kemudian akan muncul slide menu pelatihan yang anda ikuti dari sebelah kiri.
+											click/tap tombol dengan icon humberger menu <mdb-icon icon="bars" class="text-primary" size="lg" style="color: blue!important;" /> di pojok kanan atas, &nbsp;&nbsp; kemudian akan muncul slide menu materi pelatihan yang anda ikuti dari sebelah kiri.
 										</p>
 										
 									</div>
@@ -432,7 +432,7 @@
 					this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
 					this.$axios.get(url)
 					.then(({data}) => {
-						console.log(data)
+						// console.log(data)
 						this.details = data.kegiatan
 					})
 					.catch(err => console.log(err))

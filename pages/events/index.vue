@@ -1,7 +1,7 @@
 <template>
 	<div class="webinar__list">
 		<!-- Header filter event page -->
-		<EventpageHeader @update-list-event="ListEvent" :lists="lists" :loading="loading" :loadingBtn="loadingBtn" :listToShow="listToShow" @load-more-event="LoadListEvent" :categories="categories" ref="eventChild"/>
+		<EventpageHeader @update-list-event="SearchEvent" :lists="lists" :loading="loading" :loadingBtn="loadingBtn" :listToShow="listToShow" @load-more-event="LoadListEvent" :categories="categories" ref="eventChild"/>
 
 		<!-- List event page content -->
 		<EventpageListEvents :lists="lists" :loading="loading" :loadingBtn="loadingBtn" :listToShow="listToShow" :message="message" :empty="empty" :token="token" :data_event="data_event"/>
@@ -19,7 +19,7 @@
 				loadingBtn: null,
 				lists: [],
 				categories: [],
-				listToShow: 3,
+				listToShow: 20,
 				message:'',
 				empty: null
 			}
@@ -30,7 +30,7 @@
 		},
 
 		mounted(){
-			this.ListEvent(1,'', '', '')
+			this.FetchListEvent()
 		},
 
 		methods:{
@@ -38,49 +38,44 @@
 				this.$store.dispatch('config/checkAuthLogin', 'token')
 			},
 
-			ListEvent(page, keyword, category, month, loadingBtn){
-				// Clear list base on page == 1
-				// if(page == 1) page = 0 
-					const search_data = {
-						'page': page,
-						'keyword': keyword,
-						'category': category,
-						'month': month
-					}
-					// console.log(search_data)
+			FetchListEvent(keyword, page, category, month, loadingBtn=null){
+				this.loading = true
+				this.loadingBtn = loadingBtn
+				console.log(category)
 
-					this.loadingBtn = loadingBtn ? loadingBtn : null
-					this.loading=true
-					const url = `${this.api_url}/web/event/paging?keyword=${keyword ? keyword : ''}&page=${page ? page : ''}&jenis_pelatihan=${category ? category : ''}&bulan_pelatihan=${month ? month : ''}`
-
-					this.$axios.get(url)
-					.then(res => {
-						this.categories = res.data.list_jenis_kegiatan
-						this.$refs.eventChild.ResetForm()
-
-						console.log(res.data.list_kegiatan_terdekat.length)
-						if(res.data.list_kegiatan_terdekat.length > 0){
-							this.empty=false
-							this.lists = res.data.list_kegiatan_terdekat
-						}else{
-							this.empty=true
-							if(search_data.month == undefined){
-								this.message = "Pilih bulan pelatihan terlebih dahulu"
-							}else{
-								this.message = 'Data event yang dicari tidak di temukan'
-							}
-						}
-					})
-					.catch(err => {
-						console.log(err.message)
-					})
-					.finally(() => {
+				const url = `${this.api_url}/web/event/paging?keyword=${keyword ? keyword : ''}&page=${page ? page : 1}&jenis_pelatihan=${category ? category : ''}&bulan_pelatihan=${month ? month : ''}`
+				this.$axios.get(url)
+				.then(({data}) => {
+					console.log(data)
+					this.categories = data.list_jenis_kegiatan
+					this.$refs.eventChild.ResetForm()
+					if(data.list_kegiatan_terdekat.length > 0){
+						this.empty = false
+						this.lists = data.list_kegiatan_terdekat
+					}else{
+						this.empty = true
+						this.message = "Event pelatihan yang anda cari tidak ditemukan !"
 						setTimeout(() => {
-							this.loading=false
-							this.loadingBtn=false
-						}, 800)
-					})
-				},
+							this.empty = false
+						}, 2500)
+						if(month == undefined){
+							this.message = "Pilih bulan pelatihan terlebih dahulu"
+							setTimeout(() => {
+								this.empty = false
+							}, 2500)
+						}else{
+							this.message = 'Data event yang dicari tidak di temukan'
+						}
+					}
+				})
+				.catch(err => console.log(err.message))
+				.finally(() => {
+					setTimeout(() => {
+						this.loading = false
+						this.loadingBtn = false
+					}, 1500)
+				})
+			},
 
 			LoadListEvent(page){
 				// Clear list base on page == 1
@@ -89,6 +84,10 @@
 				// 	page = 0
 				// }
 				this.ListEvent(page,'', '', '')
+			},
+
+			SearchEvent(page, keyword, category, month, loadingBtn){
+				this.FetchListEvent(page, keyword, category, month, loadingBtn)
 			},
 
 			ConfigApiUrl(){

@@ -19,9 +19,14 @@
 			</mdb-row>
 
 			<mdb-row v-else col="12" class="d-flex justify-content-center align-items-stretch mb-5 webinar__content">
-				<mdb-col v-if="lists.length < 1" lg="12" xs="12" sm="12">
+				<mdb-col v-if="empty" lg="12" xs="12" sm="12">
+					<b-progress :max="max" height="2rem" :striped="true" show-progress :animated="true" class="mb-3">
+						<b-progress-bar :value="value" variant="success">
+							<h5 v-if="value > 0" class="text-white">Loading</h5>
+						</b-progress-bar>
+					</b-progress>
 					<mdb-alert color="primary" class="text-center">
-						<mdb-icon icon="info-circle" size="lg"/> Belum ada event terdekat
+						<mdb-icon icon="info-circle" size="lg"/> {{message}}
 					</mdb-alert>
 				</mdb-col>
 
@@ -71,10 +76,19 @@
 
 <script>
 	export default{
-		props: ['loading', 'lists', 'listToShow', 'token', 'data_event'],
+		props: ['loading', 'lists', 'listToShow', 'token', 'data_event', 'empty', 'message'],
+
+		data(){
+			return {
+				timer: 0,
+				value: 0,
+				max: 500
+			}
+		},
 
 		mounted(){
-			this.VenoBox()
+			this.VenoBox(),
+			this.startTimer()
 		},
 
 		methods: {
@@ -89,6 +103,15 @@
 					share: ['facebook', 'twitter', 'linkedin', 'pinterest', 'download'],
 					spinner: 'rotating-plane'
 				})
+			},
+
+			startTimer() {
+				let vm = this;
+				let timer = setInterval(function() {
+					vm.value += 6;
+					if (vm.value >= vm.max) clearInterval(timer);
+				}, 100);
+				vm.value = 0
 			}
 		}
 	}
