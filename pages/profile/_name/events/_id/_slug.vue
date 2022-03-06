@@ -22,6 +22,9 @@
 									</b-card>
 								</div>
 								<div v-else class="callout-block callout-block-info">
+									<div class="time mt-2 mb-3">
+										<GlobalsTime/>
+									</div>
 									<div class="content">
 										<h2 class="callout-title">
 											<span class="callout-icon-holder me-1">
@@ -36,6 +39,7 @@
 										
 									</div>
 								</div>
+								
 							</section><!--//section-->
 							<section class="docs-intro mt-5" id="section-1">
 								<ProfilepageEventDashboardDetailEvent :details="details" :loading="loading" :status_pendaftaran="status_pendaftaran"/>
@@ -62,7 +66,7 @@
 						</div>
 
 						<div v-else>
-							<ProfilepageEventDashboardShowContent :type_name="type_name" :type="type" :detailed_data="detailed_data" :link_yt="link_yt" :max="max" :value="value" :detailed="detailed" :token="token" :api_url="api_url" :pelatihans="pelatihans" :details="details" :id_test="id_test" :profiles="profiles" :username="username"/>
+							<ProfilepageEventDashboardShowContent :type_name="type_name" :type="type" :detailed_data="detailed_data" :link_yt="link_yt" :max="max" :value="value" :detailed="detailed" :token="token" :api_url="api_url" :pelatihans="pelatihans" :details="details" :id_test="id_test" :id_webinar="id_webinar" :profiles="profiles" :username="username"/>
 						</div>
 					</article>
 
@@ -261,7 +265,9 @@
 					obj[key] = raw[key];
 					return obj;
 				}, {});
-				const yt_link  = this.detailed.video ? this.$ytString(this.detailed.video) : ''
+				// const yt_link  = this.detailed.video ? this.$ytString(this.detailed.video) : ''
+				const yt_link = this.detailed.video
+				// console.log(yt_link)
 				this.link_yt = yt_link ? true : false
 				this.startTimer()
 				this.type = type

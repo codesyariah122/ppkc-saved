@@ -28,7 +28,7 @@
 				{ rel: 'stylesheet', type: 'text/css', href: '/assets/glightbox/glightbox.min.css'},
 				{ rel: 'stylesheet', type: 'text/css', href: '/assets/venobox/dev/venobox.min.css'},
 				{ rel: 'stylesheet', href: '/assets/docs/css/theme.css'},
-				{ rel: 'stylesheet', type: 'text/css', href: require('~/assets/css/main.css') }
+				// { rel: 'stylesheet', type: 'text/css', href: require('~/assets/css/main.css') }
 			],
 			
 			script: [

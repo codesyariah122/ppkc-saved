@@ -35,19 +35,23 @@
 			<div v-else>
 				
 				<mdb-row col="12" class="row justify-content-center mb-2 mt-2">
-					<mdb-col lg="12" xs="12" sm="12">
-						<blockquote class="blockquote-footer">
-							Waktu pelaksanaan test
-						</blockquote>
+					<mdb-col lg="12" xs="12" sm="12" class="box__intro-test">
+						
 						<ul style="list-style: none; margin-top:-.5rem;">
 							<li>
-								<strong>Tanggal : <time> {{$moment(waktu.tgl).format("LL")}} </time></strong>
+								
 							</li>
 							<li>
-								<strong>Waktu awal : <time> {{$moment(waktu.jam_awal, "HH:mm:ss").format("hh:mm A")}} </time></strong>
+								<blockquote class="blockquote-footer mb-2 mt-2">
+									Waktu pelaksanaan test :
+								</blockquote>
+								Tanggal : <time> {{$moment(waktu.tgl).format("LL")}} </time>
 							</li>
 							<li>
-								<strong>Waktu akhir : <time> {{$moment(waktu.jam_akhir, "HH:mm:ss").format("hh:mm A")}} </time></strong>
+								Waktu awal : <time> {{$moment(waktu.jam_awal, "HH:mm:ss").format("hh:mm A")}} </time>
+							</li>
+							<li>
+								Waktu akhir : <time> {{$moment(waktu.jam_akhir, "HH:mm:ss").format("hh:mm A")}} </time>
 							</li>
 						</ul>
 					</mdb-col>
@@ -56,7 +60,7 @@
 				<mdb-row col="12" class="row justify-content-center mb-3">
 					<mdb-col lg="12" xs="12" sm="12">
 						<h4 class="text-gray">Total soal : {{config.totalItem}}</h4>
-						<small class="text-gray">
+						<small class="text-primary">
 							*.Selesaikan setiap soal yang muncul
 						</small>
 					</mdb-col>

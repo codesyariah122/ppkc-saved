@@ -57,7 +57,7 @@
             <mdb-dropdown-toggle tag="a" navLink slot="toggle">
               <!-- <mdb-icon far icon="user-circle" size="lg"/>  -->
               <b-img v-if="profiles.photo" :src="profiles.photo" rounded="circle" alt="Circle image" width="30"></b-img>
-              <b-img v-else v-bind="mainProps" rounded="circle" alt="Circle image"></b-img>
+              <b-img v-else v-bind="mainProps" rounded="circle" alt="Circle image" width="30" height="30"></b-img>
               {{profiles.nama}}
             </mdb-dropdown-toggle>
             <mdb-dropdown-menu :class="`${$device.isDesktop ? 'mt-2' : ''}`">
@@ -101,6 +101,8 @@
     </mdb-navbar>
   </div>
 </template>
+
+
 
 <script>
 export default {
@@ -163,3 +165,5 @@ export default {
   },
 };
 </script>
+
+

@@ -28,37 +28,40 @@
         <mdb-row class="d-flex justify-content-between">
           <mdb-col md="3" xs="12" sm="12" class="col__img-profile">
             <div class="hover__image-wrap">
-              <img
-                v-if="
+              <div v-if="
                   profiles.photo !==
                   'https://api.ppkc-online.com/image-profiles/null'
-                "
-                :src="profiles.photo"
-                class="img-fluid image rounded-circle"
-              />
-              <img
-                v-else
-                src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png"
-                class="img-fluid image rounded-circle"
-              />
-              <div class="overlay">
-                <a
-                  :data-gall="
+                ">
+                  <img
+                  :src="profiles.photo"
+                  class="img-fluid image rounded-circle"
+                  />
+                  <div class="overlay">
+                    <a
+                    :data-gall="
                     profiles.photo
-                      ? profiles.photo
-                      : `${require('~/assets/images/profile/user-profile.svg')}`
-                  "
-                  :href="
+                    ? profiles.photo
+                    : `${require('~/assets/images/profile/user-profile.svg')}`
+                    "
+                    :href="
                     profiles.photo
-                      ? profiles.photo
-                      : `${require('~/assets/images/profile/user-profile.svg')}`
-                  "
-                  class="profiles-avatar icon"
-                  title="Lihat Foto Profile"
-                >
-                  <mdb-icon icon="search-plus" />
-                </a>
+                    ? profiles.photo
+                    : `${require('~/assets/images/profile/user-profile.svg')}`
+                    "
+                    class="profiles-avatar icon"
+                    title="Lihat Foto Profile"
+                    >
+                      <mdb-icon icon="search-plus" />
+                    </a>
+                </div>
               </div>
+              <div v-else>
+                  <img
+                  src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png"
+                  class="img-fluid image rounded-circle"
+                  />
+              </div>
+
             </div>
           </mdb-col>
           <mdb-col md="5" class="col__data-profile">
@@ -111,7 +114,7 @@ export default {
   },
 
   mounted() {
-    this.VenoBox();
+    this.VenoBox()
   },
 
   methods: {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <small>Gunakan mode baca ... <span style="font-size:31px;">&#127957;</span></small>
+    <!-- <small>Gunakan mode baca ... <span style="font-size:31px;">&#127957;</span></small> -->
     <ul>
       <li v-for="color of colors" :key="color">
         <component :is="`icon-${color}`"
@@ -57,6 +57,7 @@ ul {
   margin: 0;
 }
 ul li {
+  background-color: var(--bg)!important;
   display: inline-block;
   padding: 5px;
   font-size: 3rem!important;
@@ -71,7 +72,7 @@ p {
   top: 0px;
   cursor: pointer;
   padding: 7px;
-  background-color: var(--bg-secondary);
+  background-color: var(--bg);
   border: 2px solid var(--border-color);
   margin: 0;
   border-radius: 5px;

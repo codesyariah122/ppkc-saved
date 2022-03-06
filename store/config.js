@@ -28,7 +28,7 @@ export const mutations = {
 	},
 
 	CONFIG_CHECK_LOGIN(state, name){
-		state.config.token= localStorage.getItem(name) ? JSON.parse(localStorage.getItem('token')) : ''
+		state.config.token= localStorage.getItem(name) ? JSON.parse(localStorage.getItem('token')) : 'No token'
 	},
 
 
@@ -46,7 +46,8 @@ export const mutations = {
 
 	CONFIG_GET_PROFILE_LOGOUT(state, name){
 		state.config.logout_data = localStorage.getItem(name) ? JSON.parse(localStorage.getItem(name)) : ''
-	}
+	},
+
 }
 
 export const actions = {

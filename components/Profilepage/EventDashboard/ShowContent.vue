@@ -119,7 +119,9 @@
 			'value',
 			'max',
 			'id_test',
-			'username'
+			'id_webinar',
+			'username',
+			'link_yt'
 		]
 	}
 </script>

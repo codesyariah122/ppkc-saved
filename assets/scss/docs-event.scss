@@ -104,6 +104,10 @@
 						overflow: hidden;
 						.pre__test{
 							margin-top: -3rem;
+							.box__intro-test{
+								border: 3px solid $scroll-bar-bg;
+								width: 50%;
+							}
 						}
 					}
 				}
@@ -215,7 +219,11 @@
 
 						.docs-section{
 							.pre__test{
-								margin-top: -3rem;
+								margin-top: -7rem;
+								.box__intro-test{
+									border: 4px solid $scroll-bar-bg;
+									width: 50%;
+								}
 							}
 						}
 

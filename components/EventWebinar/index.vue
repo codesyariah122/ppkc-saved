@@ -45,7 +45,7 @@
 						<mdb-list-group-item>
 							<strong><b>Nama Peserta : </b><span class="grey-text">{{webinar_checkin.name}}</span></strong> 
 						</mdb-list-group-item>
-						<mdb-list-group-item>
+						<mdb-list-group-item v-if="webinar_checkin">
 							<strong><b>Check In : </b><span class="grey-text">{{$moment(webinar_checkin.data_checkin.created_at).format("LLLL")}}</span></strong> 
 						</mdb-list-group-item>
 						<mdb-list-group-item>
@@ -84,14 +84,14 @@
 				</mdb-col>
 			</mdb-row>
 
-			<mdb-row v-else-if="webinar_checkout || !webinar_checkin">
+			<mdb-row v-else-if="webinar_checkout && !webinar_checkin">
 				<mdb-col lg="12" xs="12" sm="12">
 					Anda telah checkout pada : <b>{{$moment(webinar_checkout.data_checkout.jam_keluar).format("LLLL")}}</b>
 				</mdb-col>
 
 				<mdb-col lg="12" xs="12" sm="12">
 					<mdb-alert color="info">
-						<mdb-icon icon="info-circle" /> Silahkan klik tombol checkin di bawah untuk mengakses webinar anda !
+						<mdb-icon icon="info-circle" /> Silahkan klik tombol checkin di bawah untuk mengakses kembali webinar anda !
 					</mdb-alert>
 
 					<b-button @click="CheckIn" variant="primary" block pill>
@@ -107,9 +107,22 @@
 			</mdb-row>
 
 			<mdb-row v-else>
-				<mdb-alert color="success">
-					<mdb-icon icon="info-circle" /> Not found !
-				</mdb-alert>
+				<mdb-col lg="12" xs="12" sm="12">					
+					<mdb-alert color="success">
+						<mdb-icon icon="info-circle" /> Silahkan checkin webinar terlebih dahulu
+					</mdb-alert>
+				</mdb-col>
+				<mdb-col lg="12" xs="12" sm="12">
+					<b-button @click="CheckIn" variant="primary" block pill>
+						<div v-if="loading">
+							<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+							Loading...
+						</div>
+						<div v-else>
+							<mdb-icon far icon="calendar-check" size="lg"/> Check In
+						</div>
+					</b-button>
+				</mdb-col>
 			</mdb-row>
 		</mdb-container>
 
@@ -166,6 +179,7 @@
 				});
 			},
 			WebinarDetail(){
+				console.log(this.token)
 				this.loading = true
 				const url = `${this.api_url}/web/webinar/${this.id_webinar}`
 				this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
@@ -176,7 +190,7 @@
 					this.pelatihan_detail_id = data.webinar.pelatihan_detail_id
 				})
 				.catch(err => {
-					console.log(err.message)
+					console.log(err.response)
 				})
 				.finally(() => {
 					setTimeout(() => {
@@ -186,6 +200,7 @@
 			},
 
 			CheckIn(){
+				console.log("aye")
 				window.scrollTo(0,0)
 				this.loading = true
 				const url = `${this.api_url}/web/webinar/check-in`

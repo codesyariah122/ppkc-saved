@@ -13,3 +13,16 @@
 		</div>
 	</footer>
 </template>
+
+<style lang="css">
+	.social-list, ul li{
+		background-color: var(--bg-card)!important;
+		color: var(--color)!important;
+		transition: background-color 0.3s;
+	}
+	.list-inline-item, a:hover{
+		background-color: var(--bg-scrollbar);
+		color: var(--color)!important;
+		transition: background-color 0.3s;
+	}
+</style>

@@ -25,3 +25,13 @@ export const LoginProfile = async(url, data) => {
 	}
 
 }
+
+export const CheckWeather = async(city, apiKey) => {
+	const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`
+	const weather = await fetch(url)
+	try{
+		return weather.json()
+	}catch(err){
+		console.error(err)
+	}
+}

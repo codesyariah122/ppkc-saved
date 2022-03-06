@@ -7,13 +7,14 @@
   /*--bg: #f3f5f4;*/
   --bg: #fff;
   --bg-card: #f3f5f4;
-  --bg-secondary: #fff;
+  --bg-secondary: #d0d0d0;
   --border-color: #ddd;
   --bg-scrollbar: #90A4AE;
   --color-management: #fff;
   --color-cookie: #fff;
   --bg-cookie:#672011;
   --bg-cookie-consent: #C5BCBB;
+  --bg-navigation: #fff;
 }
 
 .dark-mode {
@@ -31,6 +32,7 @@
   --bg-cookie-consent: #1F1031;
   --bg-cookie: #A59191;
   --color-cookie: #B7B5B7;
+  --bg-navigation: #232f56;
 }
 .sepia-mode {
   --color: #433422;
@@ -42,6 +44,7 @@
   --bg-secondary: #eae0c9;
   --border-color: #ded0bf;
   --color-management: #fff;
+  --bg-navigation: #f1e7d0;
 }
 
 /*body {
@@ -52,22 +55,15 @@
   color: var(--color);
   transition: background-color 0.3s;
 }*/
+
+
+
 .docs-page{
   background-color: var(--bg);
   color: var(--color);
   transition: background-color 0.3s;
 }
-#docs-sidebar{
-  background-color: var(--bg-secondary);
-  color: var(--color);
-  transition: background-color 0.3s;
-  scrollbar-color: var(--bg-scrollbar) var(--border-color);
-}
-.docs-nav{
-  background-color: var(--bg-secondary);
-  color: var(--color);
-  transition: background-color 0.3s;
-}
+
 
 .docs-content{
   background-color: var(--bg);
@@ -81,3 +77,22 @@
   transition: background-color 0.3s;
 }
 
+#section-1 {
+  background-color: var(--bg);
+  color: var(--color);
+  transition: background-color 0.3s;
+}
+
+.event__detail-content h4,h5,h6{
+  color: var(--color);
+}
+
+.callout-block{
+  background-color: var(--bg-card);
+  color: var(--color);
+  transition: background-color 0.3s;
+}
+
+.callout-block p, strong{
+  color: var(--color);
+}
