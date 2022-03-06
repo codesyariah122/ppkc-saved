@@ -36,6 +36,13 @@
 				</b-row>
 			</b-card>
 
+			<div v-if="loading_more">
+				<div class="d-flex justify-content-center">
+					<div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
+						<span class="sr-only">Loading...</span>
+					</div>
+				</div>
+			</div>
 
 			<b-button v-if="lisToShow <= lists.length || lists.length > listToShow" variant="success" pill block class="mt-4" @click="LoadMore">
 				<div>
@@ -99,9 +106,9 @@
 <script>
 	export default{
 		props: [
-			'api_url',
-			'token',
-			'profiles'
+		'api_url',
+		'token',
+		'profiles'
 		],
 
 		data(){
@@ -109,6 +116,7 @@
 				detail_webinar: localStorage.getItem("detail_webinar") ? JSON.parse(localStorage.getItem("detail_webinar")) : '',
 				loading_lists: null,
 				loading_send: null,
+				loading_more: null,
 				lists: [],
 				listToShow: 3,
 				field: {},
@@ -143,10 +151,10 @@
 			},
 
 			LoadMore(){
-				this.loading=true
-				this.listToShow += 1
+				this.loading_more=true
 				setTimeout(() => {
-					this.loading=false
+					this.loading_more=false
+					this.listToShow += 1
 				},1500)
 			},
 

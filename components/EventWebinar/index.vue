@@ -1,6 +1,9 @@
 <template>
 	<div class="embed__file">
-		<mdb-container>
+		<!-- <pre>
+			{{detail_webinar.pelatihan_detail_id == id_webinar}}
+		</pre> -->
+		<mdb-container v-if="detail_webinar.pelatihan_detail_id === id_webinar">
 			<mdb-row v-if="webinar_checkin" col="12" class="webinar__content">
 				<mdb-col v-if="loading" lg="12">
 					<b-progress :max="max" height="2rem" :striped="true" show-progress :animated="true" class="mb-3">
@@ -129,6 +132,16 @@
 						<mdb-icon far icon="calendar-check" size="lg"/> Check In
 					</div>
 				</b-button>
+			</mdb-col>
+		</mdb-row>
+	</mdb-container>
+
+	<mdb-container v-else>
+		<mdb-row col="12" class="webinar__content">
+			<mdb-col lg="12" xs="12" sm="12">
+				<mdb-alert color="info">
+					<mdb-icon icon="info-circle" size="lg"/> Not found !
+				</mdb-alert>
 			</mdb-col>
 		</mdb-row>
 	</mdb-container>
