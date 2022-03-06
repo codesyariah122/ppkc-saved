@@ -3,7 +3,7 @@
 		<mdb-container>
 			<!-- Event detail content -->
 			<mdb-row class="row event__detail-content">
-				<mdb-col v-if="token.accessToken || !logout_data.logout" lg="12">
+				<mdb-col v-if="token.accessToken && !logout_data.logout" lg="12">
 					<EventpageLoginDetailEvent :loading="loading" :details="details" :data_event="data_event" :status_pendaftaran="status_pendaftaran" :token="token" @registrasi-event="RegistrasiEvent" :profiles="profiles"/>
 				</mdb-col>
 				<mdb-col v-else lg="12">
@@ -73,7 +73,7 @@
 		},
 
 		mounted(){
-			this.ListEvent(0, '', '', ''),
+			this.ListEvent(),
 			this.StatusPembayaran(),
 			this.DetailEventProfileLogin(),
 			this.GetEventDataLogin(),
