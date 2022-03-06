@@ -2,10 +2,10 @@
 	<div>
 		<mdb-row class="d-flex justify-content-start" col="12">
 			<mdb-col md="3">
-				<h2> {{time}} </h2>
+				<h4> {{time}} </h4>
 			</mdb-col>
 			
-			<mdb-col md="6" class="weather">
+			<mdb-col v-if="apiKey" md="6" class="weather">
 				<mdb-badge color="primary" class="rounded-pill">
 					{{city.city}}<img :src="`http://openweathermap.org/img/wn/${weathers.icon}@2x.png`"> {{weathers.description}} {{temp}}&#8451;
 				</mdb-badge>
@@ -24,7 +24,7 @@
 				time: null,
 				ip:'',
 				city: localStorage.getItem('your-city') ? JSON.parse(localStorage.getItem('your-city')) : '',
-				apiKey: process.env.NUXT_ENV_WEATHER_KEY,
+				apiKey: process.env.NUXT_ENV_WEATHER_KEY ? process.env.NUXT_ENV_WEATHER_KEY : '',
 				temp:'',
 				weathers: [],
 				fdays:  []
@@ -41,6 +41,7 @@
 		created() {
 			this.interval = setInterval(() => {
 				this.time = Intl.DateTimeFormat(['id'], {
+					weekday: "long",
 					hour: 'numeric',
 					minute: 'numeric',
 					second: 'numeric'
@@ -93,7 +94,12 @@
 </script>
 
 <style lang="scss">
-
+	.weather{
+		margin-bottom: 1rem;
+		img{
+			width: 35px;
+		}
+	}
 	@media (min-width: 992px) {
 		.glow {
 			color: #fff;
@@ -109,6 +115,7 @@
 		}
 		.weather{
 			margin-top: -1rem!important;
+			margin-left: -2rem;
 			.badge{
 				img{
 					width: 45px;
