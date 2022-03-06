@@ -1,6 +1,8 @@
 <template>
 	<div class="pre__test">
-		
+		<pre>
+			{{username}}
+		</pre>
 		<mdb-container v-if="save_test.user_id == profiles.id ? save_test.status : success.status" class="success__test">
 
 			<!-- <pre>
@@ -32,12 +34,6 @@
 
 			<div v-else>
 				
-				<mdb-row  col="12" class="row justify-content-start mb-2">
-					<small class="text-info">
-						*.Selesaikan setiap soal yang muncul
-					</small>
-				</mdb-row>
-				
 				<mdb-row col="12" class="row justify-content-center mb-2 mt-2">
 					<mdb-col lg="12" xs="12" sm="12">
 						<blockquote class="blockquote-footer">
@@ -59,12 +55,14 @@
 
 				<mdb-row col="12" class="row justify-content-center mb-3">
 					<mdb-col lg="12" xs="12" sm="12">
-						<h4 class="text-info">Total soal : {{config.totalItem}}</h4>
+						<h4 class="text-gray">Total soal : {{config.totalItem}}</h4>
+						<small class="text-gray">
+							*.Selesaikan setiap soal yang muncul
+						</small>
 					</mdb-col>
 				</mdb-row>
 
-
-				<mdb-row col="12" class="row justify-content-center" v-if="listIndex <= lists.length" v-for="(listIndex, index) in config.perItem">
+				<mdb-row col="12" class="row justify-content-center" v-if="listIndex <= lists.length" v-for="(listIndex, index) in config.perItem" :key="lists[listIndex-1].id">
 					<mdb-col lg="12" class="test__content">
 						<h4> Soal {{lists[listIndex-1].urutan}} </h4>
 						<p> {{lists[listIndex-1].pertanyaan}} </p>
@@ -84,7 +82,7 @@
 									type="radio"
 									v-model="lists[listIndex-1].ujian_id"
 									:value="option.id"
-									:id="option.id"
+									:id="option.id" :disabled="lists[listIndex-1].urutan == config.currentItem ? config.disabled : false"
 									required @change="ChangeJawaban(option.ujian_id, index, option.id, lists[listIndex-1].urutan)"/>
 									<label
 									:for="option.id"
@@ -136,7 +134,7 @@
 
 <script>
 	export default{
-		props: ['id_test', 'token', 'api_url', 'pelatihans', 'details'],
+		props: ['id_test', 'token', 'api_url', 'pelatihans', 'details', 'username'],
 
 		data(){
 			return {
@@ -148,8 +146,9 @@
 					loadingSoal: null,
 					totalItem: '',
 					perItem:1,
-					currentItem: null,
-					lastItem: null
+					currentItem: 1,
+					lastItem: 0,
+					disabled: false
 				},
 				field: {
 					soal:[],
@@ -172,7 +171,6 @@
 				save_test: {},
 				soal_active: false,
 				profiles: [],
-				username: '',
 				timer: 0,
 				value: 0,
 				max: 100
@@ -182,24 +180,44 @@
 		mounted(){
 			this.PreTest(),
 			this.UserProfileData(),
-			this.WaktuPelatihan()
+			this.WaktuPelatihan(),
+			this.save_test=localStorage.getItem(`finish-pre-test-${this.id_test}-${this.username}`) ? JSON.parse(localStorage.getItem(`finish-pre-test-${this.id_test}-${this.username}`)) : 'Nothing'
 		},
 
 		methods: {
 
 			ChangeJawaban(id_soal, position, id_jawaban, urutan){
 				console.log(urutan)
-				this.config.perItem += 1
-				this.soal_active = urutan ? true : null
-				
-				localStorage.setItem('urutan_soal', urutan)
-				this.config.currentItem = localStorage.getItem('urutan_soal')
-				if(this.field.jawaban.length > 1){
-					this.field.jawaban.splice(position, 1, id_jawaban)
+				const config_soal = localStorage.getItem('urutan_soal') ? JSON.parse(localStorage.getItem('urutan_soal')) : ''
+				console.log(config_soal.current)
+				if(urutan === config_soal.current){
+					console.log(true)
+					localStorage.setItem('urutan_soal', JSON.stringify({
+						current: urutan !== this.config.lastItem ? config_soal.current+=1 : urutan,
+						next: config_soal.next+=1
+					}))
+					this.config.perItem+=1
+					this.config.disabled=true
+					this.config.currentItem = urutan
+					if(this.field.jawaban.length > 1){
+						this.field.jawaban.splice(position, 1, id_jawaban)
+					}else{
+						this.field.jawaban.push(id_jawaban)
+					}
 				}else{
-					this.field.jawaban.push(id_jawaban)
+					console.log(false)
 				}
-				console.log(this.field.jawaban)
+				// this.config.perItem += 1
+				// this.soal_active = urutan ? true : null
+				
+				// localStorage.setItem('urutan_soal', urutan)
+				// this.config.currentItem = localStorage.getItem('urutan_soal')
+				// if(this.field.jawaban.length > 1){
+				// 	this.field.jawaban.splice(position, 1, id_jawaban)
+				// }else{
+				// 	this.field.jawaban.push(id_jawaban)
+				// }
+				// console.log(this.field.jawaban)
 			},
 
 			UserProfileData(){
@@ -209,7 +227,7 @@
 					this.$axios.get(url)
 					.then(({data}) => {
 						this.profiles = data.user
-						this.username = this.$username(data.user.nama)
+						// this.username = this.$username(data.user.nama)
 					})
 					.catch(err => console.log(err.response ? err.response : ''))
 				}
@@ -224,9 +242,12 @@
 			},
 
 			PreTest(){
-				localStorage.setItem('urutan_soal', 1)
+				localStorage.setItem('urutan_soal', JSON.stringify({
+					current: this.config.currentItem,
+					next: this.config.currentItem+=1,
+				}))
+
 				this.loading_soal = true
-				this.save_test = localStorage.getItem(`finish-pre-test-${this.id_test}-${this.username}`) ? JSON.parse(localStorage.getItem(`finish-pre-test-${this.id_test}-${this.username}`)) : ''
 				const url = `${this.api_url}/web/event/1/pretest/list/${this.id_test}`
 				this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
 				this.$axios
@@ -237,8 +258,8 @@
 					this.tests = data.pelatihan
 					this.field.soal = this.field.soal.length < 1 ? this.lists.map(d => d.id) : this.field.jawaban.shift()
 					this.config.lastItem = data.list_data.length
-					this.config.currentItem = localStorage.getItem('urutan_soal')
-
+					const config_soal = localStorage.getItem('urutan_soal') ? JSON.parse(localStorage.getItem('urutan_soal')) : ''	
+					this.config.currentItem = config_soal.current
 					// this.field.jawaban = this.field.jawaban.length < 1 ? this.lists.map(d => d.jawaban) : this.field.jawaban.shift()
 				})
 				.catch(err => console.log(err))

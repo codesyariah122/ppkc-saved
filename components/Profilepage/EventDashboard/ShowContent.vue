@@ -54,7 +54,7 @@
 			</section><!--//docs-intro-->
 		</header>
 		<section class="docs-section" id="item-1-1">
-			<EventTestPreTest :id_test="id_test" :type_name="type_name" :token="token" :api_url="api_url" :pelatihans="pelatihans" :details="details"/>
+			<EventTestPreTest :id_test="id_test" :type_name="type_name" :token="token" :api_url="api_url" :pelatihans="pelatihans" :details="details" :username="username"/>
 		</section>
 	</div>
 
@@ -67,7 +67,7 @@
 			</section><!--//docs-intro-->
 		</header>
 		<section class="docs-section" id="item-1-1">
-			<EventTestPostTest :id_test="id_test" :type_name="type_name" :token="token" :api_url="api_url" :pelatihans="pelatihans"/>
+			<EventTestPostTest :id_test="id_test" :type_name="type_name" :token="token" :api_url="api_url" :pelatihans="pelatihans" :username="username"/>
 		</section>
 	</div>
 
@@ -118,7 +118,8 @@
 			'token',
 			'value',
 			'max',
-			'id_test'
+			'id_test',
+			'username'
 		]
 	}
 </script>

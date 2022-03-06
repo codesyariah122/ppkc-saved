@@ -62,7 +62,7 @@
 						</div>
 
 						<div v-else>
-							<ProfilepageEventDashboardShowContent :type_name="type_name" :type="type" :detailed_data="detailed_data" :link_yt="link_yt" :max="max" :value="value" :detailed="detailed" :token="token" :api_url="api_url" :pelatihans="pelatihans" :details="details" :id_test="id_test" :profiles="profiles"/>
+							<ProfilepageEventDashboardShowContent :type_name="type_name" :type="type" :detailed_data="detailed_data" :link_yt="link_yt" :max="max" :value="value" :detailed="detailed" :token="token" :api_url="api_url" :pelatihans="pelatihans" :details="details" :id_test="id_test" :profiles="profiles" :username="username"/>
 						</div>
 					</article>
 
