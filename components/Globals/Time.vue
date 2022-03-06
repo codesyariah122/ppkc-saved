@@ -6,7 +6,7 @@
 			</mdb-col>
 			
 			<mdb-col v-if="apiKey" md="6" class="weather">
-				<mdb-badge color="light-blue" class="rounded-pill">
+				<mdb-badge gradient="blue" color="info" class="rounded-pill">
 					{{city.city}}<img :src="`http://openweathermap.org/img/wn/${weathers.icon}@2x.png`"> {{weathers.description}} {{temp}}&#8451;
 				</mdb-badge>
 			</mdb-col>

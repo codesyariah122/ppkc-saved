@@ -84,6 +84,12 @@
 						<mdb-icon icon="sign-out-alt" size="lg"/> Check Out
 					</div>
 				</b-button>
+				<b-dropdown-divider style="list-style: none;margin-top: 2.5rem;"></b-dropdown-divider>
+			</mdb-col>
+
+			<!-- Komentar -->
+			<mdb-col lg="12" sm="12" xs="12">
+				<EventWebinarKomentar :profiles="profiles" :api_url="api_url" :token="token"/>
 			</mdb-col>
 		</mdb-row>
 

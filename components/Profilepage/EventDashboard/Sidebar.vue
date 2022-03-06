@@ -8,7 +8,7 @@
 		<nav v-else id="docs-nav" class="docs-nav navbar shadow-none">
 			<ul class="section-items list-unstyled nav flex-column pb-3">
 				<li class="nav-item__sidebar section-title"><a class="nav-link__sidebar scrollto active" href="#section-1"><span class="theme-icon-holder me-2"><i class="fas fa-map-signs"></i></span>Introduction</a></li>
-				<li class="nav-item__sidebar"><a class="nav-link__sidebar scrollto" href="#item-1-1">Halo, {{profiles.nama}}</a></li>
+				<li class="nav-item__sidebar"><a class="nav-link__sidebar" href="#item-1-1">Halo, {{profiles.nama}}</a></li>
 				<b-dropdown-divider style="list-style: none;margin-top: .5rem;"></b-dropdown-divider>
 
 				<div v-if="loading">

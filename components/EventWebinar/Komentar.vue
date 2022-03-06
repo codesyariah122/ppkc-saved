@@ -18,7 +18,7 @@
 			</b-card>
 		</div>
 		<div v-else>
-			<b-card v-if="listIndex <= lists.length" v-for="(listIndex, index) in listToShow" :key="index" no-body class="comment__box overflow-hidden mb-2">
+			<b-card v-if="listIndex <= lists.length" v-for="(listIndex, index) in listToShow" :key="lists[listIndex-1].id" no-body class="comment__box overflow-hidden mb-2">
 				<b-row no-gutters class="row justify-content-center">
 					<b-col md="2">
 						<b-card-img :src="lists[listIndex-1].user_photo" alt="Image" class="rounded-pill"></b-card-img>
@@ -44,7 +44,7 @@
 				</div>
 			</div>
 
-			<b-button v-if="lisToShow <= lists.length || lists.length > listToShow" variant="success" pill block class="mt-4" @click="LoadMore">
+			<b-button variant="success" pill block class="mt-4" @click="LoadMore">
 				<div>
 					Lebih Banyak <mdb-icon icon="angle-down" size="lg"/>
 				</div>
@@ -150,14 +150,6 @@
 				})
 			},
 
-			LoadMore(){
-				this.loading_more=true
-				setTimeout(() => {
-					this.loading_more=false
-					this.listToShow += 1
-				},1500)
-			},
-
 			KirimKomentar(){
 				this.loading_send=true
 				const url = `${this.api_url}/web/webinar/komentar`
@@ -173,6 +165,7 @@
 					this.comment = data.comment
 					if(this.comment.data_status === 1){
 						window.scrollTo(0,0)
+						this.KomentarLists()
 						this.success=true
 						this.field.komentar = ''
 						this.data_status = this.comment.data_status
@@ -186,11 +179,20 @@
 				})
 				.finally(() => {
 					setTimeout(() => {
-						this.KomentarLists()
+						
 						this.loading_send=false
 					}, 1500)
 				})
+			},
+
+			LoadMore(){
+				this.loading_more=true
+				setTimeout(() => {
+					this.loading_more=false
+					this.listToShow += 1
+				},1500)
 			}
+
 		}
 	}
 </script>

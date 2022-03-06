@@ -99,7 +99,7 @@
 			</section><!--//docs-intro-->
 		</header>
 		<section class="docs-section mt-2" id="item-1-1">
-			<EventWebinar :id_webinar="id_webinar" :token="token" :api_url="api_url" :profiles="profiles"/>
+			<EventWebinar :id_webinar="id_webinar" :token="token" :api_url="api_url" :profiles="profiles" :details="details"/>
 		</section>
 	</div>
 </template>
