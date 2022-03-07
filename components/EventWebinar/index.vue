@@ -3,156 +3,171 @@
 		<!-- <pre>
 			{{detail_webinar.pelatihan_detail_id == id_webinar}}
 		</pre> -->
-		<mdb-container v-if="detail_webinar.pelatihan_detail_id === id_webinar">
-			<mdb-row v-if="webinar_checkin" col="12" class="webinar__content">
-				<mdb-col v-if="loading" lg="12">
-					<b-progress :max="max" height="2rem" :striped="true" show-progress :animated="true" class="mb-3">
-						<b-progress-bar :value="value" variant="success">
-							<h5 v-if="value > 0" class="text-white">Loading</h5>
-						</b-progress-bar>
-					</b-progress>
-					<b-skeleton-img></b-skeleton-img>
-				</mdb-col>
-				<mdb-col v-else lg="12">
-					<b-embed
-					type="iframe"
-					aspect="16by9"
-					:src="`https://www.youtube-nocookie.com/embed/${details.url}?autoplay=0&version=3&enablejsapi=1&showinfo=0&controls=0&rel=0&showinfo=0&disablekb=1&iv_load_policy=3&modestbranding=0`"
-					allowfullscreen
-					></b-embed>
-				</mdb-col>
+		<div v-if="loading">
+			<mdb-container>
+				<mdb-row col="12" class="webinar__content">
+					<mdb-col lg="12">
+						<b-progress :max="max" height="2rem" :striped="true" show-progress :animated="true" class="mb-3">
+							<b-progress-bar :value="value" variant="success">
+								<h5 v-if="value > 0" class="text-white">Loading</h5>
+							</b-progress-bar>
+						</b-progress>
+						<b-skeleton-img></b-skeleton-img>
+					</mdb-col>
+				</mdb-row>
+			</mdb-container>
+		</div>
+		<div v-else>
+			<mdb-container v-if="detail_webinar && detail_webinar.pelatihan_detail_id === id_webinar">
+				<mdb-row v-if="webinar_checkin" col="12" class="webinar__content row justify-content-center">
+					<mdb-col v-if="loading" lg="12">
+						<b-progress :max="max" height="2rem" :striped="true" show-progress :animated="true" class="mb-3">
+							<b-progress-bar :value="value" variant="success">
+								<h5 v-if="value > 0" class="text-white">Loading</h5>
+							</b-progress-bar>
+						</b-progress>
+						<b-skeleton-img></b-skeleton-img>
+					</mdb-col>
+					<mdb-col v-else lg="12">
+						<b-embed
+						type="iframe"
+						aspect="16by9"
+						:src="`https://www.youtube-nocookie.com/embed/${details.url}?autoplay=0&version=3&enablejsapi=1&showinfo=0&controls=0&rel=0&showinfo=0&disablekb=1&iv_load_policy=3&modestbranding=0`"
+						allowfullscreen
+						></b-embed>
+					</mdb-col>
 
-				<!-- Informasi webinar -->
-				<mdb-col lg="12" class="mt-5">
-					<div v-if="loading">
-						<div class="d-flex justify-content-center">
-							<div class="spinner-grow text-primary" style="width: 5rem; height: 5rem;" role="status">
-								<span class="sr-only">Loading...</span>
+					<!-- Informasi webinar -->
+					<mdb-col lg="12" class="mt-5">
+						<div v-if="loading">
+							<div class="d-flex justify-content-center">
+								<div class="spinner-grow text-primary" style="width: 5rem; height: 5rem;" role="status">
+									<span class="sr-only">Loading...</span>
+								</div>
 							</div>
 						</div>
-					</div>
-					<mdb-list-group v-else>
-						<mdb-list-group-item>
-							<h4>Informasi Webinar</h4>
-						</mdb-list-group-item>
-						<mdb-list-group-item>
-							<strong><b>Judul : </b>
-								<p class="grey-text lead">
-									{{detail_webinar.judul}}
-								</p>
-								<blockquote class="blockquote-footer">
-									{{detail_webinar.deskripsi}}
-								</blockquote> 
-							</strong>
-						</mdb-list-group-item>
-						<mdb-list-group-item>
-							<strong><b>Nama Peserta : </b><span class="grey-text">{{webinar_checkin.name}}</span></strong> 
-						</mdb-list-group-item>
-						<mdb-list-group-item v-if="webinar_checkin">
-							<strong><b>Check In : </b><span class="grey-text">{{$moment(webinar_checkin.data_checkin.created_at).format("LLLL")}}</span></strong> 
-						</mdb-list-group-item>
-						<mdb-list-group-item>
-							<strong><b> Link Room : </b><a :href="detail_webinar.link_room">Link Webinar Room</a> </strong>
-						</span>
-					</mdb-list-group-item>
-					<mdb-list-group-item>
-						<strong><b>Meeting ID : </b><span class="grey-text">{{detail_webinar.username_room}}</span></strong> 
-					</mdb-list-group-item>
-					<mdb-list-group-item>
-						<strong><b>Passcode : </b><span class="grey-text"> {{detail_webinar.password_room}} </span></strong>
-					</mdb-list-group-item>
-					<mdb-list-group-item>
-						<strong><b>Penyelenggara : </b><span class="grey-text"> {{detail_webinar.penyelenggara}} </span></strong>
-					</mdb-list-group-item>
-					<mdb-list-group-item>
-						<strong><b>Total Peserta : </b><span class="grey-text"> {{detail_webinar.total_peserta}} Peserta </span></strong>
-					</mdb-list-group-item>
-				</mdb-list-group>	
-			</mdb-col>
+							<mdb-list-group v-else>
+								<mdb-list-group-item>
+									<h4>Informasi Webinar</h4>
+								</mdb-list-group-item>
+								<mdb-list-group-item>
+									<strong><b>Judul : </b>
+										<p class="grey-text lead">
+											{{detail_webinar.judul}}
+										</p>
+										<blockquote class="blockquote-footer">
+											{{detail_webinar.deskripsi}}
+										</blockquote> 
+									</strong>
+								</mdb-list-group-item>
+								<mdb-list-group-item>
+									<strong><b>Nama Peserta : </b><span class="grey-text">{{webinar_checkin.name}}</span></strong> 
+								</mdb-list-group-item>
+								<mdb-list-group-item v-if="webinar_checkin">
+									<strong><b>Check In : </b><span class="grey-text">{{$moment(webinar_checkin.data_checkin.created_at).format("LLLL")}}</span></strong> 
+								</mdb-list-group-item>
+								<mdb-list-group-item>
+									<strong><b> Link Room : </b><a :href="detail_webinar.link_room">Link Webinar Room</a> </strong>
+								</span>
+							</mdb-list-group-item>
+							<mdb-list-group-item>
+								<strong><b>Meeting ID : </b><span class="grey-text">{{detail_webinar.username_room}}</span></strong> 
+							</mdb-list-group-item>
+							<mdb-list-group-item>
+								<strong><b>Passcode : </b><span class="grey-text"> {{detail_webinar.password_room}} </span></strong>
+							</mdb-list-group-item>
+							<mdb-list-group-item>
+								<strong><b>Penyelenggara : </b><span class="grey-text"> {{detail_webinar.penyelenggara}} </span></strong>
+							</mdb-list-group-item>
+							<mdb-list-group-item>
+								<strong><b>Total Peserta : </b><span class="grey-text"> {{detail_webinar.total_peserta}} Peserta </span></strong>
+							</mdb-list-group-item>
+						</mdb-list-group>	
+					</mdb-col>
 
-			<mdb-col lg="12" xs="12" sm="12">
-				<b-dropdown-divider style="list-style: none;margin-top: 2rem;"></b-dropdown-divider>
-			</mdb-col>
+					<mdb-col lg="12" xs="12" sm="12">
+						<b-dropdown-divider style="list-style: none;margin-top: 2rem;"></b-dropdown-divider>
+					</mdb-col>
 
-			<mdb-col lg="12" xs="12" sm="12" class="mt-2">
-				<b-button varian="danger" block pill @click="CheckOut(webinar_checkin.data_checkin.webinar_id, detail_webinar.judul)">
-					<div v-if="loading">
-						<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-						Loading...
-					</div>
-					<div v-else>	
-						<mdb-icon icon="sign-out-alt" size="lg"/> Check Out
-					</div>
-				</b-button>
-				<b-dropdown-divider style="list-style: none;margin-top: 2.5rem;"></b-dropdown-divider>
-			</mdb-col>
+					<mdb-col lg="12" xs="12" sm="12" class="mt-2">
+						<b-button varian="danger" block pill @click="CheckOut(webinar_checkin.data_checkin.webinar_id, detail_webinar.judul)">
+							<div v-if="loading">
+								<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+								Loading...
+							</div>
+							<div v-else>	
+								<mdb-icon icon="sign-out-alt" size="lg"/> Check Out
+							</div>
+						</b-button>
+						<b-dropdown-divider style="list-style: none;margin-top: 2.5rem;"></b-dropdown-divider>
+					</mdb-col>
 
-			<!-- Komentar -->
-			<mdb-col lg="12" sm="12" xs="12">
-				<EventWebinarKomentar :profiles="profiles" :api_url="api_url" :token="token"/>
-			</mdb-col>
-		</mdb-row>
+					<!-- Komentar -->
+					<mdb-col lg="12" sm="12" xs="12">
+						<EventWebinarKomentar :profiles="profiles" :api_url="api_url" :token="token"/>
+					</mdb-col>
+				</mdb-row>
 
-		<mdb-row v-else-if="webinar_checkout && !webinar_checkin" col="12" class="row justify-content-center">
-			<mdb-col lg="12" xs="12" sm="12">
-				Anda telah checkout pada : <b>{{$moment(webinar_checkout.data_checkout.jam_keluar).format("LLLL")}}</b>
-			</mdb-col>
+				<mdb-row v-else-if="webinar_checkout && !webinar_checkin" col="12" class="row justify-content-center">
+					<mdb-col lg="12" xs="12" sm="12">
+						Anda telah checkout pada : <b>{{$moment(webinar_checkout.data_checkout.jam_keluar).format("LLLL")}}</b>
+					</mdb-col>
 
-			<mdb-col lg="12" xs="12" sm="12">
-				<mdb-alert color="info">
-					<mdb-icon icon="info-circle" /> Silahkan klik tombol checkin di bawah untuk mengakses kembali webinar anda !
-				</mdb-alert>
+					<mdb-col lg="12" xs="12" sm="12">
+						<mdb-alert color="info">
+							<mdb-icon icon="info-circle" /> Silahkan klik tombol checkin di bawah untuk mengakses kembali webinar anda !
+						</mdb-alert>
 
-				<b-button @click="CheckIn" variant="primary" block pill>
-					<div v-if="loading">
-						<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-						Loading...
-					</div>
-					<div v-else>
-						<mdb-icon far icon="calendar-check" size="lg"/> Check In
-					</div>
-				</b-button>
-				<b-dropdown-divider style="list-style: none;margin-top: 2.5rem;"></b-dropdown-divider>
-			</mdb-col>
+						<b-button @click="CheckIn" variant="primary" block pill>
+							<div v-if="loading">
+								<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+								Loading...
+							</div>
+							<div v-else>
+								<mdb-icon far icon="calendar-check" size="lg"/> Check In
+							</div>
+						</b-button>
+						<b-dropdown-divider style="list-style: none;margin-top: 2.5rem;"></b-dropdown-divider>
+					</mdb-col>
 
-			<!-- Komentar -->
-			<mdb-col lg="12" sm="12" xs="12">
-				<EventWebinarKomentar :profiles="profiles" :api_url="api_url" :token="token"/>
-			</mdb-col>
+					<!-- Komentar -->
+					<mdb-col lg="12" sm="12" xs="12">
+						<EventWebinarKomentar :profiles="profiles" :api_url="api_url" :token="token"/>
+					</mdb-col>
 
-		</mdb-row>
+				</mdb-row>
 
-		<mdb-row v-else>
-			<mdb-col lg="12" xs="12" sm="12">					
-				<mdb-alert color="success">
-					<mdb-icon icon="info-circle" /> Silahkan checkin webinar terlebih dahulu
-				</mdb-alert>
-			</mdb-col>
-			<mdb-col lg="12" xs="12" sm="12">
-				<b-button @click="CheckIn" variant="primary" block pill>
-					<div v-if="loading">
-						<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-						Loading...
-					</div>
-					<div v-else>
-						<mdb-icon far icon="calendar-check" size="lg"/> Check In
-					</div>
-				</b-button>
-			</mdb-col>
-		</mdb-row>
-	</mdb-container>
+				<mdb-row v-else>
+					<mdb-col lg="12" xs="12" sm="12">					
+						<mdb-alert color="success">
+							<mdb-icon icon="info-circle" /> Silahkan checkin webinar terlebih dahulu
+						</mdb-alert>
+					</mdb-col>
+					<mdb-col lg="12" xs="12" sm="12">
+						<b-button @click="CheckIn" variant="primary" block pill>
+							<div v-if="loading">
+								<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+								Loading...
+							</div>
+							<div v-else>
+								<mdb-icon far icon="calendar-check" size="lg"/> Check In
+							</div>
+						</b-button>
+					</mdb-col>
+				</mdb-row>
+			</mdb-container>
 
-	<mdb-container v-else>
-		<mdb-row col="12" class="webinar__content">
-			<mdb-col lg="12" xs="12" sm="12">
-				<mdb-alert color="info">
-					<mdb-icon icon="info-circle" size="lg"/> Not found !
-				</mdb-alert>
-			</mdb-col>
-		</mdb-row>
-	</mdb-container>
-
-</div>
+			<mdb-container v-else>
+				<mdb-row col="12" class="webinar__content">
+					<mdb-col lg="12" xs="12" sm="12">
+						<mdb-alert color="info">
+							<mdb-icon icon="info-circle" size="lg"/> Not found !
+						</mdb-alert>
+					</mdb-col>
+				</mdb-row>
+			</mdb-container>		
+		</div>
+	</div>
 </template>
 
 <style lang="scss">
@@ -227,7 +242,7 @@
 				.finally(() => {
 					setTimeout(() => {
 						this.loading = false
-					}, 1500)
+					}, 2500)
 				})
 			},
 

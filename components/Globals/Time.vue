@@ -1,12 +1,12 @@
 <template>
 	<div>
 		<mdb-row class="d-flex justify-content-start" col="12">
-			<mdb-col md="3">
+			<mdb-col class="glow" md="3">
 				<h4> {{time}} </h4>
 			</mdb-col>
 			
 			<mdb-col v-if="apiKey" md="6" class="weather">
-				<mdb-badge gradient="blue" color="info" class="rounded-pill">
+				<mdb-badge gradient="blue" :color="color_badge" class="rounded-pill">
 					{{city.city}}<img :src="`http://openweathermap.org/img/wn/${weathers.icon}@2x.png`"> {{weathers.description}} {{temp}}&#8451;
 				</mdb-badge>
 			</mdb-col>
@@ -27,7 +27,8 @@
 				apiKey: process.env.NUXT_ENV_WEATHER_KEY ? process.env.NUXT_ENV_WEATHER_KEY : '',
 				temp:'',
 				weathers: [],
-				fdays:  []
+				fdays:  [],
+				color_badge: ''
 			}
 		},
 
@@ -85,9 +86,29 @@
 				.then(res => {
 					this.weathers = res.weather[0]
 					this.temp = this.getCelcius(res.main.temp)
+					this.DetectColor(this.weathers.description)
 				})
 				.catch(err => console.log(err))
-			}
+			},
+
+			DetectColor(color){
+				switch(color){
+					case 'moderate rain':
+					this.color_badge = 'success'
+					break;
+					case 'light rain':
+					this.color_badge = 'info'
+					break;
+					case 'heavy intensity rain':
+					this.color_badge = 'secondary'
+					break;
+					case 'shower rain':
+					this.color_badge = 'indigo'
+					break;
+					default:
+					this.color_badge = 'primary'
+				}
+			},
 		}
 	}
 
@@ -96,29 +117,28 @@
 <style lang="scss">
 	.weather{
 		margin-bottom: 1rem;
-		img{
-			width: 35px;
+		.badge{
+			// color:$default-black!important;
+			// font-weight: 600;
+			img{
+				// filter: drop-shadow(0 0 0.75rem yellow);
+				width: 45px;
+			}
 		}
 	}
 	@media (min-width: 992px) {
 		.glow {
-			color: #fff;
-			text-shadow:
-			0 0 7px #fff,
-			0 0 10px #fff,
-			0 0 21px #fff,
-			0 0 42px #0fa,
-			0 0 82px #0fa,
-			0 0 92px #0fa,
-			0 0 102px #0fa,
-			0 0 151px #0fa;
+			// filter: drop-shadow(9px 9px 11px black);
 		}
 		.weather{
 			margin-top: -1rem!important;
 			margin-left: -2rem;
 			.badge{
+				// color:$default-black!important;
+				// font-weight: 600;
 				img{
-					width: 45px;
+					filter: drop-shadow(1px 11px 9px powderblue);
+					width: 55px;
 				}
 			}
 		}

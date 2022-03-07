@@ -18,11 +18,11 @@
 				<div v-else v-for="(item, index) in pelatihans" :key="item.id" class="collapse__docs">
 					<b-button v-b-toggle="`collapse-${item.id}`" class="active btn__pelatihan shadow-none nav-item__sidebar nav-link__sidebar section-title" @click="ToggleFile(index+1)">
 						<mdb-row col="12" class="d-flex justify-content-between">
-							<mdb-col md="9" sm="9" xs="9">  
+							<mdb-col col="9" md="9" sm="9" xs="9">  
 								{{item.title}}
 							</mdb-col>
 
-							<mdb-col md="2" sm="2" xs="2">
+							<mdb-col col="2" md="2" sm="2" xs="2">
 								<mdb-icon :icon="`${show_collapse && index+1 === urutan ? 'minus-circle' : 'plus-circle'}`" size="lg"/>
 							</mdb-col>
 						</mdb-row>

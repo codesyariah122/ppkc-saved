@@ -169,19 +169,22 @@
 		methods: {
 			KomentarLists(start){
 				this.loading_lists = true
-				const url = `${this.api_url}/web/webinar/komentar/list?start=${start ? start : 0}&pelatihan_detail_id=${this.detail_webinar.webinar.pelatihan_detail_id}`
-				this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
-				this.$axios.get(url)
-				.then(({data}) => {
-					this.lists = data.list_data
+				// console.log(this.detail_webinar)
+				if(this.detail_webinar){				
+					const url = `${this.api_url}/web/webinar/komentar/list?start=${start ? start : 0}&pelatihan_detail_id=${this.detail_webinar.webinar.pelatihan_detail_id}`
+					this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
+					this.$axios.get(url)
+					.then(({data}) => {
+						this.lists = data.list_data
 
-				})
-				.catch(err => console.log(err.response))
-				.finally(() => {
-					setTimeout(() => {
-						this.loading_lists = false
-					}, 2500)
-				})
+					})
+					.catch(err => console.log(err.response))
+					.finally(() => {
+						setTimeout(() => {
+							this.loading_lists = false
+						}, 2500)
+					})
+				}
 			},
 
 			KirimKomentar(){

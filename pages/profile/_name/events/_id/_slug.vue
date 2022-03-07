@@ -316,7 +316,6 @@
 			DetailEventProfileLogin(){
 				if(this.token.accessToken){
 					const url = `${this.api_url}/web/event/${this.$route.params.id}`
-
 					this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
 					this.$axios.get(url)
 					.then(({data}) => {

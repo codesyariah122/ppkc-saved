@@ -167,9 +167,9 @@
 // Event detail slug components
 .event__detail{
 	margin-top: 2rem;
-	margin-bottom: 10rem;
 	.event__detail-content{
-		height: 870px;
+		margin-bottom: 10rem;
+		height: auto;
 		.idr__color {
 			color: $idr-color;
 			font-weight: 700;
