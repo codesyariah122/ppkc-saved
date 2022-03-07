@@ -4,7 +4,7 @@
 		<EventpageHeader @update-list-event="SearchEvent" :lists="lists" :loading="loading" :loadingBtn="loadingBtn" :listToShow="listToShow" @load-more-event="LoadListEvent" :categories="categories" ref="eventChild"/>
 
 		<!-- List event page content -->
-		<EventpageListEvents :lists="lists" :loading="loading" :loadingBtn="loadingBtn" :listToShow="listToShow" :message="message" :empty="empty" :token="token" :data_event="data_event"/>
+		<EventpageListEvents :lists="lists" :loading="loading" :loadingBtn="loadingBtn" :listToShow="listToShow" :message="message" :empty="empty" :token="token" :data_event="data_event" :error_search="error_search"/>
 
 	</div>
 </template>
@@ -21,7 +21,8 @@
 				categories: [],
 				listToShow: 20,
 				message:'',
-				empty: null
+				empty: null,
+				error_search: null
 			}
 		},
 
@@ -45,6 +46,7 @@
 				const url = `${this.api_url}/web/event/paging?keyword=${keyword ? keyword : ''}&page=${page ? page : 1}&jenis_pelatihan=${category ? category : ''}&bulan_pelatihan=${month ? month : ''}`
 				this.$axios.get(url)
 				.then(({data}) => {
+					// console.log(data.list_kegiatan_terdekat.length)
 					this.categories = data.list_jenis_kegiatan
 					this.$refs.eventChild.ResetForm()
 					if(data.list_kegiatan_terdekat.length > 0){
@@ -52,18 +54,20 @@
 						this.lists = data.list_kegiatan_terdekat
 					}else{
 						this.empty = true
-						this.message = "Event pelatihan yang anda cari tidak ditemukan !"
-						setTimeout(() => {
-							this.empty = false
-						}, 2500)
-						if(month == undefined){
-							this.message = "Pilih bulan pelatihan terlebih dahulu"
-							setTimeout(() => {
-								this.empty = false
-							}, 2500)
-						}else{
-							this.message = 'Data event yang dicari tidak di temukan'
-						}
+						this.message = "Belum ada event terdekat!"
+						// setTimeout(() => {
+						// 	this.empty = false
+						// }, 2500)
+
+						// if(month == undefined){
+						// 	this.empty = true
+						// 	this.message = "Pilih bulan pelatihan terlebih dahulu"
+						// 	setTimeout(() => {
+						// 		this.empty = false
+						// 	}, 2500)
+						// }else{
+						// 	this.message = 'Data event yang dicari tidak di temukan'
+						// }
 					}
 				})
 				.catch(err => console.log(err.message))
@@ -85,7 +89,16 @@
 			},
 
 			SearchEvent(page, keyword, category, month, loadingBtn){
-				this.FetchListEvent(page, keyword, category, month, loadingBtn)
+				if(month === undefined || month === ""){
+					this.error_search = true
+					this.message = "Pilih bulan pelatihan terlebih dahulu"
+					setTimeout(() => {
+						this.error_search= false
+						this.FetchListEvent(keyword="", page=0, category="", month="", loadingBtn)
+					}, 1000)
+				}else{
+					this.FetchListEvent(keyword, page, category, month, loadingBtn)
+				}
 			},
 
 			ConfigApiUrl(){

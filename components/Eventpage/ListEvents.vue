@@ -2,7 +2,16 @@
 	<div class="mt-2 card__content-events">
 		<mdb-container>
 			<mdb-row v-if="loading" col="12" class="d-flex justify-content-center align-items-stretch mb-5 mt-5">
-				<mdb-col v-for="(item, index) in lists" md="4" :key="item.id">
+				
+				<mdb-col v-if="empty" lg="12" xs="12" sm="12">
+					<center>						
+						<div class="spinner-border text-primary" style="width:7rem; height: 7rem;" role="status">
+							<span class="sr-only">Loading...</span>
+						</div>
+					</center>
+				</mdb-col>
+
+				<mdb-col v-else v-for="(item, index) in lists" md="4" :key="item.id">
 					<b-card>
 						<b-row>
 							<b-col cols="12" class="mb-3">
@@ -16,20 +25,17 @@
 						</b-row>
 					</b-card>
 				</mdb-col>
+
 			</mdb-row>
 
 			<mdb-row v-else col="12" class="d-flex justify-content-center align-items-stretch mb-5 webinar__content">
-				<mdb-col v-if="empty" lg="12" xs="12" sm="12">
-					<b-progress :max="max" height="2rem" :striped="true" show-progress :animated="true" class="mb-3">
-						<b-progress-bar :value="value" variant="success">
-							<h5 v-if="value > 0" class="text-white">Loading</h5>
-						</b-progress-bar>
-					</b-progress>
-					<mdb-alert color="primary" class="text-center">
+				<mdb-col v-if="empty || error_search" lg="12" xs="12" sm="12">
+					<mdb-alert :color="`${error_search ? 'danger' : 'info'}`" class="text-center">
 						<mdb-icon icon="info-circle" size="lg"/> {{message}}
 					</mdb-alert>
 				</mdb-col>
 
+				
 				<mdb-col v-else id="show-event" v-for="list in lists" md="4" xs="12" sm="12" :key="list.kegiatan_id">
 					<mdb-card>
 						<div class="event__image-wrap">
@@ -69,6 +75,7 @@
 						</mdb-card-body>
 					</mdb-card>
 				</mdb-col>
+
 			</mdb-row>
 		</mdb-container>
 	</div>
@@ -76,7 +83,7 @@
 
 <script>
 	export default{
-		props: ['loading', 'lists', 'listToShow', 'token', 'data_event', 'empty', 'message'],
+		props: ['loading', 'lists', 'listToShow', 'token', 'data_event', 'empty', 'message', 'error_search'],
 
 		data(){
 			return {
@@ -88,7 +95,8 @@
 
 		mounted(){
 			this.VenoBox(),
-			this.startTimer()
+			this.startTimer(),
+			console.log(this.error_search)
 		},
 
 		methods: {
