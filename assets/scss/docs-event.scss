@@ -1,8 +1,9 @@
 .docs-wrapper{
 	margin-top: -5rem!important;
 	.docs-sidebar{
-		margin-top: -.9rem;
+		margin-top: -.8rem;
 		width:250px;
+		height:100%;
 		scrollbar-color: $scroll-bar-color $scroll-bar-bg;
 		scrollbar-width: auto;
 		&:-webkit-scrollbar {
@@ -32,6 +33,10 @@
 					&:hover{
 						background-color: $bg-hover-first!important;
 					}
+					// i{
+					// 	margin-left: 12rem;
+					// 	margin-top:-15rem!important;
+					// }
 				}
 
 				.collapse__category-event{
@@ -141,7 +146,7 @@
 					.btn__pelatihan{
 						background-color:transparent!important;
 						color:#28b76b;
-						width: 270px!important;
+						width: 320px!important;
 						text-transform: uppercase;
 						font-size:12px;
 						text-align: left;
@@ -161,7 +166,7 @@
 							margin-top: -.8rem;
 							.list-group-item{
 								background-color: transparent;
-								width: 295px;
+								width: 320px;
 								margin-left: -1.8rem;
 								margin-bottom: 1.5rem;
 								&:hover{

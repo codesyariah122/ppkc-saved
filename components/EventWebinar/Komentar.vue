@@ -18,7 +18,7 @@
 			</b-card>
 		</div>
 		<div v-else>
-			<b-card v-if="listIndex <= lists.length" v-for="(listIndex, index) in listToShow" :key="lists[listIndex-1].id" no-body class="comment__box overflow-hidden mb-3 shadow-none">
+			<b-card v-if="listIndex <= lists.length" v-for="(listIndex, index) in listToShow" :key="lists[listIndex-1].id" no-body class="comment__box overflow-hidden mb-3 shadow-none border-0">
 				<b-row no-gutters class="d-flex justify-content-center content__card-comment">
 					<b-col md="2">
 						<b-card-img :src="lists[listIndex-1].user_photo" alt="Image" class="rounded-pill"></b-card-img>
@@ -110,18 +110,21 @@
 			max-width:800px;
 			.content__card-comment{
 				.card-img,.b-skeleton-avatar{
-					margin-left: 2rem;
+					margin-left: 1rem;
 					margin-bottom: 1rem;
 					max-width: 100px;
 				}
 				.card-title{
+					font-size: 16px!important;
 					font-weight: 600;
 					color: $color-primary;
 				}
 				.card-text{
+					font-size: 14px!important;
 					margin-left: 2rem;
 				}
 				small{
+					font-size: 12px;
 					margin-left: 2rem;
 				}
 				.send__komentar{

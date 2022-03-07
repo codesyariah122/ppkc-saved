@@ -16,13 +16,14 @@
 				</div>
 
 				<div v-else v-for="(item, index) in pelatihans" :key="item.id" class="collapse__docs">
-					<b-button v-b-toggle="`collapse-${item.id}`" class="active btn__pelatihan shadow-none nav-item__sidebar nav-link__sidebar section-title" @click="ToggleFile">
-						<mdb-row col="12" class="row justify-content-between">
-							<mdb-col md="9" xs="8" sm="6">  
+					<b-button v-b-toggle="`collapse-${item.id}`" class="active btn__pelatihan shadow-none nav-item__sidebar nav-link__sidebar section-title" @click="ToggleFile(index+1)">
+						<mdb-row col="12" class="d-flex justify-content-between">
+							<mdb-col md="9" sm="9" xs="9">  
 								{{item.title}}
 							</mdb-col>
-							<mdb-col md="1" xs="2" sm="6">
-								<mdb-icon :icon="`${show_collapse == false ? 'plus-circle' : 'minus-circle'}`" size="lg"/>
+
+							<mdb-col md="2" sm="2" xs="2">
+								<mdb-icon :icon="`${show_collapse && index+1 === urutan ? 'minus-circle' : 'plus-circle'}`" size="lg"/>
 							</mdb-col>
 						</mdb-row>
 					</b-button>
@@ -56,7 +57,8 @@
 
 		data(){
 			return {
-				show_collapse: false
+				show_collapse: false,
+				urutan: ''
 			}
 		},
 
@@ -96,7 +98,11 @@
 				this.$emit('show-field', raw, id_kategori, type)
 			},
 
-			ToggleFile(){
+			ToggleFile(urutan){
+				if(urutan){
+					this.urutan = urutan
+					this.show_collapse = !this.show_collapse
+				}
 				// this.show_collapse = !this.show_collapse
 				window.scrollTo(0, 0)
 				this.$emit('toggle-file')
