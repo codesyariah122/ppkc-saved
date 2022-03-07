@@ -58,7 +58,7 @@
 				coordinates: [],
 				url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
 				attribution:
-				'&copy; <a target="_blank" href="http://osm.org/copyright">PPKC Carolus Map</a> contributors',
+				'&copy; <a target="_blank" href="https://osm.org/copyright">PPKC Carolus Map</a> contributors',
 				zoom: this.$device.isMobile ? 17 : 17,
 				center: {
 					lat: '',
