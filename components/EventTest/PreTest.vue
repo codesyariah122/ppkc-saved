@@ -1,14 +1,6 @@
 <template>
 	<div class="pre__test">
-		<pre>
-			{{username}}
-		</pre>
 		<mdb-container v-if="save_test.user_id == profiles.id ? save_test.status : success.status" class="success__test">
-
-			<!-- <pre>
-				{{save_test}}
-			</pre> -->
-
 			<mdb-row col="12" class="row justify-content-center">
 				<mdb-col lg="12">
 					<mdb-alert :color="`${save_test.status ? 'info' : 'success'}`">
@@ -48,10 +40,10 @@
 								Tanggal : <time> {{$moment(waktu.tgl).format("LL")}} </time>
 							</li>
 							<li>
-								Waktu awal : <time> {{$moment(waktu.jam_awal, "HH:mm:ss").format("hh:mm A")}} </time>
+								Mulai : <time> {{$moment(waktu.jam_awal, "HH:mm:ss").format("hh:mm A")}} </time>
 							</li>
 							<li>
-								Waktu akhir : <time> {{$moment(waktu.jam_akhir, "HH:mm:ss").format("hh:mm A")}} </time>
+								Berakhir : <time> {{$moment(waktu.jam_akhir, "HH:mm:ss").format("hh:mm A")}} </time>
 							</li>
 						</ul>
 					</mdb-col>

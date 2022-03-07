@@ -156,9 +156,12 @@
 </template>
 
 <style lang="scss">
-	.list-group{
-		.list-group-item{
-			border:0;
+	.webinar__content{		
+		.list-group{
+			width: 100%;
+			.list-group-item{
+				border:0;
+			}
 		}
 	}
 </style>

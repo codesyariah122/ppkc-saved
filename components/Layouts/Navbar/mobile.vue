@@ -40,8 +40,9 @@
         <mdb-dropdown-toggle tag="a" navLink slot="toggle" size="md"
         >
         <!-- <mdb-icon far icon="user-circle" size="lg"/>  -->
-        <b-img v-if="profiles.photo" :src="profiles.photo" rounded="circle" alt="Circle image" width="30"></b-img>
-        <b-img v-else v-bind="mainProps" rounded="circle" alt="Circle image"></b-img>
+        <b-img v-if="profiles.photo !==
+        'https://api.ppkc-online.com/image-profiles/null'" :src="profiles.photo" rounded="circle" alt="Circle image" width="30"></b-img>
+        <b-img v-else :src="`${require('~/assets/images/profile/profile.svg')}`" rounded="circle" alt="Circle image" width="30" height="30"></b-img>
         {{profiles.nama}}
         </mdb-dropdown-toggle
         >

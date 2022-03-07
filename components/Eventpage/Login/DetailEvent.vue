@@ -78,8 +78,8 @@
 					
 				</mdb-row>
 
-				<mdb-row class="inside__second mt-3">
-					<mdb-col v-if="status_pendaftaran == 'Daftar'">
+				<mdb-row class="inside__second mt-3" col="12">
+					<mdb-col v-if="status_pendaftaran == 'Daftar'" lg="12" xs="12" sm="12">
 						<div v-if="loading">
 							<span class="spinner-border spinner-border-sm text-primary" role="status" aria-hidden="true"></span>
 							Loading...
@@ -91,7 +91,7 @@
 						</div>
 					</mdb-col>
 
-					<mdb-col v-else-if="status_pendaftaran == 'Menunggu Konfirmasi'">
+					<mdb-col v-else-if="status_pendaftaran == 'Menunggu Konfirmasi'" lg="12" xs="12" sm="12">
 						<div v-if="loading">
 							<span class="spinner-border spinner-border-sm text-primary" role="status" aria-hidden="true"></span>
 							Loading...
@@ -104,7 +104,7 @@
 					</mdb-col>
 
 					
-					<mdb-col v-else>
+					<mdb-col v-else lg="12" xs="12" sm="12">
 						<div v-if="loading">
 							<span class="spinner-border spinner-border-sm text-primary" role="status" aria-hidden="true"></span>
 							Loading...

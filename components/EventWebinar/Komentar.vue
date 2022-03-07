@@ -5,7 +5,7 @@
 			<b-card  no-body class="comment__box overflow-hidden mb-3">
 				<b-row no-gutters class="row justify-content-center">
 					<b-col md="2">
-						<b-skeleton type="avatar" class="rounded-pill" width="100"></b-skeleton>
+						<b-skeleton type="avatar" class="rounded-pill mt-2" width="100"></b-skeleton>
 					</b-col>
 					<b-col md="8">
 						<b-card-body>
@@ -18,8 +18,8 @@
 			</b-card>
 		</div>
 		<div v-else>
-			<b-card v-if="listIndex <= lists.length" v-for="(listIndex, index) in listToShow" :key="lists[listIndex-1].id" no-body class="comment__box overflow-hidden mb-2">
-				<b-row no-gutters class="row justify-content-center">
+			<b-card v-if="listIndex <= lists.length" v-for="(listIndex, index) in listToShow" :key="lists[listIndex-1].id" no-body class="comment__box overflow-hidden mb-3 shadow-none">
+				<b-row no-gutters class="d-flex justify-content-center content__card-comment">
 					<b-col md="2">
 						<b-card-img :src="lists[listIndex-1].user_photo" alt="Image" class="rounded-pill"></b-card-img>
 					</b-col>
@@ -44,7 +44,7 @@
 				</div>
 			</div>
 
-			<b-button variant="success" pill block class="mt-4" @click="LoadMore">
+			<b-button v-if="listToShow <= lists.length" variant="success" pill block class="mt-4" @click="LoadMore">
 				<div>
 					Lebih Banyak <mdb-icon icon="angle-down" size="lg"/>
 				</div>
@@ -84,19 +84,50 @@
 </template>
 
 <style lang="scss">
+	.comment__box{
+		.content__card-comment{
+			width: 80%;
+			margin-left: 3rem;			
+			.card-img,.b-skeleton-avatar{
+				max-width: 85px;
+				margin-left: 2rem;
+				margin-top: 1rem;
+			}
+			.card-title{
+				font-size:14px;
+				margin-left: 2rem;
+			}
+			.card-text{
+				font-size:12px;
+			}
+			small{
+				font-size: 9px;
+			}
+		}
+	}
 	@media (min-width: 992px) {
 		.comment__box{
 			max-width:800px;
-			.card-img,.b-skeleton-avatar{
-				margin-left: 2rem;
-				margin-top: 1rem;
-				margin-bottom: 1rem;
-				max-width: 80px;
-			}
-
-			.send__komentar{
-				textarea{
-					background: $scroll-bar-bg!important;
+			.content__card-comment{
+				.card-img,.b-skeleton-avatar{
+					margin-left: 2rem;
+					margin-bottom: 1rem;
+					max-width: 100px;
+				}
+				.card-title{
+					font-weight: 600;
+					color: $color-primary;
+				}
+				.card-text{
+					margin-left: 2rem;
+				}
+				small{
+					margin-left: 2rem;
+				}
+				.send__komentar{
+					textarea{
+						background: $scroll-bar-bg!important;
+					}
 				}
 			}
 		}

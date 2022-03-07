@@ -33,6 +33,7 @@
         <div class="form-group has-input">
           <mdb-icon icon="lock" class="form-control-feedback" />
           <input
+          id="password1"
           type="password"
           class="form-control"
           placeholder="Password"
@@ -42,11 +43,23 @@
         <div class="form-group has-input">
           <mdb-icon icon="lock" class="form-control-feedback" />
           <input
+          id="password2"
           type="password"
           class="form-control"
           placeholder="Ulangi Password"
           v-model="fields.confirm_password"
           />
+        </div>
+
+        <div class="form-group">
+          <div @click="showPassword">
+            <span v-if="showing_pass === false" style="cursor: pointer">
+              <mdb-icon far icon="eye" /> Check Password
+            </span>
+            <span v-else style="cursor: pointer">
+              <mdb-icon far icon="eye-slash" /> Sembunyikan
+            </span>
+          </div>
         </div>
 
         <div class="form-group mt-5">
@@ -115,7 +128,7 @@
           }`"
           >
           Sudah punya Akun ?
-          <nuxt-link to="/auth/login">Masuk Sekarang</nuxt-link>
+          <a href="/auth/login">Masuk Sekarang</a>
         </h6>
       </mdb-col>
     </mdb-row>
@@ -145,12 +158,15 @@
       },
 
       showPassword() {
-        const password = document.querySelector("#password");
-        if (password.type === "password") {
-          password.type = "text";
+        const password1 = document.querySelector("#password1");
+        const password2 = document.querySelector("#password2");
+        if (password1.type === "password" && password2.type === "password") {
+          password1.type = "text";
+          password2.type = "text";
           this.showing_pass = true;
         } else {
-          password.type = "password";
+          password1.type = "password";
+          password2.type = "password";
           this.showing_pass = false;
         }
       },

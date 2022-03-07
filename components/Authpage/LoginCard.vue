@@ -103,7 +103,7 @@
           }`"
           >
           Belum punya Akun ?
-          <nuxt-link to="/auth/registrasi">Daftar Sekarang</nuxt-link>
+          <a href="/auth/registrasi">Daftar Sekarang</a>
         </h6>
       </mdb-col>
     </mdb-row>

@@ -57,7 +57,7 @@
               </div>
               <div v-else>
                   <img
-                  src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png"
+                  :src="`${require('~/assets/images/profile/profile.svg')}`"
                   class="img-fluid image rounded-circle"
                   />
               </div>

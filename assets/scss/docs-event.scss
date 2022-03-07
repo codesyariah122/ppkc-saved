@@ -106,7 +106,7 @@
 							margin-top: -3rem;
 							.box__intro-test{
 								border: 3px solid $scroll-bar-bg;
-								width: 50%;
+								width: 100%;
 							}
 						}
 					}
@@ -119,7 +119,7 @@
 	.docs-wrapper{
 		.docs-sidebar{	
 			margin-top: -.7rem;
-			width:300px!important;
+			width:320px!important;
 			scrollbar-color: $scroll-bar-color $scroll-bar-bg;
 			scrollbar-width: auto;
 			&:-webkit-scrollbar {
@@ -219,10 +219,12 @@
 
 						.docs-section{
 							.pre__test{
-								margin-top: -7rem;
+								margin-top: -2rem;
 								.box__intro-test{
 									border: 4px solid $scroll-bar-bg;
 									width: 50%;
+									margin-left: -25rem;
+									margin-bottom: 3rem;
 								}
 							}
 						}
