@@ -56,7 +56,7 @@
 			return {
 				loading: null,
 				coordinates: [],
-				url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+				url: 'https://{s}.tile.osm.org/{z}/{x}/{y}.png',
 				attribution:
 				'&copy; <a target="_blank" href="https://osm.org/copyright">PPKC Carolus Map</a> contributors',
 				zoom: this.$device.isMobile ? 17 : 17,
