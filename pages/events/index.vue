@@ -42,7 +42,6 @@
 			FetchListEvent(keyword, page, category, month, loadingBtn=null){
 				this.loading = true
 				this.loadingBtn = loadingBtn
-
 				const url = `${this.api_url}/web/event/paging?keyword=${keyword ? keyword : ''}&page=${page ? page : 1}&jenis_pelatihan=${category ? category : ''}&bulan_pelatihan=${month ? month : ''}`
 				this.$axios.get(url)
 				.then(({data}) => {
@@ -94,9 +93,13 @@
 					this.message = "Pilih bulan pelatihan terlebih dahulu"
 					setTimeout(() => {
 						this.error_search= false
+					}, 500)
+					setTimeout(() => {
 						this.FetchListEvent(keyword="", page=0, category="", month="", loadingBtn)
-					}, 1000)
+					}, 1500)
 				}else{
+					this.empty = false
+					this.error_search = false
 					this.FetchListEvent(keyword, page, category, month, loadingBtn)
 				}
 			},

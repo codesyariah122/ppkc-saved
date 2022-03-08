@@ -34,7 +34,8 @@
 
 		beforeMount(){
 			this.YourIp(),
-			this.YourCity()
+			this.YourCity(),
+			this.WeatherByCity()
 		},
 		beforeDestroy() {
 			clearInterval(this.interval)
@@ -84,6 +85,7 @@
 			WeatherByCity(){
 				CheckWeather(this.city.city, this.apiKey)
 				.then(res => {
+					console.log(res)
 					this.weathers = res.weather[0]
 					this.temp = this.getCelcius(res.main.temp)
 					this.DetectColor(this.weathers.description)
@@ -121,7 +123,7 @@
 			// color:$default-black!important;
 			// font-weight: 600;
 			img{
-				// filter: drop-shadow(0 0 0.75rem yellow);
+				filter: drop-shadow(0 0 0.75rem yellow);
 				width: 45px;
 			}
 		}
@@ -138,7 +140,7 @@
 				// font-weight: 600;
 				img{
 					filter: drop-shadow(1px 11px 9px powderblue);
-					width: 55px;
+					width: 45px;
 				}
 			}
 		}

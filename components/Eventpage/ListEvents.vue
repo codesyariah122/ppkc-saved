@@ -36,7 +36,7 @@
 				</mdb-col>
 
 				
-				<mdb-col v-else id="show-event" v-for="list in lists" md="4" xs="12" sm="12" :key="list.kegiatan_id">
+				<mdb-col v-else id="show-event" v-for="list in lists" md="4" xs="12" sm="12" :key="list.kegiatan_id" class="mb-3">
 					<mdb-card>
 						<div class="event__image-wrap">
 							<mdb-card-image v-if="list.photo == 'https://api.ppkc-online.com/image-kegiatans/null'" :src="require('~/assets/images/homepage/default.jpg')" alt="No image found"></mdb-card-image>
@@ -51,10 +51,10 @@
 							<mdb-badge class="badge btn-outline-primary mb-2" style="color:#004899!important;">{{list.kategori_value}}</mdb-badge>
 
 
-							<mdb-card-title>{{list.kegiatan_title}}</mdb-card-title>
+							<mdb-card-title class="truncate">{{list.kegiatan_title}}</mdb-card-title>
 							<span>{{$moment(list.tgl_awal).format("LL")}} - {{$moment(list.tgl_akhir).format("LL")}}</span>
 
-							<p class="text-gray text-truncate mb-2">
+							<p class="text-gray truncate2 mb-2">
 								{{list.kegiatan_desc}}
 							</p>
 
@@ -124,3 +124,44 @@
 		}
 	}
 </script>
+
+<style lang="css">
+	.truncate {
+		display: -webkit-box;
+		-webkit-line-clamp: var(--line-clamp, 3);
+		-webkit-box-orient: vertical;
+		word-break: var(--word-break, "none");
+		overflow: hidden;
+		hyphens: auto;
+		text-align: var(--align, left);
+
+		--is-single-line: 1 - Clamp(0, Calc(var(--line-clamp) - 1), var(--line-clamp));
+		--delay: Calc(-1s * (var(--is-single-line, 1) - 1));
+		animation: states 1s var(--delay) paused;
+
+		@keyframes states {
+			0% {
+				word-break: break-all;
+			}
+		}
+	}
+	.truncate2 {
+		display: -webkit-box;
+		-webkit-line-clamp: var(--line-clamp, 2);
+		-webkit-box-orient: vertical;
+		word-break: var(--word-break, "none");
+		overflow: hidden;
+		hyphens: auto;
+		text-align: var(--align, left);
+
+		--is-single-line: 1 - Clamp(0, Calc(var(--line-clamp) - 1), var(--line-clamp));
+		--delay: Calc(-1s * (var(--is-single-line, 1) - 1));
+		animation: states 1s var(--delay) paused;
+
+		@keyframes states {
+			0% {
+				word-break: break-all;
+			}
+		}
+	}
+</style>

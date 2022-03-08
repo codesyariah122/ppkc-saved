@@ -1,6 +1,6 @@
 <template>
 	<div id="docs-sidebar" class="docs-sidebar">
-		<div v-if="loading">
+		<div v-if="loading" class="mt-5">
 			<b-skeleton animation="throb" width="85%"></b-skeleton>
 			<b-skeleton animation="throb" width="55%"></b-skeleton>
 			<b-skeleton animation="throb" width="70%"></b-skeleton>

@@ -5,7 +5,7 @@
     <mdb-container>
       <mdb-row class="justify-content-center mt-5">
         <mdb-col lg="12" sm="12" xs="12">
-          <HomepageHeaderCard :bg="bg_image" :items="items" />
+          <HomepageHeaderCard :bg="bg_image" :items="items" :token="token" />
         </mdb-col>
       </mdb-row>
 
@@ -55,23 +55,29 @@ export default {
       //   src: 'https://widget.tochat.be/bundle.js?key=93ba0156-969f-4e9c-b1c8-0c25aafde170',
       //   defer: true
       // }
-    ]
-  },
+      ]
+    },
 
-  async asyncData({ $axios }) {
-    const lists = await $axios.$get("/web/home");
-    return {
-      lists
-    }
-  },
+    async asyncData({ $axios }) {
+      const lists = await $axios.$get("/web/home");
+      return {
+        lists
+      }
+    },
+    beforeMount(){
+      this.CheckToken()
+    },
+    mounted() {
+      this.CarouselItem()
+    },
 
-  mounted() {
-    this.CarouselItem()
-  },
+    methods: {
+      CheckToken(){
+        this.$store.dispatch('config/checkAuthLogin', 'token')
+      },
 
-  methods: {
-    CarouselItem() {
-      this.items = [
+      CarouselItem() {
+        this.items = [
         {
           img: true,
           src: "https://api.ppkc-online.com/image-banner/banner1.jpeg",
@@ -100,8 +106,14 @@ export default {
           img: true,
           src: "https://api.ppkc-online.com/image-banner/banner7.jpeg",
         }
-      ]
+        ]
+      }
+    },
+
+    computed: {
+      token(){
+        return this.$store.getters['config/ConfigCheckLogin']
+      }
     }
   }
-};
 </script>

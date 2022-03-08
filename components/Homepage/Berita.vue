@@ -20,6 +20,11 @@
 					<!-- Card berita components -->
 					<CardBerita :lists="lists" ref="childBerita"/>	
 				</mdb-col>
+				<!-- <mdb-col v-else md="8" xs="12" sm="12" class="col__berita mt-3 mb-3">
+					<mdb-alert color="primary">
+						<mdb-icon icon="info-circle" size="lg" /> Belum ada berita terupdate !
+					</mdb-alert>
+				</mdb-col> -->
 			</mdb-row>
 		</mdb-container>
 	</div>

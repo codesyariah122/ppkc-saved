@@ -12,10 +12,17 @@
 					</mdb-tooltip>
 				</mdb-col>
 				<!-- column card testimoni -->
-				<mdb-col col="12" class="col__testimoni mt-5 mb-5" md="9">
+				<mdb-col  col="12" class="col__testimoni mt-5 mb-5" md="9">
 					<!-- Testimoni card components -->
 					<MoleculesHomepageMoleculesCardTestimoni :lists="lists"/>
 				</mdb-col>
+				<!-- <mdb-col v-else md="8" xs="12" sm="12" class="col__berita mt-3 mb-3">
+					<div class="d-flex justify-content-center">
+						<div class="spinner-grow text-info" style="width: 5rem; height:5rem;" role="status">
+							<span class="sr-only">Loading...</span>
+						</div>
+					</div>
+				</mdb-col> -->
 			</mdb-row>
 		</mdb-container>
 	</div>

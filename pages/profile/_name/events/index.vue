@@ -62,6 +62,7 @@
 				this.$axios
 				.get(url)
 				.then(({ data }) => {
+					console.log(data)
 					if (data.list_data.length > 0) {
 						this.pelatihans = data.list_data;
 					} else {

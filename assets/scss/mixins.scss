@@ -75,7 +75,7 @@
 @mixin jumbotron_desktop($color) {
 	
 	.container{
-		margin-top: -2rem;
+		margin-top: -4rem!important;
 		@include container_jumbotron;
 	}
 	.display-6{
@@ -89,7 +89,6 @@
 		color:$color;
 		font-weight: 400;
 		text-shadow: 2px 2px rgba(0, 0, 0, 0.5);
-		width: 60%;
 		font-size:16px;
 		text-align: left;
 		line-height: 21px;

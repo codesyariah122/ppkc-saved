@@ -3,8 +3,11 @@
 	.card__content-events{
 		.webinar__content{
 			.card{
-				width: 325px;
+				width: 330px;
 				height: auto!important;
+				.card-title{
+					color: $color-primary!important;
+				}
 				@include card_rounded_mobile;
 				.event__image-wrap{
 					position: relative;
@@ -298,6 +301,7 @@
 	.event__detail{
 		margin-top: 7rem;
 		.event__detail-content{
+			// overflow-y: hidden;
 			.idr__color {
 				color: $idr-color;
 				font-weight: 700;

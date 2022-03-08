@@ -38,9 +38,9 @@
 					<mdb-row class="inside__first mt-3">
 						<mdb-col md="4">
 							<h5>Jenis kegiatan</h5>
-							<p>
+							<mdb-badge class="badge btn-outline-primary mb-2" style="color:#004899!important;">
 								{{details.kategori_value}}
-							</p>
+							</mdb-badge>
 						</mdb-col>
 						<mdb-col md="4">
 							<h5>Nilai SKP</h5>
@@ -131,10 +131,12 @@
 		}
 		.col-2{
 			h4{
+				color: $color-primary!important;
 				font-size: 18px;
 				font-weight: 600;
 			}
 			h6{
+				color: $idr-color!important;
 				font-size: 16px;
 				font-weight: 600;
 			}
@@ -144,6 +146,7 @@
 					font-weight: 600;
 				}
 				p{
+
 					font-size:12px;
 				}
 			}
@@ -194,10 +197,12 @@
 		}
 		.col-2{
 			h4{
+				color: $color-primary!important;
 				font-size: 18px;
 				font-weight: 600;
 			}
 			h6{
+				color: $idr-color!important;
 				font-size: 16px;
 				font-weight: 600;
 			}

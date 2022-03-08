@@ -124,7 +124,7 @@
           :class="`${
             $device.isMobile
             ? 'text-center mt-1 mb-5'
-            : 'text-center mt-4 mb-5'
+            : 'text-center  mb-5'
           }`"
           >
           Sudah punya Akun ?

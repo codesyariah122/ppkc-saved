@@ -1,8 +1,16 @@
 <template>
   <div>
-    <mdb-row class="justify-content-center card__content">
+    <mdb-row v-if="lists.length < listsToShow" col="12" class="justify-content-center card__content">
+       <mdb-col lg="12" xs="12" sm="12">
+        <mdb-alert color="info">
+         <mdb-icon icon="info-circle" size="lg" /> Belum ada event terdekat !
+       </mdb-alert>
+     </mdb-col>
+   </mdb-row>
+   
+    <mdb-row v-else col="12" class="justify-content-center card__content">
       <!-- column event -->
-      <mdb-col
+      <mdb-col 
         v-if="listIndex <= lists.length"
         v-for="listIndex in listsToShow"
         md="4"
@@ -63,6 +71,7 @@
           </mdb-card-body>
         </mdb-card>
       </mdb-col>
+      
     </mdb-row>
   </div>
 </template>
