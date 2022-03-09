@@ -1,6 +1,6 @@
 <template>
 	<div class="pre__test">
-		<mdb-container v-if="save_test.user_id == profiles.id ? save_test.status : success.status" class="success__test">
+		<!-- <mdb-container v-if="save_test.user_id == profiles.id ? save_test.status : success.status" class="success__test">
 			<mdb-row col="12" class="row justify-content-center">
 				<mdb-col lg="12">
 					<mdb-alert :color="`${save_test.status ? 'info' : 'success'}`">
@@ -8,9 +8,9 @@
 					</mdb-alert>
 				</mdb-col>
 			</mdb-row>
-		</mdb-container>
+		</mdb-container> -->
 		
-		<mdb-container v-else>
+		<mdb-container>
 			<!-- <pre>
 				{{lists}}
 			</pre> -->
@@ -27,22 +27,12 @@
 			</div>
 
 			<div v-else>
-				<mdb-row col="12" class="row justify-content-center mb-2 mt-2">
+				<mdb-row v-if="tests.is_already == 1 && lists.length > 0" col="12" class="row justify-content-center">
+
 					<mdb-col lg="12" xs="12" sm="12">
-						<blockquote class="blockquote-footer">
-							Waktu pelaksanaan test
-						</blockquote>
-						<ul style="list-style: none; margin-top:-.5rem;">
-							<li>
-								<strong>Tanggal : <time> {{$moment(waktu.tgl).format("LL")}} </time></strong>
-							</li>
-							<li>
-								<strong>Waktu awal : <time> {{$moment(waktu.jam_awal, "HH:mm:ss").format("hh:mm A")}} </time></strong>
-							</li>
-							<li>
-								<strong>Waktu akhir : <time> {{$moment(waktu.jam_akhir, "HH:mm:ss").format("hh:mm A")}} </time></strong>
-							</li>
-						</ul>
+						<mdb-alert color="primary">
+							<mdb-icon icon="info-circle" size="lg"/> Anda sudah pernah menyelesaikan sesi post test ini !
+						</mdb-alert>
 					</mdb-col>
 
 					<mdb-col lg="12" xs="12" sm="12" class="mt-5">
@@ -61,9 +51,38 @@
 						<!-- Input RTL Table -->
 						<EventTestTableRTL/>
 					</mdb-col>
+
 				</mdb-row>
 
-				<mdb-row v-if="listIndex <= lists.length" v-for="(listIndex, index) in config.perItem" class="row justify-content-center" :key="item.ujian_id">
+				<mdb-row col="12" class="row justify-content-center mb-2 mt-3">
+					<mdb-col lg="12" xs="12" sm="12" class="box__intro-test">
+						<ul style="list-style: none; margin-top:-.5rem;">
+							<li>
+								<blockquote class="blockquote-footer mb-2 mt-2">
+									Waktu pelaksanaan test :
+								</blockquote>
+								Tanggal : <time> {{$moment(waktu.tgl).format("LL")}} </time>
+							</li>
+							<li>
+								Mulai : <time> {{$moment(waktu.jam_awal, "HH:mm:ss").format("hh:mm A")}} </time>
+							</li>
+							<li>
+								Berakhir : <time> {{$moment(waktu.jam_akhir, "HH:mm:ss").format("hh:mm A")}} </time>
+							</li>
+						</ul>
+					</mdb-col>
+				</mdb-row>
+
+				<mdb-row col="12" class="row justify-content-center mb-3">
+					<mdb-col lg="12" xs="12" sm="12">
+						<h4 class="text-gray">Total soal : {{config.totalItem}}</h4>
+						<small class="text-primary">
+							*.Selesaikan soal secara berurutan (1 s/d {{lists.length}})
+						</small>
+					</mdb-col>
+				</mdb-row>
+
+				<mdb-row v-if="listIndex <= lists.length" v-for="(listIndex, index) in config.perItem" :key="lists[listIndex-1].id" class="row justify-content-center">
 					<mdb-col lg="12" class="test__content">
 						<h4> Soal {{lists[listIndex-1].urutan}} </h4>
 						<p> {{lists[listIndex-1].pertanyaan}} </p>
@@ -81,9 +100,9 @@
 									>
 									<input 
 									type="radio"
-									v-model="lists[listIndex-1].ujian_id"
+									v-model="tests.is_already == 1 ? lists[listIndex-1].jawaban : lists[listIndex-1].ujian_id"
 									:value="option.id"
-									:id="option.id" :disabled="lists[listIndex-1].urutan == config.currentItem ? config.disabled : false"
+									:id="option.id"
 									required @change="ChangeJawaban(option.ujian_id, index, option.id, lists[listIndex-1].urutan)"/>
 									<label
 									:for="option.id"
@@ -100,7 +119,7 @@
 
 	</mdb-row>
 
-	<mdb-row v-if="config.currentItem == config.lastItem" col="12" class="row justify-content-center">
+	<mdb-row v-if="tests.is_already == 0 && lists.length > 0"  col="12" class="row justify-content-center">
 		<mdb-col lg="12">
 			<div class="mb-2 ">
 				<a
@@ -121,7 +140,7 @@
 
 	<mdb-col lg="12" xs="12" sm="12">
 		<small>
-			Terjawab {{config.currentItem}} - {{config.lastItem}} soal
+			Terjawab {{config.defaultUrutan }} - dari {{config.lastItem  === 0 ? config.totalItem : config.lastItem}} soal
 		</small>
 	</mdb-col>
 </mdb-row>
@@ -145,11 +164,14 @@
 				config: {
 					loadingSoal: null,
 					totalItem: '',
-					perItem:1,
+					perItem:'',
 					currentItem: 1,
 					lastItem: 0,
-					disabled: false
+					disabled: false,
+					nextItem: 0,
+					defaultUrutan: 0
 				},
+				config_soal: localStorage.getItem('urutan_soal') ? JSON.parse(localStorage.getItem('urutan_soal')) : '',
 				field: {
 					soal:[],
 					jawaban:[]
@@ -182,27 +204,28 @@
 
 		methods: {
 			ChangeJawaban(id_soal, position, id_jawaban, urutan){
-				console.log(urutan)
-				const config_soal = localStorage.getItem('urutan_soal') ? JSON.parse(localStorage.getItem('urutan_soal')) : ''
-				console.log(config_soal.current)
-				if(urutan === config_soal.current){
-					console.log(true)
+				this.config.defaultUrutan = urutan
+				if(urutan === this.config_soal.current){
+				// if(urutan){
 					localStorage.setItem('urutan_soal', JSON.stringify({
-						current: urutan !== this.config.lastItem ? config_soal.current+=1 : urutan,
-						next: config_soal.next+=1
+						current: urutan !== this.config.lastItem ? this.config_soal.current+=1 : urutan,
+						next: this.config_soal.next+=1
 					}))
-					this.config.perItem+=1
+					// this.config.perItem+=1
 					this.config.disabled=true
 					this.config.currentItem = urutan
+					this.config.nextItem = urutan+1
 					if(this.field.jawaban.length > 1){
 						this.field.jawaban.splice(position, 1, id_jawaban)
 					}else{
 						this.field.jawaban.push(id_jawaban)
 					}
 				}else{
+					this.field.jawaban.splice(position, 0, id_jawaban)
+					console.log(position)
 					console.log(false)
 				}
-				
+				console.log(this.field.jawaban)
 			},
 			UserProfileData(){
 				if(this.token){					
@@ -226,21 +249,31 @@
 			},
 
 			posttest(){
+				localStorage.setItem('urutan_soal', JSON.stringify({
+					current: this.config.currentItem,
+					next: this.config.currentItem+=1,
+				}))
+
 				this.loading_soal = true
-				const url = `${this.api_url}/web/event/1/posttest/list/${this.id_test}`
+				const url = `${this.api_url}/web/event/1/pretest/list/${this.id_test}`
 				this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
 				this.$axios
 				.get(url)
 				.then(({data}) => {
+					// console.log(data)
 					this.lists = data.list_data
-					this.tests = data
-					this.field.soal = this.field.soal.length < 1 ? this.lists.map(d => d.id) : this.field.soal.shift()
-
+					this.config.totalItem = data.list_data.length
+					this.tests = data.pelatihan
+					this.config.listItem = data.list_data.length
+					this.field.soal = this.field.soal.length < 1 ? this.lists.map(d => d.id) : this.field.jawaban.shift()
+					this.config.perItem = data.list_data.length
+					const config_soal = localStorage.getItem('urutan_soal') ? JSON.parse(localStorage.getItem('urutan_soal')) : ''	
+					this.config.currentItem = config_soal.current
 					// this.field.jawaban = this.field.jawaban.length < 1 ? this.lists.map(d => d.jawaban) : this.field.jawaban.shift()
 				})
 				.catch(err => console.log(err))
 				.finally(() => {
-					this.save_test = localStorage.getItem(`finish-pre-test-${this.id_test}-${this.username}`) ? JSON.parse(localStorage.getItem(`finish-pre-test-${this.id_test}-${this.$username(this.profiles.nama)}`)) : ''
+					this.save_test = localStorage.getItem(`finish-pre-test-${this.id_test}-${this.username}`) ? JSON.parse(localStorage.getItem(`finish-pre-test-${this.id_test}-${this.username}`)) : ''
 					this.startTimer()
 					setTimeout(() => {
 						this.loading_soal=false
@@ -252,38 +285,51 @@
 			SubmitTest(){
 				window.scrollTo(0, 0)
 				this.loading_soal = true
-				this.$swal({
-					title: 'Apakah Anda yakin ingin mengumpulkan jawaban ?',
-					html:
-					`Anda telah mengisi <b>${this.field.jawaban.length}</b> dari <b>${this.field.soal.length} soal</b>`,
-					showDenyButton: true,
-					showCancelButton: false,
-					confirmButtonText: 'Ya, Kumpulkan jawaban saya',
-					denyButtonText: `Tidak`,
-				}).then((result) => {
-					/* Read more about isConfirmed, isDenied below */
-					if (result.isConfirmed) {
-						this.KirimJawaban(this.field.soal, this.field.jawaban)
-					} else if (result.isDenied) {
+
+				if(this.tests.is_already === 1){
+					this.$swal({
+						position: 'top-end',
+						icon: 'info',
+						title: 'Anda sudah pernah menyelesaikan sesi Pre Test ini !',
+						showConfirmButton: false,
+						timer: 1500
+					})
+					setTimeout(() => {
+						window.scrollTo(0,0)
 						this.loading_soal = false
-						this.$swal('Changes are not saved', '', 'info')
-					}
-				})
+					}, 1500)
+				}else{					
+					this.$swal({
+						title: 'Apakah Anda yakin ingin mengumpulkan jawaban ?',
+						html:
+						`Anda telah mengisi <b>${this.field.jawaban.length}</b> dari <b>${this.field.soal.length} soal</b>`,
+						showDenyButton: true,
+						showCancelButton: false,
+						confirmButtonText: 'Ya, Kumpulkan jawaban saya',
+						denyButtonText: `Tidak`,
+					}).then((result) => {
+						/* Read more about isConfirmed, isDenied below */
+						if (result.isConfirmed) {
+							this.KirimJawaban(this.field.soal, this.field.jawaban)
+						} else if (result.isDenied) {
+							this.loading_soal = false
+							this.$swal('Changes are not saved', '', 'info')
+						}
+					})
+				}
 			},
 
 			KirimJawaban(soal, jawaban){
 				window.scrollTo(0, 0)
-				this.loading_answer=true
-				const url = `${this.api_url}/web/event/1/posttest/${this.id_test}`
+				const url = `${this.api_url}/web/event/1/pretest/${this.id_test}`
 				this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
-				// console.log(jawaban.length)
-				if(jawaban.length >= 2){
+
+				if(jawaban.length > 0){		
 					this.$axios.post(url, {
 						ujian: JSON.stringify(soal),
 						jawaban: JSON.stringify(jawaban)
 					})
 					.then(({data}) => {
-						// console.log(data)
 						if(data.message == "Berhasil menyimpan hasil test"){
 							this.success.message = data.message
 							this.$swal(data.message, '', 'success')
@@ -297,13 +343,13 @@
 					})
 					.finally(() => {
 						this.success.status = true
-						const save_test = localStorage.setItem(`finish-post-test-${this.id_test}-${this.$username(this.profiles.nama)}`, JSON.stringify({status: this.success.status, user_id: this.profiles.id, message: 'Anda sudah menyelesaikan sesi post test', profile: this.profiles}))
-						this.loading_answer = false
-						this.save_test = localStorage.getItem(`finish-post-test-${this.id_test}-${this.$username(this.profiles.nama)}`) ? JSON.parse(localStorage.getItem(`finish-post-test-${this.id_test}-${this.$username(this.profiles.nama)}`)) : ''
+						const save_test = localStorage.setItem(`finish-pre-test-${this.id_test}-${this.$username(this.profiles.nama)}`, JSON.stringify({status: this.success.status, user_id: this.profiles.id, message: 'Anda sudah menyelesaikan sesi pre test', profile: this.profiles}))
+						this.save_test = localStorage.getItem(`finish-pre-test-${this.id_test}-${this.$username(this.profiles.nama)}`) ? JSON.parse(localStorage.getItem(`finish-pre-test-${this.id_test}-${this.$username(this.profiles.nama)}`)) : ''
 						this.startTimer()
 						setTimeout(() => {
 							this.loading_answer = false
 							this.loading_soal = false
+							this.PreTest()
 						}, 2500)
 					})
 				}else{					
@@ -312,10 +358,11 @@
 						title: 'Oops...',
 						text: 'Anda belum menjawab apapun!',
 					})
-					this.startTimer()
+					// this.startTimer()
 					setTimeout(() => {
 						this.loading_answer = false
 						this.loading_soal = false
+						this.PreTest()
 					}, 1500)
 				}
 			},

@@ -24,7 +24,7 @@
 			</div>
 
 			<div v-else>
-				<mdb-row v-if="tests.is_already == 1" col="12" class="row justify-content-center">
+				<mdb-row v-if="tests.is_already == 1 && lists.length > 0" col="12" class="row justify-content-center">
 					<mdb-col lg="12" xs="12" sm="12">
 						<mdb-alert color="primary">
 							<mdb-icon icon="info-circle" size="lg"/> Anda sudah pernah menyelesaikan sesi pre test ini !
@@ -33,8 +33,7 @@
 				</mdb-row>
 				
 				<mdb-row col="12" class="row justify-content-center mb-2 mt-2">
-					<mdb-col lg="12" xs="12" sm="12" class="box__intro-test">
-						
+					<mdb-col lg="12" xs="12" sm="12" class="box__intro-test">	
 						<ul style="list-style: none; margin-top:-.5rem;">
 							<li>
 								<blockquote class="blockquote-footer mb-2 mt-2">
@@ -86,7 +85,6 @@
 										 {{lists[listIndex-1].urutan > config_soal.current}} |  -- {{config.disabled}}
 										</pre> -->
 
-
 										<input 
 										type="radio"
 										v-model="tests.is_already == 1 ? lists[listIndex-1].jawaban : lists[listIndex-1].ujian_id"
@@ -108,8 +106,7 @@
 
 		</mdb-row>
 
-
-		<mdb-row v-if="tests.is_already == 0"  col="12" class="row justify-content-center">
+		<mdb-row v-if="tests.is_already == 0 && lists.length > 0"  col="12" class="row justify-content-center">
 			<mdb-col lg="12">
 				<div class="mb-2 ">
 					<a
@@ -130,7 +127,7 @@
 
 		<mdb-col lg="12" xs="12" sm="12">
 			<small>
-				Terjawab {{config.currentItem == config.defaultUrutan ? 0 : config.currentItem }} - dari {{config.lastItem  === 0 ? config.totalItem : config.lastItem}} soal
+				Terjawab {{config.defaultUrutan }} - dari {{config.lastItem  === 0 ? config.totalItem : config.lastItem}} soal
 			</small>
 		</mdb-col>
 	</mdb-row>
@@ -159,7 +156,7 @@
 					lastItem: 0,
 					disabled: false,
 					nextItem: 0,
-					defaultUrutan: 1
+					defaultUrutan: 0
 				},
 				config_soal: localStorage.getItem('urutan_soal') ? JSON.parse(localStorage.getItem('urutan_soal')) : '',
 				field: {
@@ -200,6 +197,7 @@
 		methods: {
 
 			ChangeJawaban(id_soal, position, id_jawaban, urutan){
+				this.config.defaultUrutan = urutan
 				if(urutan === this.config_soal.current){
 				// if(urutan){
 					localStorage.setItem('urutan_soal', JSON.stringify({
@@ -240,7 +238,6 @@
 					this.$axios.get(url)
 					.then(({data}) => {
 						this.profiles = data.user
-						// this.username = this.$username(data.user.nama)
 					})
 					.catch(err => console.log(err.response ? err.response : ''))
 				}
@@ -255,12 +252,11 @@
 			},
 
 			PreTest(){
-				if(this.tests.is_already == 0){					
-					localStorage.setItem('urutan_soal', JSON.stringify({
-						current: this.config.currentItem,
-						next: this.config.currentItem+=1,
-					}))
-				}
+
+				localStorage.setItem('urutan_soal', JSON.stringify({
+					current: this.config.currentItem,
+					next: this.config.currentItem+=1,
+				}))
 
 				this.loading_soal = true
 				const url = `${this.api_url}/web/event/1/pretest/list/${this.id_test}`
@@ -281,7 +277,7 @@
 				})
 				.catch(err => console.log(err))
 				.finally(() => {
-					this.save_test = localStorage.getItem(`finish-pre-test-${this.id_test}-${this.username}`) ? JSON.parse(localStorage.getItem(`finish-pre-test-${this.id_test}-${this.$username(this.profiles.nama)}`)) : ''
+					this.save_test = localStorage.getItem(`finish-pre-test-${this.id_test}-${this.username}`) ? JSON.parse(localStorage.getItem(`finish-pre-test-${this.id_test}-${this.username}`)) : ''
 					this.startTimer()
 					setTimeout(() => {
 						this.loading_soal=false
@@ -320,6 +316,7 @@
 						if (result.isConfirmed) {
 							this.KirimJawaban(this.field.soal, this.field.jawaban)
 						} else if (result.isDenied) {
+							this.field.jawaban = []
 							this.loading_soal = false
 							this.$swal('Changes are not saved', '', 'info')
 						}
@@ -332,23 +329,21 @@
 				const url = `${this.api_url}/web/event/1/pretest/${this.id_test}`
 				this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
 
-				if(jawaban.length >= 2){		
+				if(jawaban.length > 0){	
 					this.$axios.post(url, {
 						ujian: JSON.stringify(soal),
 						jawaban: JSON.stringify(jawaban)
 					})
 					.then(({data}) => {
-					// console.log(data)
-					if(data.message == "Berhasil menyimpan hasil test"){
-						this.success.message = data.message
-						this.$swal(data.message, '', 'success')
-					}
-				})
+						if(data.message == "Berhasil menyimpan hasil test"){
+							this.success.message = data.message
+							this.$swal(data.message, '', 'success')
+						}
+					})
 					.catch(err => {
 						this.loading_answer = false
 						this.success.status = false
 						this.success.message = err.message
-						console.log(err.message)
 					})
 					.finally(() => {
 						this.success.status = true
@@ -358,6 +353,7 @@
 						setTimeout(() => {
 							this.loading_answer = false
 							this.loading_soal = false
+							this.PreTest()
 						}, 2500)
 					})
 				}else{					
@@ -366,10 +362,11 @@
 						title: 'Oops...',
 						text: 'Anda belum menjawab apapun!',
 					})
-					this.startTimer()
+					// this.startTimer()
 					setTimeout(() => {
 						this.loading_answer = false
 						this.loading_soal = false
+						this.PreTest()
 					}, 1500)
 				}
 
