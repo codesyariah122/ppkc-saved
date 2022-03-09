@@ -65,7 +65,7 @@
             </div>
           </mdb-col>
           <mdb-col md="5" class="col__data-profile">
-            <h4>{{ profiles.nama }}</h4>
+            <h2>{{ profiles.nama }}</h2>
             <ul>
               <li class="mb-2">
                 <a :href="`mailto:${profiles.email}`">
@@ -83,14 +83,14 @@
 
           <mdb-col md="4" class="profile__options-page">
             <mdb-row class="d-flex justify-content-center">
-              <mdb-col sm="6">
+              <mdb-col col="12" sm="6">
                 <mdb-btn outline="primary" size="sm">
                   <a :href="`/profile/edit/${profiles.id}`">
                     <mdb-icon icon="user-cog" size="sm" /> Edit Profile
                   </a>
                 </mdb-btn>
               </mdb-col>
-              <mdb-col sm="6">
+              <mdb-col col="12" sm="6">
                 <mdb-btn color="deep-orange" size="sm" @click="LogoutProfile">
                   <mdb-icon icon="sign-out-alt" size="sm" /> Logout
                 </mdb-btn>

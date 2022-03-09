@@ -45,7 +45,6 @@
 				const url = `${this.api_url}/web/event/paging?keyword=${keyword ? keyword : ''}&page=${page ? page : 1}&jenis_pelatihan=${category ? category : ''}&bulan_pelatihan=${month ? month : ''}`
 				this.$axios.get(url)
 				.then(({data}) => {
-					// console.log(data.list_kegiatan_terdekat.length)
 					this.categories = data.list_jenis_kegiatan
 					this.$refs.eventChild.ResetForm()
 					if(data.list_kegiatan_terdekat.length > 0){
@@ -53,7 +52,7 @@
 						this.lists = data.list_kegiatan_terdekat
 					}else{
 						this.empty = true
-						this.message = "Belum ada event terdekat!"
+						this.message = `Tidak ada event terdekat !`
 						// setTimeout(() => {
 						// 	this.empty = false
 						// }, 2500)
@@ -88,6 +87,7 @@
 			},
 
 			SearchEvent(page, keyword, category, month, loadingBtn){
+				console.log(keyword)
 				if(month === undefined || month === ""){
 					this.error_search = true
 					this.message = "Pilih bulan pelatihan terlebih dahulu"

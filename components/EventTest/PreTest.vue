@@ -1,6 +1,6 @@
 <template>
 	<div class="pre__test">
-		<mdb-container v-if="save_test.user_id == profiles.id ? save_test.status : success.status" class="success__test">
+		<!-- <mdb-container v-if="save_test.user_id == profiles.id ? save_test.status : success.status" class="success__test">
 			<mdb-row col="12" class="row justify-content-center">
 				<mdb-col lg="12">
 					<mdb-alert :color="`${save_test.status ? 'info' : 'success'}`">
@@ -8,10 +8,9 @@
 					</mdb-alert>
 				</mdb-col>
 			</mdb-row>
-		</mdb-container>
+		</mdb-container> -->
 		
-		<mdb-container v-else>
-			
+		<mdb-container>
 			<div v-if="loading_soal">
 				<mdb-row col="12" class="row justify-content-center">
 					<mdb-col lg="12">
@@ -25,14 +24,18 @@
 			</div>
 
 			<div v-else>
+				<mdb-row v-if="tests.is_already == 1" col="12" class="row justify-content-center">
+					<mdb-col lg="12" xs="12" sm="12">
+						<mdb-alert color="primary">
+							<mdb-icon icon="info-circle" size="lg"/> Anda sudah pernah menyelesaikan sesi pre test ini !
+						</mdb-alert>
+					</mdb-col>
+				</mdb-row>
 				
 				<mdb-row col="12" class="row justify-content-center mb-2 mt-2">
 					<mdb-col lg="12" xs="12" sm="12" class="box__intro-test">
 						
 						<ul style="list-style: none; margin-top:-.5rem;">
-							<li>
-								
-							</li>
 							<li>
 								<blockquote class="blockquote-footer mb-2 mt-2">
 									Waktu pelaksanaan test :
@@ -53,7 +56,7 @@
 					<mdb-col lg="12" xs="12" sm="12">
 						<h4 class="text-gray">Total soal : {{config.totalItem}}</h4>
 						<small class="text-primary">
-							*.Selesaikan setiap soal yang muncul
+							*.Selesaikan soal secara berurutan (1 s/d {{lists.length}})
 						</small>
 					</mdb-col>
 				</mdb-row>
@@ -74,53 +77,63 @@
 									v-for="(option, indx) in lists[listIndex-1].pilihans" :key="option.id"
 									:value="option.id"
 									>
-									<input 
-									type="radio"
-									v-model="lists[listIndex-1].ujian_id"
-									:value="option.id"
-									:id="option.id" :disabled="lists[listIndex-1].urutan == config.currentItem ? config.disabled : false"
-									required @change="ChangeJawaban(option.ujian_id, index, option.id, lists[listIndex-1].urutan)"/>
-									<label
-									:for="option.id"
-									class="answer__item"
-									>
-									{{option.jawaban}}
-								</label> 
+
+									<!-- Debugging -->
+										<!-- <pre>
+
+										{{lists[listIndex-1].urutan}} || {{config_soal.current}}
+
+										 {{lists[listIndex-1].urutan > config_soal.current}} |  -- {{config.disabled}}
+										</pre> -->
+
+
+										<input 
+										type="radio"
+										v-model="tests.is_already == 1 ? lists[listIndex-1].jawaban : lists[listIndex-1].ujian_id"
+										:value="option.id"
+										:id="option.id"
+										required @change="ChangeJawaban(option.ujian_id, index, option.id, lists[listIndex-1].urutan)"/>
+										<label
+										:for="option.id"
+										class="answer__item"
+										>
+										{{option.jawaban}}
+									</label> 
+								</div>
 							</div>
-						</div>
-					</fieldset>
-				</form>
+						</fieldset>
+					</form>
+				</div>
+			</mdb-col>
+
+		</mdb-row>
+
+
+		<mdb-row v-if="tests.is_already == 0"  col="12" class="row justify-content-center">
+			<mdb-col lg="12">
+				<div class="mb-2 ">
+					<a
+					href=""
+					class="btn btn-primary btn-md rounded btn-block"
+					@click.prevent="SubmitTest"
+					>
+					<div v-if="loading_answer">
+						<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+						loading_answer...
+					</div>
+					<div v-else>
+						Submit <mdb-icon far icon="paper-plane" />
+					</div>
+				</a>
 			</div>
 		</mdb-col>
 
+		<mdb-col lg="12" xs="12" sm="12">
+			<small>
+				Terjawab {{config.currentItem == config.defaultUrutan ? 0 : config.currentItem }} - dari {{config.lastItem  === 0 ? config.totalItem : config.lastItem}} soal
+			</small>
+		</mdb-col>
 	</mdb-row>
-
-
-	<mdb-row v-if="config.currentItem == config.lastItem" col="12" class="row justify-content-center">
-		<mdb-col lg="12">
-			<div class="mb-2 ">
-				<a
-				href=""
-				class="btn btn-primary btn-md rounded btn-block"
-				@click.prevent="SubmitTest"
-				>
-				<div v-if="loading_answer">
-					<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-					loading_answer...
-				</div>
-				<div v-else>
-					Submit <mdb-icon far icon="paper-plane" />
-				</div>
-			</a>
-		</div>
-	</mdb-col>
-
-	<mdb-col lg="12" xs="12" sm="12">
-		<small>
-			Terjawab {{config.currentItem}} - {{config.lastItem}} soal
-		</small>
-	</mdb-col>
-</mdb-row>
 
 </div>
 </mdb-container>
@@ -141,15 +154,19 @@
 				config: {
 					loadingSoal: null,
 					totalItem: '',
-					perItem:1,
+					perItem:'',
 					currentItem: 1,
 					lastItem: 0,
-					disabled: false
+					disabled: false,
+					nextItem: 0,
+					defaultUrutan: 1
 				},
+				config_soal: localStorage.getItem('urutan_soal') ? JSON.parse(localStorage.getItem('urutan_soal')) : '',
 				field: {
 					soal:[],
 					jawaban:[]
 				},
+				jawaban:{},
 				success:{
 					status: null,
 					message: ''
@@ -183,24 +200,24 @@
 		methods: {
 
 			ChangeJawaban(id_soal, position, id_jawaban, urutan){
-				console.log(urutan)
-				const config_soal = localStorage.getItem('urutan_soal') ? JSON.parse(localStorage.getItem('urutan_soal')) : ''
-				console.log(config_soal.current)
-				if(urutan === config_soal.current){
-					console.log(true)
+				if(urutan === this.config_soal.current){
+				// if(urutan){
 					localStorage.setItem('urutan_soal', JSON.stringify({
-						current: urutan !== this.config.lastItem ? config_soal.current+=1 : urutan,
-						next: config_soal.next+=1
+						current: urutan !== this.config.lastItem ? this.config_soal.current+=1 : urutan,
+						next: this.config_soal.next+=1
 					}))
-					this.config.perItem+=1
+					// this.config.perItem+=1
 					this.config.disabled=true
 					this.config.currentItem = urutan
+					this.config.nextItem = urutan+1
 					if(this.field.jawaban.length > 1){
 						this.field.jawaban.splice(position, 1, id_jawaban)
 					}else{
 						this.field.jawaban.push(id_jawaban)
 					}
 				}else{
+					this.field.jawaban.splice(position, 0, id_jawaban)
+					console.log(position)
 					console.log(false)
 				}
 				// this.config.perItem += 1
@@ -213,7 +230,7 @@
 				// }else{
 				// 	this.field.jawaban.push(id_jawaban)
 				// }
-				// console.log(this.field.jawaban)
+				console.log(this.field.jawaban)
 			},
 
 			UserProfileData(){
@@ -238,10 +255,12 @@
 			},
 
 			PreTest(){
-				localStorage.setItem('urutan_soal', JSON.stringify({
-					current: this.config.currentItem,
-					next: this.config.currentItem+=1,
-				}))
+				if(this.tests.is_already == 0){					
+					localStorage.setItem('urutan_soal', JSON.stringify({
+						current: this.config.currentItem,
+						next: this.config.currentItem+=1,
+					}))
+				}
 
 				this.loading_soal = true
 				const url = `${this.api_url}/web/event/1/pretest/list/${this.id_test}`
@@ -249,11 +268,13 @@
 				this.$axios
 				.get(url)
 				.then(({data}) => {
+					// console.log(data)
 					this.lists = data.list_data
 					this.config.totalItem = data.list_data.length
 					this.tests = data.pelatihan
+					this.config.listItem = data.list_data.length
 					this.field.soal = this.field.soal.length < 1 ? this.lists.map(d => d.id) : this.field.jawaban.shift()
-					this.config.lastItem = data.list_data.length
+					this.config.perItem = data.list_data.length
 					const config_soal = localStorage.getItem('urutan_soal') ? JSON.parse(localStorage.getItem('urutan_soal')) : ''	
 					this.config.currentItem = config_soal.current
 					// this.field.jawaban = this.field.jawaban.length < 1 ? this.lists.map(d => d.jawaban) : this.field.jawaban.shift()
@@ -272,23 +293,38 @@
 			SubmitTest(){
 				window.scrollTo(0, 0)
 				this.loading_soal = true
-				this.$swal({
-					title: 'Apakah Anda yakin ingin mengumpulkan jawaban ?',
-					html:
-					`Anda telah mengisi <b>${this.field.jawaban.length}</b> dari <b>${this.field.soal.length} soal</b>`,
-					showDenyButton: true,
-					showCancelButton: false,
-					confirmButtonText: 'Ya, Kumpulkan jawaban saya',
-					denyButtonText: `Tidak`,
-				}).then((result) => {
-					/* Read more about isConfirmed, isDenied below */
-					if (result.isConfirmed) {
-						this.KirimJawaban(this.field.soal, this.field.jawaban)
-					} else if (result.isDenied) {
+
+				if(this.tests.is_already === 1){
+					this.$swal({
+						position: 'top-end',
+						icon: 'info',
+						title: 'Anda sudah pernah menyelesaikan sesi Pre Test ini !',
+						showConfirmButton: false,
+						timer: 1500
+					})
+					setTimeout(() => {
+						window.scrollTo(0,0)
 						this.loading_soal = false
-						this.$swal('Changes are not saved', '', 'info')
-					}
-				})
+					}, 1500)
+				}else{					
+					this.$swal({
+						title: 'Apakah Anda yakin ingin mengumpulkan jawaban ?',
+						html:
+						`Anda telah mengisi <b>${this.field.jawaban.length}</b> dari <b>${this.field.soal.length} soal</b>`,
+						showDenyButton: true,
+						showCancelButton: false,
+						confirmButtonText: 'Ya, Kumpulkan jawaban saya',
+						denyButtonText: `Tidak`,
+					}).then((result) => {
+						/* Read more about isConfirmed, isDenied below */
+						if (result.isConfirmed) {
+							this.KirimJawaban(this.field.soal, this.field.jawaban)
+						} else if (result.isDenied) {
+							this.loading_soal = false
+							this.$swal('Changes are not saved', '', 'info')
+						}
+					})
+				}
 			},
 
 			KirimJawaban(soal, jawaban){

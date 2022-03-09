@@ -14,15 +14,23 @@
 	</footer>
 </template>
 
-<style lang="css">
-	.social-list, ul li{
-		background-color: var(--bg-card)!important;
-		color: var(--color)!important;
-		transition: background-color 0.3s;
+<style lang="scss">
+	.copyright{
+		a{
+			color: $color-primary;
+		}
 	}
-	.list-inline-item, a:hover{
-		background-color: var(--bg-scrollbar);
-		color: var(--color)!important;
-		transition: background-color 0.3s;
+	.social-list{
+		a{			
+			// background-color: $bg-primary!important;
+			color: $color-primary!important;
+			transition: background-color 0.3s;
+			&:hover{
+				// background-color: $scroll-bar-bg;
+				color: $color-secondary!important;
+				transition: background-color 0.3s;
+			}
+		}
 	}
+	
 </style>

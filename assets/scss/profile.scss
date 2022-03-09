@@ -61,7 +61,7 @@
 			}
 			.col__data-profile{
 				margin-top: 1rem;				
-				h4{
+				h2{
 					color: $color-primary;
 					font-size:23px;
 					font-weight:700;
@@ -189,9 +189,8 @@
 						max-width: 400px;
 						.image {
 							display: block;
-							width: 100%;
 							height: auto;
-							max-width: 130px;
+							max-width: 157px;
 							margin-left: -1rem;
 						}
 
@@ -203,7 +202,7 @@
 							right: 0;
 							// height: 100px;
 							// width: 100%;
-							max-width: 140px;
+							max-width: 157.5px;
 							border-radius:80%;
 							opacity: 0;
 							transition: .3s ease;
@@ -218,10 +217,10 @@
 						.icon {
 							color: white;
 							font-weight: 700;
-							font-size: 70px;
+							font-size: 65px;
 							position: absolute;
-							top: 50%;
-							left: 50%;
+							top: 55%;
+							left: 55%;
 							transform: translate(-50%, -50%);
 							-ms-transform: translate(-50%, -50%);
 							text-align: center;
@@ -236,13 +235,14 @@
 				.col__data-profile{
 					margin-left: -6rem;
 					margin-top: 1rem;				
-					h4{
+					h2{
 						color: $color-primary;
-						font-size:21px;
+						font-size:24px;
 						font-weight:700;
 					}
 					ul li{
 						list-style: none;
+						font-size: 16px;
 					}
 					li{
 						margin-left: -2.5rem;
@@ -252,12 +252,12 @@
 
 			.profile__options-page{
 				margin-top:2rem;
-				margin-left:6rem;
+				margin-left:4rem;
 				button{
 					text-align: center;
-					width: 130px;
+					width: 140px!important;
 					text-transform: capitalize;
-					font-size: 11px;
+					font-size: 13px;
 					// width:100px;
 				}
 			}

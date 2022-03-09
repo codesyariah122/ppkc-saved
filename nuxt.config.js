@@ -141,7 +141,8 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
-    'mdbvue/nuxt'
+    'mdbvue/nuxt',
+    'nuxt-leaflet'
     ],
     mdbvue: {
     icons: true, // FA5
@@ -169,6 +170,12 @@ export default {
     // offlineAssets: [],
     runtimeCaching: [
     {
+      urlPattern: '/assets/scss/.*',
+      handler: 'cacheFirst',
+      method: 'GET',
+      strategyOptions: { cacheableResponse: { statuses: [0, 200] } }
+    },
+    {
       urlPattern: '/assets/css/.*',
       handler: 'cacheFirst',
       method: 'GET',
@@ -186,12 +193,12 @@ export default {
       strategyOptions: { cacheableResponse: { statuses: [0, 200] } }
     },
     {
-      urlPattern: '/assets/js/.*',
+      urlPattern: '/assets/images/.*',
       method: 'GET',
       strategyOptions: { cacheableResponse: { statuses: [0, 200] } }
     },
     {
-      urlPattern: '/assets/scss/.*',
+      urlPattern: '/assets/js/.*',
       method: 'GET',
       strategyOptions: { cacheableResponse: { statuses: [0, 200] } }
     }
