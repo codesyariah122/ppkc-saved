@@ -3,7 +3,7 @@
 		<mdb-container>
 			<mdb-row class="row justify-content-center card__profile-page">
 				<mdb-col lg="12" xs="12" sm="12">
-					<CardProfile :profiles="profiles" :studs="studs" :works="works" :loading="loading" :maritals="maritals"/>
+					<CardProfile :profiles="profiles" :studs="studs" :works="works" :loading="loading" :maritals="maritals" :username="username"/>
 				</mdb-col>
 			</mdb-row>
 
@@ -23,7 +23,7 @@
 	import TabsProfile from './TabsProfile'
 
 	export default {
-		props: ['profiles', 'genders', 'studs', 'jobs', 'works', 'maritals',  'categories', 'api_url', 'token', 'loading'],
+		props: ['profiles', 'genders', 'studs', 'jobs', 'works', 'maritals',  'categories', 'api_url', 'token', 'loading', 'username'],
 
 		components: {
 			CardProfile,

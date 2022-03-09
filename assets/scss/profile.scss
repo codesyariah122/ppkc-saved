@@ -5,6 +5,7 @@
 	font-family: 'Poppins', sans-serif;
 	.card__profile-page{
 		.profile__info-data{
+			margin-left: 3rem;
 			.col__img-profile{
 				.hover__image-wrap{
 					position: relative;
@@ -22,11 +23,11 @@
 						position: absolute;
 						top: 0;
 						bottom: 0;
-						left: -7%;
+						left: -1%;
 						right: 0;
 							// height: 100px;
 							// width: 100%;
-							max-width: 155px;
+							max-width: 165px;
 							border-radius:80%;
 							opacity: 0;
 							transition: .3s ease;
@@ -60,7 +61,8 @@
 				// }
 			}
 			.col__data-profile{
-				margin-top: 1rem;				
+				margin-top: 1rem;
+				margin-left: .3rem;				
 				h2{
 					color: $color-primary;
 					font-size:23px;
@@ -70,8 +72,19 @@
 					list-style: none;
 				}
 				li{
-					margin-left: -2.5rem;
-					font-size: 12px;
+					margin-left: -3rem;
+					font-size: 14px;
+				}
+			}
+
+			.profile__options-page{
+				margin-left: .5rem;
+				button{
+					text-align: center;
+					width: 140px!important;
+					text-transform: capitalize;
+					font-size: 13px;
+					// width:100px;
 				}
 			}
 		}
@@ -156,6 +169,25 @@
 				color: $color-primary;
 				text-transform:capitalize;
 			}
+			blockquote{
+				display: -webkit-box;
+				-webkit-line-clamp: var(--line-clamp, 2);
+				-webkit-box-orient: vertical;
+				word-break: var(--word-break, "none");
+				overflow: hidden;
+				hyphens: auto;
+				text-align: var(--align, left);
+
+				--is-single-line: 1 - Clamp(0, Calc(var(--line-clamp) - 1), var(--line-clamp));
+				--delay: Calc(-1s * (var(--is-single-line, 1) - 1));
+				animation: states 1s var(--delay) paused;
+
+				@keyframes states {
+					0% {
+						word-break: break-all;
+					}
+				}
+			}
 			small{
 				font-size:10px;
 				font-weight: 700;
@@ -198,11 +230,11 @@
 							position: absolute;
 							top: 0;
 							bottom: 0;
-							left: -7%;
+							left: -.5%;
 							right: 0;
 							// height: 100px;
 							// width: 100%;
-							max-width: 157.5px;
+							max-width: 161.5px;
 							border-radius:80%;
 							opacity: 0;
 							transition: .3s ease;

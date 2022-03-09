@@ -32,10 +32,11 @@
                   profiles.photo !==
                   'https://api.ppkc-online.com/image-profiles/null'
                 ">
-                  <img
+                <b-avatar variant="info" :src="profiles.photo" :size="size"></b-avatar>
+                  <!-- <img
                   :src="profiles.photo"
                   class="img-fluid image rounded-circle"
-                  />
+                  /> -->
                   <div class="overlay">
                     <a
                     :data-gall="
@@ -56,16 +57,13 @@
                 </div>
               </div>
               <div v-else>
-                  <img
-                  :src="`${require('~/assets/images/profile/profile.svg')}`"
-                  class="img-fluid image rounded-circle"
-                  />
+                  <b-avatar variant="primary" :text="username.charAt(0)" :size="size"></b-avatar>
               </div>
 
             </div>
           </mdb-col>
           <mdb-col md="5" class="col__data-profile">
-            <h2>{{ profiles.nama }}</h2>
+            <h2>{{ nama }}</h2>
             <ul>
               <li class="mb-2">
                 <a :href="`mailto:${profiles.email}`">
@@ -105,12 +103,13 @@
 
 <script>
 export default {
-  props: ["profiles", "loading"],
+  props: ["profiles", "loading", "username"],
 
   data() {
     return {
       p1: true,
-    };
+      size: '10rem'
+    }
   },
 
   mounted() {

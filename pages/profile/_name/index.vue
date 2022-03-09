@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<Profilepage :profiles="profiles" :genders="genders" :jobs="jobs" :studs="studs" :works="works" :maritals="maritals"  :categories="categories" :api_url="api_url" :loading="loading" :token="token" />
+		<Profilepage :profiles="profiles" :genders="genders" :jobs="jobs" :studs="studs" :works="works" :maritals="maritals"  :categories="categories" :api_url="api_url" :loading="loading" :token="token" :username="username"/>
 	</div>
 </template>
 
@@ -22,7 +22,8 @@
 				categories: [],
 				empty_filter: false,
 				loading: null,
-				start_submit: null
+				start_submit: null,
+				username: ''
 			}
 		},
 
@@ -76,6 +77,7 @@
 					this.$axios.get(url)
 					.then(({data}) => {
 						this.profiles = data.user
+						this.username = this.$username(data.user.nama)
 						this.works = data.pekerjaan ? data.pekerjaan : ''
 						this.studs = data.pendidikan ? data.pendidikan : ''
 						this.genders = data.jenisKelamins

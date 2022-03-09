@@ -47,8 +47,8 @@
 			</mdb-col>
 		</mdb-row>
 
-		<mdb-row v-else>
-			<mdb-col lg="12">
+		<mdb-row v-else col="12" class="row justify-content-center">
+			<mdb-col lg="12" xs="12" sm="12">
 				<mdb-card v-if="empty_filter" class="card-body" style="width: 100%; margin-top: 1rem;">
 					<mdb-row>
 						<mdb-col lg="12" xs="12" sm="12">

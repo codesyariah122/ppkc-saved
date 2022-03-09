@@ -2,7 +2,7 @@
 	<div>
 		<mdb-row cols="12" class="justify-content-end filtering__form-data">
 			<mdb-col md="2">
-				<h4>Filter</h4>
+				<h5>Filter</h5>
 			</mdb-col>
 			<mdb-col md="10">
 				<form @submit.prevent="FilterSertifikat">
@@ -44,31 +44,32 @@
 			</div>
 		</mdb-row> -->
 
-		<mdb-row>
-			<mdb-card v-if="sertifikats.length === 0" class="card-body" style="width: 100%; margin-top: 1rem;">
-				<mdb-row>
-					<mdb-col lg="12" xs="12" sm="12">
-						<mdb-alert color="warning" v-if="p1" @closeAlert="p1=false" dismiss>
-							<strong>Oopps!</strong> Belum ada event yang anda ikuti.
-						</mdb-alert>
-					</mdb-col>
-				</mdb-row>
-			</mdb-card>
+		<mdb-row col="12" class="row justify-content-center">
+			<mdb-col lg="12" xs="12" sm="12">
+				<mdb-card v-if="sertifikats.length === 0" class="card-body" style="width: 100%; margin-top: 1rem;">
+					<mdb-row>
+						<mdb-col lg="12" xs="12" sm="12">
+							<mdb-alert color="warning" v-if="p1" @closeAlert="p1=false" dismiss>
+								<strong>Oopps!</strong> Sertifikat tidak tersedia.
+							</mdb-alert>
+						</mdb-col>
+					</mdb-row>
+				</mdb-card>
 
-			<mdb-card v-else v-for="(item, index) in sertifikats" class="card-body" style="width: 100%; margin-top: 1rem;" :key="item.id">
-				<mdb-row>
-					<mdb-col lg="12" xs="12" sm="12">
-						<mdb-card-title>{{item.title}}</mdb-card-title>
-						<small class="mt-2">
-							{{$moment(item.date_start).format("LL")}} - {{$moment(item.date_end).format("LL")}}
-						</small>
-					</mdb-col>
-					<mdb-col lg="12" xs="12" sm="12">
-						<mdb-btn size="sm" outline="primary"><mdb-icon icon="download" /> Unduh Sertifikat</mdb-btn>
-					</mdb-col>
-				</mdb-row>
-			</mdb-card>
-
+				<mdb-card v-else v-for="(item, index) in sertifikats" class="card-body" style="width: 100%; margin-top: 1rem;" :key="item.id">
+					<mdb-row>
+						<mdb-col lg="12" xs="12" sm="12">
+							<mdb-card-title>{{item.title}}</mdb-card-title>
+							<small class="mt-2">
+								{{$moment(item.date_start).format("LL")}} - {{$moment(item.date_end).format("LL")}}
+							</small>
+						</mdb-col>
+						<mdb-col lg="12" xs="12" sm="12">
+							<mdb-btn size="sm" outline="primary"><mdb-icon icon="download" /> Unduh Sertifikat</mdb-btn>
+						</mdb-col>
+					</mdb-row>
+				</mdb-card>
+			</mdb-col>
 		</mdb-row>
 	</div>
 </template>
