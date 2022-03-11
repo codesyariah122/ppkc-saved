@@ -67,7 +67,7 @@
 			</section><!--//docs-intro-->
 		</header>
 		<section class="docs-section" id="item-1-1">
-			<EventTestPostTest :id_test="id_test" :type_name="type_name" :token="token" :api_url="api_url" :pelatihans="pelatihans" :username="username"/>
+			<EventTestPostTest :id_test="id_test" :type_name="type_name" :token="token" :api_url="api_url" :pelatihans="pelatihans" :username="username" :kegiatan_id="kegiatan_id" :pelatihan_id="pelatihan_id" :details="details" :evaluasi="evaluasi"/>
 		</section>
 	</div>
 
@@ -121,7 +121,10 @@
 			'id_test',
 			'id_webinar',
 			'username',
-			'link_yt'
+			'link_yt',
+			'kegiatan_id',
+			'pelatihan_id',
+			'evaluasi'
 		]
 	}
 </script>

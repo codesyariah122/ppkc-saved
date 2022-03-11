@@ -106,6 +106,15 @@
 					<mdb-col lg="12" sm="12" xs="12">
 						<EventWebinarKomentar :profiles="profiles" :api_url="api_url" :token="token"/>
 					</mdb-col>
+
+					<mdb-col lg="12" xs="12" sm="12">
+						<b-dropdown-divider style="list-style: none;margin-top: 3rem;"></b-dropdown-divider>
+					</mdb-col>
+
+					<mdb-col lg="12" sm="12" xs="12">
+						<EventWebinarPertanyaan :profiles="profiles" :api_url="api_url" :token="token"/>
+					</mdb-col>
+
 				</mdb-row>
 
 				<mdb-row v-else-if="webinar_checkout && !webinar_checkin" col="12" class="row justify-content-center">
@@ -133,6 +142,14 @@
 					<!-- Komentar -->
 					<mdb-col lg="12" sm="12" xs="12">
 						<EventWebinarKomentar :profiles="profiles" :api_url="api_url" :token="token"/>
+					</mdb-col>
+
+					<mdb-col lg="12" xs="12" sm="12">
+						<b-dropdown-divider style="list-style: none;margin-top: 2rem;"></b-dropdown-divider>
+					</mdb-col>
+
+					<mdb-col lg="12" sm="12" xs="12">
+						<EventWebinarPertanyaan :profiles="profiles" :api_url="api_url" :token="token"/>
 					</mdb-col>
 
 				</mdb-row>

@@ -24,10 +24,10 @@
 			</div>
 
 			<div v-else>
-				<mdb-row v-if="tests.is_already == 1 && lists.length > 0" col="12" class="row justify-content-center">
+				<mdb-row v-if="tests.is_already == 1" col="12" class="row justify-content-center">
 					<mdb-col lg="12" xs="12" sm="12">
 						<mdb-alert color="primary">
-							<mdb-icon icon="info-circle" size="lg"/> Anda sudah pernah menyelesaikan sesi pre test ini !
+							<mdb-icon icon="info-circle" size="lg"/> Anda telah menyelesaikan sesi pre test ini !
 						</mdb-alert>
 					</mdb-col>
 				</mdb-row>
@@ -88,6 +88,7 @@
 										<input 
 										type="radio"
 										v-model="tests.is_already == 1 ? lists[listIndex-1].jawaban : lists[listIndex-1].ujian_id"
+										:disabled="tests.is_already == 1 ? true : false"
 										:value="option.id"
 										:id="option.id"
 										required @change="ChangeJawaban(option.ujian_id, index, option.id, lists[listIndex-1].urutan)"/>
@@ -349,7 +350,7 @@
 						this.success.status = true
 						const save_test = localStorage.setItem(`finish-pre-test-${this.id_test}-${this.$username(this.profiles.nama)}`, JSON.stringify({status: this.success.status, user_id: this.profiles.id, message: 'Anda sudah menyelesaikan sesi pre test', profile: this.profiles}))
 						this.save_test = localStorage.getItem(`finish-pre-test-${this.id_test}-${this.$username(this.profiles.nama)}`) ? JSON.parse(localStorage.getItem(`finish-pre-test-${this.id_test}-${this.$username(this.profiles.nama)}`)) : ''
-						this.startTimer()
+						// this.startTimer()
 						setTimeout(() => {
 							this.loading_answer = false
 							this.loading_soal = false

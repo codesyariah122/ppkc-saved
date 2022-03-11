@@ -67,7 +67,7 @@
 
 						<!-- Konten utama -->
 						<div v-else>
-							<ProfilepageEventDashboardShowContent :type_name="type_name" :type="type" :detailed_data="detailed_data" :link_yt="link_yt" :max="max" :value="value" :detailed="detailed" :token="token" :api_url="api_url" :pelatihans="pelatihans" :details="details" :id_test="id_test" :id_webinar="id_webinar" :profiles="profiles" :username="username"/>
+							<ProfilepageEventDashboardShowContent :type_name="type_name" :type="type" :detailed_data="detailed_data" :link_yt="link_yt" :max="max" :value="value" :detailed="detailed" :token="token" :api_url="api_url" :pelatihans="pelatihans" :details="details" :id_test="id_test" :id_webinar="id_webinar" :profiles="profiles" :username="username" :kegiatan_id="kegiatan_id" :pelatihan_id="pelatihan_id" :evaluasi="evaluasi"/>
 						</div>
 					</article>
 
@@ -103,6 +103,9 @@
 				loading_file:null,
 				pelatihans: [],
 				kegiataan: [],
+				kegiatan_id: '',
+				pelatihan_id: '',
+				evaluasi: [],
 				categories:'',
 				category_title: '',
 				detailed_data: {},
@@ -182,6 +185,11 @@
 				.then(({data}) => {
 					this.kegiatan = data.kegiatan
 					this.pelatihans = data.pelatihans
+					data.pelatihans.map(d => {
+						this.evaluasi.push(d)
+						this.pelatihan_id = d.id
+						this.kegiatan_id = d.kegiatan_id
+					})
 				})
 				.catch(err => console.log(err))
 				.finally(() => {

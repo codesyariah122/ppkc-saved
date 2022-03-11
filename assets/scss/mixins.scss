@@ -627,19 +627,27 @@
 			color: $primary-button!important;
 			border-radius: 5px!important;
 			height:33.7px!important;
-			width:107px!important;
-			font-size: 10px!important;
+			width:160px!important;
+			font-size: 15px!important;
 			margin-bottom: 1rem!important;
+			// margin-left: -2rem;
 		}
 		button{
 			margin-top:.1em!important;
-			width: 150px!important;
-			left:.1rem!important;
+			width: 175px!important;
+			left:-.7rem!important;
 			height: 33px!important;
 			border-radius:4px!important;
-			font-size:9px!important;
+			font-size:13px!important;
 			background-color: $primary-button!important;
-			text-align: left!important;
+			text-align: left;
+		}
+		h5{
+			color:$color-primary;
+			font-size: 20px;
+			font-weight: 800;
+			line-height: 27px;
+			text-transform: capitalize;
 		}
 	}
 }

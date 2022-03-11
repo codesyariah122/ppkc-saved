@@ -6,8 +6,8 @@
 			</mdb-col>
 			<mdb-col md="10">
 				<form @submit.prevent="FilterSertifikat">
-					<mdb-row>
-						<mdb-col md="3">
+					<mdb-row  :class="`${$device.isDesktop ? 'd-flex justify-content-between' : ''}`">
+						<mdb-col col="12" md="3">
 							<select selected :value="undefined" @change="ChangeCategoryChild($event)">
 								<option value="">Jenis Pelatihan</option>
 								<option v-for="(item, index) in categories" :value="item.code">
@@ -15,7 +15,7 @@
 								</option>
 							</select>
 						</mdb-col>
-						<mdb-col md="3">
+						<mdb-col col="12" md="3">
 							<select selected :value="undefined" @change="ChangeMonthChild($event)">
 								<option value="">Bulan Pelatihan</option>
 								<option v-for="(month, index) in $moment.months()" :value="index + 1">
@@ -23,14 +23,14 @@
 								</option>
 							</select>
 						</mdb-col>
-						<mdb-col md="4">
+						<mdb-col col="12" md="4">
 							<mdb-btn size="sm" type="submit">
 								<!-- <div v-if="loading">
 									<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
 									Loading...
 								</div> -->
 								<div>
-									<mdb-icon icon="filter" size="lg"/> Terapkan Filter		
+									<mdb-icon icon="filter" size="sm"/> Terapkan Filter		
 								</div>
 							</mdb-btn>
 						</mdb-col>

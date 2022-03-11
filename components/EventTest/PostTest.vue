@@ -27,34 +27,12 @@
 			</div>
 
 			<div v-else>
-				<mdb-row v-if="tests.is_already == 1 && lists.length > 0" col="12" class="row justify-content-center">
-
-					<mdb-col lg="12" xs="12" sm="12">
+				<mdb-row col="12" class="row justify-content-center mt-3">
+					<mdb-col v-if="tests.is_already == 1" lg="12" xs="12" sm="12">
 						<mdb-alert color="primary">
-							<mdb-icon icon="info-circle" size="lg"/> Anda sudah pernah menyelesaikan sesi post test ini !
+							<mdb-icon icon="info-circle" size="lg"/> Anda telah menyelesaikan sesi post test ini !
 						</mdb-alert>
 					</mdb-col>
-
-					<mdb-col lg="12" xs="12" sm="12" class="mt-5">
-						<h2 style="text-transform: uppercase;text-align: center;margin-bottom: 2rem;">rencana tindak lanjut (rtl)</h2>
-						<mdb-list-group style="margin-bottom: 3rem;">
-							<mdb-list-group-item>
-								Nama 			: Ratih Annatri
-							</mdb-list-group-item>
-							<mdb-list-group-item>
-								Instansi		: Siloam Hospitals Bogor
-							</mdb-list-group-item>
-							<mdb-list-group-item>
-								Nama Pelatihan	: Pelatihan Kepala Ruang - SCT
-							</mdb-list-group-item>
-						</mdb-list-group>
-						<!-- Input RTL Table -->
-						<EventTestTableRTL/>
-					</mdb-col>
-
-				</mdb-row>
-
-				<mdb-row col="12" class="row justify-content-center mb-2 mt-3">
 					<mdb-col lg="12" xs="12" sm="12" class="box__intro-test">
 						<ul style="list-style: none; margin-top:-.5rem;">
 							<li>
@@ -73,7 +51,7 @@
 					</mdb-col>
 				</mdb-row>
 
-				<mdb-row col="12" class="row justify-content-center mb-3">
+				<mdb-row v-if="tests.is_already == 0" col="12" class="row justify-content-center mb-3">
 					<mdb-col lg="12" xs="12" sm="12">
 						<h4 class="text-gray">Total soal : {{config.totalItem}}</h4>
 						<small class="text-primary">
@@ -96,64 +74,88 @@
 									<div
 									class="answer"
 									v-for="(option, indx) in lists[listIndex-1].pilihans" :key="option.id"
-									:value="option.id"
-									>
-									<input 
-									type="radio"
-									v-model="tests.is_already == 1 ? lists[listIndex-1].jawaban : lists[listIndex-1].ujian_id"
-									:value="option.id"
-									:id="option.id"
-									required @change="ChangeJawaban(option.ujian_id, index, option.id, lists[listIndex-1].urutan)"/>
-									<label
-									:for="option.id"
-									class="answer__item"
-									>
-									{{option.jawaban}}
-								</label> 
-							</div>
+									:value="option.id">
+										<input 
+										type="radio"
+										v-model="tests.is_already == 1 ? lists[listIndex-1].jawaban : lists[listIndex-1].ujian_id" :disabled="tests.is_already == 1 ? true : false"
+										:value="option.id"
+										:id="option.id"
+										required @change="ChangeJawaban(option.ujian_id, index, option.id, lists[listIndex-1].urutan)"/>
+											<label
+												:for="option.id"
+												class="answer__item"
+												>
+												{{option.jawaban}}
+											</label> 
+										</div>
+									</div>
+								</fieldset>
+							</form>
 						</div>
-					</fieldset>
-				</form>
-			</div>
-		</mdb-col>
+					</mdb-col>
 
-	</mdb-row>
+				</mdb-row>
 
-	<mdb-row v-if="tests.is_already == 0 && lists.length > 0"  col="12" class="row justify-content-center">
-		<mdb-col lg="12">
-			<div class="mb-2 ">
-				<a
-				href=""
-				class="btn btn-primary btn-md rounded btn-block"
-				@click.prevent="SubmitTest"
-				>
-				<div v-if="loading_answer">
-					<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-					loading_answer...
-				</div>
-				<div v-else>
-					Submit <mdb-icon far icon="paper-plane" />
-				</div>
-			</a>
+				<mdb-row v-if="tests.is_already == 0 && lists.length > 0"  col="12" class="row justify-content-center">
+					<mdb-col lg="12">
+						<div class="mb-2 ">
+							<a
+							href=""
+							class="btn btn-primary btn-md rounded btn-block"
+							@click.prevent="SubmitTest"
+							>
+							<div v-if="loading_answer">
+								<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+								loading_answer...
+							</div>
+							<div v-else>
+								Submit <mdb-icon far icon="paper-plane" />
+							</div>
+						</a>
+					</div>
+				</mdb-col>
+
+				<mdb-col lg="12" xs="12" sm="12">
+					<small>
+						Terjawab {{config.defaultUrutan }} - dari {{config.lastItem  === 0 ? config.totalItem : config.lastItem}} soal
+					</small>
+				</mdb-col>
+			</mdb-row>
+
+			<mdb-row v-if="tests.is_already == 1 && lists.length > 0" col="12" class="row justify-content-center">
+				<!-- <pre>
+					{{details}}
+				</pre> -->
+				<mdb-col lg="12" xs="12" sm="12">
+					<b-dropdown-divider style="list-style: none;margin-top: 2rem; margin-bottom: 2rem;"></b-dropdown-divider>
+				</mdb-col>
+				<mdb-col  id="table-rtl" lg="12" xs="12" sm="12" class="mt-5">
+					<h2 style="text-transform: uppercase;text-align: center;margin-bottom: 2rem;">rencana tindak lanjut (rtl)</h2>
+					<mdb-list-group style="margin-bottom: 3rem;">
+						<mdb-list-group-item>
+							Nama 			: {{profiles.nama}}
+						</mdb-list-group-item>
+						<mdb-list-group-item>
+							Instansi		: {{details.penyelenggara}}
+						</mdb-list-group-item>
+						<mdb-list-group-item>
+							Nama Pelatihan	: {{details.kegiatan_title}}
+						</mdb-list-group-item>
+					</mdb-list-group>
+					<!-- Input RTL Table -->
+					<EventTestTableRTL :token="token" :api_url="api_url" :kegiatan_id="kegiatan_id" :pelatihan_id="pelatihan_id" :tests="tests" :evaluasi="evaluasi"/>
+				</mdb-col>
+			</mdb-row>
+
 		</div>
-	</mdb-col>
-
-	<mdb-col lg="12" xs="12" sm="12">
-		<small>
-			Terjawab {{config.defaultUrutan }} - dari {{config.lastItem  === 0 ? config.totalItem : config.lastItem}} soal
-		</small>
-	</mdb-col>
-</mdb-row>
-
-</div>
-</mdb-container>
+	</mdb-container>
 
 </div>
 </template>
 
 <script>
 	export default{
-		props: ['id_test', 'token', 'api_url', 'pelatihans', 'username'],
+		props: ['id_test', 'token', 'api_url', 'pelatihans', 'details', 'username', 'kegiatan_id', 'pelatihan_id', 'evaluasi'],
 
 		data(){
 			return {
@@ -203,6 +205,7 @@
 		},
 
 		methods: {
+			
 			ChangeJawaban(id_soal, position, id_jawaban, urutan){
 				this.config.defaultUrutan = urutan
 				if(urutan === this.config_soal.current){
@@ -264,6 +267,8 @@
 					this.lists = data.list_data
 					this.config.totalItem = data.list_data.length
 					this.tests = data.pelatihan
+					
+
 					this.config.listItem = data.list_data.length
 					this.field.soal = this.field.soal.length < 1 ? this.lists.map(d => d.id) : this.field.jawaban.shift()
 					this.config.perItem = data.list_data.length
@@ -345,11 +350,11 @@
 						this.success.status = true
 						const save_test = localStorage.setItem(`finish-pre-test-${this.id_test}-${this.$username(this.profiles.nama)}`, JSON.stringify({status: this.success.status, user_id: this.profiles.id, message: 'Anda sudah menyelesaikan sesi pre test', profile: this.profiles}))
 						this.save_test = localStorage.getItem(`finish-pre-test-${this.id_test}-${this.$username(this.profiles.nama)}`) ? JSON.parse(localStorage.getItem(`finish-pre-test-${this.id_test}-${this.$username(this.profiles.nama)}`)) : ''
-						this.startTimer()
+						// this.startTimer()
 						setTimeout(() => {
 							this.loading_answer = false
 							this.loading_soal = false
-							this.PreTest()
+							this.posttest()
 						}, 2500)
 					})
 				}else{					

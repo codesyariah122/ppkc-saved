@@ -3,7 +3,7 @@
     <b-card v-if="loading">
       <b-row>
         <b-col cols="2">
-          <b-skeleton type="avatar"></b-skeleton>
+          <b-skeleton type="avatar" :size="`${$device.isDesktop ? size : '3rem'}`"></b-skeleton>
         </b-col>
         <b-col cols="4">
           <b-skeleton animation="wave" width="85%"></b-skeleton>
@@ -63,7 +63,7 @@
             </div>
           </mdb-col>
           <mdb-col md="5" class="col__data-profile">
-            <h2>{{ nama }}</h2>
+            <h2 class="text-capitalize">{{ profiles.nama }}</h2>
             <ul>
               <li class="mb-2">
                 <a :href="`mailto:${profiles.email}`">
