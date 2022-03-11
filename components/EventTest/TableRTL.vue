@@ -140,14 +140,10 @@
 					{title: 'Options'}
 					],
 					rows: [],
-					send: {
-						title: ''
-					},
 					form: {},
 					jawabans: [],
 					success: ''
 				},
-				showModal: true,
 				loading: null,
 				loading_input: null,
 				is_already: null,
@@ -167,9 +163,7 @@
 				this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
 				this.$axios.get(url)
 				.then(({data}) => {
-					// console.log(data)
 					this.data.rows = data.list_data
-					// console.log(this.data.rows)
 					this.data.rows.forEach((item, index) => {
 						if(item.sasaran  && item.keterangan) this.data.jawabans.push({kegiatan_id: this.kegiatan_id, pelatihan_id: item.id, sasaran: item.sasaran, keterangan: item.keterangan})
 					})
@@ -208,7 +202,7 @@
 				this.$axios.post(url, form_data)
 				.then(({data}) => {
 					console.log(data)
-					if(data.messagge){
+					if(data.message){
 						this.data.success = data.message
 						this.$swal(data.message, '', 'success')
 					}
