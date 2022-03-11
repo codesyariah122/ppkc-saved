@@ -1,8 +1,5 @@
 <template>
 	<div class="embed__file">
-		<!-- <pre>
-			{{detail_webinar.pelatihan_detail_id == id_webinar}}
-		</pre> -->
 		<div v-if="loading">
 			<mdb-container>
 				<mdb-row col="12" class="webinar__content">
@@ -18,34 +15,46 @@
 			</mdb-container>
 		</div>
 		<div v-else>
-			<mdb-container v-if="detail_webinar && detail_webinar.pelatihan_detail_id === id_webinar">
-				<mdb-row v-if="webinar_checkin" col="12" class="webinar__content row justify-content-center">
-					<mdb-col v-if="loading" lg="12">
-						<b-progress :max="max" height="2rem" :striped="true" show-progress :animated="true" class="mb-3">
-							<b-progress-bar :value="value" variant="success">
-								<h5 v-if="value > 0" class="text-white">Loading</h5>
-							</b-progress-bar>
-						</b-progress>
-						<b-skeleton-img></b-skeleton-img>
-					</mdb-col>
-					<mdb-col v-else lg="12">
-						<b-embed
-						type="iframe"
-						aspect="16by9"
-						:src="`https://www.youtube-nocookie.com/embed/${details.url}?autoplay=0&version=3&enablejsapi=1&showinfo=0&controls=0&rel=0&showinfo=0&disablekb=1&iv_load_policy=3&modestbranding=0`"
-						allowfullscreen
-						></b-embed>
-					</mdb-col>
+			<div v-if="detail_webinar.is_berakhir === 1">
+				<mdb-container>
+					<mdb-row col="12" class="row justify-content-center webinar__content">
+						<mdb-col lg="12" xs="12" sm="12">
+							<mdb-alert color="info">
+								<mdb-icon icon="info-circle" size="lg"/> {{detail_webinar.status_value}}!
+							</mdb-alert>
+						</mdb-col>
+					</mdb-row>
+				</mdb-container>
+			</div>
+			<div v-else>
+				<mdb-container v-if="detail_webinar && detail_webinar.pelatihan_detail_id === id_webinar">
+					<mdb-row v-if="webinar_checkin" col="12" class="webinar__content row justify-content-center">
+						<mdb-col v-if="loading" lg="12">
+							<b-progress :max="max" height="2rem" :striped="true" show-progress :animated="true" class="mb-3">
+								<b-progress-bar :value="value" variant="success">
+									<h5 v-if="value > 0" class="text-white">Loading</h5>
+								</b-progress-bar>
+							</b-progress>
+							<b-skeleton-img></b-skeleton-img>
+						</mdb-col>
+						<mdb-col v-else lg="12">
+							<b-embed
+							type="iframe"
+							aspect="16by9"
+							:src="`https://www.youtube-nocookie.com/embed/${details.url}?autoplay=0&version=3&enablejsapi=1&showinfo=0&controls=0&rel=0&showinfo=0&disablekb=1&iv_load_policy=3&modestbranding=0`"
+							allowfullscreen
+							></b-embed>
+						</mdb-col>
 
-					<!-- Informasi webinar -->
-					<mdb-col lg="12" class="mt-5">
-						<div v-if="loading">
-							<div class="d-flex justify-content-center">
-								<div class="spinner-grow text-primary" style="width: 5rem; height: 5rem;" role="status">
-									<span class="sr-only">Loading...</span>
+						<!-- Informasi webinar -->
+						<mdb-col lg="12" class="mt-5">
+							<div v-if="loading">
+								<div class="d-flex justify-content-center">
+									<div class="spinner-grow text-primary" style="width: 5rem; height: 5rem;" role="status">
+										<span class="sr-only">Loading...</span>
+									</div>
 								</div>
 							</div>
-						</div>
 							<mdb-list-group v-else>
 								<mdb-list-group-item>
 									<h4>Informasi Webinar</h4>
@@ -183,6 +192,7 @@
 					</mdb-col>
 				</mdb-row>
 			</mdb-container>		
+			</div>
 		</div>
 	</div>
 </template>

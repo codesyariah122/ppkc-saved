@@ -26,7 +26,12 @@
 				<thead>
 					<tr>
 						<th v-for="(item, index) in data.fields" :key="index+1" scope="col">
-							{{item.title}}
+							<span v-if="index === 7">
+								<mdb-icon icon="ellipsis-h" size="lg"/>
+							</span>
+							<span v-else>
+								{{item.title}}
+							</span>
 						</th>
 					</tr>
 				</thead>
@@ -212,10 +217,11 @@
 				.finally(() => {
 					setTimeout(() => {
 						this.loading_input=false
-						this.$root.$emit('bv::hide::modal', 'addmodal', '#btnShow')
+						this.data.form={}
+						this.data.jawabans=[]
+						this.$root.$emit('bv::hide::modal', `modal-${pelatihan_id}`, '#btnShow')
 						this.ListsData()
-						this.data.jawabans= []
-					}, 2500)
+					}, 1000)
 				})
 			},
 
