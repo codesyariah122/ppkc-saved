@@ -39,11 +39,13 @@
 			</mdb-col>
 		</mdb-row>
 
-		<mdb-row v-if="loading_filter" class="row justify-content-center">
+		<mdb-row v-if="loading_filter" class="row justify-content-center mt-2">
 			<mdb-col lg="12" xs="12" sm="12">
-				<b-skeleton animation="throb" width="85%"></b-skeleton>
-				<b-skeleton animation="throb" width="55%"></b-skeleton>
-				<b-skeleton animation="throb" width="70%"></b-skeleton>
+				<b-card>
+					<b-skeleton animation="throb" width="85%"></b-skeleton>
+					<b-skeleton animation="throb" width="55%"></b-skeleton>
+					<b-skeleton animation="throb" width="70%"></b-skeleton>
+				</b-card>
 			</mdb-col>
 		</mdb-row>
 

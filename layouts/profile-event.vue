@@ -4,7 +4,7 @@
 		<Nuxt/>
 
 		<!-- Scrolling back to top page -->
-		<GlobalsToTop/>
+		<GlobalsToTop v-if="$device.isDesktop"/>
 		<!-- end scroll top -->
 	</div>
 </template>
