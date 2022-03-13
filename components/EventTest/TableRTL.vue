@@ -215,7 +215,7 @@
 						this.data.jawabans=[]
 						this.$root.$emit('bv::hide::modal', `modal-${pelatihan_id}`, '#btnShow')
 						this.ListsData()
-					}, 1000)
+					}, 1500)
 				})
 			},
 

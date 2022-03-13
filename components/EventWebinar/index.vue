@@ -19,6 +19,7 @@
 				<mdb-container>
 					<mdb-row col="12" class="row justify-content-center webinar__content">
 						<mdb-col lg="12" xs="12" sm="12">
+							<mdb-alert color="success"><mdb-icon far icon="calendar-check" size="lg"/> Webinar telah berakhir.</mdb-alert>
 							<mdb-alert color="info">
 								<mdb-icon icon="info-circle" size="lg"/> {{detail_webinar.status_value}}!
 							</mdb-alert>
