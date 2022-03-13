@@ -83,14 +83,18 @@
 			},
 
 			WeatherByCity(){
-				CheckWeather(this.city.city, this.apiKey)
-				.then(res => {
-					console.log(res)
-					this.weathers = res.weather[0]
-					this.temp = this.getCelcius(res.main.temp)
-					this.DetectColor(this.weathers.description)
-				})
-				.catch(err => console.log(err))
+				if(this.apiKey){					
+					CheckWeather(this.city.city, this.apiKey)
+					.then(res => {
+						console.log(res)
+						this.weathers = res.weather[0]
+						this.temp = this.getCelcius(res.main.temp)
+						this.DetectColor(this.weathers.description)
+					})
+					.catch(err => console.log(err))
+				}else{
+					console.log("No Weather Widget")
+				}
 			},
 
 			DetectColor(color){
