@@ -5,7 +5,7 @@
       <b-skeleton animation="throb" width="55%"></b-skeleton>
       <b-skeleton animation="throb" width="70%"></b-skeleton>
     </div>
-    <nav v-else id="docs-nav" class="docs-nav navbar shadow-none">
+    <nav v-else id="docs-nav" class="docs-nav navbar shadow-none mt-2">
       <ul class="section-items list-unstyled nav flex-column pb-3">
         <li class="nav-item__sidebar section-title">
           <a class="nav-link__sidebar scrollto active" href="#section-1"
