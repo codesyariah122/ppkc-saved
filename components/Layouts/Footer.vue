@@ -24,8 +24,8 @@
 			<!-- Bonus Map -->
 			<mdb-row>
 				<mdb-col col="12" lg="12" class="col-3">
-					<LayoutsMap/>
-					<!-- <LayoutsMapGoogle/> -->
+					<!-- <LayoutsMap/> -->
+					<LayoutsMapGoogle/>
 				</mdb-col>
 			</mdb-row>
 			<!-- end map -->

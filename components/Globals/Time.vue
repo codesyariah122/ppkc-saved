@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<mdb-row class="d-flex justify-content-start" col="12">
+		<mdb-row v-if="apiKey" class="d-flex justify-content-start" col="12">
 			<mdb-col class="glow" md="3">
 				<h4> {{time}} </h4>
 			</mdb-col>

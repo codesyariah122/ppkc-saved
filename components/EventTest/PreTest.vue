@@ -54,7 +54,7 @@
 				<mdb-row col="12" class="row justify-content-center mb-3">
 					<mdb-col lg="12" xs="12" sm="12">
 						<h4 class="text-gray">Total soal : {{config.totalItem}}</h4>
-						<small v-if="tests.is_already == 0" class="text-primary">
+						<small class="text-primary">
 							*.Selesaikan soal secara berurutan (1 s/d {{lists.length}})
 						</small>
 					</mdb-col>
