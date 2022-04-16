@@ -21,6 +21,19 @@
       </div>
 
       <div v-else>
+        <mdb-row col="12" class="row justify-content-center mb-3">
+          <mdb-col lg="12" xs="12" sm="12">
+            <small class="text-primary" style="font-size: 24px">
+              Evaluasi bisa diisi di tanggal
+              {{
+                $moment(kegiatan.tanggal_evaluasi_pasca_kegiatan).format(
+                  "DD MMMM YYYY"
+                )
+              }}
+            </small>
+          </mdb-col>
+        </mdb-row>
+
         <mdb-row
           v-if="is_already_post_test == 0"
           col="12"
@@ -35,81 +48,83 @@
         </mdb-row>
 
         <div v-else>
-          <mdb-row
-            v-if="is_already == 1"
-            col="12"
-            class="row justify-content-center"
-          >
-            <mdb-col lg="12" xs="12" sm="12">
-              <mdb-alert color="primary">
-                <mdb-icon icon="info-circle" size="lg" /> Anda telah
-                menyelesaikan evaluasi pasca kegiatan ini !
-              </mdb-alert>
-            </mdb-col>
-          </mdb-row>
+          <div v-if="is_can_pasca_kegiatan == 1">
+            <mdb-row
+              v-if="is_already == 1"
+              col="12"
+              class="row justify-content-center"
+            >
+              <mdb-col lg="12" xs="12" sm="12">
+                <mdb-alert color="primary">
+                  <mdb-icon icon="info-circle" size="lg" /> Anda telah
+                  menyelesaikan evaluasi pasca kegiatan ini !
+                </mdb-alert>
+              </mdb-col>
+            </mdb-row>
 
-          <mdb-row col="12" class="row justify-content-center mb-3">
-            <mdb-col lg="12" xs="12" sm="12">
-              <small class="text-primary">
-                Mohon isi evaluasi untuk pasca kegiatan berikut
-              </small>
-            </mdb-col>
-          </mdb-row>
+            <mdb-row col="12" class="row justify-content-center mb-3">
+              <mdb-col lg="12" xs="12" sm="12">
+                <small class="text-primary">
+                  Mohon isi evaluasi untuk pasca kegiatan berikut
+                </small>
+              </mdb-col>
+            </mdb-row>
 
-          <mdb-row
-            col="12"
-            class="row justify-content-center"
-            v-for="(item, index) in lists"
-            :key="item.id"
-          >
-            <mdb-col lg="12" class="test__content">
-              <h4>No. {{ item.urutan }}</h4>
-              <p>{{ item.aspek_dinilai }}</p>
-              <div class="test-answers">
-                <form method="POST" class="is-not-results">
-                  <fieldset>
-                    <div class="answers">
-                      <div class="answer">
-                        <textarea
-                          class="form-control"
-                          id="exampleFormControlTextarea1"
-                          rows="3"
-                          :readonly="is_already == 1"
-                          v-model="item.jawaban"
-                        ></textarea>
+            <mdb-row
+              col="12"
+              class="row justify-content-center"
+              v-for="(item, index) in lists"
+              :key="item.id"
+            >
+              <mdb-col lg="12" class="test__content">
+                <h4>No. {{ item.urutan }}</h4>
+                <p>{{ item.aspek_dinilai }}</p>
+                <div class="test-answers">
+                  <form method="POST" class="is-not-results">
+                    <fieldset>
+                      <div class="answers">
+                        <div class="answer">
+                          <textarea
+                            class="form-control"
+                            id="exampleFormControlTextarea1"
+                            rows="3"
+                            :readonly="is_already == 1"
+                            v-model="item.jawaban"
+                          ></textarea>
+                        </div>
                       </div>
-                    </div>
-                  </fieldset>
-                </form>
-              </div>
-            </mdb-col>
-          </mdb-row>
+                    </fieldset>
+                  </form>
+                </div>
+              </mdb-col>
+            </mdb-row>
 
-          <mdb-row
-            v-if="is_already == 0"
-            col="12"
-            class="row justify-content-center"
-          >
-            <mdb-col lg="12">
-              <div class="mb-2">
-                <a
-                  href=""
-                  class="btn btn-primary btn-md rounded btn-block"
-                  @click.prevent="SubmitTest"
-                >
-                  <div v-if="loading_answer">
-                    <span
-                      class="spinner-border spinner-border-sm"
-                      role="status"
-                      aria-hidden="true"
-                    ></span>
-                    loading_answer...
-                  </div>
-                  <div v-else>Submit <mdb-icon far icon="paper-plane" /></div>
-                </a>
-              </div>
-            </mdb-col>
-          </mdb-row>
+            <mdb-row
+              v-if="is_already == 0"
+              col="12"
+              class="row justify-content-center"
+            >
+              <mdb-col lg="12">
+                <div class="mb-2">
+                  <a
+                    href=""
+                    class="btn btn-primary btn-md rounded btn-block"
+                    @click.prevent="SubmitTest"
+                  >
+                    <div v-if="loading_answer">
+                      <span
+                        class="spinner-border spinner-border-sm"
+                        role="status"
+                        aria-hidden="true"
+                      ></span>
+                      loading_answer...
+                    </div>
+                    <div v-else>Submit <mdb-icon far icon="paper-plane" /></div>
+                  </a>
+                </div>
+              </mdb-col>
+            </mdb-row>
+          </div>
         </div>
       </div>
     </mdb-container>
@@ -134,11 +149,13 @@ export default {
       loading_answer: null,
       is_already: 0,
       is_already_post_test: 0,
+      is_can_pasca_kegiatan: 0,
       lists: [],
       profiles: [],
       timer: 0,
       value: 0,
       max: 100,
+      kegiatan: {},
     };
   },
 
@@ -168,9 +185,12 @@ export default {
       this.$axios
         .get(url)
         .then(({ data }) => {
+          console.log(data);
           this.lists = data.list_data;
           this.is_already = data.is_already;
           this.is_already_post_test = data.is_already_post_test;
+          this.is_can_pasca_kegiatan = data.is_can_pasca_kegiatan;
+          this.kegiatan = data.kegiatan;
         })
         .catch((err) => console.log(err))
         .finally(() => {

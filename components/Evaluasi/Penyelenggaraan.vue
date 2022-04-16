@@ -65,30 +65,71 @@
             <mdb-col lg="12" class="test__content">
               <h4>No. {{ item.urutan }}</h4>
               <p>{{ item.aspek_dinilai }}</p>
-              <div class="test-answers">
-                <form method="POST" class="is-not-results">
-                  <fieldset>
-                    <div class="answers">
-                      <div class="answer">
-                        <textarea
-                          class="form-control"
-                          id="exampleFormControlTextarea1"
-                          rows="3"
-                          :readonly="is_already == 1"
-                          v-model="item.jawaban"
-                        ></textarea>
-                      </div>
-                    </div>
-                  </fieldset>
+              <div class="">
+                <form method="POST" class="">
+                  <div class="d-flex">
+                    <fieldset
+                      v-for="(choice_item, index_choice) in choice_list"
+                      :key="choice_item"
+                      class="ml-3"
+                    >
+                      <input
+                        type="radio"
+                        :value="choice_item"
+                        v-model="item.jawaban"
+                        required
+                        @change="ChangeJawaban(item)"
+                        :disabled="is_already == 1"
+                      />
+                      <label class="answer__item">
+                        <b>{{ choice_item }}</b>
+                      </label>
+                    </fieldset>
+                  </div>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Jawaban Custom"
+                    v-model="item.jawaban_custom"
+                    autofocus
+                    :disabled="item.is_disabled || is_already == 1"
+                  />
                 </form>
               </div>
             </mdb-col>
           </mdb-row>
 
+          <h4>Hal-hal yang sudah baik:</h4>
+          <textarea
+            class="form-control"
+            id="exampleFormControlTextarea1"
+            rows="3"
+            :readonly="is_already == 1"
+            v-model="hal_sudah_baik"
+          ></textarea>
+
+          <h4 class="mt-4">Hal-hal yang memerlukan perbaikan:</h4>
+          <textarea
+            class="form-control"
+            id="exampleFormControlTextarea1"
+            rows="3"
+            :readonly="is_already == 1"
+            v-model="hal_perlu_perbaikan"
+          ></textarea>
+
+          <h4 class="mt-4">Saran</h4>
+          <textarea
+            class="form-control"
+            id="exampleFormControlTextarea1"
+            rows="3"
+            :readonly="is_already == 1"
+            v-model="saran"
+          ></textarea>
+
           <mdb-row
             v-if="is_already == 0"
             col="12"
-            class="row justify-content-center"
+            class="row justify-content-center mt-4"
           >
             <mdb-col lg="12">
               <div class="mb-2">
@@ -139,6 +180,10 @@ export default {
       timer: 0,
       value: 0,
       max: 100,
+      choice_list: ["50", "60", "70", "80", "90", "100", "custom"],
+      saran: null,
+      hal_sudah_baik: null,
+      hal_perlu_perbaikan: null,
     };
   },
 
@@ -161,6 +206,15 @@ export default {
       }
     },
 
+    ChangeJawaban(item) {
+      if (item.jawaban == "custom") {
+        item.is_disabled = false;
+      } else {
+        item.is_disabled = true;
+        item.jawaban_custom = "";
+      }
+    },
+
     Evaluasi() {
       this.loading_soal = true;
       const url = `${this.api_url}/web/kegiatan/evaluasi-penyelenggaraan/list?kegiatan_id=${this.kegiatan_id}`;
@@ -168,9 +222,35 @@ export default {
       this.$axios
         .get(url)
         .then(({ data }) => {
+          console.log(data.evaluasi_saran);
+          if (data.evaluasi_saran) {
+            this.saran = data.evaluasi_saran.saran;
+            this.hal_sudah_baik = data.evaluasi_saran.hal_sudah_baik;
+            this.hal_perlu_perbaikan = data.evaluasi_saran.hal_perlu_perbaikan;
+          } else {
+            this.saran = "";
+            this.hal_sudah_baik = "";
+            this.hal_perlu_perbaikan = "";
+          }
+
           this.lists = data.list_data;
           this.is_already = data.is_already;
           this.is_already_post_test = data.is_already_post_test;
+
+          this.lists.forEach((entry) => {
+            entry.is_disabled = true;
+            console.log(entry.jawaban);
+            if (["50", "60", "70", "80", "90", "100"].includes(entry.jawaban)) {
+              entry.jawaban = entry.jawaban;
+            } else {
+              if (entry.jawaban != null && entry.jawaban) {
+                entry.jawaban_custom = entry.jawaban;
+                entry.jawaban = "custom";
+              } else {
+                entry.jawaban_custom = "";
+              }
+            }
+          });
         })
         .catch((err) => console.log(err))
         .finally(() => {
@@ -183,8 +263,14 @@ export default {
       //check if already filled all question
       var isFilled = 1;
       this.lists.forEach((entry) => {
-        if (entry.jawaban == null || !entry.jawaban.trim()) {
-          isFilled = 0;
+        if (entry.jawaban == "custom") {
+          if (entry.jawaban_custom == null || !entry.jawaban_custom.trim()) {
+            isFilled = 0;
+          }
+        } else {
+          if (entry.jawaban == null) {
+            isFilled = 0;
+          }
         }
       });
 
@@ -218,15 +304,26 @@ export default {
 
       var paramJawaban = [];
       this.lists.forEach((entry) => {
-        paramJawaban.push({
-          kegiatan_id: this.kegiatan_id,
-          pelatihan_evaluasi_penyelenggaraan_id: entry.id,
-          jawaban: entry.jawaban,
-        });
+        if (entry.jawaban == "custom") {
+          paramJawaban.push({
+            kegiatan_id: this.kegiatan_id,
+            pelatihan_evaluasi_penyelenggaraan_id: entry.id,
+            jawaban: entry.jawaban_custom,
+          });
+        } else {
+          paramJawaban.push({
+            kegiatan_id: this.kegiatan_id,
+            pelatihan_evaluasi_penyelenggaraan_id: entry.id,
+            jawaban: entry.jawaban,
+          });
+        }
       });
 
       var params = {
         kegiatan_id: this.kegiatan_id,
+        saran: this.saran,
+        hal_sudah_baik: this.hal_sudah_baik,
+        hal_perlu_perbaikan: this.hal_perlu_perbaikan,
         jawabans: paramJawaban,
       };
       this.$axios

@@ -5,7 +5,7 @@
       <b-skeleton animation="throb" width="55%"></b-skeleton>
       <b-skeleton animation="throb" width="70%"></b-skeleton>
     </div>
-    <nav v-else id="docs-nav" class="docs-nav navbar shadow-none mt-2">
+    <nav v-else id="docs-nav" class="docs-nav navbar shadow-none">
       <ul class="section-items list-unstyled nav flex-column pb-3">
         <li class="nav-item__sidebar section-title">
           <a class="nav-link__sidebar scrollto active" href="#section-1"
@@ -35,7 +35,14 @@
         >
           <b-button
             v-b-toggle="`collapse-${item.id}`"
-            class="active btn__pelatihan shadow-none nav-item__sidebar nav-link__sidebar section-title"
+            class="
+              active
+              btn__pelatihan
+              shadow-none
+              nav-item__sidebar
+              nav-link__sidebar
+              section-title
+            "
             @click="ToggleFile(index + 1)"
           >
             <mdb-row col="12" class="d-flex justify-content-between">
@@ -105,8 +112,15 @@
         <div v-if="!loading" class="collapse__docs">
           <b-button
             v-b-toggle="`collapse-evaluasi`"
-            class="active btn__pelatihan shadow-none nav-item__sidebar nav-link__sidebar section-title"
-            @click="ToggleFile(pelatihans.length + 1)"
+            class="
+              active
+              btn__pelatihan
+              shadow-none
+              nav-item__sidebar
+              nav-link__sidebar
+              section-title
+            "
+            @click="ToggleFile(3)"
           >
             <mdb-row col="12" class="d-flex justify-content-between">
               <mdb-col col="9" md="9" sm="9" xs="9"> Evaluasi </mdb-col>
@@ -114,7 +128,7 @@
               <mdb-col col="2" md="2" sm="2" xs="2">
                 <mdb-icon
                   :icon="`${
-                    show_collapse && pelatihans.length+1 === urutan
+                    show_collapse && 3 === urutan
                       ? 'minus-circle'
                       : 'plus-circle'
                   }`"
@@ -186,7 +200,7 @@ export default {
         },
         {
           id: 10,
-          nama: "Evaluasi Rencana Tindak Lanjut",
+          nama: "Rencana Tindak Lanjut",
         },
       ],
     };
@@ -228,7 +242,6 @@ export default {
     },
 
     ToggleFile(urutan) {
-    	console.log(urutan)
       if (urutan) {
         this.urutan = urutan;
         this.show_collapse = !this.show_collapse;

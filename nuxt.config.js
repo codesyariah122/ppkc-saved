@@ -156,7 +156,7 @@ export default {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
     // Process Env Basse url
     proxy: false,
-    baseURL: process.env.NUXT_ENV_API_URL,
+    baseURL: process.env.NUXT_ENV_API_URL
   },
 
   // workbox

@@ -48,7 +48,7 @@
               <b>{{ option.nama }}</b> (Kelas Online :
               <b>{{ option.judul }}</b> -
               {{
-                $moment(option.waktu_webinar_awal).format("d MMMM YYYY HH:mm")
+                $moment(option.waktu_webinar_awal).format("DD MMMM YYYY HH:mm")
               }})
             </label>
           </div>
@@ -90,7 +90,9 @@
               <mdb-row col="12" class="row justify-content-center mb-3">
                 <mdb-col lg="12" xs="12" sm="12">
                   <small class="text-primary">
-                    Mohon isi evaluasi untuk fasilitator berikut
+                    Mohon isi evaluasi untuk fasilitator berikut. Anda dapat
+                    memberikan angka satuan pada jawaban custom (misal: 67, 79,
+                    dll).
                   </small>
                 </mdb-col>
               </mdb-row>
@@ -104,30 +106,53 @@
                 <mdb-col lg="12" class="test__content">
                   <h4>No. {{ item.urutan }}</h4>
                   <p>{{ item.aspek_dinilai }}</p>
-                  <div class="test-answers">
-                    <form method="POST" class="is-not-results">
-                      <fieldset>
-                        <div class="answers">
-                          <div class="answer">
-                            <textarea
-                              class="form-control"
-                              id="exampleFormControlTextarea1"
-                              rows="3"
-                              :readonly="is_already == 1"
-                              v-model="item.jawaban"
-                            ></textarea>
-                          </div>
-                        </div>
-                      </fieldset>
+                  <div class="">
+                    <form method="POST" class="">
+                      <div class="d-flex">
+                        <fieldset
+                          v-for="(choice_item, index_choice) in choice_list"
+                          :key="choice_item"
+                          class="ml-3"
+                        >
+                          <input
+                            type="radio"
+                            :value="choice_item"
+                            v-model="item.jawaban"
+                            required
+                            @change="ChangeJawaban(item)"
+                            :disabled="is_already == 1"
+                          />
+                          <label class="answer__item">
+                            <b>{{ choice_item }}</b>
+                          </label>
+                        </fieldset>
+                      </div>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Jawaban Custom"
+                        v-model="item.jawaban_custom"
+                        autofocus
+                        :disabled="item.is_disabled || is_already == 1"
+                      />
                     </form>
                   </div>
                 </mdb-col>
               </mdb-row>
 
+              <h4>Saran</h4>
+              <textarea
+                class="form-control"
+                id="exampleFormControlTextarea1"
+                rows="3"
+                :readonly="is_already == 1"
+                v-model="saran"
+              ></textarea>
+
               <mdb-row
                 v-if="is_already == 0"
                 col="12"
-                class="row justify-content-center"
+                class="row justify-content-center mt-4"
               >
                 <mdb-col lg="12">
                   <div class="mb-2">
@@ -185,6 +210,8 @@ export default {
       timer: 0,
       value: 0,
       max: 100,
+      choice_list: ["50", "60", "70", "80", "90", "100", "custom"],
+      saran: null,
     };
   },
 
@@ -212,6 +239,15 @@ export default {
       this.Evaluasi();
     },
 
+    ChangeJawaban(item) {
+      if (item.jawaban == "custom") {
+        item.is_disabled = false;
+      } else {
+        item.is_disabled = true;
+        item.jawaban_custom = "";
+      }
+    },
+
     listFasilitator() {
       this.loading_fasilitator = true;
       const url = `${this.api_url}/web/kegiatan/evaluasi-narasumber/list?kegiatan_id=${this.kegiatan_id}`;
@@ -236,8 +272,28 @@ export default {
       this.$axios
         .get(url)
         .then(({ data }) => {
+          if (data.evaluasi_saran) {
+            this.saran = data.evaluasi_saran.saran;
+          } else {
+            this.saran = "";
+          }
           this.lists = data.list_data;
           this.is_already = data.is_already;
+
+          this.lists.forEach((entry) => {
+            entry.is_disabled = true;
+            console.log(entry.jawaban);
+            if (["50", "60", "70", "80", "90", "100"].includes(entry.jawaban)) {
+              entry.jawaban = entry.jawaban;
+            } else {
+              if (entry.jawaban != null && entry.jawaban) {
+                entry.jawaban_custom = entry.jawaban;
+                entry.jawaban = "custom";
+              } else {
+                entry.jawaban_custom = "";
+              }
+            }
+          });
         })
         .catch((err) => console.log(err))
         .finally(() => {
@@ -252,8 +308,14 @@ export default {
       //check if already filled all question
       var isFilled = 1;
       this.lists.forEach((entry) => {
-        if (entry.jawaban == null || !entry.jawaban.trim()) {
-          isFilled = 0;
+        if (entry.jawaban == "custom") {
+          if (entry.jawaban_custom == null || !entry.jawaban_custom.trim()) {
+            isFilled = 0;
+          }
+        } else {
+          if (entry.jawaban == null) {
+            isFilled = 0;
+          }
         }
       });
 
@@ -287,17 +349,27 @@ export default {
 
       var paramJawaban = [];
       this.lists.forEach((entry) => {
-        paramJawaban.push({
-          kegiatan_id: this.kegiatan_id,
-          pelatihan_evaluasi_aspek_fasilitator_id: entry.id,
-          narasumber_id: this.selectedFasilitator,
-          jawaban: entry.jawaban,
-        });
+        if (entry.jawaban == "custom") {
+          paramJawaban.push({
+            kegiatan_id: this.kegiatan_id,
+            pelatihan_evaluasi_aspek_fasilitator_id: entry.id,
+            narasumber_id: this.selectedFasilitator,
+            jawaban: entry.jawaban_custom,
+          });
+        } else {
+          paramJawaban.push({
+            kegiatan_id: this.kegiatan_id,
+            pelatihan_evaluasi_aspek_fasilitator_id: entry.id,
+            narasumber_id: this.selectedFasilitator,
+            jawaban: entry.jawaban,
+          });
+        }
       });
 
       var params = {
         kegiatan_id: this.kegiatan_id,
         narasumber_id: this.selectedFasilitator,
+        saran: this.saran,
         jawabans: paramJawaban,
       };
       this.$axios

@@ -43,122 +43,171 @@
         </mdb-col>
       </mdb-row>
 
-      <div v-else id="table-rtl" class="table-responsive">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th
-                v-for="(item, index) in data.fields"
-                :key="index + 1"
-                scope="col"
-              >
-                {{ item.title }}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-if="loading">
-              <td colspan="10">
-                <div class="d-flex justify-content-center">
-                  <div class="spinner-border text-primary" role="status">
-                    <span class="sr-only">Loading...</span>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr v-else v-for="(item, index) in data.rows" :key="item.id">
-              <td>{{ index + 1 }}</td>
-              <td>{{ item.title }}</td>
-              <td>{{ $moment(item.tanggal).format("LL") }}</td>
-              <td>
-                {{ $moment(item.jam_awal, "HH:mm:ss").format("HH:mm:ss") }}
-              </td>
-              <td>
-                {{ $moment(item.jam_akhir, "HH:mm:ss").format("HH:mm:ss") }}
-              </td>
-              <td v-if="item.sasaran">
-                {{ item.sasaran }}
-              </td>
-              <td v-else>-</td>
-              <td v-if="item.keterangan">
-                {{ item.keterangan }}
-              </td>
-              <td v-else>-</td>
-              <td v-if="item.sasaran && item.keterangan">
-                <mdb-icon icon="check-double" size="lg" class="text-success" />
-              </td>
-              <td v-else class="add__data">
-                <b-button
-                  v-b-modal="`modal-${item.id}`"
-                  size="sm"
-                  :style="style"
-                  ref="btnShow"
-                  >Add</b-button
+      <div v-else>
+        <div class="row">
+          <div class="col-12">
+            <b-button
+              v-b-modal="`modal-rtl`"
+              size="sm"
+              style="width: 150px; margin-left: 20px"
+              ref="btnShow"
+              class="btn float-right"
+              >Add</b-button
+            >
+          </div>
+        </div>
+        <div id="table-rtl" class="table-responsive">
+          <table class="table table-hover" style="overflow-x: hidden">
+            <thead>
+              <tr>
+                <th
+                  v-for="(item, index) in data.fields"
+                  :key="index + 1"
+                  scope="col"
                 >
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
-        <b-modal
-          v-for="(item, index) in data.rows"
-          :key="item.id"
-          :id="`modal-${item.id}`"
-          hide-footer
-        >
-          <b-row>
-            <b-col cols="12">
-              <h4 class="card-title">
-                {{ item.title }}
-              </h4>
-              <form @submit.stop.prevent="SendingData(item.id)">
-                <div class="form-group">
-                  <label for="sasaran"> Sasaran </label>
-                  <textarea
-                    id="sasaran"
-                    v-model="data.form.sasaran"
-                    class="form-control"
-                  >
-                  </textarea>
-                </div>
-                <div class="form-group">
-                  <label for="sasaran"> Keterangan </label>
-                  <textarea
-                    id="keterangan"
-                    v-model="data.form.keterangan"
-                    class="form-control"
-                  >
-                  </textarea>
-                </div>
-                <div
-                  v-if="item.sasaran == null && item.keterangan == null"
-                  class="form-group m-3"
-                >
-                  <button
-                    type="submit"
-                    class="btn btn-block rounded-pill btn-primary"
-                  >
-                    <div v-if="loading_input">
-                      <span
-                        class="spinner-border spinner-border-sm text-primary"
-                        role="status"
-                        aria-hidden="true"
-                      ></span>
-                      Loading...
+                  {{ item.title }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-if="loading">
+                <td colspan="5">
+                  <div class="d-flex justify-content-center">
+                    <div class="spinner-border text-primary" role="status">
+                      <span class="sr-only">Loading...</span>
                     </div>
-                    <div v-else>Tambah Data</div>
-                  </button>
-                </div>
-              </form>
-            </b-col>
-          </b-row>
-        </b-modal>
+                  </div>
+                </td>
+              </tr>
+              <tr v-else v-for="(item, index) in data.rows" :key="item.id">
+                <td>{{ index + 1 }}</td>
+                <td>{{ item.jenis_kegiatan }}</td>
+                <td>{{ $moment(item.tanggal_kegiatan).format("LL") }}</td>
+                <td>{{ item.sasaran }}</td>
+                <td>{{ item.keterangan }}</td>
+                <td>
+                  <b-button
+                    @click="openModalEdit(item)"
+                    size="sm"
+                    ref="btnShow"
+                    class="btn"
+                    >Edit</b-button
+                  >
+                  <b-button
+                    @click="openModalDelete(item)"
+                    size="sm"
+                    ref="btnShow"
+                    class="btn"
+                    >Hapus</b-button
+                  >
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <b-modal
+            :id="`modal-rtl`"
+            ref="modalRtl"
+            hide-footer
+            v-model="dialogRtl"
+          >
+            <b-row>
+              <b-col cols="12">
+                <h4 class="card-title">Evaluasi RTL</h4>
+                <form>
+                  <div class="form-group">
+                    <label for="sasaran"> Jenis Kegiatan </label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="input_no_anggota"
+                      autofocus
+                      v-model="data.form.jenis_kegiatan"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="sasaran"> Tanggal Kegiatan </label>
+                    <input
+                      type="date"
+                      class="form-control"
+                      id="input_nama_ktp"
+                      v-model="data.form.tanggal_kegiatan"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="sasaran"> Sasaran </label>
+                    <textarea
+                      id="sasaran"
+                      class="form-control"
+                      v-model="data.form.sasaran"
+                    >
+                    </textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="sasaran"> Keterangan </label>
+                    <textarea
+                      id="keterangan"
+                      class="form-control"
+                      v-model="data.form.keterangan"
+                    >
+                    </textarea>
+                  </div>
+                  <div class="form-group m-3">
+                    <button
+                      type="button"
+                      class="btn btn-block rounded-pill btn-primary"
+                    >
+                      <div v-if="loading_input">
+                        <span
+                          class="spinner-border spinner-border-sm text-primary"
+                          role="status"
+                          aria-hidden="true"
+                        ></span>
+                        Loading...
+                      </div>
+                      <div v-else @click="SendingData">Simpan</div>
+                    </button>
+                  </div>
+                </form>
+              </b-col>
+            </b-row>
+          </b-modal>
+
+          <b-modal ref="modalDeleteRtl" hide-footer v-model="dialogDelete">
+            <b-row>
+              <b-col cols="12">
+                <h4 class="card-title">HapusEvaluasi RTL</h4>
+                <form>
+                  <p>Apakah anda akan menghapus evaluasi ini?</p>
+                  <div class="form-group m-3">
+                    <button
+                      type="button"
+                      class="btn btn-block rounded-pill btn-primary"
+                    >
+                      <div v-if="loading_input">
+                        <span
+                          class="spinner-border spinner-border-sm text-primary"
+                          role="status"
+                          aria-hidden="true"
+                        ></span>
+                        Loading...
+                      </div>
+                      <div v-else @click="HapusData">Hapus</div>
+                    </button>
+                  </div>
+                </form>
+              </b-col>
+            </b-row>
+          </b-modal>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import moment from "moment";
+
 export default {
   props: [
     "api_url",
@@ -170,22 +219,29 @@ export default {
   ],
   data() {
     return {
+      dialogRtl: false,
+      dialogDelete: false,
       data: {
         fields: [
           { title: "#" },
-          { title: "Kegiatan" },
-          { title: "Waktu Pelaksanaan" },
-          { title: "Jam Awal" },
-          { title: "Jam Akhir" },
+          { title: "Jenis Kegiatan" },
+          { title: "Tanggal Kegiatan" },
           { title: "Sasaran" },
           { title: "Keterangan" },
-          { title: "Options" },
+          { title: "Action" },
         ],
         rows: [],
         send: {
           title: "",
         },
-        form: {},
+        form: {
+          id: null,
+          jenis_kegiatan: "",
+          tanggal_kegiatan: "",
+          sasaran: "",
+          keterangan: "",
+          kegiatan_id: "",
+        },
         jawabans: [],
         success: "",
       },
@@ -241,40 +297,85 @@ export default {
       console.log(this.data.jawabans);
     },
 
-    SendingData(pelatihan_id) {
-      this.data.jawabans.push({
-        kegiatan_id: this.kegiatan_id,
-        pelatihan_id: pelatihan_id,
-        sasaran: this.data.form.sasaran,
-        keterangan: this.data.form.keterangan,
-      });
-
+    SendingData() {
       this.loading_input = true;
 
-      let form_data = {
-        kegiatan_id: this.kegiatan_id,
-        jawabans: this.data.jawabans,
-      };
-      console.log(this.data.jawabans);
+      this.data.form.kegiatan_id = this.kegiatan_id;
 
-      const url = `${this.api_url}/web/kegiatan/evaluasi-rtl/jawaban`;
-      this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`;
-      this.$axios
-        .post(url, form_data)
-        .then(({ data }) => {
-          console.log(data);
-          if (data.messagge) {
+      if (this.data.form.id) {
+        const url = `${this.api_url}/web/kegiatan/evaluasi-rtl-new/jawaban/${this.data.form.id}`;
+        this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`;
+        this.$axios
+          .put(url, this.data.form)
+          .then(({ data }) => {
+            console.log(data);
             this.data.success = data.message;
             this.$swal(data.message, "", "success");
-          }
+
+            this.ListsData();
+            this.data.form.jenis_kegiatan = "";
+            this.data.form.tanggal_kegiatan = "";
+            this.data.form.sasaran = "";
+            this.data.form.keterangan = "";
+            this.data.form.id = null;
+
+            this.dialogRtl = false;
+          })
+          .catch((err) => console.log(err.response))
+          .finally(() => {
+            setTimeout(() => {
+              this.loading_input = false;
+            }, 2500);
+          });
+      } else {
+        const url = `${this.api_url}/web/kegiatan/evaluasi-rtl-new/jawaban`;
+        this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`;
+        this.$axios
+          .post(url, this.data.form)
+          .then(({ data }) => {
+            console.log(data);
+            this.data.success = data.message;
+            this.$swal(data.message, "", "success");
+
+            this.ListsData();
+            this.data.form.jenis_kegiatan = "";
+            this.data.form.tanggal_kegiatan = "";
+            this.data.form.sasaran = "";
+            this.data.form.keterangan = "";
+            this.data.form.id = null;
+
+            this.dialogRtl = false;
+          })
+          .catch((err) => console.log(err.response))
+          .finally(() => {
+            setTimeout(() => {
+              this.loading_input = false;
+            }, 2500);
+          });
+      }
+    },
+
+    HapusData() {
+      this.loading_input = true;
+
+      const url = `${this.api_url}/web/kegiatan/evaluasi-rtl-new/jawaban/${this.data.form.id}`;
+      this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`;
+      this.$axios
+        .delete(url)
+        .then(({ data }) => {
+          console.log(data);
+          this.data.success = data.message;
+          this.$swal(data.message, "", "success");
+
+          this.data.form.id = null;
+          this.ListsData();
+
+          this.dialogDelete = false;
         })
         .catch((err) => console.log(err.response))
         .finally(() => {
           setTimeout(() => {
             this.loading_input = false;
-            this.$root.$emit("bv::hide::modal", "addmodal", "#btnShow");
-            this.ListsData();
-            this.data.jawabans = [];
           }, 2500);
         });
     },
@@ -284,6 +385,24 @@ export default {
       if (already === 1) {
         tableRTL.scrollIntoView();
       }
+    },
+
+    openModalEdit(item) {
+      this.data.form.id = item.id;
+      this.data.form.jenis_kegiatan = item.jenis_kegiatan;
+      this.data.form.tanggal_kegiatan = moment(item.tanggal_kegiatan).format(
+        "YYYY-MM-DD"
+      );
+      this.data.form.sasaran = item.sasaran;
+      this.data.form.keterangan = item.keterangan;
+
+      this.dialogRtl = true;
+    },
+
+    openModalDelete(item) {
+      this.data.form.id = item.id;
+
+      this.dialogDelete = true;
     },
   },
 };
