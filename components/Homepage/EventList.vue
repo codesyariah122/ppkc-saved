@@ -15,7 +15,7 @@
   <!-- End header webinar list -->
 
     <!-- Event webinar list content -->
-    <CardEventList :listsToShow="listsToShow" :lists="lists" />
+    <CardEventList :listToShow="listToShow" :lists="lists" />
     <!-- <MoleculesHomepageMoleculesListEventSample v-else :listsToShow="listsToShow"/> -->
     <!-- End Event Webinar List content -->
 
@@ -29,11 +29,6 @@ export default {
   props: ["lists", "listToShow"],
   components: {
     CardEventList
-  },
-  data() {
-    return {
-      listsToShow: 3
-    }
   }
 }
 </script>

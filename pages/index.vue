@@ -48,7 +48,8 @@ export default {
       items: [],
       events:[],
       testimonis: [],
-      news: []
+      news: [],
+      listToShow: 3
     }
   },
 

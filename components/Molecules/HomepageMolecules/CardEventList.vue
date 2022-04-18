@@ -21,7 +21,7 @@
 
         <mdb-row v-else class="row justify-content-center card__content">
           <mdb-col
-          v-for="(item, index) in lists"
+          v-for="item in lists.slice(0, 3)"
           col="12"
           md="4"
           class="mb-3"
@@ -34,10 +34,13 @@
             ></mdb-card-image>
 
             <mdb-card-body>
-              <mdb-badge
+              
+              <mdb-badge v-if="item.kategori_value"
               class="mb-2 badge__category shadow-none"
               >{{ item.kategori_value }}</mdb-badge
               >
+
+              <mdb-badge v-else class="mb-2 badge__category shadow-none">No Category</mdb-badge>
 
               <mdb-card-title
               class="truncate"
