@@ -46,7 +46,6 @@
 					.then(({data}) => {
 						this.profiles = data.user
 						this.slug = data.user.nama
-						console.log(this.slug)
 					})
 					.catch(err => console.log(err.response ? err.response : ''))
 				}

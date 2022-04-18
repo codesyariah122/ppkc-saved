@@ -17,12 +17,15 @@ export default {
       }
     },
     body: true,
+  // Global page headers: https://go.nuxtjs.dev/config-head
+  head: {
+    bodyAttrs: {
+      'class': 'docs-page'  
+    },
     htmlAttrs: {
       lang: 'en',
       amp: true
     },
-  // Global page headers: https://go.nuxtjs.dev/config-head
-  head: {
     title: 'PPKC - Pusat Pengembangan Kesehatan Carolus',
     meta: [
     { charset: 'utf-8' },
@@ -33,44 +36,51 @@ export default {
     { httpEquiv: "X-Frame-Options",  content:"deny"}
     ],
     link: [
-    {
-      hid: "canonical",
-      rel: "canonical",
-      href: "https://ppkc-online.com/",
-    },
-    { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-    {
-      rel: 'stylesheet',
-      href: 'https://fonts.googleapis.com/css?family=Open+Sans'
-    },
-    { rel: 'stylesheet', type: 'text/css', href: '/assets/glightbox/glightbox.min.css'},
-    { rel: 'stylesheet', type: 'text/css', href: '/assets/venobox/dev/venobox.min.css'}
+      {
+        hid: "canonical",
+        rel: "canonical",
+        href: "https://ppkc-online.com/",
+      },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css?family=Open+Sans'
+      },
+      { rel: 'stylesheet', type: 'text/css', href: '/assets/glightbox/glightbox.min.css'},
+      { rel: 'stylesheet', type: 'text/css', href: '/assets/venobox/dev/venobox.min.css'},
+      { rel: 'stylesheet', type: 'text/css', href: '/assets/css/tiny-slider.css'},
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap'},
     ],
     script: [
-    {
-      src: 'https://polyfill.io/v3/polyfill.min.js?features=es2015%2CIntersectionObserver',
-      body: true
-    },
-    {
-      src: 'https://cdn.ampproject.org/v0/amp-ad-0.1.js',
-      async: 'true',
-      'custom-element': 'amp-ad'
-    },
-    {
-      src: '/assets/glightbox/glightbox.min.js',
-      type: 'text/javascript'
-    },
-    {
-      src: '/assets/venobox/dev/venobox.min.js',
-      type: 'text/javascript'
-    },
+      {
+        src: 'https://polyfill.io/v3/polyfill.min.js?features=es2015%2CIntersectionObserver',
+        body: true
+      },
+      {
+        src: 'https://cdn.ampproject.org/v0/amp-ad-0.1.js',
+        async: 'true',
+        'custom-element': 'amp-ad'
+      },
+
+      {
+        src: '/assets/glightbox/glightbox.min.js',
+        type: 'text/javascript'
+      },
+      
+      {
+        src: '/assets/venobox/dev/venobox.min.js',
+        type: 'text/javascript'
+      },
+      {
+        src: '/assets/js/tiny-slider.js',
+        type: 'text/javascript'
+      }
     ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     // 'bootstrap-css-only/css/bootstrap.min.css',
-    '~assets/css/video.css',
     'mdbvue/lib/mdbvue.css',
     'mdbvue/lib/css/mdb.min.css'
     ],
@@ -92,7 +102,8 @@ export default {
   '@nuxtjs/device',
   '@nuxtjs/style-resources',
   '@nuxtjs/svg',
-  '@nuxtjs/moment'
+  '@nuxtjs/moment',
+  '@nuxtjs/color-mode'
   ],
 
   styleResources: {
@@ -106,8 +117,8 @@ export default {
     '~assets/scss/berita.scss',
     '~assets/scss/auth.scss',
     '~assets/scss/profile.scss',
-    '~assets/scss/event-detail-login.scss',
-    '~assets/scss/event-test.scss'
+    '~assets/scss/event-test.scss',
+    '~assets/scss/docs-event.scss'
     ]
   },
 
@@ -130,7 +141,8 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
-    'mdbvue/nuxt'
+    'mdbvue/nuxt',
+    'nuxt-leaflet'
     ],
     mdbvue: {
     icons: true, // FA5
@@ -144,7 +156,7 @@ export default {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
     // Process Env Basse url
     proxy: false,
-    baseURL: process.env.NUXT_ENV_API_URL,
+    baseURL: process.env.NUXT_ENV_API_URL
   },
 
   // workbox
@@ -157,6 +169,12 @@ export default {
     // offlinePage: null,
     // offlineAssets: [],
     runtimeCaching: [
+    {
+      urlPattern: '/assets/scss/.*',
+      handler: 'cacheFirst',
+      method: 'GET',
+      strategyOptions: { cacheableResponse: { statuses: [0, 200] } }
+    },
     {
       urlPattern: '/assets/css/.*',
       handler: 'cacheFirst',
@@ -175,12 +193,12 @@ export default {
       strategyOptions: { cacheableResponse: { statuses: [0, 200] } }
     },
     {
-      urlPattern: '/assets/js/.*',
+      urlPattern: '/assets/images/.*',
       method: 'GET',
       strategyOptions: { cacheableResponse: { statuses: [0, 200] } }
     },
     {
-      urlPattern: '/assets/scss/.*',
+      urlPattern: '/assets/js/.*',
       method: 'GET',
       strategyOptions: { cacheableResponse: { statuses: [0, 200] } }
     }

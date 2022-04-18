@@ -1,6 +1,10 @@
 <template>
   <div>
-    <div ref="testimoni_square" class="card__list testimoni__list" :style="berita__list_style">
+    <div
+      ref="testimoni_square"
+      class="card__list testimoni__list"
+      :style="berita__list_style"
+    >
       <mdb-container>
         <!-- header -->
         <mdb-row class="row justify-content-center header__ppkc-list-page">
@@ -20,28 +24,26 @@
         <!-- show card berita -->
         <mdb-row col="12" class="row justify-content-center mb-5 mt-5">
           <mdb-col
-          v-for="item in lists"
-          md="4" xs="12" sm="12"
-          :key="item.id"
-          class="col__testimoni"
+            v-for="item in lists"
+            lg="8"
+            xs="12"
+            sm="12"
+            :key="item.id"
+            class="col__testimoni-card"
           >
-            <mdb-card
-            class="card__testimoni-content"
-            >
-            <mdb-container class="mt-4 mb-5">
-              <blockquote class="post__quote">
-                <mdb-icon icon="quote-left" /><br />
-                <span class="quote__txt">
-                  {{ item.testimoni }}
-                </span>
-                <h3 class="profile__name">
-                  {{ item.konsumen }}
-                </h3>
-              </blockquote>
-            </mdb-container>
-          </mdb-card>
-        </mdb-col>
-      </mdb-row>
+            <mdb-card class="card__testimoni-content mb-3">
+              <mdb-container class="mt-2">
+                <blockquote class="post__quote">
+                  <mdb-icon icon="quote-left" size="lg" /><br />
+                  <span class="quote__txt">
+                    {{ item.testimoni }}
+                  </span>
+                  <h3 class="profile__name">- {{ item.konsumen }}</h3>
+                </blockquote>
+              </mdb-container>
+            </mdb-card>
+          </mdb-col>
+        </mdb-row>
 
         <mdb-row v-if="loading" class="row justify-content-center">
           <mdb-col lg="12" xs="12" sm="12">
@@ -96,7 +98,12 @@ export default {
 
     getNextTestimoni() {
       window.onscroll = () => {
-        if (!this.loading && !this.end && !this.error && this.$route.path == '/ppkc/testimoni') {
+        if (
+          !this.loading &&
+          !this.end &&
+          !this.error &&
+          this.$route.path == "/ppkc/testimoni"
+        ) {
           if (
             this.$refs.testimoni_square.getBoundingClientRect().bottom <= 450
           ) {
