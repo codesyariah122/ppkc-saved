@@ -42,8 +42,8 @@
         <!-- <mdb-icon far icon="user-circle" size="lg"/>  -->
        <!--  <b-img v-if="profiles.photo !==
         'https://api.ppkc-online.com/image-profiles/null'" :src="profiles.photo" rounded="circle" alt="Circle image" width="30"></b-img> -->
-        <b-avatar v-if="profiles.photo !== 'https://api.ppkc-online.com/image-profiles/null'" variant="info" :src="profiles.photo"></b-avatar>
-        <b-avatar v-else variant="primary" :text="slug.charAt(0)"></b-avatar>
+        <b-avatar v-if="profiles.photo !== 'https://api.ppkc-online.com/image-profiles/null'" variant="none" :src="profiles.photo"></b-avatar>
+        <b-avatar v-else variant="none" :text="slug.charAt(0)"></b-avatar>
       <!--   <b-img v-else :src="`${require('~/assets/images/profile/profile.svg')}`" rounded="circle" alt="Circle image" width="30" height="30"></b-img> -->
         {{profiles.nama}}
         </mdb-dropdown-toggle

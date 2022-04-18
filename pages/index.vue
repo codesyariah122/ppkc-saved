@@ -18,12 +18,12 @@
     <!-- End inside container -->
 
     <!-- out container -->
+    <!-- Testimoni -->
+    <HomepageTestimoni :lists="lists.list_testimoni" :listToShow="listToShow"/>
     <!-- parallax -->
     <HomepageParallaxHome />
     <!-- berita -->
     <HomepageBerita :lists="lists.list_berita" />
-    <!-- Testimoni -->
-    <HomepageTestimoni :lists="lists.list_testimoni" />
     <!-- visi misi content -->
     <HomepageVisiMisi />
     <!-- End out container -->
@@ -49,7 +49,7 @@ export default {
       events:[],
       testimonis: [],
       news: [],
-      listToShow: 3
+      listToShow: 2
     }
   },
 

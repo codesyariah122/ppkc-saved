@@ -32,7 +32,7 @@
                   profiles.photo !==
                   'https://api.ppkc-online.com/image-profiles/null'
                 ">
-                <b-avatar variant="info" :src="profiles.photo" :size="size"></b-avatar>
+                <b-avatar variant="none" :src="profiles.photo" :size="size"></b-avatar>
                   <!-- <img
                   :src="profiles.photo"
                   class="img-fluid image rounded-circle"

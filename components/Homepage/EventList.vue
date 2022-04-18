@@ -15,7 +15,7 @@
   <!-- End header webinar list -->
 
     <!-- Event webinar list content -->
-    <CardEventList :listToShow="listToShow" :lists="lists" />
+    <CardEventList :listToShow="listToShow" :lists="lists" :loading="loading"/>
     <!-- <MoleculesHomepageMoleculesListEventSample v-else :listsToShow="listsToShow"/> -->
     <!-- End Event Webinar List content -->
 
@@ -26,7 +26,7 @@
 import CardEventList from "@/components/Molecules/HomepageMolecules/CardEventList";
 
 export default {
-  props: ["lists", "listToShow"],
+  props: ["lists", "listToShow", "loading"],
   components: {
     CardEventList
   }

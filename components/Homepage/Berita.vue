@@ -1,42 +1,33 @@
 <template>
 	<div class="berita__list">
-		<mdb-container>
-			<mdb-row class="justify-content-between" col="12">
-				<!-- colomn header berita -->
-				<mdb-col class="header__inside-content" md="3">
-					<h1 class="mb-3">Berita</h1>
-					<blockquote class="mb-5">Ikuti semua kegiatan dan berita dari PPKC</blockquote>
-					<mdb-tooltip trigger="hover" :options="{placement: 'top'}">
-						<span slot="tip"> Lihat semua berita </span>
-						<nuxt-link to="/ppkc/berita" class="btn__tooltip" slot="reference">
-							lihat semua berita 
-							<mdb-icon icon="arrow-right" />
-						</nuxt-link>
-					</mdb-tooltip>
-				</mdb-col>
+		<mdb-row class="row justify-content-center header__inside-content">
+			<!-- colomn header berita -->
+			<mdb-col col="12" md="12" xs="12" sm="12">
+				<h5 :class="`${$device.isDesktop ? 'text-center' : 'text-center'}`">Berita</h5>
+			</mdb-col>
+			<mdb-col md="12" xs="12" sm="12">
+				<h2 class="text-center font-weight-bold" :style="`${$device.isDesktop ? 'margin-left:5rem;' : 'margin-left:2rem;'}`">
+					Ikuti Berita dan Kegiatan Kami
+				</h2>
+			</mdb-col>
+		</mdb-row>
 
-				<!-- column card berita -->
-				<mdb-col v-if="lists.length > 0" md="9" xs="12" sm="12" class="col__berita mt-3 mb-3">
-					<!-- Card berita components -->
-					<CardBerita :lists="lists" ref="childBerita"/>	
-				</mdb-col>
-				<!-- <mdb-col v-else md="8" xs="12" sm="12" class="col__berita mt-3 mb-3">
-					<mdb-alert color="primary">
-						<mdb-icon icon="info-circle" size="lg" /> Belum ada berita terupdate !
-					</mdb-alert>
-				</mdb-col> -->
-			</mdb-row>
-		</mdb-container>
+		<mdb-row class="col__berita mt-3 mb-3">
+			<!-- column card berita -->
+			<mdb-col v-if="lists.length > 0" lg="12" xs="12" sm="12" >
+				<!-- Card berita components -->
+				<MoleculesHomepageMoleculesCardBerita :lists="lists" :listToShow="listToShow" ref="childBerita"/>	
+			</mdb-col>
+
+			<MoleculesHomepageMoleculesListBeritaSample v-else/>
+		</mdb-row>
+
 	</div>
 </template>
 
 <script>
-	import CardBerita from '@/components/Molecules/HomepageMolecules/CardBerita'
 
 	export default{
-		props: ['lists'],
-		components: {
-			CardBerita
-		}
+		props: ['lists']
 	}
 </script>

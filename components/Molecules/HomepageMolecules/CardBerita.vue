@@ -1,164 +1,35 @@
 <template>
   <div>
-    <div v-if="lists.length > 0">
-      <hooper :settings="hooperSettings">
-        <slide v-for="item in lists" :key="item.id" style="margin-right: 30px">
-          <mdb-card class="berita mt-2" style="width: 100%; margin-right: 30px">
-            <mdb-card-image
-              :src="item.foto_url"
-              alt="Card image cap"
-              style="object-fit: cover"
-            ></mdb-card-image>
-            <mdb-card-body>
-              <mdb-card-title class="mb-3 mt-1">{{
-                item.judul
-              }}</mdb-card-title>
-              <nuxt-link
-                :to="{
-                  name: `detail-berita-id-slug`,
-                  params: {
-                    id: item.id,
-                    slug: $slug(item.judul),
-                  },
-                }"
-                class="mt-2 mb-2"
-                color="primary"
-                >Baca Selengkapnya <mdb-icon icon="arrow-right"
-              /></nuxt-link>
-            </mdb-card-body>
-          </mdb-card>
-        </slide>
-        <hooper-navigation slot="hooper-addons"></hooper-navigation>
-        <hooper-pagination slot="hooper-addons"></hooper-pagination>
-      </hooper>
-    </div>
+    <mdb-row class="row justify-content-center card__berita-list">
+      <mdb-col v-for="listIndex in listToShow" md="4" xs="12" sm="12" :key="lists[listIndex-1].id" class="mb-3">
+        <mdb-card>
+          <mdb-card-image :src="lists[listIndex-1].foto_url" alt="Card image cap"></mdb-card-image>
+          <mdb-card-body>
+            <mdb-card-title>{{lists[listIndex-1].judul}}</mdb-card-title>
+            <mdb-card-text class="truncate2">{{lists[listIndex-1].content}}</mdb-card-text>
+            <br><br>
+            <nuxt-link :to="{name: `detail-berita-id-slug`, params: {id: lists[listIndex-1].id, slug: $slug(lists[listIndex-1].judul)}}" class="mt-5 mb-2">Baca Selengkapnya <mdb-icon icon="arrow-right" /></nuxt-link>
+          </mdb-card-body>
+        </mdb-card>
+      </mdb-col>
+
+
+      <mdb-col col="12"  xl="4" lg="12" xs="12" sm="12" :class="`${$device.isDesktop ? 'mb-5 mt-5 ml-5 shadow-none' : 'mb-2'}`">
+        <nuxt-link to="/rsi/berita" :class="`btn my__btn-primary rounded-pill ${$device.isMobile ? 'btn-block btn-sm btn__link' : 'btn-lg'}`">Lihat Semua Berita</nuxt-link>
+      </mdb-col>
+    </mdb-row>
+
   </div>
 </template>
 
 <script>
-import {
-  Hooper,
-  Slide,
-  Navigation as HooperNavigation,
-  Pagination as HooperPagination,
-} from "hooper";
-import "hooper/dist/hooper.css";
-
-export default {
-  props: ["lists"],
-  components: {
-    Hooper,
-    Slide,
-    HooperNavigation,
-    HooperPagination,
-  },
-
-  data() {
-    return {
-      listsToShow: 6,
-      hooperSettings: {
-        itemsToShow: 2,
-        centerMode: false,
-      },
-    };
-  },
-  mounted() {},
-  methods: {
-    TnsSlider() {
-      tns({
-        container: ".slider__berita",
-        items: this.$device.isDesktop ? 2 : 1,
-        center: true,
-        slideBy: "page",
-        loop: false,
-        autoplay: false,
-        speed: 400,
-        autoplayButtonOutput: false,
-        swipeAngle: true,
-        mouseDrag: true,
-        lazyload: false,
-        speed: 400,
-        nav: false,
-        controls: true,
-        controlsText: [
-          '<span class="fas fa-chevron-circle-left"></span>',
-          '<span class="fas fa-chevron-circle-right"></span>',
-        ],
-      });
-    },
-  },
-};
+  export default{
+    props: ['lists'],
+    data(){
+      return {
+        listToShow: 3
+      }
+    }
+  }
 </script>
 
-<style lang="scss">
-.tns-outer {
-  position: relative;
-}
-[data-controls] {
-  border: 0;
-  padding: 0;
-  font-size: 40px;
-  position: absolute;
-  top: 50%;
-  margin-top: -18px;
-  z-index: 1;
-  background: transparent;
-  color: $color-primary;
-}
-button[disabled] {
-  color: $default-gray !important;
-  cursor: not-allowed;
-}
-[data-controls="prev"] {
-  left: -8px;
-}
-[data-controls="next"] {
-  right: 5px;
-}
-
-.hooper {
-  position: relative;
-  box-sizing: border-box;
-  width: 100%;
-  height: auto !important;
-}
-
-.hooper-track {
-  padding-bottom: 40px;
-}
-
-.berita {
-  height: 300px;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
-  h4 {
-    font-size: 14px;
-  }
-
-  a {
-    font-size: 14px;
-  }
-
-  img {
-    height: 140px;
-    width: 100%;
-    object-fit: cover;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
-  }
-}
-
-@media (min-width: 992px) {
-  .berita {
-    height: 350px;
-
-    h4 {
-      font-size: 24px;
-    }
-
-    img {
-      height: 180px;
-    }
-  }
-}
-</style>
