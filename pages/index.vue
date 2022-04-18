@@ -73,58 +73,12 @@ export default {
       this.CheckToken()
     },
     mounted() {
-      this.CarouselItem(),
-      this.EventLists(),
-      this.TestimoniLists(),
-      this.NewsLists()
+      this.CarouselItem()
     },
 
     methods: {
       CheckToken(){
         this.$store.dispatch('config/checkAuthLogin', 'token')
-      },
-
-      EventLists(keyword='', page=1, category='', month=''){
-        this.loading = true
-        const url = `${this.api_url}/web/event/paging?keyword=${keyword ? keyword : ''}&page=${page ? page : 1}&jenis_pelatihan=${category ? category : ''}&bulan_pelatihan=${month ? month : ''}`
-        this.$axios.get(url)
-        .then(({data}) => {
-          this.events = data.list_kegiatan_terdekat
-        })
-        .catch(err => console.log(err.response))
-        .finally(() => {
-          setTimeout(() => {
-            this.loading = false
-          }, 1500)
-        })
-      },
-
-      TestimoniLists(start=0){
-        this.loading = true
-        const url = `${this.api_url}/web/testimoni/page?start=${start}`
-        this.$axios.get(url)
-        .then(({data}) => {
-          this.testimonis = data.list_data
-        })
-        .catch(err => console.log(err.response))
-        .finally(() => {
-          this.loading = false
-        }, 1500)
-      },
-
-      NewsLists(start=0){
-        this.loading = true
-        const url = `${this.api_url}/web/berita/page?start=${start}`
-        this.$axios.get(url)
-        .then(({data}) => {
-          this.news = data.list_data
-        })
-        .catch(err => console.log(err.response))
-        .finally(() => {
-          setTimeout(() => {
-            this.loading=false
-          }, 1500) 
-        })
       },
 
       CarouselItem() {
