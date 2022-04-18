@@ -16,7 +16,7 @@
 			<!-- column card berita -->
 			<mdb-col v-if="lists.length > 0" lg="12" xs="12" sm="12" >
 				<!-- Card berita components -->
-				<MoleculesHomepageMoleculesCardBerita :lists="lists" :listToShow="listToShow" ref="childBerita"/>	
+				<MoleculesHomepageMoleculesCardBerita :lists="lists"  ref="childBerita"/>	
 			</mdb-col>
 
 			<MoleculesHomepageMoleculesListBeritaSample v-else/>
