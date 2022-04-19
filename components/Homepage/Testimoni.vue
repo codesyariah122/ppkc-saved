@@ -35,7 +35,7 @@
 </template>
 
 <script>
-	export default{
-		props: ['lists', 'listToShow']
-	}
+  export default{
+    props: ['lists', 'listToShow']
+  }
 </script>

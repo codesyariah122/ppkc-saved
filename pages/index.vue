@@ -53,72 +53,65 @@ export default {
     }
   },
 
-  head:{
-    script: [
-      // {
-      //   src: 'https://widget.tochat.be/bundle.js?key=93ba0156-969f-4e9c-b1c8-0c25aafde170',
-      //   defer: true
-      // }
-      ]
+  
+
+  async asyncData({ $axios }) {
+    const lists = await $axios.$get("/web/home");
+    console.log(lists)
+    return {
+      lists
+    }
+  },
+  beforeMount(){
+    this.CheckToken()
+  },
+  mounted() {
+    this.CarouselItem()
+  },
+
+  methods: {
+    CheckToken(){
+      this.$store.dispatch('config/checkAuthLogin', 'token')
     },
 
-    async asyncData({ $axios }) {
-      const lists = await $axios.$get("/web/home");
-      console.log(lists)
-      return {
-        lists
-      }
-    },
-    beforeMount(){
-      this.CheckToken()
-    },
-    mounted() {
-      this.CarouselItem()
-    },
-
-    methods: {
-      CheckToken(){
-        this.$store.dispatch('config/checkAuthLogin', 'token')
+    CarouselItem() {
+      this.items = [
+      {
+        img: true,
+        src: "https://api.ppkc-online.com/image-banner/banner1.jpeg",
       },
-
-      CarouselItem() {
-        this.items = [
-        {
-          img: true,
-          src: "https://api.ppkc-online.com/image-banner/banner1.jpeg",
-        },
-        {
-          img: true,
-          src: "https://api.ppkc-online.com/image-banner/banner2.jpeg",
-        },
-        {
-          img: true,
-          src: "https://api.ppkc-online.com/image-banner/banner3.jpeg",
-        },
-        {
-          img: true,
-          src: "https://api.ppkc-online.com/image-banner/banner4.jpeg",
-        },
-        {
-          img: true,
-          src: "https://api.ppkc-online.com/image-banner/banner5.jpeg",
-        },
-        {
-          img: true,
-          src: "https://api.ppkc-online.com/image-banner/banner6.jpeg",
-        },
-        {
-          img: true,
-          src: "https://api.ppkc-online.com/image-banner/banner7.jpeg",
-        }
-        ]
+      {
+        img: true,
+        src: "https://api.ppkc-online.com/image-banner/banner2.jpeg",
+      },
+      {
+        img: true,
+        src: "https://api.ppkc-online.com/image-banner/banner3.jpeg",
+      },
+      {
+        img: true,
+        src: "https://api.ppkc-online.com/image-banner/banner4.jpeg",
+      },
+      {
+        img: true,
+        src: "https://api.ppkc-online.com/image-banner/banner5.jpeg",
+      },
+      {
+        img: true,
+        src: "https://api.ppkc-online.com/image-banner/banner6.jpeg",
+      },
+      {
+        img: true,
+        src: "https://api.ppkc-online.com/image-banner/banner7.jpeg",
       }
-    },
+      ]
+    }
+  },
 
-    computed: {
-      token(){
-        return this.$store.getters['config/ConfigCheckLogin']
-      }
+  computed: {
+    token(){
+      return this.$store.getters['config/ConfigCheckLogin']
     }
   }
+}
 </script>

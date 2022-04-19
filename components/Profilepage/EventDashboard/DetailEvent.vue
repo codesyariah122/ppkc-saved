@@ -19,11 +19,6 @@
 				<mdb-col md="5" sm="12" xs="12" class="col-1">
 					<div class="event__image-wrap">
 						<img :src="details.photo" :class="`${$device.isDesktop ? 'img-fluid' : 'img-responsive'}`">
-						<div class="overlay__event-img">
-							<a :data-gall="details.photo" :href="details.photo" class="event__detail-profile icon" :title="details.kegiatan_title">
-								<mdb-icon icon="search-plus" />
-							</a>
-						</div>
 					</div>
 				</mdb-col>
 
@@ -222,22 +217,6 @@
 
 <script>
 	export default{
-		props: ['details', 'loading', 'status_pendaftaran'],
-
-		mounted(){
-			this.VenoBox()
-		},
-
-		methods: {
-			VenoBox(){
-				new VenoBox({
-					selector: '.event__detail-profile',
-					numeration: true,
-					infinigall: true,
-					share: ['facebook', 'twitter', 'linkedin', 'pinterest', 'download'],
-					spinner: 'rotating-plane'
-				})
-			},
-		}
+		props: ['details', 'loading', 'status_pendaftaran']
 	}
 </script>

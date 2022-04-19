@@ -181,7 +181,7 @@
 
 // List pelatihan&webinar component&ppkc component
 .card__list{
-	.rsi__page{
+	.header__ppkc-list-page{
 		h2{
 			color: $second-black;
 			font-size:21px;
@@ -299,7 +299,7 @@
 @media (min-width: 992px) {
 	.card__list{
 
-		.rsi__page{
+		.header__ppkc-list-page{
 			margin-left: 1.5rem;
 			h2{
 				color: $second-black;

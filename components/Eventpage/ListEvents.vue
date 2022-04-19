@@ -59,31 +59,20 @@
           class="mb-3"
         >
           <mdb-card>
-            <div class="event__image-wrap">
-              <mdb-card-image
-                v-if="
-                  list.photo ==
-                  'https://api.ppkc-online.com/image-kegiatans/null'
-                "
-                :src="require('~/assets/images/homepage/default.jpg')"
-                alt="No image found"
-              ></mdb-card-image>
-              <mdb-card-image
-                v-else
-                :src="list.photo"
-                :alt="list.kegiatan_title"
-              ></mdb-card-image>
-              <div class="overlay__event-img">
-                <a
-                  :data-gall="list.photo"
-                  :href="list.photo"
-                  class="list-events icon"
-                  title="Lihat Foto"
-                >
-                  <mdb-icon icon="search-plus" />
-                </a>
-              </div>
-            </div>
+            <mdb-card-image
+            v-if="
+            list.photo ==
+            'https://api.ppkc-online.com/image-kegiatans/null'
+            "
+            :src="require('~/assets/images/homepage/default.jpg')"
+            alt="No image found"
+            ></mdb-card-image>
+            <mdb-card-image
+            v-else
+            :src="list.photo"
+            :alt="list.kegiatan_title"
+            ></mdb-card-image>
+             
             <mdb-card-body>
               <mdb-badge
                 class="badge btn-outline-primary mb-2"

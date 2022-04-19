@@ -19,17 +19,10 @@
 				profiles: {},
 				slug: '',
 				event_id: localStorage.getItem('event_id'),
-				event_path: this.$route.path
+				event_path: this.$route.path,
+				local_img: 'http://localhost:8000/_nuxt',
+				prod_img: 'https://ppkc-saved.vercel.app'
 			}
-		},
-
-		head:{
-			// script: [
-			// 	{
-			// 		src: 'https://widget.tochat.be/bundle.js?key=93ba0156-969f-4e9c-b1c8-0c25aafde170',
-			// 		defer: false
-			// 	}
-			// ]
 		},
 		
 		beforeMount(){
@@ -72,11 +65,11 @@
 				s.type = 'text/javascript';
 				s.async = true;
 				s.src = url;
-				let cta_text = this.$device.isDesktop ? 'Admin RSI Sultan Agung' : ''
+				let cta_text = this.$device.isDesktop ? 'Admin PPKC Carolus' : ''
 				let options = {
 					"enabled":true,
 					"chatButtonSetting":{
-						"backgroundColor":"#004899",
+						"backgroundColor":"#06875C",
 						"ctaText":'',
 						"borderRadius":"25",
 						"marginLeft":"20",
@@ -87,7 +80,7 @@
 					"brandSetting":{
 						"brandName":"PPKC Carolus",
 						"brandSubTitle":"Pusat Pelatihan Kesehatan Carolus",
-						"brandImg":"https://gitlab.com/nirwan/ppkc-portal/-/raw/new-update-restyle/assets/images/profile/call-center.jpg",
+						"brandImg": require('~/assets/images/profile/call-center.jpg'),
 						"welcomeText":"Halo, new member\nada yang bisa kami bantu ?\ncukup kirimkan pesan kepada kami sekarang untuk mendapatkan info lebih lanjut tentang pelatihan tenaga kesehatan PPKC Carolus.",
 						"messageText":"Halo, Admin PPKC ! kami butuh bantuan untuk mengikuti pelatihan PPKC Carolus  {{page_link}}",
 						"backgroundColor":"#004899",

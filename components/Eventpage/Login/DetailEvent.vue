@@ -15,7 +15,7 @@
           </b-row>
         </b-card>
       </mdb-col>
-      <mdb-col lg="12">
+      <mdb-col lg="12" class="mt-2">
         <b-progress
           :max="max"
           height="2rem"
@@ -34,16 +34,6 @@
       <mdb-col md="5" sm="12" xs="12" class="col-1">
         <div class="event__image-wrap">
           <img :src="details.photo" class="rounded image" />
-          <div class="overlay__event-img">
-            <a
-              :data-gall="details.photo"
-              :href="details.photo"
-              class="event__details-login icon"
-              :title="details.kegiatan_title"
-            >
-              <mdb-icon icon="search-plus" />
-            </a>
-          </div>
         </div>
       </mdb-col>
 
@@ -229,12 +219,11 @@ export default {
   },
 
   mounted() {
-    this.startTimer(), this.VenoBox();
+    this.startTimer()
   },
 
   methods: {
     RegistrasiEvent(id) {
-      // alert(id)
       this.$emit("registrasi-event", id);
     },
 
@@ -259,17 +248,7 @@ export default {
         vm.value += 6;
         if (vm.value >= vm.max) clearInterval(timer);
       }, 100);
-    },
-
-    VenoBox() {
-      new VenoBox({
-        selector: ".event__details-login",
-        numeration: true,
-        infinigall: true,
-        share: ["facebook", "twitter", "linkedin", "pinterest", "download"],
-        spinner: "rotating-plane",
-      });
-    },
-  },
-};
+    }
+  }
+}
 </script>

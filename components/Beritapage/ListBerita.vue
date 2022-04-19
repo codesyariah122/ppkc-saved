@@ -4,9 +4,9 @@
       <mdb-container>
         <mdb-row class="row justify-content-center header__ppkc-list-page">
           <mdb-col lg="12" xs="12" sm="12" style="margin-top: 32px">
-            <h2 style="color: #004899 !important; font-weight: 700">Berita</h2>
+            <h2 style="font-weight: 700">Berita</h2>
           </mdb-col>
-          <mdb-col lg="12" xs="12" sm="12" style="margin-top: 8px">
+          <mdb-col lg="12" xs="12" sm="12">
             <span style="color: #666666 !important; font-size: 14px">
               Ikuti semua kegiatan dan berita dari PPKC
             </span>
@@ -30,20 +30,25 @@
                     :key="item.id" :style="`${$device.isMobile ? 'margin-bottom: 2rem;' : ''}`"
                   >
                     <mdb-card>
-                      <div class="event__image-wrap">
-                        <mdb-card-image :src="item.foto_url" alt="Card image cap"></mdb-card-image>
-                        <div class="overlay__event-img">
-                          <a :data-gall="item.foto_url" :href="item.foto_url" class="lists-berita icon" :title="item.judul">
-                            <mdb-icon icon="search-plus" />
-                          </a>
-                        </div>
-                      </div>
+                      <mdb-card-image :src="item.foto_url" alt="Card image cap"></mdb-card-image>
+                       
                       <mdb-card-body>
                         <mdb-card-title
                           class="truncate"
-                          style="padding-top: 16px; min-height: 100px"
+                          style="font-size: 16px;"
                           >{{ item.judul }}</mdb-card-title
                         >
+                        <span style="font-size: 12px;"
+                        ><i class="fa fa-calendar fa-fw fa-lg" aria-hidden="true"></i>
+                        {{ $moment(item.created_at).format("LL") }}</span
+                        >
+                        
+                        <p  class="mt-3 mb-2 truncate2">
+                          {{item.konten}}
+                        </p>
+
+                        <hr />
+
                         <nuxt-link
                           :to="{
                             name: `detail-berita-id-slug`,
@@ -109,8 +114,7 @@ export default {
   },
 
   mounted() {
-    this.getNextBerita(),
-    this.VenoBox()
+    this.getNextBerita()
   },
 
   methods: {
@@ -128,23 +132,15 @@ export default {
           }
         }
       }
-    },
-
-    VenoBox(){
-      new VenoBox({
-        selector: '.lists-berita',
-        numeration: true,
-        infinigall: true,
-        share: ['facebook', 'twitter', 'linkedin', 'pinterest', 'download'],
-        spinner: 'rotating-plane'
-      })
     }
+
   }
 }
 </script>
 
 <style lang="css">
 .truncate {
+  text-transform: capitalize;
   display: -webkit-box;
   -webkit-line-clamp: var(--line-clamp, 3);
   -webkit-box-orient: vertical;
@@ -163,4 +159,24 @@ export default {
     }
   }
 }
+
+.truncate2 {
+    display: -webkit-box;
+    -webkit-line-clamp: var(--line-clamp, 2);
+    -webkit-box-orient: vertical;
+    word-break: var(--word-break, "none");
+    overflow: hidden;
+    hyphens: auto;
+    text-align: var(--align, left);
+
+    --is-single-line: 1 - Clamp(0, Calc(var(--line-clamp) - 1), var(--line-clamp));
+    --delay: Calc(-1s * (var(--is-single-line, 1) - 1));
+    animation: states 1s var(--delay) paused;
+
+    @keyframes states {
+      0% {
+        word-break: break-all;
+      }
+    }
+  }
 </style>

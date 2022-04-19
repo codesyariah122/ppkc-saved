@@ -170,6 +170,8 @@
 // Event detail slug components
 .event__detail{
 	margin-top: 2rem;
+	overflow: hidden;
+	height: auto;
 	.event__detail-content{
 		margin-bottom: 10rem;
 		height: auto;
@@ -299,6 +301,8 @@
 // Desktop
 @media (min-width: 992px) {
 	.event__detail{
+		overflow: hidden;
+		height: auto;
 		margin-top: 7rem;
 		.event__detail-content{
 			// overflow-y: hidden;

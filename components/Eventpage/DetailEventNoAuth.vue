@@ -20,11 +20,6 @@
 			<mdb-col md="5" sm="12" xs="12" class="col-1">
 				<div class="event__image-wrap">
 					<img :src="events.kegiatan.photo" class="rounded image">
-					<div class="overlay__event-img">
-						<a :data-gall="events.kegiatan.photo" :href="events.kegiatan.photo" class="event-details icon" :title="events.kegiatan_title">
-							<mdb-icon icon="search-plus" />
-						</a>
-					</div>
 				</div>
 			</mdb-col>
 
@@ -80,20 +75,9 @@
 	export default{
 		props: ['events', 'loading'],
 
-		mounted(){
-			this.VenoBox()
-		},
+
 
 		methods: {
-			VenoBox(){
-				new VenoBox({
-					selector: '.event-details',
-					numeration: true,
-					infinigall: true,
-					share: ['facebook', 'twitter', 'linkedin', 'pinterest', 'download'],
-					spinner: 'rotating-plane'
-				})
-			},
 
 			GoToLogin() {
 				if (this.event_id === this.$route.params.id) {

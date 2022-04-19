@@ -33,33 +33,10 @@
                   'https://api.ppkc-online.com/image-profiles/null'
                 ">
                 <b-avatar variant="none" :src="profiles.photo" :size="size"></b-avatar>
-                  <!-- <img
-                  :src="profiles.photo"
-                  class="img-fluid image rounded-circle"
-                  /> -->
-                  <div class="overlay">
-                    <a
-                    :data-gall="
-                    profiles.photo
-                    ? profiles.photo
-                    : `${require('~/assets/images/profile/user-profile.svg')}`
-                    "
-                    :href="
-                    profiles.photo
-                    ? profiles.photo
-                    : `${require('~/assets/images/profile/user-profile.svg')}`
-                    "
-                    class="profiles-avatar icon"
-                    title="Lihat Foto Profile"
-                    >
-                      <mdb-icon icon="search-plus" />
-                    </a>
-                </div>
               </div>
               <div v-else>
-                  <b-avatar variant="primary" :text="username.charAt(0)" :size="size"></b-avatar>
+                  <b-avatar variant="none" :text="username.charAt(0)" :size="size"></b-avatar>
               </div>
-
             </div>
           </mdb-col>
           <mdb-col md="5" class="col__data-profile">
@@ -112,20 +89,8 @@ export default {
     }
   },
 
-  mounted() {
-    this.VenoBox()
-  },
-
   methods: {
-    VenoBox() {
-      new VenoBox({
-        selector: ".profiles-avatar",
-        numeration: true,
-        infinigall: true,
-        share: ["facebook", "twitter", "linkedin", "pinterest", "download"],
-        spinner: "rotating-plane",
-      });
-    },
+   
     LogoutProfile() {
       this.$swal({
         title: `Keluar sebagai ${this.profiles.nama}?`,

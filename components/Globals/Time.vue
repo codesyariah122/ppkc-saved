@@ -4,16 +4,6 @@
       <mdb-col class="glow" md="3">
         <h4>{{ time }}</h4>
       </mdb-col>
-
-      <mdb-col v-if="apiKey" md="6" class="weather">
-        <mdb-badge gradient="blue" :color="color_badge" class="rounded-pill">
-          {{ city.city
-          }}<img
-            :src="`http://openweathermap.org/img/wn/${weathers.icon}@2x.png`"
-          />
-          {{ weathers.description }} {{ temp }}&#8451;
-        </mdb-badge>
-      </mdb-col>
     </mdb-row>
   </div>
 </template>
