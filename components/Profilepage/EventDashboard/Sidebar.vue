@@ -7,24 +7,23 @@
     </div>
     <nav v-else id="docs-nav" class="docs-nav navbar shadow-none">
       <ul class="section-items list-unstyled nav flex-column pb-3">
-        <div>
-          <li class="nav-item__sidebar section-title">
-            <h5>
-             {{details.kegiatan_title}}
-           </h5>
-         </li>
-         <li class="nav-item__sidebar">
-          <div class="row justify-content-start profile__fasilitator">
-            <div class="col-md-5 avatar">
-              <b-avatar :src="require('~/assets/images/Avatar/5.jpg')" variant="none" size="5rem"></b-avatar>
-            </div>
-            <div class="col-md-7 profile">
-              <h5>dr. Hasan Fadly</h5>
-              <blockquote>Dokter Umum</blockquote>
-            </div>
+        <li class="nav-item__sidebar section-title">
+         <!-- <img :src="details.photo" class="img-fluid" width="250"> -->
+          <h5>
+           {{details.kegiatan_title}}
+         </h5>
+       </li>
+       <!-- <li class="nav-item__sidebar">
+        <div class="row justify-content-start profile__fasilitator">
+          <div class="col-md-5 avatar">
+            <b-avatar :src="require('~/assets/images/Avatar/5.jpg')" variant="none" size="5rem"></b-avatar>
           </div>
-        </li>
+          <div class="col-md-7 profile">
+            <h5>dr. Hasan Fadly</h5>
+            <blockquote>Dokter Umum</blockquote>
+          </div>
         </div>
+      </li> -->
       <b-dropdown-divider
       style="list-style: none;"
       ></b-dropdown-divider>
@@ -189,6 +188,71 @@
             </b-card>
           </b-collapse>
         </div>
+
+        <div v-if="!loading" class="collapse__docs">
+          <b-button
+            v-b-toggle="`collapse-absensi`"
+            class="
+              active
+              btn__pelatihan
+              shadow-none
+              nav-item__sidebar
+              nav-link__sidebar
+              section-title
+            "
+            @click="ToggleFile(pelatihans.length + 2)"
+          >
+            <mdb-row col="12" class="d-flex justify-content-between">
+                <mdb-col col="9" md="9" sm="9" xs="9"> 
+                 <h6> Absensi </h6>
+               </mdb-col>
+
+               <mdb-col col="2" md="2" sm="2" xs="2">
+                <mdb-icon
+                :icon="`${
+                  show_collapse && pelatihans.length+1 === urutan
+                  ? 'angle-down'
+                  : 'angle-right'
+                }`"
+                size="lg"
+                />
+              </mdb-col>
+            </mdb-row>
+          </b-button>
+
+          <b-collapse
+            :id="`collapse-absensi`"
+            class="collapse__category-event mb-3 shadow-none"
+          >
+            <b-card class="shadow-none">
+              <div v-for="(evaluasi, index) in absensis" :key="evaluasi.id">
+                <b-list-group class="list__modul">
+                  <b-list-group-item
+                    class="list-unstyled"
+                    @click="ShowField(evaluasi, evaluasi.id, evaluasi.id)"
+                  >
+                    <mdb-row>
+                      <mdb-col md="10" xs="10" sm="10" col="10">
+                        <mdb-icon color="blue" far icon="calendar-check" :size="`${$device.isDesktop ? 'lg' : 'sm'}`"/> <a
+                        class="link__text"
+                        :href="`#item-${evaluasi.id}`"
+                        @click="ShowField(evaluasi, evaluasi.id, evaluasi.id)"
+                        >
+                        {{ evaluasi.nama }}
+                      </a>
+                    </mdb-col>
+                    <mdb-col md="1" xs="1" sm="1" col="1">
+                      <mdb-icon far icon="circle" color="blue" :size="`${$device.isDesktop ? 'lg' : 'sm'}`"/>
+                    </mdb-col>
+                  </mdb-row>
+                  </b-list-group-item>
+                </b-list-group>
+              </div>
+            </b-card>
+          </b-collapse>
+        </div>
+
+
       </ul>
     </nav>
     <!--//docs-nav-->
@@ -229,6 +293,13 @@ export default {
           nama: "Rencana Tindak Lanjut",
         },
       ],
+      absensis: [
+        {
+          id: 11,
+          nama: "Absensi Pelatihan",
+        },
+      ],
+
     };
   },
 
