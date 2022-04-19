@@ -1,8 +1,8 @@
 .docs-wrapper{
 	margin-top: -5rem!important;
 	.docs-sidebar{
-		margin-top: -.8rem;
-		width:250px;
+		margin-top: -1.7rem;
+		width:300px;
 		height:100%;
 		scrollbar-color: $scroll-bar-color $scroll-bar-bg;
 		scrollbar-width: auto;
@@ -18,7 +18,15 @@
 			border: 11px solid $scroll-bar-bg;
 		}
 		.docs-nav{
-			overflow-x: hidden;
+			overflow-x: hidden; 
+			position: static;
+			height: 120vh;
+			margin-bottom: 5rem;
+			.section-items{
+				.section-title{
+					width: 90%;
+				}
+			}
 			.theme-icon-holder{
 				background-color: $bg-primary!important;
 			}
@@ -27,40 +35,56 @@
 			}
 			.collapse__docs{
 				border:0;
-				width: 250px;
+				width: 280px;
 				.btn__pelatihan{
-					background-color:transparent!important;
-					color:$bg-second-primary!important;
-					width: 250px;
+					background-color:$bg-hover-first!important;
+					color:$second-black!important;
+					width: 280px;
 					text-transform: uppercase;
 					font-size:12px;
 					text-align: left;
 					margin-left: -15px;
-					&:hover{
-						background-color: $bg-hover-first!important;
-					}
+					// &:hover{
+					// 	background-color: $bg-hover-first!important;
+					// }
 					// i{
 					// 	margin-left: 12rem;
 					// 	margin-top:-15rem!important;
 					// }
 				}
-
+				.nav-item__sidebar{
+					h6,h5{
+						width: 70%;
+						text-transform: capitalize;
+					}
+				}
 				.collapse__category-event{
 					overflow-x: hidden;
 					margin-left:5px;
+					.collapse__absensi{
+						margin-left: -1rem;
+					}
+					h6{
+						color:$second-black!important;
+						font-weight: 800;
+						margin-left: -1rem;
+						margin-bottom: 1rem;
+						text-transform: capitalize;
+					}
 					.card{
 						border: 0 none;
 					}
 					.list__modul{
 						margin-top: -.8rem;
+						margin-left: -1rem;
 						.list-group-item{
-							background-color: transparent;
-							width: 250px;
-							margin-left: -1.8rem;
+							background-color:$bg-hover-first!important;
+							width: 275px;
+							// margin-left: -.5rem;
 							margin-bottom: 1.5rem;
 							&:hover{
 								background-color: $bg-hover-first;
-								color:$color-primary;
+								color:$second-black;
 								cursor: pointer;
 							}
 							.link__text{
@@ -73,7 +97,7 @@
 							a{
 								text-decoration: none;
 								&:hover{
-									color:$color-primary;
+									color:$second-black;
 								}
 							}
 						}
@@ -94,13 +118,13 @@
 							h2{
 								font-size: 18px;
 								font-weight: 700;
-								color:$color-primary;
+								color:$second-black;
 							}
 							.type__name{
-								border: 2px solid $color-primary!important;
+								border: 3px solid $color-primary!important;
 								width: 30%;
 								color: $color-primary;
-								font-weight: 500;
+								font-weight: 600;
 								text-align: center;
 								margin-bottom: 1rem;
 								font-size: 12px;
@@ -129,8 +153,8 @@
 @media (min-width: 992px) {
 	.docs-wrapper{
 		.docs-sidebar{	
-			margin-top: -.7rem;
-			width:320px!important;
+			margin-top: 1rem;
+			width:380px!important;
 			scrollbar-color: $scroll-bar-color $scroll-bar-bg;
 			scrollbar-width: auto;
 			&:-webkit-scrollbar {
@@ -145,15 +169,44 @@
 				border: 11px solid $scroll-bar-bg;
 			}
 			.docs-nav{
+				overflow-x: hidden;
+				// overflow-y: hidden;
+				position: static;
+				height: 120vh;
+				margin-top: -7rem;
+				margin-bottom: 7rem;
+				.section-items{
+					.section-title{
+						width:100%;
+					}
+				}
+				.nav-item__sidebar{
+					h5{
+						width:80%;
+					}
+					.sidebar__absen{
+						margin-left: -10rem!important;
+						h5{
+							font-weight: 700;
+						}
+					}
+				}
+				.profile__fasilitator{
+					margin-left: -3rem;
+					.profile{
+						margin-top: 1rem;
+						margin-left: -2rem;
+					}
+				}
 				.collapse__docs{
 					overflow: hidden!important;
 					border:0;
 					width: 100%;
 					.btn__pelatihan{
 						background-color:transparent!important;
-						color:#28b76b;
-						width: 320px!important;
-						text-transform: uppercase;
+						color:$second-black!important;
+						width: 370px!important;
+						text-transform: capitalize;
 						font-size:12px;
 						text-align: left;
 						margin-left: -15px;
@@ -165,22 +218,34 @@
 					.collapse__category-event{
 						overflow-x: hidden;
 						margin-left:5px;
+						.collapse__absensi{
+							margin-left: -1.5rem;
+						}
+						h6{
+							color:$second-black!important;
+							font-weight: 700;
+							margin-left: -1rem;
+							margin-bottom: 1rem;
+							text-transform: capitalize;
+						}
 						.card{
 							border: 0 none;
 						}
+
 						.list__modul{
 							margin-top: -.8rem;
-							&:hover{
-								color:$color-primary!important;
-							}
+							// &:hover{
+							// 	color:$second-black!important;
+							// }
 							.list-group-item{
-								background-color: transparent;
+								// background-color: transparent;
+								background-color:$bg-hover-first!important;
 								width: 320px;
-								margin-left: -1.8rem;
+								margin-left: -.8rem;
 								margin-bottom: 1.5rem;
 								&:hover{
 									background-color: $bg-hover-first;
-									color:$color-primary!important;
+									color:$second-black!important;
 									cursor: pointer;
 								}
 								.link__text{
@@ -189,14 +254,14 @@
 									margin-left: .5rem;
 									color: $default-black;
 									&:hover{
-										color:$color-primary!important;
+										color:$second-black!important;
 									}
 								}
 								border:0;
 								a{
 									text-decoration: none;
 									&:hover{
-										color:$color-primary!important;
+										color:$second-black!important;
 									}
 								}
 							}
@@ -208,7 +273,8 @@
 
 
 		.docs-content{
-			margin-top: 6rem!important;
+			margin-top: 8rem!important;
+			margin-left: 22rem;
 			height: auto!important;
 			.container{
 				.docs-article{
@@ -220,15 +286,15 @@
 								h2{
 									font-size: 21px;
 									font-weight:700;	
-									color: $color-primary;
+									color: $second-black;
 								}
 								.type__name{
-									border: 2px solid $color-primary!important;
+									border: 3px solid $color-primary!important;
 									width:15%;
 									color: $color-primary;
-									font-weight: 500;
+									font-weight: 600;
 									text-align: center;
-									margin-bottom: 1.5rem;
+									margin-bottom: 1rem;
 									font-size: 16px;
 									margin-left: -.2rem;
 								}
@@ -239,9 +305,10 @@
 							.pre__test{
 								margin-top: -2rem;
 								.box__intro-test{
+									color: $second-black;
+									font-weight: 600;
 									border: 4px solid $scroll-bar-bg;
-									width: 50%;
-									margin-left: -25rem;
+									margin-left: 2rem;
 									margin-bottom: 3rem;
 								}
 							}

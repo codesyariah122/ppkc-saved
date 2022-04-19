@@ -119,7 +119,7 @@
 			PertanyaanLists(start){
 				this.loading_lists_ask = true
 				// console.log(this.detail_webinar)
-				if(this.detail_webinar){				
+				if(this.detail_webinar){			
 					const url = `${this.api_url}/web/webinar/question/list?start=${start ? start : 0}&pelatihan_detail_id=${this.detail_webinar.webinar.pelatihan_detail_id}`
 					this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
 					this.$axios.get(url)
@@ -133,6 +133,8 @@
 							this.loading_lists_ask = false
 						}, 2500)
 					})
+				}else{
+					console.log("Webinar not found")
 				}
 			},
 

@@ -18,6 +18,7 @@
 			</b-card>
 		</div>
 		<div v-else>
+			
 			<b-card  v-if="listIndex <= lists.length" v-for="(listIndex, index) in listToShow" :key="lists[listIndex-1].id" no-body :class="`${$device.isDesktop ? 'comment__box overflow-hidden mb-3 shadow-none' : 'comment__box overflow-hidden mb-3 shadow-none border-0'}`">
 				<b-row no-gutters class="d-flex justify-content-center content__card-comment">
 					<b-col md="2">
@@ -175,12 +176,14 @@
 		methods: {
 			KomentarLists(start){
 				this.loading_lists = true
-				// console.log(this.detail_webinar)
+				console.log(this.detail_webinar)
 				if(this.detail_webinar){				
 					const url = `${this.api_url}/web/webinar/komentar/list?start=${start ? start : 0}&pelatihan_detail_id=${this.detail_webinar.webinar.pelatihan_detail_id}`
 					this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
 					this.$axios.get(url)
 					.then(({data}) => {
+						console.log("Ok")
+						console.log(data)
 						this.lists = data.list_data
 
 					})
@@ -190,6 +193,8 @@
 							this.loading_lists = false
 						}, 2500)
 					})
+				}else{
+					console.log("Webinar not found")
 				}
 			},
 

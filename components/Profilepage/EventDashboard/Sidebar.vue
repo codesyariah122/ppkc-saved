@@ -7,25 +7,32 @@
     </div>
     <nav v-else id="docs-nav" class="docs-nav navbar shadow-none">
       <ul class="section-items list-unstyled nav flex-column pb-3">
-        <li class="nav-item__sidebar section-title">
-          <a class="nav-link__sidebar scrollto active" href="#section-1"
-            ><span class="theme-icon-holder me-2"
-              ><i class="fas fa-map-signs"></i></span
-            >Introduction</a
-          >
+        <div>
+          <li class="nav-item__sidebar section-title">
+            <h5>
+             {{details.kegiatan_title}}
+           </h5>
+         </li>
+         <li class="nav-item__sidebar">
+          <div class="row justify-content-start profile__fasilitator">
+            <div class="col-md-5 avatar">
+              <b-avatar :src="require('~/assets/images/Avatar/5.jpg')" variant="none" size="5rem"></b-avatar>
+            </div>
+            <div class="col-md-7 profile">
+              <h5>dr. Hasan Fadly</h5>
+              <blockquote>Dokter Umum</blockquote>
+            </div>
+          </div>
         </li>
-        <li class="nav-item__sidebar">
-          <a class="nav-link__sidebar" href="#item-1-1"
-            >Halo, {{ profiles.nama }}</a
-          >
-        </li>
-        <b-dropdown-divider
-          style="list-style: none; margin-top: 0.5rem"
-        ></b-dropdown-divider>
-
-        <div v-if="loading">
-          <mdb-spinner big multicolor />
         </div>
+      <b-dropdown-divider
+      style="list-style: none;"
+      ></b-dropdown-divider>
+
+      <div v-if="loading">
+        <mdb-spinner big multicolor />
+      </div>
+
 
         <div
           v-else
@@ -47,19 +54,21 @@
           >
             <mdb-row col="12" class="d-flex justify-content-between">
               <mdb-col col="9" md="9" sm="9" xs="9">
-                {{ item.title }}
+                <h6>{{ item.title }}</h6>
+                <small> {{$moment(item.tanggal).format("LLLL")}} </small>
               </mdb-col>
 
               <mdb-col col="2" md="2" sm="2" xs="2">
-                <mdb-icon
-                  :icon="`${
-                    show_collapse && index + 1 === urutan
-                      ? 'minus-circle'
-                      : 'plus-circle'
-                  }`"
-                  size="lg"
+                <mdb-icon 
+                :icon="`${
+                  show_collapse && index + 1 === urutan
+                  ? 'angle-down'
+                  : 'angle-right'
+                }`"
+                size="lg"
                 />
               </mdb-col>
+
             </mdb-row>
           </b-button>
 
@@ -83,24 +92,32 @@
                         )
                       "
                     >
-                      <mdb-icon :icon="FilterIcon(d.kategori)" />&nbsp;
-                      <a
+                    <mdb-row>
+                      <mdb-col md="10" xs="10" sm="10" col="10">
+                        <mdb-icon color="blue" :icon="FilterIcon(d.kategori)" :size="`${$device.isDesktop ? 'lg' : 'sm'}`"/> <a
                         class="link__text"
                         :href="`#item-${d.kategori}`"
                         @click="
-                          ShowField(
-                            d,
-                            d.kategori == 3 ||
-                              d.kategori == 4 ||
-                              d.kategori == 6
-                              ? d.id
-                              : d.kategori,
-                            d.kategori
+                        ShowField(
+                          d,
+                          d.kategori == 3 ||
+                          d.kategori == 4 ||
+                          d.kategori == 6
+                          ? d.id
+                          : d.kategori,
+                          d.kategori
                           )
-                        "
-                      >
-                        {{ d.title }}
-                      </a>
+                          "
+                          >
+                          {{ d.title }}
+                        </a>
+
+                      </mdb-col>
+                      <mdb-col md="1" xs="1" sm="1" col="1">
+                        <mdb-icon far icon="circle" color="blue" :size="`${$device.isDesktop ? 'lg' : 'sm'}`"/>
+                      </mdb-col>
+                    </mdb-row>
+
                     </b-list-group-item>
                   </b-list-group>
                 </div>
@@ -122,20 +139,23 @@
             "
             @click="ToggleFile(3)"
           >
-            <mdb-row col="12" class="d-flex justify-content-between">
-              <mdb-col col="9" md="9" sm="9" xs="9"> Evaluasi </mdb-col>
+          <mdb-row col="12" class="d-flex justify-content-between">
+            <mdb-col col="9" md="9" sm="9" xs="9"> 
+             <h6> Evaluasi </h6>
+           </mdb-col>
 
-              <mdb-col col="2" md="2" sm="2" xs="2">
-                <mdb-icon
-                  :icon="`${
-                    show_collapse && 3 === urutan
-                      ? 'minus-circle'
-                      : 'plus-circle'
-                  }`"
-                  size="lg"
-                />
-              </mdb-col>
-            </mdb-row>
+           <mdb-col col="2" md="2" sm="2" xs="2">
+            <mdb-icon
+            :icon="`${
+              show_collapse && pelatihans.length+1 === urutan
+              ? 'angle-down'
+              : 'angle-right'
+            }`"
+            size="lg"
+            />
+          </mdb-col>
+        </mdb-row>
+
           </b-button>
 
           <b-collapse
@@ -149,14 +169,20 @@
                     class="list-unstyled"
                     @click="ShowField(evaluasi, evaluasi.id, evaluasi.id)"
                   >
-                    &nbsp;
-                    <a
-                      class="link__text"
-                      :href="`#item-${evaluasi.id}`"
-                      @click="ShowField(evaluasi, evaluasi.id, evaluasi.id)"
-                    >
-                      {{ evaluasi.nama }}
-                    </a>
+                    <mdb-row>
+                      <mdb-col md="10" xs="10" sm="10" col="10">
+                        <mdb-icon color="success" far icon="calendar-check" :size="`${$device.isDesktop ? 'lg' : 'sm'}`"/> <a
+                        class="link__text"
+                        :href="`#item-${evaluasi.id}`"
+                        @click="ShowField(evaluasi, evaluasi.id, evaluasi.id)"
+                        >
+                        {{ evaluasi.nama }}
+                      </a>
+                    </mdb-col>
+                    <mdb-col md="1" xs="1" sm="1" col="1">
+                      <mdb-icon far icon="circle" color="success" :size="`${$device.isDesktop ? 'lg' : 'sm'}`"/>
+                    </mdb-col>
+                  </mdb-row>
                   </b-list-group-item>
                 </b-list-group>
               </div>
@@ -275,7 +301,7 @@ export default {
           this.$swal(
             "Logout!",
             `Anda berhasil keluar dari profile ${this.profiles.nama}.`,
-            "success"
+            "primary"
           );
           this.$router.push({
             // name: 'auth-login'

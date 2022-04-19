@@ -22,11 +22,12 @@
 			color:$bg-fourt!important;
 		}
 		position: fixed;
+		margin-left: 1.3rem;
 	}
 
 	@media (min-width: 992px) {
 		.toggler{
-			margin-left: -2rem;
+			margin-left: .7rem;
 		}
 	}
 </style>

@@ -369,6 +369,7 @@ export default {
       this.$axios
         .get(url)
         .then(({ data }) => {
+          console.log(data)
           this.is_can_check_in = data.is_can_check_in;
           this.detail_webinar = data.webinar;
           this.pelatihan_detail_id = data.webinar.pelatihan_detail_id;

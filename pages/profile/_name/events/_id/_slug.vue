@@ -9,6 +9,7 @@
         @show-field="ShowField"
         @toggle-file="ToggleFile"
         :profiles="profiles"
+        :details="details"
       />
 
       <div class="docs-content">
@@ -189,7 +190,6 @@ export default {
       this.EventAktif(),
       this.DetailEventProfileLogin(),
       this.StatusPembayaran(),
-      this.VenoBox(),
       this.WelcomeText();
   },
 
@@ -407,17 +407,8 @@ export default {
       if (h >= 10 && h < 15) this.ucapan = "Selamat Siang,";
       if (h >= 15 && h < 18) this.ucapan = "Selamat Sore,";
       if (h >= 18 || h < 4) this.ucapan = "Selamat Malam,";
-    },
-
-    VenoBox() {
-      new VenoBox({
-        selector: ".event-detail",
-        numeration: true,
-        infinigall: true,
-        share: ["facebook", "twitter", "linkedin", "pinterest", "download"],
-        spinner: "rotating-plane",
-      });
-    },
+    }
+    
   },
 
   computed: {
