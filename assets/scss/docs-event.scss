@@ -154,7 +154,7 @@
 @media (min-width: 992px) {
 	.docs-wrapper{
 		.docs-sidebar{	
-			margin-top: 1rem;
+			margin-top: -2rem;
 			width:380px!important;
 			height:100vh;
 			margin-bottom: 7rem;
@@ -175,7 +175,7 @@
 				overflow-x: hidden;
 				// overflow-y: hidden;
 				height: 120vh;
-				margin-top: -8em;
+				margin-top: -5em;
 				
 				.section-items{
 					position: relative;
@@ -244,7 +244,7 @@
 								// background-color: transparent;
 								background-color:$bg-hover-first!important;
 								width: 320px;
-								margin-left: -.8rem;
+								margin-left: 1rem;
 								margin-bottom: 1.5rem;
 								&:hover{
 									background-color: $bg-hover-first;
