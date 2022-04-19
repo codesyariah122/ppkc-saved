@@ -66,7 +66,7 @@
 								Loading...
 							</div>
 							<div v-else>
-								<mdb-btn disabled color="success" size="md" block class="text-white"> 
+								<mdb-btn disabled color="success" size="md" block class="text-white shadow-none"> 
 									<mdb-icon icon="check" size="lg"/> {{status_pendaftaran}}
 								</mdb-btn>
 							</div>

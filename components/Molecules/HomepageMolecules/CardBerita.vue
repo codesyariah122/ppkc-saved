@@ -5,7 +5,7 @@
         <mdb-card>
           <mdb-card-image :src="lists[listIndex-1].foto_url" alt="Card image cap"></mdb-card-image>
           <mdb-card-body>
-            <mdb-card-title>{{lists[listIndex-1].judul}}</mdb-card-title>
+            <mdb-card-title class="truncate">{{lists[listIndex-1].judul}}</mdb-card-title>
             <mdb-card-text class="truncate2 mt-2">
               <span style="font-size: 12px;"
             ><i class="fa fa-calendar fa-fw fa-lg" aria-hidden="true"></i>
