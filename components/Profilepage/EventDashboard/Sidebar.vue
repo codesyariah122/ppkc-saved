@@ -171,7 +171,7 @@
                   >
                     <mdb-row>
                       <mdb-col md="10" xs="10" sm="10" col="10">
-                        <mdb-icon color="success" far icon="calendar-check" :size="`${$device.isDesktop ? 'lg' : 'sm'}`"/> <a
+                        <mdb-icon color="blue" far icon="calendar-check" :size="`${$device.isDesktop ? 'lg' : 'sm'}`"/> <a
                         class="link__text"
                         :href="`#item-${evaluasi.id}`"
                         @click="ShowField(evaluasi, evaluasi.id, evaluasi.id)"
@@ -180,7 +180,7 @@
                       </a>
                     </mdb-col>
                     <mdb-col md="1" xs="1" sm="1" col="1">
-                      <mdb-icon far icon="circle" color="success" :size="`${$device.isDesktop ? 'lg' : 'sm'}`"/>
+                      <mdb-icon far icon="circle" color="blue" :size="`${$device.isDesktop ? 'lg' : 'sm'}`"/>
                     </mdb-col>
                   </mdb-row>
                   </b-list-group-item>
