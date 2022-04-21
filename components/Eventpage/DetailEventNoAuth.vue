@@ -15,59 +15,62 @@
 					</b-row>
 				</b-card>
 			</mdb-col>
-		</mdb-row>
-		<mdb-row v-else>
-			<mdb-col md="5" sm="12" xs="12" class="col-1">
-				<div class="event__image-wrap">
-					<img :src="events.kegiatan.photo" class="rounded image">
-				</div>
-			</mdb-col>
-
-			<mdb-col md="7" sm="12" xs="12" col="12" class="col-2">
-				<h1>
-					{{events.kegiatan.kegiatan_title}}
-				</h1>
-				<h4 class="mt-3 idr__color">
-					{{events.kegiatan.harga ? $format(events.kegiatan.harga) : 'Rp. -'}}
-				</h4>
-
-				<mdb-row class="inside__first mt-3">
-					<mdb-col md="4">
-						<h5>Jenis kegiatan</h5>
-						<p>
-							{{events.kegiatan.kegiatan_value}}
-						</p>
-					</mdb-col>
-					<mdb-col md="4">
-						<h5>Nilai SKP</h5>
-						<p>
-							{{events.kegiatan.nomor_skp ? events.kegiatan.nomor_skp : '-'}}
-						</p>
-					</mdb-col>
-					<mdb-col md="12">
-						<h5>Deskripsi</h5>
-						<p>
-							{{events.kegiatan.kegiatan_desc}}
-						</p>
-					</mdb-col>
-					<mdb-col md="12">
-						<h5>Waktu</h5>
-						<p>
-							{{$moment(events.kegiatan.tanggal_awal).format("LL")}} - {{$moment(events.kegiatan.tanggal_akhir).format("LL")}}
-						</p>
-					</mdb-col>
-				</mdb-row>
-
-				<mdb-row class="inside__second mt-3">
-					<mdb-col>
-						<mdb-btn size="md" color="blue-grey" class="mb-3" @click="GoToLogin">
-							<mdb-icon icon="sign-in-alt" size="lg"/> Daftar
-						</mdb-btn>
-					</mdb-col>
-				</mdb-row>
-
+			<mdb-col lg="12" class="mt-2">
+				<b-progress :max="max" height="2rem" :striped="true" show-progress :animated="true">
+					<b-progress-bar :value="value" variant="success">
+						<h5 v-if="value > 0">Loading</h5>
+					</b-progress-bar>
+				</b-progress>
 			</mdb-col>
 		</mdb-row>
+
+		<div v-else>
+			<mdb-row col="12" class="row justify-content-start">
+				<mdb-col v-if="$device.isMobile" lg="4" xs="4" sm="12" col="12" class="event__flyer">
+					<img :src="events.kegiatan.photo">
+				</mdb-col>
+				<mdb-col lg="6" xs="6" sm="12" class="event__info">
+					<mdb-badge
+					class="mb-2 badge__category shadow-none"
+					>{{ events.kegiatan.kegiatan_value }}</mdb-badge
+					>			
+					<h1>
+						{{events.kegiatan.kegiatan_title}}
+					</h1>
+					<h4 class="mt-3 idr__color">
+						{{events.kegiatan.harga ? $format(events.kegiatan.harga) : 'Rp. -'}}
+					</h4>
+					<p>
+						{{events.kegiatan.kegiatan_desc}}
+					</p>
+					<mdb-row col="12">
+						<mdb-col md="6" sm="4">
+							<h5>Waktu</h5>
+							<p>
+								{{$moment(events.kegiatan.tanggal_awal).format("LL")}} - {{$moment(events.kegiatan.tanggal_akhir).format("LL")}}
+							</p>
+						</mdb-col>
+						<mdb-col md="6" sm="4">
+							<h5>Nilai SKP</h5>
+							<p>
+								{{events.kegiatan.nomor_skp ? events.kegiatan.nomor_skp : '-'}}
+							</p>
+						</mdb-col>
+					</mdb-row>
+					<mdb-row class="mt-3" col="12">
+						<mdb-col md="12" xs="12" sm="12" col="12">
+							<mdb-btn class="btn my__btn-secondary rounded-pill btn-block shadow-none mb-2" :size="`${$device.isDesktop ? 'md' : 'sm'}`" @click="GoToLogin"> Beli kelas
+							</mdb-btn>
+						</mdb-col>
+					</mdb-row>
+				</mdb-col>
+
+				<!-- image flyer row -->
+				<mdb-col v-if="$device.isDesktop" lg="4" xs="4" sm="12" class="event__flyer">
+					<img :src="events.kegiatan.photo">
+				</mdb-col>
+			</mdb-row>
+		</div>
 	</div>
 </template>
 
@@ -75,9 +78,55 @@
 	export default{
 		props: ['events', 'loading'],
 
+		data(){
+			return {
+				timer: 0,
+				value: 0,
+				max: 100,
+			}
+		},
 
+		mounted(){
+			this.startTimer()
+		},
 
 		methods: {
+
+			CheckKeranjang(){
+				if (this.events.length < this.listsToShow) {
+					SampleEvents.map((d) => {
+						this.events.push(d);
+					});
+				}
+			},
+
+			SetKeranjang(id_event, photo_event, title_event, harga) {
+				const data_event = {
+					id: id_event,
+					photo: photo_event,
+					title: title_event,
+					harga: harga,
+					active: true,
+				};
+				this.SaveCarts(data_event)
+			},
+
+			SaveCarts(data){
+				this.$store.dispatch("config/storeConfigCartEvent", data)
+				if(this.token.accessToken){
+					this.$router.push({
+						path: `/profile/${this.username}/keranjang`
+					});
+				}else{
+					localStorage.setItem('go-to-cart', JSON.stringify({
+						status: true
+					}))
+					this.$router.push({
+						name: 'auth-login'
+					})
+				}
+			},
+			
 
 			GoToLogin() {
 				if (this.event_id === this.$route.params.id) {
@@ -96,6 +145,13 @@
 				this.$router.push({
 					name: "auth-login",
 				});
+			},
+			startTimer() {
+				let vm = this;
+				let timer = setInterval(function() {
+					vm.value += 6;
+					if (vm.value >= vm.max) clearInterval(timer);
+				}, 100);
 			},
 		},
 
