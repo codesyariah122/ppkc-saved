@@ -3,7 +3,7 @@
     <!-- webinar list header -->
     <div class="row justify-content-between card__header">
       <mdb-col md="12" xs="12" sm="12">
-        <h5 class="text-capitalize">
+        <h5 class="text-capitalize" :style="`${$device.isDesktop ? 'font-size:21px!important;' : ''}`">
           <strong class="font-weight-bold">mulai sekarang</strong>
         </h5>
       </mdb-col>

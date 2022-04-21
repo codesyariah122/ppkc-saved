@@ -5,7 +5,7 @@
         <mdb-card>
           <mdb-card-image :src="lists[listIndex-1].foto_url" alt="Card image cap"></mdb-card-image>
           <mdb-card-body>
-            <mdb-card-title class="truncate">{{lists[listIndex-1].judul}}</mdb-card-title>
+            <mdb-card-title class="truncate2">{{lists[listIndex-1].judul}}</mdb-card-title>
             <mdb-card-text class="truncate2 mt-2">
               <span style="font-size: 12px;"
             ><i class="fa fa-calendar fa-fw fa-lg" aria-hidden="true"></i>
@@ -40,48 +40,4 @@
     }
   }
 </script>
-
-<style lang="css">
-.truncate {
-  text-transform: capitalize;
-  display: -webkit-box;
-  -webkit-line-clamp: var(--line-clamp, 3);
-  -webkit-box-orient: vertical;
-  word-break: var(--word-break, "none");
-  overflow: hidden;
-  hyphens: auto;
-  text-align: var(--align, left);
-
-  --is-single-line: 1 - Clamp(0, Calc(var(--line-clamp) - 1), var(--line-clamp));
-  --delay: Calc(-1s * (var(--is-single-line, 1) - 1));
-  animation: states 1s var(--delay) paused;
-
-  @keyframes states {
-    0% {
-      word-break: break-all;
-    }
-  }
-}
-
-.truncate2 {
-    display: -webkit-box;
-    -webkit-line-clamp: var(--line-clamp, 2);
-    -webkit-box-orient: vertical;
-    word-break: var(--word-break, "none");
-    overflow: hidden;
-    hyphens: auto;
-    text-align: var(--align, left);
-
-    --is-single-line: 1 - Clamp(0, Calc(var(--line-clamp) - 1), var(--line-clamp));
-    --delay: Calc(-1s * (var(--is-single-line, 1) - 1));
-    animation: states 1s var(--delay) paused;
-
-    @keyframes states {
-      0% {
-        word-break: break-all;
-      }
-    }
-  }
-</style>
-
 

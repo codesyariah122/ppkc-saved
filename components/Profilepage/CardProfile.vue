@@ -90,6 +90,7 @@ export default {
   },
 
   methods: {
+   
     LogoutProfile() {
       this.$swal({
         title: `Keluar sebagai ${this.profiles.nama}?`,
