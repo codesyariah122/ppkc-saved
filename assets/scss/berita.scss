@@ -10,8 +10,14 @@
 				max-width: 250px;
 				object-fit: cover;
 			}
+			img{
+				width: 100vw;
+				position: relative;
+				left: 50%;  
+				margin-left: -50vw;
+			}
 			h2{
-				color: $color-primary!important;
+				color: $second-black;
 				font-weight:500;
 			}
 			p{
@@ -19,13 +25,15 @@
 				font-size: 14px;
 				font-weight: 400;
 				line-height:19.07px;
-				text-align: center;
+				text-align: left;
 				margin-top:1rem;
+				margin-left: 3rem;
+				margin-bottom: 2rem;
 			}
 		}
 		.col__berita-2{
 			width: 100%;
-			article{
+			.content-desc{
 				color:$default-gray;
 				font-size:15px;
 				font-weight: 400;
@@ -68,28 +76,39 @@
 			height: 100%;
 			.col__berita-1{
 				margin-bottom: 2rem;
-				
+				img{
+					width: 100vw;
+					height: auto;
+					position: relative;
+					left: 50%;  
+					margin-left: -50vw;
+				}
 				h2{
-					color: $color-primary;
+					color: $second-black;
 					font-weight: 700;
 					text-align: justify;
-					margin-bottom: 3rem;
+					margin-bottom: 1rem;
+					margin-left: 3rem;
 				}
-				span{
+				p{
 					color:$default-gray;
 					font-size: 14px;
 					font-weight: 400;
 					line-height:19.07px;
-					text-align: center;
+					text-align: left;
+					margin-left: 3rem;
+					margin-bottom: 2rem;
 				}
 			}
 			.col__berita-2{
-				article{
+				width: 100%;
+				.content-desc{
 					color:$default-gray;
-					font-size:18px;
+					font-size:14px;
 					font-weight: 500;
 					line-height: 35px;
 					text-indent: 70px;
+					text-align: justify!important;
 					white-space: pre-wrap;
 				}
 			}

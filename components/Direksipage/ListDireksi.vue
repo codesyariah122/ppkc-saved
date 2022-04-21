@@ -3,8 +3,8 @@
     <div ref="direksi_square" class="card__list" :style="berita__list_style">
       <mdb-container>
         <mdb-row class="row justify-content-center header__ppkc-list-page">
-          <mdb-col lg="12" xs="12" sm="12" style="margin-top: 32px">
-            <h2 style="color: #004899 !important; font-weight: 700">
+          <mdb-col lg="12" xs="12" sm="12"  class="text-center">
+            <h2 style="font-weight: 700">
               Yayasan & Direksi
             </h2>
           </mdb-col>

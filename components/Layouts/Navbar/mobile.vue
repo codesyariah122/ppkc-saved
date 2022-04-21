@@ -100,10 +100,9 @@
           link: "/ppkc/struktur-organisasi",
         },
         { id: 4, name: "Fasilitas", link: "/ppkc/fasilitas" },
-        { id: 5, name: "Berita", link: "/ppkc/berita" },
-        { id: 6, name: "Testimoni", link: "/ppkc/testimoni" },
-        { id: 7, name: "Fasilitator", link: "/ppkc/fasilitator" },
-        { id: 8, name: "Yayasan & Direksi", link: "/ppkc/yayasan-direksi" },
+        { id: 5, name: "Testimoni", link: "/ppkc/testimoni" },
+        { id: 6, name: "Fasilitator", link: "/ppkc/fasilitator" },
+        { id: 7, name: "Yayasan & Direksi", link: "/ppkc/yayasan-direksi" },
         ],
         mainProps: { blank: true, blankColor: '#777', width: 75, height: 75, class: 'm1' }
       }

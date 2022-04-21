@@ -74,6 +74,7 @@
                 </mdb-col>
               </mdb-row>
             </div>
+            <hr/>
           </mdb-col>
 
           <mdb-col v-else-if="status_pendaftaran == 'Menunggu Konfirmasi'" md="12" xs="12" sm="12" class="mt-5">

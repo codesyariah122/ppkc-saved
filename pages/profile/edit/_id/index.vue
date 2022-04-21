@@ -3,6 +3,12 @@
     <mdb-container>
       <!-- header -->
       <mdb-row class="row justify-content-center berita__detail-content">
+        <mdb-col lg="12" xs="12" sm="12" class="mb-3">
+          <mdb-btn @click="$router.go(-1)" color="danger" class="rounded-pill">
+            <mdb-icon icon="angle-left" size="lg" /> Kembali Ke Profile 
+          </mdb-btn>
+        </mdb-col>
+
         <mdb-col lg="12" xs="12" sm="12" class="col__berita-1">
           <h2 class="text-capitalize">Data Diri</h2>
         </mdb-col>
@@ -56,6 +62,17 @@
               class="form-control"
               id="input_nama_ktp"
               v-model="profiles.email"
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="nama">No Telphone</label>
+            <input
+            type="text"
+            class="form-control"
+            id="input_nama_ktp"
+            v-model="profiles.phone"
             />
           </div>
         </div>
@@ -263,6 +280,7 @@ export default {
             this.profiles.no_anggota = user.no_anggota;
             this.profiles.nama = user.nama;
             this.profiles.email = user.email;
+            this.profiles.phone = user.phone
             this.profiles.tempat_lahir = user.tempat_lahir;
             this.profiles.no_ktp = user.no_ktp;
             if (user.tanggal_lahir) {

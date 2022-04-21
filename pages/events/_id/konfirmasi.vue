@@ -1,19 +1,8 @@
 <template>
-	<div class="auth__content">
+	<div :class="`${$device.isDesktop ? 'event__pembayaran mb-5' : 'event__pembayaran mb-5'}`">
 		<mdb-container>
-
-			<mdb-row class="justify-content-center registrasi__event-header">
-				<mdb-col lg="12" sm="12" xs="12">
-					<EventpageKonfirmasiHeader/>
-				</mdb-col>
-			</mdb-row>
-
-
-			<mdb-row class="row justify-content-center registrasi__event-content">
-				<mdb-col md="6" sm="8" xs="8">
-					<EventpageKonfirmasi :id="id" :kegiatan="kegiatan" :bank="bank" :loading="loading" :token="token" :api_url="api_url"/>
-				</mdb-col>
-			</mdb-row>
+			<EventpageKonfirmasiHeader/>
+			<EventpageKonfirmasi :id="id" :kegiatan="kegiatan" :bank="bank" :loading="loading" :token="token" :api_url="api_url" :details="details"/>
 		</mdb-container>
 	</div>
 </template>
@@ -21,26 +10,23 @@
 	export default {
 		name: 'events-id-konfirmasi',
 		layout: 'profile',
-
 		data(){
 			return {
 				loading: null,
 				id: this.$route.params.id,
 				kegiatan: {},
-				bank: {}
+				bank: {},
+				details: {}
 			}
 		},
-
 		beforeMount(){
 			this.ConfigApiUrl(),
 			this.CheckToken()
 		},
-
 		mounted(){
 			this.CheckPembayaran(),
 			this.IsLoggedIn()
 		},
-
 		methods:{
 			IsLoggedIn(){
 				if(!this.token.accessToken){
@@ -59,7 +45,6 @@
 				const api_url = process.env.NUXT_ENV_API_URL
 				this.$store.dispatch('config/storeConfigApiUrl', api_url)
 			},
-
 			CheckPembayaran(){
 				this.loading = true
 				const url = `${this.api_url}/web/event/${this.id}/konfirmasi`
@@ -74,7 +59,17 @@
 					this.loading = false
 				})
 			},
-
+			DetailEventProfileLogin(){
+				if(this.token.accessToken){
+					const url = `${this.api_url}/web/event/${this.$route.params.id}`
+					this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
+					this.$axios.get(url)
+					.then(({data}) => {
+						this.details = data.kegiatan
+					})
+					.catch(err => console.log(err))
+				}
+			},
 			Alert(status, data){
 				switch(status){
 					case 'error':
@@ -96,7 +91,6 @@
 				}
 			}
 		},
-
 		computed: {
 			token(){
 				return this.$store.getters['config/ConfigCheckLogin']

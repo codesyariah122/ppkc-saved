@@ -340,8 +340,8 @@
 
 			.event__jadwal{
 				height: 100%;
-				margin-top: 10rem!important;
-				margin-bottom: 8rem;
+				margin-top: 7rem!important;
+				margin-bottom: 5rem;
 				h4{
 					font-weight: 700;
 					color:$second-black;
@@ -367,6 +367,7 @@
 								}
 								.schedule__collapse{
 									.list__categori{
+										width: 90%;
 										.list__categori-item{
 											border:0;
 											background-color: transparent;
