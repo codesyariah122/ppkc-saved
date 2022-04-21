@@ -106,7 +106,7 @@
 									<b-card no-body class="shadow-none overflow-hidden card__bank-list">
 										<b-row no-gutters>
 											<b-col md="4" class="mt-5">
-												<b-card-img :src="require('~/assets/images/bank/bsi.png')" alt="Image" class="rounded-0"></b-card-img>
+												<b-card-img :src="require('~/assets/images/bank/logo-bank-bca.svg') " alt="Image" class="rounded-0"></b-card-img>
 											</b-col>
 											<b-col md="8">
 												<b-card-body title="Transfer Bank">
@@ -123,11 +123,11 @@
 										</b-row>
 									</b-card>
 								</div>
-								<div v-else-if="parseInt(pembayaran.bank.id ) == 4">
+								<div v-else>
 									<b-card no-body class="shadow-none overflow-hidden card__bank-list">
 										<b-row no-gutters>
 											<b-col md="4" class="mt-5">
-												<b-card-img :src="require('~/assets/images/bank/permata-syariah.png')" alt="Image" class="rounded-0"></b-card-img>
+												<b-card-img :src="require('~/assets/images/bank/logo-bank-mandiri.svg')" alt="Image" class="rounded-0"></b-card-img>
 											</b-col>
 											<b-col md="8">
 												<b-card-body title="Transfer Bank">

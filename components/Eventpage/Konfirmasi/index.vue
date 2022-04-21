@@ -124,7 +124,7 @@
 										</b-row>
 									</b-card>
 								</div>
-								<div v-else-if="parseInt(pembayaran.bank.id ) == 4">
+								<div v-else>
 									<b-card no-body class="shadow-none overflow-hidden card__bank-list">
 										<b-row no-gutters>
 											<b-col md="4" class="mt-5">
