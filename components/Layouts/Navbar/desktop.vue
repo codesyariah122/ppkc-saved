@@ -1,7 +1,7 @@
 <template>
   <div>
     <mdb-navbar
-    class="fixed-top shadow-none"
+    class="fixed-top"
     light
     color="white"
     expand="large"
@@ -136,7 +136,7 @@ style="font-size: 31px !important"
    },
 
    mounted(){
-    this.scroll()
+    // this.scroll()
   },
 
   methods: {
