@@ -4,7 +4,7 @@
       <!-- header -->
       <mdb-row class="row justify-content-center berita__detail-content">
         <mdb-col lg="12" xs="12" sm="12" class="mb-3">
-          <mdb-btn @click="$router.go(-1)" color="danger" class="rounded-pill">
+          <mdb-btn @click="$router.push({path: `/profile/${$username(profiles.nama)}`})" color="danger" class="rounded-pill">
             <mdb-icon icon="angle-left" size="lg" /> Kembali Ke Profile 
           </mdb-btn>
         </mdb-col>
