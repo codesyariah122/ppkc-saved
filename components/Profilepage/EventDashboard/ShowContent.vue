@@ -270,7 +270,6 @@
       />
     </section>
   </div>
-
 </template>
 
 <script>

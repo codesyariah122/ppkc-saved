@@ -78,9 +78,9 @@
             <mdb-row class="d-flex justify-content-center">
               <mdb-col col="12" sm="6">
                 <mdb-btn class="shadow-none" outline="primary" size="sm">
-                  <nuxt-link :to="{path: `/profile/edit/${profiles.id}`}">
+                  <a :href="`/profile/edit/${profiles.id}`">
                     <mdb-icon icon="user-cog" size="sm" /> Edit Profile
-                  </nuxt-link>
+                  </a>
                 </mdb-btn>
               </mdb-col>
               <mdb-col col="12" sm="6">

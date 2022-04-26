@@ -46,29 +46,10 @@ export default {
         rel: 'stylesheet',
         href: 'https://fonts.googleapis.com/css?family=Open+Sans'
       },
-      { rel: 'stylesheet', type: 'text/css', href: '/assets/css/tiny-slider.css'},
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap'},
     ],
     script: [
-      {
-        src: 'https://polyfill.io/v3/polyfill.min.js?features=es2015%2CIntersectionObserver',
-        body: true
-      },
-      {
-        src: 'https://cdn.ampproject.org/v0/amp-ad-0.1.js',
-        async: 'true',
-        'custom-element': 'amp-ad'
-      },
-
-      {
-        src: '/assets/glightbox/glightbox.min.js',
-        type: 'text/javascript'
-      },
-      
-      {
-        src: '/assets/js/tiny-slider.js',
-        type: 'text/javascript'
-      }
+    
     ]
   },
 

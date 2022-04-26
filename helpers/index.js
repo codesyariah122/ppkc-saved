@@ -38,7 +38,7 @@ export const CheckWeather = async(city, apiKey) => {
 
 export const SampleEvents = [
   {
-    kegiatan_id:1, 
+    kegiatan_id:8, 
     kegiatan_title: 'Penanganan Pertama pada Gejala COVID 19',
     kategori_value: 'full online',
     photo: require('~/assets/images/samples/Card/1.jpg'),
@@ -48,7 +48,7 @@ export const SampleEvents = [
     jam_akhir: new Date(2022, 3, 22)
   },
   {
-    kegiatan_id:2, 
+    kegiatan_id:9, 
     kegiatan_title: 'Pelatihan sanitasi lingkungan dan pembuatan Desinfektan',
     kategori_value: 'full online',
     photo: require('~/assets/images/samples/Card/2.jpg'),
@@ -58,7 +58,7 @@ export const SampleEvents = [
     jam_akhir: new Date(2022, 3, 30)
   },
   {
-    kegiatan_id:3, 
+    kegiatan_id:10, 
     kegiatan_title: 'Pelatihan tenaga k3 - tingkat muda', 
     kategori_value: 'blended',
     photo: require('~/assets/images/samples/Card/3.jpg'),
@@ -68,7 +68,7 @@ export const SampleEvents = [
     jam_akhir: new Date(2022, 4, 22)
   },
   {
-    kegiatan_id:4, 
+    kegiatan_id:11, 
     kegiatan_title: 'Pelatihan tes kesehatan1 - tingkat muda', 
     kategori_value: 'blended',
     photo: require('~/assets/images/samples/Card/3.jpg'),
@@ -78,7 +78,7 @@ export const SampleEvents = [
     jam_akhir: new Date(2022, 4, 22)
   },
   {
-    kegiatan_id:5, 
+    kegiatan_id:12, 
     kegiatan_title: 'Pelatihan tes kesehatan2 - tingkat muda', 
     kategori_value: 'blended',
     photo: require('~/assets/images/samples/Card/3.jpg'),
@@ -88,7 +88,7 @@ export const SampleEvents = [
     jam_akhir: new Date(2022, 4, 22)
   },
   {
-    kegiatan_id:6, 
+    kegiatan_id:13, 
     kegiatan_title: 'Pelatihan tes kesehatan3 - tingkat muda', 
     kategori_value: 'blended',
     photo: require('~/assets/images/samples/Card/3.jpg'),

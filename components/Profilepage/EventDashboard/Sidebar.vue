@@ -8,12 +8,12 @@
     <nav v-else id="docs-nav" class="docs-nav navbar shadow-none">
       <ul class="section-items list-unstyled nav flex-column pb-3">
         <li class="nav-item__sidebar section-title">
-         <!-- <img :src="details.photo" class="img-fluid" width="250"> -->
+          <!-- <img :src="details.photo" class="img-fluid" width="250"> -->
           <h5>
-           {{details.kegiatan_title}}
-         </h5>
-       </li>
-       <!-- <li class="nav-item__sidebar">
+            {{ details.kegiatan_title }}
+          </h5>
+        </li>
+        <!-- <li class="nav-item__sidebar">
         <div class="row justify-content-start profile__fasilitator">
           <div class="col-md-5 avatar">
             <b-avatar :src="require('~/assets/images/Avatar/5.jpg')" variant="none" size="5rem"></b-avatar>
@@ -24,14 +24,11 @@
           </div>
         </div>
       </li> -->
-      <b-dropdown-divider
-      style="list-style: none;"
-      ></b-dropdown-divider>
+        <b-dropdown-divider style="list-style: none"></b-dropdown-divider>
 
-      <div v-if="loading">
-        <mdb-spinner big multicolor />
-      </div>
-
+        <div v-if="loading">
+          <mdb-spinner big multicolor />
+        </div>
 
         <div
           v-else
@@ -54,20 +51,19 @@
             <mdb-row col="12" class="d-flex justify-content-between">
               <mdb-col col="9" md="9" sm="9" xs="9">
                 <h6>{{ item.title }}</h6>
-                <small> {{$moment(item.tanggal).format("LLLL")}} </small>
+                <small> {{ $moment(item.tanggal).format("LLLL") }} </small>
               </mdb-col>
 
               <mdb-col col="2" md="2" sm="2" xs="2">
-                <mdb-icon 
-                :icon="`${
-                  show_collapse && index + 1 === urutan
-                  ? 'angle-down'
-                  : 'angle-right'
-                }`"
-                size="lg"
+                <mdb-icon
+                  :icon="`${
+                    show_collapse && index + 1 === urutan
+                      ? 'angle-down'
+                      : 'angle-right'
+                  }`"
+                  size="lg"
                 />
               </mdb-col>
-
             </mdb-row>
           </b-button>
 
@@ -91,32 +87,40 @@
                         )
                       "
                     >
-                    <mdb-row>
-                      <mdb-col md="10" xs="10" sm="10" col="10">
-                        <mdb-icon color="blue" :icon="FilterIcon(d.kategori)" :size="`${$device.isDesktop ? 'lg' : 'sm'}`"/> <a
-                        class="link__text"
-                        :href="`#item-${d.kategori}`"
-                        @click="
-                        ShowField(
-                          d,
-                          d.kategori == 3 ||
-                          d.kategori == 4 ||
-                          d.kategori == 6
-                          ? d.id
-                          : d.kategori,
-                          d.kategori
-                          )
-                          "
+                      <mdb-row>
+                        <mdb-col md="10" xs="10" sm="10" col="10">
+                          <mdb-icon
+                            color="blue"
+                            :icon="FilterIcon(d.kategori)"
+                            :size="`${$device.isDesktop ? 'lg' : 'sm'}`"
+                          />
+                          <a
+                            class="link__text"
+                            :href="`#item-${d.kategori}`"
+                            @click="
+                              ShowField(
+                                d,
+                                d.kategori == 3 ||
+                                  d.kategori == 4 ||
+                                  d.kategori == 6
+                                  ? d.id
+                                  : d.kategori,
+                                d.kategori
+                              )
+                            "
                           >
-                          {{ d.title }}
-                        </a>
-
-                      </mdb-col>
-                      <mdb-col md="1" xs="1" sm="1" col="1">
-                        <mdb-icon far icon="circle" color="blue" :size="`${$device.isDesktop ? 'lg' : 'sm'}`"/>
-                      </mdb-col>
-                    </mdb-row>
-
+                            {{ d.title }}
+                          </a>
+                        </mdb-col>
+                        <mdb-col md="1" xs="1" sm="1" col="1">
+                          <mdb-icon
+                            far
+                            icon="circle"
+                            color="blue"
+                            :size="`${$device.isDesktop ? 'lg' : 'sm'}`"
+                          />
+                        </mdb-col>
+                      </mdb-row>
                     </b-list-group-item>
                   </b-list-group>
                 </div>
@@ -136,25 +140,24 @@
               nav-link__sidebar
               section-title
             "
-            @click="ToggleFile(3)"
+            @click="ToggleFile(pelatihans.length + 1)"
           >
-          <mdb-row col="12" class="d-flex justify-content-between">
-            <mdb-col col="9" md="9" sm="9" xs="9"> 
-             <h6> Evaluasi </h6>
-           </mdb-col>
+            <mdb-row col="12" class="d-flex justify-content-between">
+              <mdb-col col="9" md="9" sm="9" xs="9">
+                <h6>Evaluasi</h6>
+              </mdb-col>
 
-           <mdb-col col="2" md="2" sm="2" xs="2">
-            <mdb-icon
-            :icon="`${
-              show_collapse && pelatihans.length+1 === urutan
-              ? 'angle-down'
-              : 'angle-right'
-            }`"
-            size="lg"
-            />
-          </mdb-col>
-        </mdb-row>
-
+              <mdb-col col="2" md="2" sm="2" xs="2">
+                <mdb-icon
+                  :icon="`${
+                    show_collapse && pelatihans.length + 1 === urutan
+                      ? 'angle-down'
+                      : 'angle-right'
+                  }`"
+                  size="lg"
+                />
+              </mdb-col>
+            </mdb-row>
           </b-button>
 
           <b-collapse
@@ -170,18 +173,29 @@
                   >
                     <mdb-row>
                       <mdb-col md="10" xs="10" sm="10" col="10">
-                        <mdb-icon color="blue" far icon="calendar-check" :size="`${$device.isDesktop ? 'lg' : 'sm'}`"/> <a
-                        class="link__text"
-                        :href="`#item-${evaluasi.id}`"
-                        @click="ShowField(evaluasi, evaluasi.id, evaluasi.id)"
+                        <mdb-icon
+                          color="blue"
+                          far
+                          icon="calendar-check"
+                          :size="`${$device.isDesktop ? 'lg' : 'sm'}`"
+                        />
+                        <a
+                          class="link__text"
+                          :href="`#item-${evaluasi.id}`"
+                          @click="ShowField(evaluasi, evaluasi.id, evaluasi.id)"
                         >
-                        {{ evaluasi.nama }}
-                      </a>
-                    </mdb-col>
-                    <mdb-col md="1" xs="1" sm="1" col="1">
-                      <mdb-icon far icon="circle" color="blue" :size="`${$device.isDesktop ? 'lg' : 'sm'}`"/>
-                    </mdb-col>
-                  </mdb-row>
+                          {{ evaluasi.nama }}
+                        </a>
+                      </mdb-col>
+                      <mdb-col md="1" xs="1" sm="1" col="1">
+                        <mdb-icon
+                          far
+                          icon="circle"
+                          color="blue"
+                          :size="`${$device.isDesktop ? 'lg' : 'sm'}`"
+                        />
+                      </mdb-col>
+                    </mdb-row>
                   </b-list-group-item>
                 </b-list-group>
               </div>
@@ -203,18 +217,18 @@
             @click="ToggleFile(pelatihans.length + 2)"
           >
             <mdb-row col="12" class="d-flex justify-content-between">
-                <mdb-col col="9" md="9" sm="9" xs="9"> 
-                 <h6> Absensi </h6>
-               </mdb-col>
+              <mdb-col col="9" md="9" sm="9" xs="9">
+                <h6>Absensi</h6>
+              </mdb-col>
 
-               <mdb-col col="2" md="2" sm="2" xs="2">
+              <mdb-col col="2" md="2" sm="2" xs="2">
                 <mdb-icon
-                :icon="`${
-                  show_collapse && pelatihans.length+1 === urutan
-                  ? 'angle-down'
-                  : 'angle-right'
-                }`"
-                size="lg"
+                  :icon="`${
+                    show_collapse && pelatihans.length + 1 === urutan
+                      ? 'angle-down'
+                      : 'angle-right'
+                  }`"
+                  size="lg"
                 />
               </mdb-col>
             </mdb-row>
@@ -233,26 +247,35 @@
                   >
                     <mdb-row>
                       <mdb-col md="10" xs="10" sm="10" col="10">
-                        <mdb-icon color="blue" far icon="calendar-check" :size="`${$device.isDesktop ? 'lg' : 'sm'}`"/> <a
-                        class="link__text"
-                        :href="`#item-${evaluasi.id}`"
-                        @click="ShowField(evaluasi, evaluasi.id, evaluasi.id)"
+                        <mdb-icon
+                          color="blue"
+                          far
+                          icon="calendar-check"
+                          :size="`${$device.isDesktop ? 'lg' : 'sm'}`"
+                        />
+                        <a
+                          class="link__text"
+                          :href="`#item-${evaluasi.id}`"
+                          @click="ShowField(evaluasi, evaluasi.id, evaluasi.id)"
                         >
-                        {{ evaluasi.nama }}
-                      </a>
-                    </mdb-col>
-                    <mdb-col md="1" xs="1" sm="1" col="1">
-                      <mdb-icon far icon="circle" color="blue" :size="`${$device.isDesktop ? 'lg' : 'sm'}`"/>
-                    </mdb-col>
-                  </mdb-row>
+                          {{ evaluasi.nama }}
+                        </a>
+                      </mdb-col>
+                      <mdb-col md="1" xs="1" sm="1" col="1">
+                        <mdb-icon
+                          far
+                          icon="circle"
+                          color="blue"
+                          :size="`${$device.isDesktop ? 'lg' : 'sm'}`"
+                        />
+                      </mdb-col>
+                    </mdb-row>
                   </b-list-group-item>
                 </b-list-group>
               </div>
             </b-card>
           </b-collapse>
         </div>
-
-
       </ul>
     </nav>
     <!--//docs-nav-->
@@ -299,7 +322,6 @@ export default {
           nama: "Absensi Pelatihan",
         },
       ],
-
     };
   },
 

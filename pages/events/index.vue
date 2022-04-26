@@ -4,12 +4,14 @@
 		<EventpageHeader @update-list-event="SearchEvent" :lists="lists" :loading="loading" :loadingBtn="loadingBtn" :listToShow="listToShow" @load-more-event="LoadListEvent" :categories="categories" ref="eventChild"/>
 
 		<!-- List event page content -->
-		<EventpageListEvents :lists="lists" :loading="loading" :loadingBtn="loadingBtn" :listToShow="listToShow" :message="message" :empty="empty" :token="token" :data_event="data_event" :error_search="error_search"/>
+		<EventpageListEvents :lists="lists" :loading="loading" :loadingBtn="loadingBtn" :listToShow="listToShow" :message="message" :empty="empty" :token="token" :data_event="data_event" :error_search="error_search" @load-more-event="LoadListEvent" :page="page"/>
 
 	</div>
 </template>
 
 <script>
+	import {SampleEvents} from '@/helpers'
+
 	export default{
 		name: 'events',
 		layout: 'default',
@@ -19,7 +21,9 @@
 				loadingBtn: null,
 				lists: [],
 				categories: [],
-				listToShow: 20,
+				listToShow: 9,
+				page: 1,
+				start: 20,
 				message:'',
 				empty: null,
 				error_search: null
@@ -39,10 +43,10 @@
 				this.$store.dispatch('config/checkAuthLogin', 'token')
 			},
 
-			FetchListEvent(keyword, page, category, month, loadingBtn=null){
+			FetchListEvent(keyword, start, category, month, loadingBtn=null){
 				this.loading = true
 				this.loadingBtn = loadingBtn
-				const url = `${this.api_url}/web/event/paging?keyword=${keyword ? keyword : ''}&page=${page ? page : 1}&jenis_pelatihan=${category ? category : ''}&bulan_pelatihan=${month ? month : ''}`
+				const url = `${this.api_url}/web/event/paging?keyword=${keyword ? keyword : ''}&start=${start ? start : this.start}&jenis_pelatihan=${category ? category : ''}&bulan_pelatihan=${month ? month : ''}`
 				this.$axios.get(url)
 				.then(({data}) => {
 					this.categories = data.list_jenis_kegiatan
@@ -50,6 +54,11 @@
 					if(data.list_kegiatan_terdekat.length > 0){
 						this.empty = false
 						this.lists = data.list_kegiatan_terdekat
+						// if (this.lists.length <= this.listToShow) {
+						// 	SampleEvents.map(d => {
+						// 		this.lists.push(d)
+						// 	})
+						// }
 					}else{
 						this.empty = true
 						this.message = `Tidak ada event terdekat !`
@@ -77,13 +86,14 @@
 				})
 			},
 
-			LoadListEvent(page){
+			LoadListEvent(start){
 				// Clear list base on page == 1
 				// console.log(page)
 				// if(page == 1){
 				// 	page = 0
 				// }
-				this.ListEvent(page,'', '', '')
+				this.listToShow += 9
+				this.FetchListEvent('', this.start+=start,'', '', true)
 			},
 
 			SearchEvent(page, keyword, category, month, loadingBtn){
@@ -95,7 +105,7 @@
 						this.error_search= false
 					}, 500)
 					setTimeout(() => {
-						this.FetchListEvent(keyword="", page=0, category="", month="", loadingBtn)
+						this.FetchListEvent(keyword="", start=20, category="", month="", loadingBtn)
 					}, 1500)
 				}else{
 					this.empty = false

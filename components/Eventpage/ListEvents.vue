@@ -1,5 +1,5 @@
 <template>
-  <div class="card__content-lists">
+  <div class="card__content-lists[listIndex - 1]s">
     <mdb-container>
       <mdb-row v-if="loading && !load_more" col="12" class="d-flex justify-content-start align-items-stretch mb-5 mt-2">
         
@@ -30,7 +30,7 @@
 
       <mdb-row v-else col="12" class="d-flex justify-content-start align-items-stretch mb-5 webinar__content">
         <!-- <pre>
-          {{lists.slice(0,6)}}
+          {{lists[listIndex - 1]s.slice(0,6)}}
         </pre> -->
 
         <mdb-col v-if="empty || error_search" lg="12" xs="12" sm="12">
@@ -38,55 +38,56 @@
             <mdb-icon icon="info-circle" size="lg"/> {{message}}
           </mdb-alert>
         </mdb-col>
-
+        
         <mdb-col
-        v-for="list in lists"
+        v-if="listIndex <= lists.length"
+        v-for="listIndex in listToShow"
         col="12"
         md="4"
         class="mb-4"
-        :key="list.kegiatan_id"
+        :key="lists[listIndex - 1].kegiatan_id"
         >
         <mdb-card>
           <mdb-card-image
-          :src="list.photo"
-          :alt="list.kegiatan_title"
+          :src="lists[listIndex - 1].photo"
+          :alt="lists[listIndex - 1].kegiatan_title"
           ></mdb-card-image>
 
           <mdb-card-body>
             <mdb-badge class="mb-2 badge__category shadow-none">{{
-              list.kategori_value
+              lists[listIndex - 1].kategori_value
             }}</mdb-badge>
 
             <mdb-card-title
             class="truncate"
             style="color: #004899; font-weight: bold; min-height: 80px"
-            >{{ list.kegiatan_title }}</mdb-card-title
+            >{{ lists[listIndex - 1].kegiatan_title }}</mdb-card-title
             >
             <mdb-card-text
             class="truncate2 mt-2"
             style="width: 200px; min-height: 45px"
-            >{{ list.kegiatan_desc }}</mdb-card-text
+            >{{ lists[listIndex - 1].kegiatan_desc }}</mdb-card-text
             >
 
             <h6 class="mt-2 idr__color">
-              {{ $format(list.harga) }}
+              {{ $format(lists[listIndex - 1].harga) }}
             </h6>
 
             <span style="font-size: 12px; margin-top: 1.5rem"
             ><i class="fa fa-calendar fa-fw fa-lg" aria-hidden="true"></i>
-            {{ $moment(list.tgl_awal).format("LL") }} -
-            {{ $moment(list.tgl_akhir).format("LL") }}</span
+            {{ $moment(lists[listIndex - 1].tgl_awal).format("LL") }} -
+            {{ $moment(lists[listIndex - 1].tgl_akhir).format("LL") }}</span
             >
 
-            <!-- <mdb-btn @click="ToDetailEvent(list.kegiatan_id)" block class="btn btn-outline-primary mt-3 mb-2" color="primary">Detail Event</mdb-btn> -->
+            <!-- <mdb-btn @click="ToDetailEvent(lists[listIndex - 1].kegiatan_id)" block class="btn btn-outline-primary mt-3 mb-2" color="primary">Detail Event</mdb-btn> -->
             <hr />
             
               <nuxt-link
               :to="{
                 name: `detail-event-id-slug`,
                 params: {
-                  id: list.kegiatan_id,
-                  slug: $slug(list.kegiatan_title),
+                  id: lists[listIndex - 1].kegiatan_id,
+                  slug: $slug(lists[listIndex - 1].kegiatan_title),
                 },
               }"
               :class="`btn my__btn-secondary rounded-pill mt-3 mb-2 btn-block shadow-none ${
@@ -106,7 +107,7 @@
         </mdb-col>
       </mdb-row>
 
-      <mdb-row v-if="listToShow !== lists.length" class="row justify-content-center mt-2">
+      <mdb-row v-if="listToShow <= lists.length" class="row justify-content-center mt-2">
         <mdb-col
         col="12"
         xl="5"
@@ -120,7 +121,15 @@
           :class="`btn my__btn-primary rounded-pill  ${
             $device.isMobile ? 'btn-block btn-sm' : 'btn-block'
           }`"
-          >Lihat kelas Lainnya</mdb-btn>
+          >
+          <div v-if="loadingBtn">
+            <b-spinner small ></b-spinner>
+            Loading...
+          </div>
+            <div v-else>
+              Lihat kelas Lainnya
+            </div>
+          </mdb-btn>
         </mdb-col>
       </mdb-row>
 
@@ -130,7 +139,7 @@
 
 <script>
   export default{
-    props: ['loading', 'lists', 'listToShow', 'loading_more', 'token', 'data_event', 'empty', 'message', 'error_search'],
+    props: ['loading', 'lists', 'listToShow', 'loading_more', 'loadingBtn', 'token', 'data_event', 'empty', 'message', 'error_search', 'page'],
 
     data(){
       return {
@@ -189,8 +198,7 @@
         },
 
         LoadMore(){
-          this.load_more = true
-          this.$emit('load-more-event', 0)
+          this.$emit('load-more-event', 1)
         }
     }
   }

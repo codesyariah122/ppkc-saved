@@ -727,11 +727,12 @@
 		opacity: 0.6;
 	}
 	.visi-misi__content{
-		color:$default;
+		color:$default!important;
 		// margin-left: -5rem;
 		width:80%;
 		z-index: 9999;
 		h1{
+			color:$default!important;
 			font-size:27px;
 			font-weight: 700;
 			line-height: 32.68px;

@@ -3,7 +3,7 @@
     <mdb-container>
       <mdb-row class="justify-content-center visi-misi__header">
         <mdb-col lg="12">
-          <h1 class="mt-5 mb-5">Tentang Kami</h1>
+          <h1 :class="`${$device.isMobile ? 'text-white font-weight-bold mt-5 mb-5' : 'mt-5 mb-5'}`">Tentang Kami</h1>
         </mdb-col>
       </mdb-row>
 

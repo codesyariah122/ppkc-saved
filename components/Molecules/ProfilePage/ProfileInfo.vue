@@ -36,7 +36,7 @@
           <strong class="text-primary font-weight-bold">Pekerjaan</strong>
         </div>
         <div class="col-md-6 col-xs-2 col-sm-2 mb-2">
-          <nuxt-link :to="{path: `/profile/pekerjaan/${profiles.id}`}" class="btn btn-sm btn-outline-primary font-weight-bold">Edit</nuxt-link>
+          <a :href="`/profile/pekerjaan/${profiles.id}`" class="btn btn-sm btn-outline-primary font-weight-bold">Edit</a>
         </div>
       </div>
       <div class="d-flex">
@@ -57,7 +57,7 @@
           <strong class="text-primary font-weight-bold">Pendidikan</strong>
         </div>
         <div class="col-md-6 col-xs-2 col-sm-2 mt-2 mb-2">
-          <nuxt-link :to="{path: `/profile/pendidikan/${profiles.id}`}" class="btn btn-sm btn-outline-primary font-weight-bold">Edit</nuxt-link>
+          <a :href="`/profile/pendidikan/${profiles.id}`" class="btn btn-sm btn-outline-primary font-weight-bold">Edit</a>
         </div>
       </div>
       <div class="d-flex">

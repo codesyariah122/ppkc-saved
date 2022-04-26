@@ -135,11 +135,8 @@ style="font-size: 31px !important"
      };
    },
 
-   mounted(){
-    // this.scroll()
-  },
 
-  methods: {
+   methods: {
     Logout() {
       this.$emit("logout-profile");
     },
@@ -148,23 +145,6 @@ style="font-size: 31px !important"
       this.notifs = this.notifs > 0 ? this.notifs + 3 : 0
     },
 
-    scroll () {
-      window.onscroll = () => {
-        let bottomOfWindow = window.pageYOffset
-        let fixeNav= document.querySelector('.fixed-top')
-          // console.log(bottomOfWindow)
-          
-          if (bottomOfWindow) {
-           this.scrolledToBottom = true // replace it with your code
-           fixeNav.classList.remove('shadow-none')
-           fixeNav.classList.add('z-depth-2')
-         }else{
-          this.scrolledToBottom = false
-          fixeNav.classList.add('shadow-none')
-          fixeNav.classList.remove('z-depth-2')
-        }
-      }
-    },
     GoToLogin() {
       if (this.event_id === this.$route.params.id) {
         const data = {
