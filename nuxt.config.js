@@ -8,14 +8,18 @@ export default {
     color: '#2f80ed',
     height: '15px'
   },
-  generate: {
-    cache: {
-      ignore: [
-        // When something changed in the docs folder, do not re-build via webpack
-        'docs'
-        ]
-      }
-    },
+  // generate: {
+  //   cache: {
+  //     ignore: [
+  //       // When something changed in the docs folder, do not re-build via webpack
+  //       'docs'
+  //       ]
+  //     }
+  //   },
+  purgeCSS: {
+    whitelistPatterns: [/^ct/]
+  },
+
     body: true,
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
