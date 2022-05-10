@@ -68,7 +68,7 @@
           block
           color="white"
           size="md"
-          class="text-primary"
+          class="text-white"
           >
           <div v-if="loading">
             <span
@@ -128,7 +128,7 @@
           }`"
           >
           Sudah punya Akun ?
-          <a href="/auth/login">Masuk Sekarang</a>
+          <nuxt-link to="/auth/login">Masuk Sekarang</nuxt-link>
         </h6>
       </mdb-col>
     </mdb-row>

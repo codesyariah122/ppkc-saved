@@ -13,6 +13,10 @@
         <mdb-col lg="12" sm="12" xs="12">
           <HomepageEventList :lists="lists.list_kegiatan_terdekat" :listToShow="listToShow" />
         </mdb-col>
+
+        <mdb-col lg="12" sm="12" xs="12">
+          <HomepagePanelTarget/>
+        </mdb-col>
       </mdb-row>
     </mdb-container>
     <!-- End inside container -->

@@ -12,7 +12,6 @@
     <!-- Navbar brand -->
     <mdb-navbar-brand>
       <nuxt-link to="/">
-        <!-- <MoleculesLayoutMoleculesBrand /> -->
         <img :src="require('~/assets/images/logo/brand.svg')" class="img-fluid">
       </nuxt-link>
     </mdb-navbar-brand>
@@ -139,10 +138,6 @@ style="font-size: 31px !important"
    methods: {
     Logout() {
       this.$emit("logout-profile");
-    },
-
-    ToggleNotif(){
-      this.notifs = this.notifs > 0 ? this.notifs + 3 : 0
     },
 
     GoToLogin() {

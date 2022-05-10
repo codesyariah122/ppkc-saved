@@ -21,7 +21,6 @@
           </mdb-container>
         </mdb-card>
       </mdb-col>
-
     </mdb-row>
 
   </div>

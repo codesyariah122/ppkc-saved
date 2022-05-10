@@ -10,7 +10,7 @@
         </mdb-col>
 
         <mdb-col v-if="$device.isDesktop" col="12" md="3" >
-          <nuxt-link to="/ppkc/testimoni" class="btn btn-sm rounded-pill shadow-none">Lihat Semua Testimoni </nuxt-link>
+          <nuxt-link to="/ppkc/testimoni" class="btn btn-sm  rounded-pill shadow-none">Lihat Semua Testimoni </nuxt-link>
         </mdb-col>
 
         <!-- <mdb-col md="4"></mdb-col> -->

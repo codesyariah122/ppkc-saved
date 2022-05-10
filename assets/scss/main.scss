@@ -459,7 +459,7 @@
 		margin-top: 2rem;
 		margin-left: 1rem;
 		.card{
-			background-color: $button-gray!important;
+			background-color: $bg-button-gray!important;
 			width: 90%;
 			height: 300px;
 			.card-title{
@@ -551,7 +551,7 @@
 			font-size: 31px!important;
 		}
 		a{
-			background-color:$button-gray!important;
+			background-color:$bg-button-gray!important;
 			color:$default-black;
 			font-weight: 600;
 			font-size:13px;
@@ -682,12 +682,13 @@
 		width: 100%;
 		.col__testimoni{
 			width: 100%;
-			margin-bottom: 1rem;
+			margin-bottom: 3rem;
 			margin-left: .5rem;
 			.col__testimoni-card{
 				margin-top: -.5rem;
 				.card__testimoni-content{
 					width: 95%;
+					height: 317px!important;
 				}
 			}
 
