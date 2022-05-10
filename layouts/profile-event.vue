@@ -3,14 +3,13 @@
 		<LayoutsNavigation :token="token" :profiles="profiles" :slug="slug" :event_id="data_event_path.event_id" :event_path="data_event_path.event_path" :style="style"/>
 		<Nuxt/>
 		<!-- Scrolling back to top page -->
-		<GlobalsToTop/>
+		<!-- <GlobalsToTop/> -->
 		<!-- end scroll top -->
 	</div>
 </template>
 
 <script>
 	export default {
-
 		data(){
 			return{
 				loading: null,

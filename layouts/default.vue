@@ -69,7 +69,7 @@
 				let options = {
 					"enabled":true,
 					"chatButtonSetting":{
-						"backgroundColor":"#06875C",
+						"backgroundColor":"#004899",
 						"ctaText":'',
 						"borderRadius":"25",
 						"marginLeft":"20",
@@ -87,7 +87,7 @@
 						"ctaText":"Start Chat",
 						"borderRadius":"25",
 						"autoShow":false,
-						"phoneNumber":"6281284359312"
+						"phoneNumber":"628164851356"
 					}
 				};
 				s.onload = function() {
