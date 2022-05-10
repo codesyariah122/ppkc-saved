@@ -626,6 +626,7 @@
 			margin-left: 2rem;
 			.card{
 				border-radius:13px;
+				height: auto!important;
 				.card-body{
 					.card-title{
 						color:$second-black;
@@ -688,7 +689,7 @@
 				margin-top: -.5rem;
 				.card__testimoni-content{
 					width: 95%;
-					height: 317px!important;
+					height: 325px!important;
 				}
 			}
 

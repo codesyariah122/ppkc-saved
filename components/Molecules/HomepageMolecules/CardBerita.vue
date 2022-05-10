@@ -1,5 +1,12 @@
 <template>
   <div>
+    <mdb-row class="row justify-content-center">
+      <!-- bg content -->
+      <mdb-col col="12" lg="12" xs="12" sm="12" class="bg__content">
+        <img :src="require('~/assets/art/vector-5.png')" />
+      </mdb-col>
+    </mdb-row>
+    
     <mdb-row class="row justify-content-center card__berita-list">
       <mdb-col v-for="listIndex in listToShow" md="4" xs="12" sm="12" :key="lists[listIndex-1].id" class="mb-3">
         <mdb-card>
@@ -8,12 +15,12 @@
             <mdb-card-title class="truncate2">{{lists[listIndex-1].judul}}</mdb-card-title>
             <mdb-card-text class="truncate2 mt-2">
               <span style="font-size: 12px;"
-            ><i class="fa fa-calendar fa-fw fa-lg" aria-hidden="true"></i>
-            {{ $moment(lists[listIndex-1].created_at).format("LL") }}</span
-            >
-            <p  class="mt-3 mb-2 truncate2">
-              {{lists[listIndex-1].konten}}
-            </p>
+              ><i class="fa fa-calendar fa-fw fa-lg" aria-hidden="true"></i>
+              {{ $moment(lists[listIndex-1].created_at).format("LL") }}</span
+              >
+              <p  class="mt-3 mb-2 truncate2">
+                {{lists[listIndex-1].konten}}
+              </p>
             </mdb-card-text>
             <hr />
 

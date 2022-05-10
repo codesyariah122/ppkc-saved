@@ -26,7 +26,7 @@
             <mdb-badge v-else class="mb-2 badge__category shadow-none">No Category</mdb-badge>
 
             <mdb-card-title
-            class="truncate"
+            class=""
             >{{ item.kegiatan_title }}</mdb-card-title
             >
             <mdb-card-text
