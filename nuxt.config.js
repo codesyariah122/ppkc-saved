@@ -8,14 +8,14 @@ export default {
     color: '#2f80ed',
     height: '15px'
   },
-  // generate: {
-  //   cache: {
-  //     ignore: [
-  //       // When something changed in the docs folder, do not re-build via webpack
-  //       'docs'
-  //       ]
-  //     }
-  //   },
+  generate: {
+    cache: {
+      ignore: [
+        // When something changed in the docs folder, do not re-build via webpack
+        'docs'
+        ]
+      }
+    },
   purgeCSS: {
     whitelistPatterns: [/^ct/]
   },
@@ -53,7 +53,11 @@ export default {
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap'},
     ],
     script: [
-    
+      {
+        src: "https://cdn.ampproject.org/v0/amp-ad-0.1.js",
+        async: "true",
+        "custom-element": "amp-ad",
+      },
     ]
   },
 

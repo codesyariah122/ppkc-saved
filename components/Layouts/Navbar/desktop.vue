@@ -18,13 +18,13 @@
     <mdb-navbar-toggler>
       <mdb-navbar-nav left>
         <mdb-nav-item active waves-fixed >
-          <nuxt-link to="/" tag="li" navLink > Home </nuxt-link>
+          <nuxt-link to="/" > Home </nuxt-link>
         </mdb-nav-item>
         <mdb-nav-item waves-fixed>
-          <nuxt-link to="/events" tag="li" navLink > Katalog Kelas </nuxt-link>
+          <nuxt-link to="/events"> Katalog Kelas </nuxt-link>
         </mdb-nav-item>
         <mdb-nav-item v-if="token.accessToken" waves-fixed>
-          <nuxt-link tag="li" navLink  :to="`/profile/${$username(slug)}/events`">Akses Pelatihan</nuxt-link>
+          <nuxt-link  :to="`/profile/${$username(slug)}/events`">Akses Pelatihan</nuxt-link>
         </mdb-nav-item>
         <mdb-dropdown tag="li" class="nav-item">
           <mdb-dropdown-toggle
@@ -46,7 +46,7 @@
         </mdb-dropdown-menu>
       </mdb-dropdown>
       <mdb-nav-item waves-fixed>
-        <nuxt-link to="/ppkc/berita" tag="li" navLink > Berita </nuxt-link>
+        <nuxt-link to="/ppkc/berita"> Berita </nuxt-link>
       </mdb-nav-item>
     </mdb-navbar-nav>
 

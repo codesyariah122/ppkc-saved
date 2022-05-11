@@ -19,9 +19,7 @@
 				profiles: {},
 				slug: '',
 				event_id: localStorage.getItem('event_id'),
-				event_path: this.$route.path,
-				local_img: 'http://localhost:8000/_nuxt',
-				prod_img: 'https://ppkc-saved.vercel.app'
+				event_path: this.$route.path
 			}
 		},
 		

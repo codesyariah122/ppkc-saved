@@ -11,19 +11,6 @@
 				</mdb-col>
 			</mdb-row>
 			
-			<!-- Event profile setelah login -->
-			<!-- <mdb-row v-if="token.accessToken || status_pendaftaran == 'Terdaftar' || !logout_data.logout" class="row justify-content-center event__detail-profile">
-				<mdb-col v-if="details" lg="12" xs="12" sm="12">
-					<div v-if="$device.isDesktop">
-						<ProfilepageEventAktif :token="token" :api_url="api_url" :events="events" :status_pendaftaran="status_pendaftaran"/>
-					</div>
-					<div v-else>
-						<mdb-alert color="warning" v-if="p1" @closeAlert="p1=false" dismiss>
-							<strong>Ooppss !</strong> Untuk menampilkan konten ini anda harus membuka nya di komputer/PC - Laptop.
-						</mdb-alert>
-					</div>
-				</mdb-col>
-			</mdb-row> -->
 
 			<!-- List Event lainnya -->
 			<mdb-row class="event__detail-list">

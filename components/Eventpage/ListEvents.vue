@@ -1,5 +1,5 @@
 <template>
-  <div class="card__content-lists[listIndex - 1]s">
+  <div class="card__content-lists">
     <mdb-container>
       <mdb-row v-if="loading && !load_more" col="12" class="d-flex justify-content-start align-items-stretch mb-5 mt-2">
         
