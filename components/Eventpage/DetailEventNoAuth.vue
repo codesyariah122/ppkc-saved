@@ -62,7 +62,7 @@
 
 <script>
 	export default{
-		props: ['events'],
+		props: ['events', 'details'],
 
 		mounted(){
 			this.VenoBox()
