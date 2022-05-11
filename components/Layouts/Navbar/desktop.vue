@@ -124,18 +124,16 @@ style="font-size: 31px !important"
        { id: 4, name: "Fasilitas", link: "/ppkc/fasilitas" },
        { id: 5, name: "Testimoni", link: "/ppkc/testimoni" },
        { id: 6, name: "Fasilitator", link: "/ppkc/fasilitator" },
-       { id: 7, name: "Yayasan & Direksi", link: "/ppkc/yayasan-direksi" },
-       ],
-       path: this.$route.path,
-       mainProps: { blank: true, blankColor: '#777', width: 75, height: 75, class: 'm1' },
-       scrolledToBottom: false,
-       notifs: 0,
-       data_cart:{}
+       { id: 7, name: "Yayasan & Direksi", link: "/ppkc/yayasan-direksi" }
+       ]
      };
    },
 
-
-   methods: {
+  mounted() {
+    console.log(this.event_id ? this.event_id : "-");
+  },
+  
+  methods: {
     Logout() {
       this.$emit("logout-profile");
     },

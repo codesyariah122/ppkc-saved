@@ -92,19 +92,18 @@
     data() {
       return {
         links: [
-        { id: 1, name: "Sejarah", link: "/ppkc/sejarah" },
-        { id: 2, name: "Visi & Misi", link: "/ppkc/visi-misi" },
-        {
-          id: 3,
-          name: "Struktur Organisasi",
-          link: "/ppkc/struktur-organisasi",
-        },
-        { id: 4, name: "Fasilitas", link: "/ppkc/fasilitas" },
-        { id: 5, name: "Testimoni", link: "/ppkc/testimoni" },
-        { id: 6, name: "Fasilitator", link: "/ppkc/fasilitator" },
-        { id: 7, name: "Yayasan & Direksi", link: "/ppkc/yayasan-direksi" },
-        ],
-        mainProps: { blank: true, blankColor: '#777', width: 75, height: 75, class: 'm1' }
+          { id: 1, name: "Sejarah", link: "/ppkc/sejarah" },
+          { id: 2, name: "Visi & Misi", link: "/ppkc/visi-misi" },
+          {
+            id: 3,
+            name: "Struktur Organisasi",
+            link: "/ppkc/struktur-organisasi",
+          },
+          { id: 4, name: "Fasilitas", link: "/ppkc/fasilitas" },
+          { id: 5, name: "Testimoni", link: "/ppkc/testimoni" },
+          { id: 6, name: "Fasilitator", link: "/ppkc/fasilitator" },
+          { id: 7, name: "Yayasan & Direksi", link: "/ppkc/yayasan-direksi" }
+        ]
       }
     },
 

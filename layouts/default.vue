@@ -28,11 +28,8 @@
 			this.CheckToken()
 		},
 
-		created(){
-			this.WidgetChat()
-		},
-
 		mounted(){
+			this.WidgetChat(),
 			this.UserProfileData()
 		},
 
@@ -45,7 +42,7 @@
 				this.$store.dispatch('config/storeConfigApiUrl', api_url)
 			},
 			UserProfileData(){
-				if(this.token){					
+				if(this.token.accessToken){					
 					const url = `${this.api_url}/web/user`
 					this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
 					this.$axios.get(url)
@@ -54,6 +51,8 @@
 						this.slug = data.user.nama
 					})
 					.catch(err => console.log(err.response ? err.response : ''))
+				}else{
+					console.log("No-Login")
 				}
 			},
 

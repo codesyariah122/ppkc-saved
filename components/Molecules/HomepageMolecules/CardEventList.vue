@@ -114,7 +114,7 @@ class="justify-content-center card__content"
     methods: {
 
       UserProfileData() {
-        if (this.token) {
+        if (this.token.accessToken) {
           const url = `${this.api_url}/web/user`;
           this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`;
           this.$axios
@@ -123,6 +123,8 @@ class="justify-content-center card__content"
             this.username = this.$username(data.user.nama)
           })
           .catch((err) => console.log(err.response ? err.response : ""));
+        }else{
+          console.log("No-Login")
         }
       },
 

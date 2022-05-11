@@ -48,6 +48,8 @@
 						this.slug = data.user.nama
 					})
 					.catch(err => console.log(err.response ? err.response : ''))
+				}else{
+					console.log("No-Login")
 				}
 			}
 		},
