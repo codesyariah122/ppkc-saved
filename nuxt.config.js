@@ -107,9 +107,9 @@ export default {
     ]
   },
 
-  device: {
-    refreshOnResize: true
-  },
+  // device: {
+  //   refreshOnResize: true
+  // },
 
   moment: {
     timezone: true,
