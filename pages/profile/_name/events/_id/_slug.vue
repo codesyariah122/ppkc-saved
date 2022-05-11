@@ -132,7 +132,7 @@ import ColorModePicker from "@/components/Globals/ColorModePicker";
 
 export default {
   name: "profile-events-id-slug",
-  layout: "profile-event",
+  layout: "profile",
   components: {
     ColorModePicker,
   },
