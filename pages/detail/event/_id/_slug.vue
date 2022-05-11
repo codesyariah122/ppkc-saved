@@ -7,7 +7,7 @@
 					<EventpageLoginDetailEvent :loading="loading" :details="details" :data_event="data_event" :status_pendaftaran="status_pendaftaran" :token="token" @registrasi-event="RegistrasiEvent"/>
 				</mdb-col>
 				<mdb-col v-else lg="12">
-					<EventpageDetailEventNoAuth :events="events" />
+					<EventpageDetailEventNoAuth :events="events" :details="details"/>
 				</mdb-col>
 			</mdb-row>
 			
