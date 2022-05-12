@@ -46,13 +46,14 @@
                     v-for="(month, index) in $moment.months()"
                     :value="index + 1"
                     :data-month="index + 1"
+                    :data-name="month"
                     >
                     {{ month }}
                   </option>
                 </select>
               </div>
             </div>
-            <div :class="`p-2 bd-highlight mr-3 ${$device.isDesktop ? 'count__event' : ''}`">
+            <div v-if="!search || search == null" :class="`p-2 bd-highlight mr-3 ${$device.isDesktop ? 'count__event' : ''}`">
               <div class="float-right">
                   <h6>
                     Menampilkan <strong> {{listToShow}} </strong> dari <strong> {{lists.length < listToShow ? listToShow : lists.length}} </strong>
@@ -69,7 +70,7 @@
 
 <script>
 export default {
-  props: ["lists", "loading", "loadingBtn", "listToShow", "categories"],
+  props: ["lists", "loading", "loadingBtn", "listToShow", "categories", "search"],
   data() {
     return {
       field: {
@@ -77,6 +78,7 @@ export default {
         category_id: null,
         month: null,
       },
+      month: "",
       selected: undefined,
       currentPage: 1,
     };
@@ -90,7 +92,8 @@ export default {
         this.field.keyword,
         this.field.category_id,
         this.field.month,
-        true
+        true,
+        this.month
       );
     },
 
@@ -108,6 +111,7 @@ export default {
     ChangeMonth(e) {
       const options = e.target.options;
       this.field.month = options[options.selectedIndex].getAttribute("data-month");
+      this.month = options[options.selectedIndex].getAttribute("data-name");
       this.SearchEvent()
     },
 

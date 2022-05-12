@@ -32,13 +32,15 @@
         <!-- <pre>
           {{lists[listIndex - 1]s.slice(0,6)}}
         </pre> -->
-
         <mdb-col v-if="empty || error_search" lg="12" xs="12" sm="12">
           <mdb-alert :color="`${error_search ? 'danger' : 'info'}`" class="text-center">
             <mdb-icon icon="info-circle" size="lg"/> {{message}}
           </mdb-alert>
+          <mdb-btn @click="LoadMore" :class="`mt-3 btn my__btn-primary rounded-pill  ${
+            $device.isMobile ? 'btn-block btn-sm' : 'btn-block'
+          }`">Reload Event</mdb-btn>
         </mdb-col>
-        
+
         <mdb-col
         v-if="listIndex <= lists.length"
         v-for="listIndex in listToShow"
@@ -107,6 +109,25 @@
         </mdb-col>
       </mdb-row>
 
+      <mdb-row v-if="search" class="row justify-content-center">
+        <mdb-col xl="12" xs="12" lg="12" sm="12" :class="`${$device.isDesktop ? 'mb-5 shadow-none' : 'mb-2'}`">
+          <mdb-btn
+          @click="LoadMore"
+          :class="`btn my__btn-primary rounded-pill  ${
+            $device.isMobile ? 'btn-block btn-sm' : 'btn-block'
+          }`"
+          >
+          <div v-if="loadingBtn">
+            <b-spinner small ></b-spinner>
+            Loading...
+          </div>
+          <div v-else>
+            Reload Events
+          </div>
+        </mdb-btn>
+        </mdb-col>
+      </mdb-row>
+
       <mdb-row v-if="listToShow <= lists.length" class="row justify-content-center mt-2">
         <mdb-col
         col="12"
@@ -139,7 +160,7 @@
 
 <script>
   export default{
-    props: ['loading', 'lists', 'listToShow', 'loading_more', 'loadingBtn', 'token', 'data_event', 'empty', 'message', 'error_search', 'page'],
+    props: ['loading', 'lists', 'listToShow', 'loading_more', 'loadingBtn', 'token', 'data_event', 'empty', 'message', 'error_search', 'page', 'search'],
 
     data(){
       return {
@@ -198,7 +219,7 @@
         },
 
         LoadMore(){
-          this.$emit('load-more-event', 1)
+          this.$emit('load-more-event', 20)
         }
     }
   }

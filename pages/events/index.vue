@@ -1,10 +1,10 @@
 <template>
 	<div class="webinar__list">
 		<!-- Header filter event page -->
-		<EventpageHeader @update-list-event="SearchEvent" :lists="lists" :loading="loading" :loadingBtn="loadingBtn" :listToShow="listToShow" @load-more-event="LoadListEvent" :categories="categories" ref="eventChild"/>
-
+		<EventpageHeader @update-list-event="SearchEvent" :lists="lists" :loading="loading" :loadingBtn="loadingBtn" :listToShow="listToShow" @load-more-event="LoadListEvent" :categories="categories" ref="eventChild" :search="search"/>
+		
 		<!-- List event page content -->
-		<EventpageListEvents :lists="lists" :loading="loading" :loadingBtn="loadingBtn" :listToShow="listToShow" :message="message" :empty="empty" :token="token" :data_event="data_event" :error_search="error_search" @load-more-event="LoadListEvent" :page="page"/>
+		<EventpageListEvents :lists="lists" :loading="loading" :loadingBtn="loadingBtn" :listToShow="listToShow" :message="message" :empty="empty" :token="token" :data_event="data_event" :error_search="error_search" @load-more-event="LoadListEvent" :page="page" :search="search"/>
 
 	</div>
 </template>
@@ -26,7 +26,9 @@
 				start: 20,
 				message:'',
 				empty: null,
-				error_search: null
+				error_search: null,
+				month: '',
+				search: null
 			}
 		},
 
@@ -61,7 +63,13 @@
 						// }
 					}else{
 						this.empty = true
-						this.message = `Tidak ada event terdekat !`
+						this.search = false
+						this.message = `Tidak ada event terdekat di bulan ${this.month}!`
+						this.lists = []
+						// setTimeout(() => {
+						// 	this.empty = false
+						// 	this.LoadListEvent(this.start)
+						// }, 3000)
 						// setTimeout(() => {
 						// 	this.empty = false
 						// }, 2500)
@@ -96,18 +104,23 @@
 				this.FetchListEvent('', this.start+=start,'', '', true)
 			},
 
-			SearchEvent(page, keyword, category, month, loadingBtn){
+			SearchEvent(page, keyword, category, month, loadingBtn, month_name){
+				this.search = true
+				this.month = month_name
 				console.log(keyword)
-				if(month === undefined || month === ""){
+				if(month === undefined && month === ""){
 					this.error_search = true
 					this.message = "Pilih bulan pelatihan terlebih dahulu"
-					setTimeout(() => {
-						this.error_search= false
-					}, 500)
-					setTimeout(() => {
-						this.FetchListEvent(keyword="", start=20, category="", month="", loadingBtn)
-					}, 1500)
+					this.error_search= false
+					this.lists = []
+					this.search = false
+					// setTimeout(() => {
+					// }, 500)
+					// setTimeout(() => {
+					// 	this.FetchListEvent(keyword="",  this.start, category="", month="", loadingBtn)
+					// }, 1500)
 				}else{
+					this.search = true
 					this.empty = false
 					this.error_search = false
 					this.FetchListEvent(keyword, page, category, month, loadingBtn)
