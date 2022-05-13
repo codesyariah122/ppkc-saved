@@ -1,6 +1,7 @@
 <template>
 	<div>
 		<LayoutsNavigation :token="token" :profiles="profiles" :slug="slug" :event_id="event_id" :event_path="event_path"/>
+
 		<Nuxt/>
 
 		<LayoutsFooter v-if="$route.name !== 'detail-event-id-slug' || !token.accessToken"/>
@@ -30,10 +31,15 @@
 
 		mounted(){
 			this.WidgetChat(),
-			this.UserProfileData()
+			this.UserProfileData(),
+			this.scrollTo()
 		},
 
 		methods: {
+			scrollTo(){
+				const element = document.querySelector("#testimoni-list")
+				element.scrollIntoView();
+			},
 			CheckToken(){
 				this.$store.dispatch('config/checkAuthLogin', 'token')
 			},
