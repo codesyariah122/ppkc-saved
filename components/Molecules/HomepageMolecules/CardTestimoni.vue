@@ -41,5 +41,6 @@ export default {
   mounted(){
     console.log("Welcome !!")
   }
+  
 }
 </script>

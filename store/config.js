@@ -28,7 +28,7 @@ export const mutations = {
 	},
 
 	CONFIG_CHECK_LOGIN(state, name){
-		state.config.token= localStorage.getItem(name) ? JSON.parse(localStorage.getItem('token')) : 'No token'
+		state.config.token= localStorage.getItem(name) ? JSON.parse(localStorage.getItem('token')) : {}
 	},
 
 
