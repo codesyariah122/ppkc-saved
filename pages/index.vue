@@ -61,7 +61,6 @@ export default {
 
   async asyncData({ $axios }) {
     const lists = await $axios.$get("/web/home");
-    console.log(lists)
     return {
       lists
     }

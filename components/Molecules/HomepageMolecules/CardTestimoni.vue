@@ -36,6 +36,10 @@ export default {
       profile_default: DefaultProfile,
       null_foto: null,
     }
+  },
+
+  mounted(){
+    console.log("Welcome !!")
   }
 }
 </script>
