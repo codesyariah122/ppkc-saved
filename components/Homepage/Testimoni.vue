@@ -9,7 +9,7 @@
           </h5>
         </mdb-col>
 
-        <mdb-col v-if="$device.isDesktop" col="12" md="3" >
+        <mdb-col v-if="$device.isDesktop" col="12" md="4" >
           <nuxt-link to="/ppkc/testimoni" class="btn btn-sm  rounded-pill shadow-none">Lihat Semua Testimoni </nuxt-link>
         </mdb-col>
 
@@ -25,9 +25,9 @@
 
       <!-- column card testimoni -->
       <!-- Testimoni card components -->
-      <MoleculesHomepageMoleculesCardTestimoni v-if="lists.length > 0" :lists="lists" :listToShow="listToShow"/>
+      <MoleculesHomepageMoleculesCardTestimoni :lists="lists"/>
 
-        <MoleculesHomepageMoleculesListlistsample v-else/>
+        <!-- <MoleculesHomepageMoleculesListlistsample v-else/> -->
 
 
     </mdb-container>
@@ -36,6 +36,6 @@
 
 <script>
   export default{
-    props: ['lists', 'listToShow']
+    props: ['lists']
   }
 </script>
