@@ -37,84 +37,89 @@
 </template>
 
 <script>
-//Image base on assets directory
-import HeroImage from "~/assets/images/homepage/hero-image.svg";
-import HeroImageMobile from "~/assets/images/homepage/banner.svg";
-import NewHeroImage from "~/assets/images/homepage/new-hero-3.svg"
+  import HeroImage from "~/assets/images/homepage/hero-image.svg"
+  import HeroImageMobile from "~/assets/images/homepage/banner.svg"
+  import NewHeroImage from "~/assets/images/homepage/new-hero-3.svg"
 
-export default {
-  name: "IndexPage",
-  layout: "default",
+  export default {
+    name: "IndexPage",
+    layout: "default",
 
-  data() {
-    return {
-      bg_image: this.$device.isMobile ? HeroImageMobile : HeroImage,
-      items: [],
-      events:[],
-      testimonis: [],
-      news: [],
-      listToShow: 2
-    }
-  },
-
-  
-
-  async asyncData({ $axios }) {
-    const lists = await $axios.$get("/web/home");
-    return {
-      lists
-    }
-  },
-  beforeMount(){
-    this.CheckToken()
-  },
-  mounted() {
-    this.CarouselItem()
-  },
-
-  methods: {
-    CheckToken(){
-      this.$store.dispatch('config/checkAuthLogin', 'token')
+    data() {
+      return {
+        bg_image: this.$device.isMobile ? HeroImageMobile : HeroImage,
+        items: [],
+        events:[],
+        testimonis: [],
+        news: [],
+        listToShow: 2
+      }
     },
 
-    CarouselItem() {
-      this.items = [
-      {
-        img: true,
-        src: "https://api.ppkc-online.com/image-banner/banner1.jpeg",
-      },
-      {
-        img: true,
-        src: "https://api.ppkc-online.com/image-banner/banner2.jpeg",
-      },
-      {
-        img: true,
-        src: "https://api.ppkc-online.com/image-banner/banner3.jpeg",
-      },
-      {
-        img: true,
-        src: "https://api.ppkc-online.com/image-banner/banner4.jpeg",
-      },
-      {
-        img: true,
-        src: "https://api.ppkc-online.com/image-banner/banner5.jpeg",
-      },
-      {
-        img: true,
-        src: "https://api.ppkc-online.com/image-banner/banner6.jpeg",
-      },
-      {
-        img: true,
-        src: "https://api.ppkc-online.com/image-banner/banner7.jpeg",
-      }
-      ]
-    }
-  },
 
-  computed: {
-    token(){
-      return this.$store.getters['config/ConfigCheckLogin']
+
+    async asyncData({ $axios }) {
+      const lists = await $axios.$get("/web/home");
+      return {
+        lists
+      }
+    },
+    beforeMount(){
+      this.CheckToken()
+    },
+    mounted() {
+      this.CarouselItem(),
+      this.scrollTo()
+    },
+
+    methods: {
+      scrollTo(){
+        const element = document.querySelector("#testimoni-list")
+        element.scrollIntoView();
+      },
+
+      CheckToken(){
+        this.$store.dispatch('config/checkAuthLogin', 'token')
+      },
+
+      CarouselItem() {
+        this.items = [
+        {
+          img: true,
+          src: "https://api.ppkc-online.com/image-banner/banner1.jpeg",
+        },
+        {
+          img: true,
+          src: "https://api.ppkc-online.com/image-banner/banner2.jpeg",
+        },
+        {
+          img: true,
+          src: "https://api.ppkc-online.com/image-banner/banner3.jpeg",
+        },
+        {
+          img: true,
+          src: "https://api.ppkc-online.com/image-banner/banner4.jpeg",
+        },
+        {
+          img: true,
+          src: "https://api.ppkc-online.com/image-banner/banner5.jpeg",
+        },
+        {
+          img: true,
+          src: "https://api.ppkc-online.com/image-banner/banner6.jpeg",
+        },
+        {
+          img: true,
+          src: "https://api.ppkc-online.com/image-banner/banner7.jpeg",
+        }
+        ]
+      }
+    },
+
+    computed: {
+      token(){
+        return this.$store.getters['config/ConfigCheckLogin']
+      }
     }
   }
-}
 </script>
