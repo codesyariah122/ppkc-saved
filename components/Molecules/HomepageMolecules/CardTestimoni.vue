@@ -2,7 +2,7 @@
   <div>
     <!-- Testimoni content -->
     <mdb-row class="row justify-content-center col__testimoni">
-      <mdb-col v-for="item in lists.slice(0, 2)" md="6" xs="12" sm="12" class="col__testimoni-card" :key="item.id">
+      <mdb-col v-for="item in lists" md="6" xs="12" sm="12" class="col__testimoni-card" :key="item.id">
         <mdb-card class="card__testimoni-content">
           <mdb-container class="mt-3">
             <mdb-row>
@@ -27,16 +27,9 @@
 </template>
 
 <script>
-import DefaultProfile from "~/assets/images/profile/user-profile.svg";
 
 export default {
   props: ["lists"],
-  data() {
-    return {
-      profile_default: DefaultProfile,
-      null_foto: null,
-    }
-  },
 
   mounted(){
     console.log("Welcome !!")

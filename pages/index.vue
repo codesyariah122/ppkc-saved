@@ -23,7 +23,7 @@
 
     <!-- out container -->
     <!-- Testimoni -->
-    <HomepageTestimoni :lists="lists.list_testimoni" />
+    <HomepageTestimoni :lists="lists.list_testimoni.slice(0, 2)" />
     <!-- parallax -->
     <HomepageParallaxHome />
     <!-- berita -->

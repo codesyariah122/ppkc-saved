@@ -5,9 +5,9 @@ module.exports = {
     '^vue$': 'vue/dist/vue.common.js'
   },
   moduleFileExtensions: [
-    'js',
-    'vue',
-    'json'
+  'js',
+  'vue',
+  'json'
   ],
   transform: {
     '^.+\\.js$': 'babel-jest',
@@ -15,8 +15,9 @@ module.exports = {
   },
   collectCoverage: true,
   collectCoverageFrom: [
-    '<rootDir>/components/**/*.vue',
-    '<rootDir>/pages/**/*.vue'
+  '<rootDir>/components/**/*.vue',
+  '<rootDir>/components/Molecoules/**/*.vue',
+  '<rootDir>/pages/**/*.vue'
   ],
   testEnvironment: 'jsdom'
 }

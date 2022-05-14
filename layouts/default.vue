@@ -31,8 +31,7 @@
 
 		mounted(){
 			this.WidgetChat(),
-			this.UserProfileData(),
-			this.scrollTo()
+			this.UserProfileData()
 		},
 
 		methods: {

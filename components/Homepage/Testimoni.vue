@@ -14,7 +14,7 @@
         </mdb-col>
 
         <!-- <mdb-col md="4"></mdb-col> -->
-        <mdb-col md="12" xs="12" sm="12" :class="`text-capitalize ${$device.isDesktop ? '' : ''}`">
+        <mdb-col md="12" xs="12" sm="12" :class="`text-capitalize ${$device.isDesktop ? 'mt-5' : ''}`">
           <h2>Cerita sukses member kami</h2>
         </mdb-col>
 
