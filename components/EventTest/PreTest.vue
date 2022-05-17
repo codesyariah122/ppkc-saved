@@ -1,15 +1,5 @@
 <template>
   <div class="pre__test">
-    <!-- <mdb-container v-if="save_test.user_id == profiles.id ? save_test.status : success.status" class="success__test">
-			<mdb-row col="12" class="row justify-content-center">
-				<mdb-col lg="12">
-					<mdb-alert :color="`${save_test.status ? 'info' : 'success'}`">
-						Halo, {{save_test.profile.nama}}. {{save_test.message ? save_test.message :  success.message}}
-					</mdb-alert>
-				</mdb-col>
-			</mdb-row>
-		</mdb-container> -->
-
     <mdb-container>
       <div v-if="loading_soal">
         <mdb-row col="12" class="row justify-content-center">
@@ -123,13 +113,7 @@
                           :key="option.id"
                           :value="option.id"
                         >
-                          <!-- Debugging -->
-                          <!-- <pre>
-
-										{{lists[listIndex-1].urutan}} || {{config_soal.current}}
-
-										 {{lists[listIndex-1].urutan > config_soal.current}} |  -- {{config.disabled}}
-										</pre> -->
+                         
 
                           <input
                             type="radio"
