@@ -6,7 +6,7 @@
 				<h5 :class="`${$device.isDesktop ? 'text-center' : 'text-center'}`">Berita</h5>
 			</mdb-col>
 			<mdb-col md="12" xs="12" sm="12">
-				<h2 class="text-center font-weight-bold" :style="`${$device.isDesktop ? 'margin-left:5rem;' : 'margin-left:2rem;'}`">
+				<h2 class="text-center" :style="`${$device.isDesktop ? 'margin-left:5rem;' : 'margin-left:2rem;'}`">
 					Ikuti Berita dan Kegiatan Kami
 				</h2>
 			</mdb-col>

@@ -11,7 +11,7 @@
         :profiles="profiles"
         :details="details"
       />
-
+      
       <div class="docs-content">
         <div class="container">
           <!-- Sidebar Toggler -->
@@ -45,16 +45,18 @@
                         >Selamat Datang di Dashboard Pelatihan PPKC</strong
                       >
                       <br />
-                      click/tap tombol dengan icon humberger menu
-                      <mdb-icon
+                      <mdb-alert color="warning">                        
+                        click/tap tombol dengan icon humberger menu
+                        <mdb-icon
                         icon="bars"
                         class="text-primary"
                         size="lg"
                         style="color: blue !important"
-                      />
-                      di pojok kanan atas, &nbsp;&nbsp; kemudian akan muncul
-                      slide menu materi pelatihan yang anda ikuti dari sebelah
-                      kiri.
+                        />
+                        di pojok kanan atas, &nbsp;&nbsp; kemudian akan muncul
+                        slide menu materi pelatihan yang anda ikuti dari sebelah
+                        kiri.
+                      </mdb-alert>
                     </p>
                   </div>
                 </div>

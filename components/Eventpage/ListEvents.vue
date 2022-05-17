@@ -2,7 +2,6 @@
   <div class="card__content-lists">
     <mdb-container>
       <mdb-row v-if="loading && !load_more" col="12" class="d-flex justify-content-start align-items-stretch mb-5 mt-2">
-        
         <mdb-col v-if="empty" lg="12" xs="12" sm="12">
           <center>            
             <div class="spinner-border text-primary" style="width:7rem; height: 7rem;" role="status">
@@ -77,8 +76,8 @@
 
             <span style="font-size: 12px; margin-top: 1.5rem"
             ><i class="fa fa-calendar fa-fw fa-lg" aria-hidden="true"></i>
-            {{ $moment(lists[listIndex - 1].tgl_awal).format("LL") }} -
-            {{ $moment(lists[listIndex - 1].tgl_akhir).format("LL") }}</span
+            {{ $moment(lists[listIndex - 1].tanggal_awal).format("LL") }} -
+            {{ $moment(lists[listIndex - 1].tanggal_akhir).format("LL") }}</span
             >
 
             <!-- <mdb-btn @click="ToDetailEvent(lists[listIndex - 1].kegiatan_id)" block class="btn btn-outline-primary mt-3 mb-2" color="primary">Detail Event</mdb-btn> -->
@@ -127,32 +126,33 @@
         </mdb-btn>
         </mdb-col>
       </mdb-row>
-
-      <mdb-row v-if="listToShow <= lists.length" class="row justify-content-center mt-2">
-        <mdb-col
-        col="12"
-        xl="5"
-        lg="12"
-        xs="12"
-        sm="12"
-        :class="`${$device.isDesktop ? 'mb-5 shadow-none' : 'mb-2'}`"
-        >
-          <mdb-btn
-          @click="LoadMore"
-          :class="`btn my__btn-primary rounded-pill  ${
-            $device.isMobile ? 'btn-block btn-sm' : 'btn-block'
-          }`"
+      <div v-else>
+        <mdb-row v-if="listToShow <= lists.length" class="row justify-content-center mt-2">
+          <mdb-col
+          col="12"
+          xl="5"
+          lg="12"
+          xs="12"
+          sm="12"
+          :class="`${$device.isDesktop ? 'mb-5 shadow-none' : 'mb-2'}`"
           >
-          <div v-if="loadingBtn">
-            <b-spinner small ></b-spinner>
-            Loading...
-          </div>
-            <div v-else>
-              Lihat kelas Lainnya
-            </div>
-          </mdb-btn>
-        </mdb-col>
-      </mdb-row>
+              <mdb-btn
+              @click="LoadMore"
+              :class="`btn my__btn-primary rounded-pill  ${
+                $device.isMobile ? 'btn-block btn-sm' : 'btn-block'
+              }`"
+              >
+              <div v-if="loadingBtn">
+                <b-spinner small ></b-spinner>
+                Loading...
+              </div>
+              <div v-else>
+                Lihat kelas Lainnya
+              </div>
+            </mdb-btn>
+          </mdb-col>
+        </mdb-row>
+      </div>
 
     </mdb-container>
   </div>

@@ -92,42 +92,6 @@
 
 		methods: {
 
-			CheckKeranjang(){
-				if (this.events.length < this.listsToShow) {
-					SampleEvents.map((d) => {
-						this.events.push(d);
-					});
-				}
-			},
-
-			SetKeranjang(id_event, photo_event, title_event, harga) {
-				const data_event = {
-					id: id_event,
-					photo: photo_event,
-					title: title_event,
-					harga: harga,
-					active: true,
-				};
-				this.SaveCarts(data_event)
-			},
-
-			SaveCarts(data){
-				this.$store.dispatch("config/storeConfigCartEvent", data)
-				if(this.token.accessToken){
-					this.$router.push({
-						path: `/profile/${this.username}/keranjang`
-					});
-				}else{
-					localStorage.setItem('go-to-cart', JSON.stringify({
-						status: true
-					}))
-					this.$router.push({
-						name: 'auth-login'
-					})
-				}
-			},
-			
-
 			GoToLogin() {
 				if (this.event_id === this.$route.params.id) {
 					const data = {

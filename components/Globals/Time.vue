@@ -2,7 +2,7 @@
   <div>
     <mdb-row class="d-flex justify-content-start" col="12">
       <mdb-col class="glow" md="3">
-        <h4>{{ time }}</h4>
+        <h4>{{time}} <br> {{$moment(new Date()).format("LL")}} </h4>
       </mdb-col>
     </mdb-row>
   </div>
@@ -40,12 +40,14 @@ export default {
   },
   created() {
     this.interval = setInterval(() => {
+      const date = new Date()
+
       this.time = Intl.DateTimeFormat(["id"], {
         weekday: "long",
         hour: "numeric",
         minute: "numeric",
         second: "numeric",
-      }).format();
+      }).format(date);
     }, 1000);
   },
 

@@ -12,19 +12,24 @@
     <!-- Navbar brand -->
     <mdb-navbar-brand>
       <nuxt-link to="/">
+        <!-- <MoleculesLayoutMoleculesBrand /> -->
         <img :src="require('~/assets/images/logo/brand.svg')" class="img-fluid">
       </nuxt-link>
     </mdb-navbar-brand>
     <mdb-navbar-toggler>
       <mdb-navbar-nav left>
         <mdb-nav-item active waves-fixed >
-          <nuxt-link to="/" > Home </nuxt-link>
+          <nuxt-link to="/" tag="li" navLink > Home </nuxt-link>
         </mdb-nav-item>
         <mdb-nav-item waves-fixed>
-          <nuxt-link to="/events"> Katalog Kelas </nuxt-link>
+          <nuxt-link to="/events" tag="li" navLink > Katalog Kelas </nuxt-link>
         </mdb-nav-item>
+        <mdb-nav-item v-if="!token.accessToken" waves-fixed>
+          <nuxt-link to="/agendapelatihan" tag="li" navLink > Agenda Pelatihan </nuxt-link>
+        </mdb-nav-item>
+
         <mdb-nav-item v-if="token.accessToken" waves-fixed>
-          <nuxt-link  :to="`/profile/${$username(slug)}/events`">Akses Pelatihan</nuxt-link>
+          <nuxt-link tag="li" navLink  :to="`/profile/${$username(slug)}/events`">Akses Pelatihan</nuxt-link>
         </mdb-nav-item>
         <mdb-dropdown tag="li" class="nav-item">
           <mdb-dropdown-toggle
@@ -46,10 +51,9 @@
         </mdb-dropdown-menu>
       </mdb-dropdown>
       <mdb-nav-item waves-fixed>
-        <nuxt-link to="/ppkc/berita"> Berita </nuxt-link>
+        <nuxt-link to="/ppkc/berita" tag="li" navLink > Berita </nuxt-link>
       </mdb-nav-item>
     </mdb-navbar-nav>
-
   </mdb-container>
 </mdb-dropdown-menu>
 </mdb-dropdown>
@@ -62,8 +66,8 @@ style="font-size: 31px !important"
 >
 <mdb-dropdown-toggle tag="a" navLink slot="toggle">
   {{profiles.nama}}
-  <b-avatar v-if="profiles.photo !== 'https://api.ppkc-online.com/image-profiles/null'" variant="none" :src="profiles.photo"></b-avatar>
-  <b-avatar v-else variant="none" :text="slug.charAt(0)"></b-avatar>
+  <b-avatar v-if="profiles.photo !== 'https://api.ppkc-online.com/image-profiles/null'" variant="primary" :src="profiles.photo"></b-avatar>
+  <b-avatar v-else variant="primary" :text="slug.charAt(0)"></b-avatar>
   
 </mdb-dropdown-toggle>
 <mdb-dropdown-menu :class="`${$device.isDesktop ? 'mt-2' : 'mt-3'}`">
@@ -75,8 +79,8 @@ style="font-size: 31px !important"
     }"
     class="text-center"
     >
-    <b-avatar v-if="profiles.photo !== 'https://api.ppkc-online.com/image-profiles/null'" variant="none" :src="profiles.photo" size="1.7rem"></b-avatar>
-    <b-avatar v-else variant="none" :text="slug.charAt(0)" size="1.7rem"></b-avatar> &nbsp; <b>{{ profiles.nama }}</b>
+    <b-avatar v-if="profiles.photo !== 'https://api.ppkc-online.com/image-profiles/null'" variant="primary" :src="profiles.photo" size="1.7rem"></b-avatar>
+  <b-avatar v-else variant="primary" :text="slug.charAt(0)" size="1.7rem"></b-avatar> &nbsp; <b>{{ profiles.nama }}</b>
   </nuxt-link>
 </mdb-dropdown-item>
 <div class="dropdown-divider"></div>
@@ -113,26 +117,30 @@ style="font-size: 31px !important"
 
 
 <script>
-  export default {
-    props: ["token", "profiles", "slug", "event_id", "event_path"],
-    data() {
-      return {
-       links: [
-       { id: 1, name: "Sejarah", link: "/ppkc/sejarah" },
-       { id: 2, name: "Visi & Misi", link: "/ppkc/visi-misi" },
-       { id: 3, name: "Struktur Organisasi", link: "/ppkc/struktur-organisasi"},
-       { id: 4, name: "Fasilitas", link: "/ppkc/fasilitas" },
-       { id: 5, name: "Testimoni", link: "/ppkc/testimoni" },
-       { id: 6, name: "Fasilitator", link: "/ppkc/fasilitator" },
-       { id: 7, name: "Yayasan & Direksi", link: "/ppkc/yayasan-direksi" }
-       ]
-     };
-   },
+export default {
+  props: ["token", "profiles", "slug", "event_id", "event_path"],
+  data() {
+    return {
+      links: [
+        { id: 1, name: "Sejarah", link: "/ppkc/sejarah" },
+        { id: 2, name: "Visi & Misi", link: "/ppkc/visi-misi" },
+        {
+          id: 3,
+          name: "Struktur Organisasi",
+          link: "/ppkc/struktur-organisasi",
+        },
+        { id: 4, name: "Fasilitas", link: "/ppkc/fasilitas" },
+        { id: 5, name: "Testimoni", link: "/ppkc/testimoni" },
+        { id: 6, name: "Fasilitator", link: "/ppkc/fasilitator" },
+        { id: 7, name: "Yayasan & Direksi", link: "/ppkc/yayasan-direksi" },
+      ],
+    };
+  },
 
   mounted() {
     console.log(this.event_id ? this.event_id : "-");
   },
-  
+
   methods: {
     Logout() {
       this.$emit("logout-profile");
@@ -150,7 +158,7 @@ style="font-size: 31px !important"
       }
     },
 
-    GoToRegistrasi(){
+    GoToRegistrasi() {
       this.$router.push({ name: "auth-registrasi" });
     },
 
@@ -159,13 +167,13 @@ style="font-size: 31px !important"
       this.$router.push({
         name: "auth-login",
       });
-    }
+    },
   },
 
   computed: {
     set_event() {
       return this.$store.getters["config/ConfigSetEventLogin"];
-    }
+    },
   },
 };
 </script>

@@ -80,6 +80,7 @@ export default {
       // Method from helpers
       LoginProfile(url, params)
         .then((res) => {
+          console.log(res)
           if (res.length > 0 && res[0].message) {
             this.Alert("error", res[0].message);
             this.show_alert = true;

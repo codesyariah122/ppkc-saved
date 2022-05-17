@@ -503,7 +503,7 @@
 			margin-top: 2rem;
 			margin-left: 2rem;
 			.card{
-				background-color: $button-gray;
+				background-color: $bg-button-gray;
 				height: 320px;
 				.card-title{
 					font-size: 21px;
@@ -1224,8 +1224,11 @@
 		.jumbotron{
 			.card__pelatihan{
 				.card{
+					margin-left: 1rem;
+					width: 300px;
 					.card-title{
 						color:$second-black!important;
+						font-size: 18px;
 					}
 					.card-text{
 						margin-top: -1rem!important;

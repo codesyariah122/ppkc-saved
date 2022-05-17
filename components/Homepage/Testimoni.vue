@@ -9,18 +9,18 @@
           </h5>
         </mdb-col>
 
-        <mdb-col col="12" md="4" >
+        <mdb-col v-if="$device.isDesktop" col="12" md="4" >
           <nuxt-link to="/ppkc/testimoni" class="btn btn-sm  rounded-pill shadow-none">Lihat Semua Testimoni </nuxt-link>
         </mdb-col>
 
         <!-- <mdb-col md="4"></mdb-col> -->
-        <mdb-col md="12" xs="12" sm="12" :class="text-capitalize">
+        <mdb-col md="12" xs="12" sm="12" :class="`text-capitalize ${$device.isDesktop ? '' : ''}`">
           <h2>Cerita sukses member kami</h2>
         </mdb-col>
 
-        <!-- <mdb-col v-if="$device.isMobile" col="12" md="3" sm="12" class="mt-2">
+        <mdb-col v-if="$device.isMobile" col="12" md="3" sm="12" class="mt-2">
           <nuxt-link to="/ppkc/testimoni" class="btn btn-sm rounded-pill shadow-none">Lihat Semua Testimoni <i class="fa fa-arrow-circle-right fa-fw fa-lg" aria-hidden="true"></i></nuxt-link>
-        </mdb-col> -->
+        </mdb-col>
       </mdb-row>
 
       <!-- column card testimoni -->

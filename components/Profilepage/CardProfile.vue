@@ -3,7 +3,10 @@
     <b-card v-if="loading">
       <b-row>
         <b-col cols="2">
-          <b-skeleton type="avatar" :size="`${$device.isDesktop ? size : '3rem'}`"></b-skeleton>
+          <b-skeleton
+          type="avatar"
+          :size="`${$device.isDesktop ? size : '3rem'}`"
+          ></b-skeleton>
         </b-col>
         <b-col cols="4">
           <b-skeleton animation="wave" width="85%"></b-skeleton>
@@ -25,35 +28,49 @@
 
     <b-card v-else>
       <mdb-container class="profile__info-data">
+
         <mdb-row class="d-flex justify-content-between">
           <mdb-col md="3" xs="12" sm="12" class="col__img-profile">
             <div class="hover__image-wrap">
-              <div v-if="
-                  profiles.photo !==
-                  'https://api.ppkc-online.com/image-profiles/null' || profiles.photo === ''
-                ">
-                <b-avatar variant="none" :src="profiles.photo" :size="size"></b-avatar>
-                <div class="overlay">
-                  <a
+              <div
+              v-if="
+              profiles.photo !== 'https://api.ppkc-online.com/image-profiles/null'
+              "
+              >
+              <b-avatar
+              variant="primary"
+              :src="profiles.photo"
+              :size="size"
+              ></b-avatar>
+                <!-- <img
+                  :src="profiles.photo"
+                  class="img-fluid image rounded-circle"
+                  /> -->
+                  <div class="overlay">
+                    <a
                     :data-gall="
-                      profiles.photo
-                        ? profiles.photo
-                        : `${require('~/assets/images/profile/user-profile.svg')}`
+                    profiles.photo
+                    ? profiles.photo
+                    : `${require('~/assets/images/profile/user-profile.svg')}`
                     "
                     :href="
-                      profiles.photo
-                        ? profiles.photo
-                        : `${require('~/assets/images/profile/user-profile.svg')}`
+                    profiles.photo
+                    ? profiles.photo
+                    : `${require('~/assets/images/profile/user-profile.svg')}`
                     "
                     class="profiles-avatar icon"
                     title="Lihat Foto Profile"
-                  >
+                    >
                     <mdb-icon icon="search-plus" />
                   </a>
                 </div>
               </div>
               <div v-else>
-                  <b-avatar variant="none" :text="username.charAt(0)" :size="size"></b-avatar>
+                <b-avatar
+                variant="primary"
+                :text="username.charAt(0)"
+                :size="size"
+                ></b-avatar>
               </div>
             </div>
           </mdb-col>
@@ -78,9 +95,9 @@
             <mdb-row class="d-flex justify-content-center">
               <mdb-col col="12" sm="6">
                 <mdb-btn class="shadow-none" outline="primary" size="sm">
-                  <a :href="`/profile/edit/${profiles.id}`">
-                    <mdb-icon icon="user-cog" size="sm" /> Edit Profile
-                  </a>
+                  <nuxt-link :to="`/profile/edit/${profiles.id}`">
+                    <mdb-icon icon="user-cog" size="sm" />Edit Profile
+                  </nuxt-link>
                 </mdb-btn>
               </mdb-col>
               <mdb-col col="12" sm="6">
@@ -97,54 +114,54 @@
 </template>
 
 <script>
-export default {
-  props: ["profiles", "loading", "username"],
+  export default {
+    props: ["profiles", "loading", "username"],
 
-  data() {
-    return {
-      p1: true,
-      size: '10rem'
-    }
-  },
+    data() {
+      return {
+        p1: true,
+        size: '10rem'
+      }
+    },
 
-  methods: {
-   
-    LogoutProfile() {
-      this.$swal({
-        title: `Keluar sebagai ${this.profiles.nama}?`,
-        text: "Anda akan keluar dari halaman profile!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Ya, Lanjut keluar!",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.$store.dispatch("config/storeConfigAuth", "");
-          this.$store.dispatch("config/setEventToLogin", "");
-          this.$store.dispatch(
-            "config/setProfileLogout",
-            JSON.stringify({
-              logout: true,
-              username: this.$username(this.profiles.nama),
-            })
-          );
-          this.$swal(
-            "Logout!",
-            `Anda berhasil keluar dari profile ${this.profiles.nama}.`,
-            "success"
-          );
+    methods: {
 
-          this.$router.push({
+      LogoutProfile() {
+        this.$swal({
+          title: `Keluar sebagai ${this.profiles.nama}?`,
+          text: "Anda akan keluar dari halaman profile!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Ya, Lanjut keluar!",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.$store.dispatch("config/storeConfigAuth", "");
+            this.$store.dispatch("config/setEventToLogin", "");
+            this.$store.dispatch(
+              "config/setProfileLogout",
+              JSON.stringify({
+                logout: true,
+                username: this.$username(this.profiles.nama),
+              })
+              );
+            this.$swal(
+              "Logout!",
+              `Anda berhasil keluar dari profile ${this.profiles.nama}.`,
+              "success"
+              );
+
+            this.$router.push({
             // name: 'auth-login'
             path: this.$route.path,
           });
-          setTimeout(() => {
-            location.reload();
-          }, 900);
-        }
-      });
+            setTimeout(() => {
+              location.reload();
+            }, 900);
+          }
+        });
+      },
     },
-  },
-};
+  };
 </script>

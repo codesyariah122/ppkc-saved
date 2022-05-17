@@ -12,78 +12,125 @@
     <!-- Navbar brand -->
     <mdb-navbar-brand>
       <nuxt-link to="/">
-        <MoleculesLayoutMoleculesBrand />
+        <!-- <MoleculesLayoutMoleculesBrand /> -->
+        <img :src="require('~/assets/images/logo/brand.svg')" class="img-fluid">
       </nuxt-link>
     </mdb-navbar-brand>
     <mdb-navbar-toggler class="mt-3 mb-2">
       <mdb-navbar-nav right>
-        <mdb-nav-item active waves-fixed to="/"> Home </mdb-nav-item>
-        <mdb-nav-item waves-fixed to="/events"> Events </mdb-nav-item>
-        <mdb-nav-item v-if="token.accessToken" waves-fixed :to="`/profile/${$username(slug)}/events`">
-          Akses Pelatihan
+        <mdb-nav-item active waves-fixed> 
+          <nuxt-link to="/">
+            Home     
+          </nuxt-link>
         </mdb-nav-item>
-        <mdb-dropdown tag="li" class="nav-item">
-          <mdb-dropdown-toggle tag="a" navLink slot="toggle" waves-fixed>
-            Tetang PPKC
-          </mdb-dropdown-toggle>
-          <mdb-dropdown-menu :class="`${$device.isDesktop ? 'mt-4' : ''}`">
-            <mdb-dropdown-item v-for="item in links" :key="item.id">
-              <nuxt-link :to="item.link">
-                {{ item.name }}
-              </nuxt-link>
-            </mdb-dropdown-item>
-          </mdb-dropdown-menu>
-        </mdb-dropdown>
-      </mdb-navbar-nav>
-      <!-- check user login -->
-      <mdb-dropdown v-if="token.accessToken" tag="li" class="nav-item mt-4">
-        <mdb-dropdown-toggle tag="a" navLink slot="toggle" size="md"
+        <mdb-nav-item waves-fixed> 
+          <nuxt-link to="/events">
+            Katalog Kelas     
+          </nuxt-link>
+        </mdb-nav-item>
+        <mdb-nav-item waves-fixed> 
+          <nuxt-link to="/agendapelatihan">
+            Agenda Pelatihan    
+          </nuxt-link>
+        </mdb-nav-item>
+        <mdb-nav-item
+        v-if="token.accessToken"
+        waves-fixed
+        :to="`/profile/${$username(slug)}/events`"
         >
-        <!-- <mdb-icon far icon="user-circle" size="lg"/>  -->
-       <!--  <b-img v-if="profiles.photo !==
-        'https://api.ppkc-online.com/image-profiles/null'" :src="profiles.photo" rounded="circle" alt="Circle image" width="30"></b-img> -->
-        <b-avatar v-if="profiles.photo !== 'https://api.ppkc-online.com/image-profiles/null'" variant="none" :src="profiles.photo"></b-avatar>
-        <b-avatar v-else variant="none" :text="slug.charAt(0)"></b-avatar>
-      <!--   <b-img v-else :src="`${require('~/assets/images/profile/profile.svg')}`" rounded="circle" alt="Circle image" width="30" height="30"></b-img> -->
-        {{profiles.nama}}
-        </mdb-dropdown-toggle
-        >
-        <mdb-dropdown-menu>
-          <mdb-dropdown-item>
-              <nuxt-link
-               :to="{
-                name: 'profile-name',
-                params: { name: $username(slug) },
-              }"
-              class="text-center"
-              >
-              <mdb-icon icon="user-md" /> {{ profiles.nama }}
+        Akses Pelatihan
+      </mdb-nav-item>
+      <mdb-dropdown tag="li" class="nav-item">
+        <mdb-dropdown-toggle tag="a" navLink slot="toggle" waves-fixed class="no-caret">
+          Tentang Diklat <mdb-icon icon="external-link-alt" />
+        </mdb-dropdown-toggle>
+        <mdb-dropdown-menu :class="`${$device.isDesktop ? 'mt-4' : ''}`">
+          <mdb-dropdown-item v-for="item in links" :key="item.id">
+            <nuxt-link :to="item.link">
+              {{ item.name }}
             </nuxt-link>
-            <!-- <mdb-icon far icon="user-circle" size="lg"/>  -->
-            <!-- <a :href="`/profile/${$username(slug)}`" class="text-center">
-              <mdb-icon icon="user-md" /> Profile
-            </a> -->
-          </mdb-dropdown-item>
-          <div class="dropdown-divider"></div>
-          <mdb-dropdown-item @click="Logout" class="text-center">
-            <mdb-icon icon="sign-out-alt" /> Logout
           </mdb-dropdown-item>
         </mdb-dropdown-menu>
       </mdb-dropdown>
+      <mdb-nav-item waves-fixed>
+        <nuxt-link to="/ppkc/berita" tag="li" navLink > Berita </nuxt-link>
+      </mdb-nav-item>
+    </mdb-navbar-nav>
+    <!-- check user login -->
+   
+<mdb-col lg="12">
+ <div class="dropdown-divider"></div>
+</mdb-col>
 
-      <mdb-btn
-      v-else
-      size="sm"
-      @click="$router.push({ path: '/auth/login' })"
-      block
-      class="my__btn-primary mt-4 rounded"
-      >Masuk</mdb-btn
-      >
-      
-      <!-- end check -->
-    </mdb-navbar-toggler>
-  </mdb-navbar>
-</div>
+<mdb-row v-if="token.accessToken">
+  <mdb-col col="12" sm="12">
+    <mdb-dropdown tag="li" class="nav-item mt-4">
+      <mdb-dropdown-toggle tag="a" navLink slot="toggle">
+        <b-avatar
+        v-if="
+        profiles.photo !==
+        'https://api.ppkc-online.com/image-profiles/null'
+        "
+        variant="primary"
+        :src="profiles.photo"
+        ></b-avatar>
+        <b-avatar
+        v-else
+        variant="primary"
+        :text="slug.charAt(0)"
+        ></b-avatar>
+        <!--   <b-img v-else :src="`${require('~/assets/images/profile/profile.svg')}`" rounded="circle" alt="Circle image" width="30" height="30"></b-img> -->
+        {{ profiles.nama }}
+      </mdb-dropdown-toggle>
+      <mdb-dropdown-menu>
+        <mdb-dropdown-item>
+          <nuxt-link
+          :to="{
+            name: 'profile-name',
+            params: { name: $username(slug) },
+          }"
+          class="text-center"
+          >
+          <b-avatar v-if="profiles.photo !== 'https://api.ppkc-online.com/image-profiles/null'" variant="primary" :src="profiles.photo" size="1.7rem"></b-avatar>
+          <b-avatar v-else variant="primary" :text="slug.charAt(0)" size="1.7rem"></b-avatar> &nbsp; <b>{{ profiles.nama }}</b>
+        </nuxt-link>
+        <!-- <mdb-icon far icon="user-circle" size="lg"/>  -->
+                    <!-- <a :href="`/profile/${$username(slug)}`" class="text-center">
+                    <mdb-icon icon="user-md" /> Profile
+                  </a> -->
+                </mdb-dropdown-item>
+                <div class="dropdown-divider"></div>
+                <mdb-dropdown-item @click="Logout" class="text-center">
+                  <mdb-icon icon="sign-out-alt" /> Logout
+                </mdb-dropdown-item>
+              </mdb-dropdown-menu>
+            </mdb-dropdown>
+          </mdb-col>
+        </mdb-row>
+
+        <div v-else>
+          <mdb-row class="row justify-content-center">
+            <mdb-col col="12" lg="12" xs="12" sm="12" class="mt-2">
+              <nuxt-link 
+              to="/auth/login"
+              class="my__btn-secondary rounded-pill btn btn-block btn-md shadow-none"
+              size="md"
+              >Masuk</nuxt-link>
+            </mdb-col>
+            <mdb-col lg="12" xs="12" sm="12" class="mt-2">
+              <nuxt-link
+              to="/auth/registrasi"
+              class="my__btn-primary rounded-pill btn btn-block btn-md shadow-none"
+              size="md"
+              >Daftar</nuxt-link>
+            </mdb-col>         
+          </mdb-row>
+        </div>
+
+        <!-- end check -->
+      </mdb-navbar-toggler>
+    </mdb-navbar>
+  </div>
 </template>
 
 <script>

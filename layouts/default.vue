@@ -1,7 +1,6 @@
 <template>
 	<div>
 		<LayoutsNavigation :token="token" :profiles="profiles" :slug="slug" :event_id="event_id" :event_path="event_path"/>
-
 		<Nuxt/>
 
 		<LayoutsFooter v-if="$route.name !== 'detail-event-id-slug' || !token.accessToken"/>
@@ -35,10 +34,7 @@
 		},
 
 		methods: {
-			scrollTo(){
-				const element = document.querySelector("#testimoni-list")
-				element.scrollIntoView();
-			},
+			
 			CheckToken(){
 				this.$store.dispatch('config/checkAuthLogin', 'token')
 			},
