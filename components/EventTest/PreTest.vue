@@ -75,14 +75,13 @@
         <div v-if="is_can_test == 0">
           <mdb-row col="12" class="row justify-content-center mb-3">
             <mdb-col lg="12" xs="12" sm="12">
-              <small class="text-primary" style="font-size: 24px">
-                Test bisa diisi sesuai tanggal
+              <small class="text-primary font-weight-bold" style="font-size: 24px">
+                Test dikerjakan sesuai tanggal yang dijadwalkan !!
               </small>
             </mdb-col>
           </mdb-row>
         </div>
         <div v-else>
-          <div v-if="tests.is_already == 0">
             <mdb-row col="12" class="row justify-content-center mb-3">
               <mdb-col lg="12" xs="12" sm="12">
                 <h4 class="text-gray">Total soal : {{ config.totalItem }}</h4>
@@ -145,7 +144,6 @@
                 </div>
               </mdb-col>
             </mdb-row>
-          </div>
 
           <mdb-row
             v-if="tests.is_already == 0 && lists.length > 0"

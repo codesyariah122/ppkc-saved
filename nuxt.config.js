@@ -81,6 +81,7 @@ export default {
   {src: '~/plugins/mdb-vue', ssr: false},
   {src: '~/plugins/vue2-leaflet', mode: 'client', ssr: false },
   { src: '~/plugins/sweetalert', ssr: false},
+  { src: '~/plugins/vue-pdf', ssr: false},
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

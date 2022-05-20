@@ -98,7 +98,7 @@
 
             <!-- Konten utama -->
             <div v-else>
-              <ProfilepageEventDashboardShowContent
+              <ShowContent
                 :type_name="type_name"
                 :type="type"
                 :detailed_data="detailed_data"
@@ -130,6 +130,7 @@
 </template>
 
 <script>
+import ShowContent from "@/components/Profilepage/EventDashboard/ShowContent"
 import ColorModePicker from "@/components/Globals/ColorModePicker";
 
 export default {
@@ -137,6 +138,7 @@ export default {
   layout: "profile-event",
   components: {
     ColorModePicker,
+    ShowContent
   },
   data() {
     return {
@@ -161,6 +163,7 @@ export default {
       detailed_data: {},
       category_name: "",
       detailed: "",
+      pdf: "",
       type: "",
       tgl: "",
       start: "",
@@ -286,6 +289,7 @@ export default {
       });
     },
     ShowField(raw, id_kategori = "", type) {
+      // console.log(raw)
       window.scrollTo(0, 0);
       this.loading_file = true;
       this.show_file = true;
@@ -320,6 +324,8 @@ export default {
           obj[key] = raw[key];
           return obj;
         }, {});
+      this.pdf = this.detailed.file_pdf
+      // console.log(this.detailed)
       // const yt_link  = this.detailed.video ? this.$ytString(this.detailed.video) : ''
       const yt_link = this.detailed.video;
       // console.log(yt_link)
