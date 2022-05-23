@@ -1,8 +1,9 @@
-<template>
+  <template>
   <div class="auth__content">
     <mdb-container>
       <mdb-row class="row justify-content-center">
         <mdb-col md="6" sm="8" xs="8">
+          
           <AuthpageRegistrasiCard
             @registrasi-profile="Register"
             :validation="validation"
@@ -30,6 +31,7 @@ export default {
       show_alert: null,
       profiles: [],
       loading: null,
+      username: ''
     };
   },
 
@@ -39,6 +41,7 @@ export default {
   },
 
   mounted() {
+    console.log(this.profiles),
     this.EventDataLogin(),
     this.UserProfileData(),
     this.IsLoggedIn()
@@ -52,7 +55,7 @@ export default {
           this.$router.push({
             name: 'profile-name',
             params: {
-              name: this.$username(this.username)
+              name: this.username
             }
           })
         }, 900)
@@ -67,6 +70,7 @@ export default {
         this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
         this.$axios.get(url)
         .then(({data}) => {
+          console.log(data.user)
           this.profiles = data.user
           this.username = this.$username(data.user.nama)
         })

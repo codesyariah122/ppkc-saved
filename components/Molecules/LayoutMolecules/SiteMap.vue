@@ -60,18 +60,18 @@
         <div class="row">
           <div class="col-sm-3">
             <ul class="list-group">
-              <li class="list-group-item bg-transparent border-0 p-0 mb-2">
+              <li class="list-group-item bg-transparent border-0 p-0 mb-3">
                 <a href="/"></i>
                   Home
                 </a>
               </li>
-              <li class="list-group-item bg-transparent border-0 p-0 mb-2">
+              <li class="list-group-item bg-transparent border-0 p-0 mb-3">
                 <a href="/events"></i> 
                   Katalog Kelas
                 </a>
               </li>
-              <li class="list-group-item bg-transparent border-0 p-0 mb-2">
-                <a href="/auth/login"></i> 
+              <li class="list-group-item bg-transparent border-0 p-0 mb-3">
+                <a href="/auth/registrasi"></i> 
                   Daftar
                 </a>
               </li>
@@ -79,17 +79,17 @@
           </div>
           <div :class="`col-sm-3 ${$device.isDesktop ? 'ml-5' : ''}`">
             <ul class="list-group">
-               <li class="list-group-item bg-transparent border-0 p-0 mb-2">
+               <li class="list-group-item bg-transparent border-0 p-0 mb-3">
                 <a href="/auth/login"></i>
                   Login
                 </a>
               </li>
-              <li class="list-group-item bg-transparent border-0 p-0 mb-2">
+              <li class="list-group-item bg-transparent border-0 p-0 mb-3">
                 <a href="/ppkc/berita"></i> 
                   Berita
                 </a>
               </li>
-              <li class="list-group-item bg-transparent border-0 p-0 mb-2">
+              <li class="list-group-item bg-transparent border-0 p-0 mb-3">
                 <a href="/ppkc/testimoni"></i> 
                   Testimoni
                 </a>
@@ -101,7 +101,7 @@
         <div class="row mt-2">
           <div class="col-sm-12">
             <ul class="list-group">
-             <li class="list-group-item bg-transparent border-0 p-0 mb-2">
+             <li class="list-group-item bg-transparent border-0 p-0 mb-3">
               <a href="http://ppkcarolus.com/"></i>
                   Situs Resmi PPKC Carolus <mdb-icon icon="external-link-alt" size="sm" />
                 </a>

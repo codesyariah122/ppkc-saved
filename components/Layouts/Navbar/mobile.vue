@@ -1,7 +1,7 @@
 <template>
   <div>
     <mdb-navbar
-    class="fixed-top lighten-4 navbar-9"
+    class="fixed-top lighten-4 navbar-9  text-primary"
     light
     color="white"
     expand="large"
@@ -19,26 +19,27 @@
     <mdb-navbar-toggler class="mt-3 mb-2">
       <mdb-navbar-nav right>
         <mdb-nav-item active waves-fixed> 
-          <nuxt-link to="/">
+          <nuxt-link to="/" tag="li" class="nav-item">
             Home     
           </nuxt-link>
         </mdb-nav-item>
         <mdb-nav-item waves-fixed> 
-          <nuxt-link to="/events">
+          <nuxt-link to="/events" tag="li" class="nav-item">
             Katalog Kelas     
           </nuxt-link>
         </mdb-nav-item>
         <mdb-nav-item waves-fixed> 
-          <nuxt-link to="/agendapelatihan">
+          <nuxt-link to="/agendapelatihan" tag="li" class="nav-item">
             Agenda Pelatihan    
           </nuxt-link>
         </mdb-nav-item>
         <mdb-nav-item
         v-if="token.accessToken"
         waves-fixed
-        :to="`/profile/${$username(slug)}/events`"
         >
-        Akses Pelatihan
+        <nuxt-link :to="`/profile/${$username(slug)}/events`" tag="li" class="nav-item">
+          Akses Pelatihan
+        </nuxt-link>
       </mdb-nav-item>
       <mdb-dropdown tag="li" class="nav-item">
         <mdb-dropdown-toggle tag="a" navLink slot="toggle" waves-fixed class="no-caret">
@@ -57,44 +58,45 @@
       </mdb-nav-item>
     </mdb-navbar-nav>
     <!-- check user login -->
-   
-<mdb-col lg="12">
- <div class="dropdown-divider"></div>
-</mdb-col>
 
-<mdb-row v-if="token.accessToken">
-  <mdb-col col="12" sm="12">
-    <mdb-dropdown tag="li" class="nav-item mt-4">
-      <mdb-dropdown-toggle tag="a" navLink slot="toggle">
-        <b-avatar
-        v-if="
-        profiles.photo !==
-        'https://api.ppkc-online.com/image-profiles/null'
-        "
-        variant="primary"
-        :src="profiles.photo"
-        ></b-avatar>
-        <b-avatar
-        v-else
-        variant="primary"
-        :text="slug.charAt(0)"
-        ></b-avatar>
-        <!--   <b-img v-else :src="`${require('~/assets/images/profile/profile.svg')}`" rounded="circle" alt="Circle image" width="30" height="30"></b-img> -->
-        {{ profiles.nama }}
-      </mdb-dropdown-toggle>
-      <mdb-dropdown-menu>
-        <mdb-dropdown-item>
-          <nuxt-link
-          :to="{
-            name: 'profile-name',
-            params: { name: $username(slug) },
-          }"
-          class="text-center"
-          >
-          <b-avatar v-if="profiles.photo !== 'https://api.ppkc-online.com/image-profiles/null'" variant="primary" :src="profiles.photo" size="1.7rem"></b-avatar>
-          <b-avatar v-else variant="primary" :text="slug.charAt(0)" size="1.7rem"></b-avatar> &nbsp; <b>{{ profiles.nama }}</b>
-        </nuxt-link>
-        <!-- <mdb-icon far icon="user-circle" size="lg"/>  -->
+    <mdb-col lg="12">
+     <div class="dropdown-divider"></div>
+   </mdb-col>
+
+   <mdb-row v-if="token.accessToken">
+    <mdb-col col="12" sm="12">
+      <mdb-dropdown tag="li" class="nav-item mt-4 text-black">
+        <mdb-dropdown-toggle tag="a" navLink slot="toggle">
+          <b-avatar
+          v-if="
+          profiles.photo !==
+          'https://api.ppkc-online.com/image-profiles/null'
+          "
+          variant="primary"
+          :src="profiles.photo"
+          ></b-avatar>
+          <b-avatar
+          v-else
+          variant="primary"
+          :text="slug.charAt(0)"
+          ></b-avatar>
+          <!--   <b-img v-else :src="`${require('~/assets/images/profile/profile.svg')}`" rounded="circle" alt="Circle image" width="30" height="30"></b-img> -->
+          {{ profiles.nama }}
+        </mdb-dropdown-toggle>
+        <mdb-dropdown-menu>
+          <mdb-dropdown-item>
+            <nuxt-link
+            :to="{
+              name: 'profile-name',
+              params: { name: $username(slug) },
+            }"
+            class="text-center"
+            >
+            <b-avatar v-if="profiles.photo !== 'https://api.ppkc-online.com/image-profiles/null'" variant="primary" :src="profiles.photo" size="1.7rem"></b-avatar>
+            <b-avatar v-else variant="primary" :text="slug.charAt(0)" size="1.7rem"></b-avatar> 
+              &nbsp; <b>{{ profiles.nama }}</b>
+          </nuxt-link>
+          <!-- <mdb-icon far icon="user-circle" size="lg"/>  -->
                     <!-- <a :href="`/profile/${$username(slug)}`" class="text-center">
                     <mdb-icon icon="user-md" /> Profile
                   </a> -->
@@ -139,17 +141,17 @@
     data() {
       return {
         links: [
-          { id: 1, name: "Sejarah", link: "/ppkc/sejarah" },
-          { id: 2, name: "Visi & Misi", link: "/ppkc/visi-misi" },
-          {
-            id: 3,
-            name: "Struktur Organisasi",
-            link: "/ppkc/struktur-organisasi",
-          },
-          { id: 4, name: "Fasilitas", link: "/ppkc/fasilitas" },
-          { id: 5, name: "Testimoni", link: "/ppkc/testimoni" },
-          { id: 6, name: "Fasilitator", link: "/ppkc/fasilitator" },
-          { id: 7, name: "Yayasan & Direksi", link: "/ppkc/yayasan-direksi" }
+        { id: 1, name: "Sejarah", link: "/ppkc/sejarah" },
+        { id: 2, name: "Visi & Misi", link: "/ppkc/visi-misi" },
+        {
+          id: 3,
+          name: "Struktur Organisasi",
+          link: "/ppkc/struktur-organisasi",
+        },
+        { id: 4, name: "Fasilitas", link: "/ppkc/fasilitas" },
+        { id: 5, name: "Testimoni", link: "/ppkc/testimoni" },
+        { id: 6, name: "Fasilitator", link: "/ppkc/fasilitator" },
+        { id: 7, name: "Yayasan & Direksi", link: "/ppkc/yayasan-direksi" }
         ]
       }
     },

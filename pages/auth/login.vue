@@ -29,7 +29,7 @@ export default {
       validation: {},
       show_alert: null,
       profiles: [],
-      username: "",
+      username: '',
       loading: null,
     };
   },
@@ -39,7 +39,7 @@ export default {
   },
 
   mounted() {
-    this.EventDataLogin(),
+      this.EventDataLogin(),
       this.UserProfileData(),
       this.IsLoggedIn(),
       this.CheckLogout();
@@ -53,7 +53,7 @@ export default {
           this.$router.push({
             name: "profile-name",
             params: {
-              name: this.$username(this.username),
+              name: this.username,
             },
           });
         }, 1500);
@@ -71,6 +71,7 @@ export default {
         this.$axios
           .get(url)
           .then(({ data }) => {
+            console.log(data.user)
             this.profiles = data.user;
             this.username = this.$username(data.user.nama);
           })

@@ -457,7 +457,6 @@
 	}
 	.lists__panel{
 		margin-top: 2rem;
-		margin-left: 1rem;
 		.card{
 			background-color: $bg-button-gray!important;
 			width: 100%;
@@ -664,7 +663,8 @@
 		.col__testimoni-card{
 			margin-bottom: 1rem;
 			.card__testimoni-content{
-				width: 315px;
+				width: 330px;
+				margin-left: -.1rem;
 			}
 		}
 		.bg__content{
@@ -1043,11 +1043,9 @@
 			h5{
 				color:$second-black;
 				margin-bottom: .9rem;
-				// margin-left: 2.5rem;
-				font-size:23px;
+				font-size:18px;
 				margin-top: 1.3rem;
 				font-weight: 600;
-					// text-decoration: underline wavy  $color-primary;
 				}
 				ul li{
 					font-size: 14px;

@@ -353,7 +353,7 @@ export default {
       .finally(() => {
         setTimeout(() => {
           this.loading = false
-        }, 1500)
+        }, 500)
       });
     },
     findPos(obj) {
