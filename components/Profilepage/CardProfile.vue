@@ -153,9 +153,8 @@
               );
 
             this.$router.push({
-            // name: 'auth-login'
-            path: this.$route.path,
-          });
+              path: this.$route.path,
+            });
             setTimeout(() => {
               location.reload();
             }, 900);

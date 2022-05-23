@@ -265,12 +265,17 @@ export default {
         .then(({ data }) => {
           console.log(data);
           this.$swal("Anda telah absen pagi ini", "", "success");
+          this.ListsData();
         })
-        .catch((err) => console.log(err.response))
+        .catch((err) => {
+          console.log(err.response);
+          if (err.response.data.message) {
+            this.$swal(err.response.data.message, "", "failed");
+          }
+        })
         .finally(() => {
           this.loading_input = false;
           this.dialogPagi = false;
-          this.ListsData();
         });
     },
 
@@ -286,12 +291,17 @@ export default {
         .then(({ data }) => {
           console.log(data);
           this.$swal("Anda telah absen siang ini", "", "success");
+          this.ListsData();
         })
-        .catch((err) => console.log(err.response))
+        .catch((err) => {
+          console.log(err.response);
+          if (err.response.data.message) {
+            this.$swal(err.response.data.message, "", "failed");
+          }
+        })
         .finally(() => {
           this.loading_input = false;
           this.dialogSiang = false;
-          this.ListsData();
         });
     },
 

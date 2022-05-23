@@ -71,7 +71,7 @@
       indicators
       fade
       dark
-      class="jumbotron__home"
+      class="jumbotron__home mb-5"
       customClass="rounded"
       >
       </mdb-carousel>

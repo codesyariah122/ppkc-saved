@@ -7,7 +7,7 @@
       >
         <!-- footer branding content -->
         <mdb-col col="12" sm="3" class="mt-5 col-1">
-          <img :src="brand" />
+          <img :src="brand" :style="`${$device.isMobile ? 'width:450px;' : ''}`"/>
 
          <p class="mb-1">Pusat Pengembangan Kesehatan Carolus (PPKC) sebagai Lembaga pelatihan yang mampu memberikan solusi setiap permasalahan di Bidang kesehatan.</p><br>
          

@@ -1,5 +1,5 @@
 <template>
-  <div class="panel__target-content">
+  <div class="panel__target-content mt-5">
     <!-- Header -->
     <mdb-row class="row justify-content-center panel__header">
       <mdb-col col="12" lg="12" xs="12" sm="12">

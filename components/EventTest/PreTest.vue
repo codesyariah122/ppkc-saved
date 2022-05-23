@@ -1,5 +1,15 @@
 <template>
   <div class="pre__test">
+    <!-- <mdb-container v-if="save_test.user_id == profiles.id ? save_test.status : success.status" class="success__test">
+			<mdb-row col="12" class="row justify-content-center">
+				<mdb-col lg="12">
+					<mdb-alert :color="`${save_test.status ? 'info' : 'success'}`">
+						Halo, {{save_test.profile.nama}}. {{save_test.message ? save_test.message :  success.message}}
+					</mdb-alert>
+				</mdb-col>
+			</mdb-row>
+		</mdb-container> -->
+
     <mdb-container>
       <div v-if="loading_soal">
         <mdb-row col="12" class="row justify-content-center">
@@ -75,13 +85,14 @@
         <div v-if="is_can_test == 0">
           <mdb-row col="12" class="row justify-content-center mb-3">
             <mdb-col lg="12" xs="12" sm="12">
-              <small class="text-primary font-weight-bold" style="font-size: 24px">
-                Test dikerjakan sesuai tanggal yang dijadwalkan !!
+              <small class="text-primary" style="font-size: 24px">
+                Test bisa diisi sesuai tanggal
               </small>
             </mdb-col>
           </mdb-row>
         </div>
         <div v-else>
+          <div v-if="tests.is_already == 0">
             <mdb-row col="12" class="row justify-content-center mb-3">
               <mdb-col lg="12" xs="12" sm="12">
                 <h4 class="text-gray">Total soal : {{ config.totalItem }}</h4>
@@ -112,7 +123,13 @@
                           :key="option.id"
                           :value="option.id"
                         >
-                         
+                          <!-- Debugging -->
+                          <!-- <pre>
+
+										{{lists[listIndex-1].urutan}} || {{config_soal.current}}
+
+										 {{lists[listIndex-1].urutan > config_soal.current}} |  -- {{config.disabled}}
+										</pre> -->
 
                           <input
                             type="radio"
@@ -144,6 +161,7 @@
                 </div>
               </mdb-col>
             </mdb-row>
+          </div>
 
           <mdb-row
             v-if="tests.is_already == 0 && lists.length > 0"

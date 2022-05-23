@@ -96,7 +96,7 @@
 						</mdb-col>
 
 						<mdb-col lg="6" xs="12" sm="12" class="mt-3">
-							<nuxt-link :to="`/detail/event/${item.kegiatan_id}/${$slug(item.kegiatan_title)}`" size="sm" class="btn my__btn-primary rounded-pill btn-block">Akses Pelatihan</nuxt-link>
+							<nuxt-link :to="`/detail/event/${item.kegiatan_id}/${$slug(item.kegiatan_title)}`" size="sm" class="btn my__btn-primary  btn-block">Akses Pelatihan</nuxt-link>
 						</mdb-col>
 					</mdb-row>
 				</mdb-container>

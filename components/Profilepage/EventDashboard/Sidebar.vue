@@ -51,7 +51,15 @@
             <mdb-row col="12" class="d-flex justify-content-between">
               <mdb-col col="9" md="9" sm="9" xs="9">
                 <h6>{{ item.title }}</h6>
-                <small> {{ $moment(item.tanggal).format("LLLL") }} </small>
+                <small>
+                  {{
+                    $moment(
+                      $moment(item.tanggal).format("YYYY-MM-DD") +
+                        "T" +
+                        item.jam_awal
+                    ).format("LLLL")
+                  }}
+                </small>
               </mdb-col>
 
               <mdb-col col="2" md="2" sm="2" xs="2">
