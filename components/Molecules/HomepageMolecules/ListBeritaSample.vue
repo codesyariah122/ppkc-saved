@@ -1,7 +1,6 @@
 <template>
-	<div>
-		<mdb-row class="row justify-content-center card__berita-list">
-			<mdb-col v-if="listIndex <= listToShow" v-for="listIndex in listToShow" md="4" xs="12" sm="12" class="mb-3" :key="news[listIndex - 1].id">
+	<div class="col__berita mt-3 mb-5">
+			<!-- <mdb-col v-if="listIndex <= listToShow" v-for="listIndex in listToShow" md="4" xs="12" sm="12" class="mb-3" :key="news[listIndex - 1].id">
 				<mdb-card>
 					<mdb-card-image :src="news[listIndex - 1].foto_url" alt="Card image cap"></mdb-card-image>
 					<mdb-card-body>
@@ -15,8 +14,11 @@
 
 			<mdb-col col="12"  xl="4" lg="12" xs="12" sm="12" :class="`${$device.isDesktop ? 'mb-5 mt-5 ml-5 shadow-none' : 'mb-2'}`">
 				<nuxt-link to="/rsi/berita" :class="`btn my__btn-primary rounded-pill ${$device.isMobile ? 'btn-block btn-sm btn__link' : 'btn-lg'}`">Lihat Semua Berita</nuxt-link>
+			</mdb-col> -->
+			<mdb-col lg="12" xs="12" sm="12" class="text-center">
+				<mdb-alert color="info">Belum ada berita terbaru !</mdb-alert>
 			</mdb-col>
-		</mdb-row>
+			<br>
 	</div>
 </template>
 

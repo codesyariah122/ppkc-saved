@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<mdb-row class="row justify-content-center col__testimoni">
+		<!-- <mdb-row class="row justify-content-center col__testimoni">
 			<mdb-col v-for="listIndex in listToShow" md="6" xs="12" sm="12" class="col__testimoni-card" :key="lists[listIndex-1].id">
 				<mdb-card class="card__testimoni-content">
 					<mdb-container class="mt-3">
@@ -19,9 +19,10 @@
 					</mdb-container>
 				</mdb-card>
 			</mdb-col>
-
-		</mdb-row>
-
+		</mdb-row> -->
+		<mdb-col lg="12" xs="12" sm="12" class="text-center mb-5">
+			<mdb-alert color="info">Belum ada testimoni !</mdb-alert>
+		</mdb-col>
 	</div>
 </template>
 
@@ -50,9 +51,9 @@
 </script>
 
 <style lang="scss">
-@include card_testimonial_mobile;
+	@include card_testimonial_mobile;
 
-@media (min-width: 992px) {
-  @include card_testimonial_desktop;
-}
+	@media (min-width: 992px) {
+		@include card_testimonial_desktop;
+	}
 </style>
