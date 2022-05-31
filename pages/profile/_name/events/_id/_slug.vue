@@ -11,7 +11,7 @@
         :profiles="profiles"
         :details="details"
       />
-      
+
       <div class="docs-content">
         <div class="container">
           <!-- Sidebar Toggler -->
@@ -42,16 +42,17 @@
                     </h2>
                     <p>
                       <strong
-                        >Selamat Datang di Dashboard Pelatihan PPKC</strong
+                        >Selamat Datang di Dashboard Pelatihan CPD
+                        Online</strong
                       >
                       <br />
-                      <mdb-alert color="warning">                        
+                      <mdb-alert color="warning">
                         click/tap tombol dengan icon humberger menu
                         <mdb-icon
-                        icon="bars"
-                        class="text-primary"
-                        size="lg"
-                        style="color: blue !important"
+                          icon="bars"
+                          class="text-primary"
+                          size="lg"
+                          style="color: blue !important"
                         />
                         di pojok kanan atas, &nbsp;&nbsp; kemudian akan muncul
                         slide menu materi pelatihan yang anda ikuti dari sebelah
@@ -409,8 +410,7 @@ export default {
       if (h >= 10 && h < 15) this.ucapan = "Selamat Siang,";
       if (h >= 15 && h < 18) this.ucapan = "Selamat Sore,";
       if (h >= 18 || h < 4) this.ucapan = "Selamat Malam,";
-    }
-    
+    },
   },
 
   computed: {

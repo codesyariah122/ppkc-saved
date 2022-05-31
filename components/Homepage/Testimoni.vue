@@ -25,17 +25,17 @@
 
       <!-- column card testimoni -->
       <!-- Testimoni card components -->
-      <MoleculesHomepageMoleculesCardTestimoni :lists="lists"/>
+      <MoleculesHomepageMoleculesCardTestimoni v-if="lists.length > 0" :lists="lists"/>
 
-        <!-- <MoleculesHomepageMoleculesListlistsample v-else/> -->
+        <MoleculesHomepageMoleculesListTestimoniSample v-else/>
 
 
-    </mdb-container>
-  </div>
-</template>
+      </mdb-container>
+    </div>
+  </template>
 
-<script>
-  export default{
-    props: ['lists']
-  }
-</script>
+  <script>
+    export default{
+      props: ['lists']
+    }
+  </script>
