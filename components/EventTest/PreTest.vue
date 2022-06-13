@@ -81,49 +81,49 @@
             </ul>
           </mdb-col>
         </mdb-row>
-
+        
         <div v-if="is_can_test == 0">
           <mdb-row col="12" class="row justify-content-center mb-3">
             <mdb-col lg="12" xs="12" sm="12">
-              <small class="text-primary" style="font-size: 24px">
-                Test bisa diisi sesuai tanggal
-              </small>
+              <mdb-alert color="info">
+                 Test bisa diisi sesuai tanggal
+              </mdb-alert>
             </mdb-col>
           </mdb-row>
         </div>
-        <div v-else>
-          <div v-if="tests.is_already == 0">
-            <mdb-row col="12" class="row justify-content-center mb-3">
-              <mdb-col lg="12" xs="12" sm="12">
-                <h4 class="text-gray">Total soal : {{ config.totalItem }}</h4>
-                <small class="text-primary">
-                  *.Selesaikan soal secara berurutan (1 s/d {{ lists.length }})
-                </small>
-              </mdb-col>
-            </mdb-row>
 
-            <mdb-row
-              col="12"
-              class="row justify-content-center"
-              v-if="listIndex <= lists.length"
-              v-for="(listIndex, index) in config.perItem"
-              :key="lists[listIndex - 1].id"
-            >
-              <mdb-col lg="12" class="test__content">
-                <h4>Soal {{ lists[listIndex - 1].urutan }}</h4>
-                <p>{{ lists[listIndex - 1].pertanyaan }}</p>
-                <div class="test-answers">
-                  <form method="POST" class="is-not-results">
-                    <fieldset>
-                      <div class="answers">
-                        <div
-                          class="answer"
-                          v-for="(option, indx) in lists[listIndex - 1]
-                            .pilihans"
-                          :key="option.id"
-                          :value="option.id"
-                        >
-                          <!-- Debugging -->
+        <div v-else>
+          <mdb-row v-if="tests.is_already !== 1" col="12" class="row justify-content-center mb-3">
+            <mdb-col lg="12" xs="12" sm="12">
+              <h4 class="text-gray">Total soal : {{ config.totalItem }}</h4>
+              <small class="text-primary">
+                *.Selesaikan soal secara berurutan (1 s/d {{ lists.length }})
+              </small>
+            </mdb-col>
+          </mdb-row>
+
+          <mdb-row
+          col="12"
+          class="row justify-content-center"
+          v-if="listIndex <= lists.length"
+          v-for="(listIndex, index) in config.perItem"
+          :key="lists[listIndex - 1].id"
+          >
+          <mdb-col lg="12" class="test__content">
+            <h4>Soal {{ lists[listIndex - 1].urutan }}</h4>
+            <p>{{ lists[listIndex - 1].pertanyaan }}</p>
+            <div class="test-answers">
+              <form method="POST" class="is-not-results">
+                <fieldset>
+                  <div class="answers">
+                    <div
+                    class="answer"
+                    v-for="(option, indx) in lists[listIndex - 1]
+                    .pilihans"
+                    :key="option.id"
+                    :value="option.id"
+                    >
+                    <!-- Debugging -->
                           <!-- <pre>
 
                     {{lists[listIndex-1].urutan}} || {{config_soal.current}}
@@ -131,37 +131,36 @@
                      {{lists[listIndex-1].urutan > config_soal.current}} |  -- {{config.disabled}}
                     </pre> -->
 
-                          <input
-                            type="radio"
-                            v-model="
-                              tests.is_already == 1
-                                ? lists[listIndex - 1].jawaban
-                                : lists[listIndex - 1].ujian_id
-                            "
-                            :disabled="tests.is_already == 1 ? true : false"
-                            :value="option.id"
-                            :id="option.id"
-                            required
-                            @change="
-                              ChangeJawaban(
-                                option.ujian_id,
-                                index,
-                                option.id,
-                                lists[listIndex - 1].urutan
-                              )
-                            "
-                          />
-                          <label :for="option.id" class="answer__item">
-                            {{ option.jawaban }}
-                          </label>
-                        </div>
-                      </div>
-                    </fieldset>
-                  </form>
-                </div>
-              </mdb-col>
-            </mdb-row>
-          </div>
+                    <input
+                    type="radio"
+                    v-model="
+                    tests.is_already == 1
+                    ? lists[listIndex - 1].jawaban
+                    : lists[listIndex - 1].ujian_id
+                    "
+                    :disabled="tests.is_already == 1 ? true : false"
+                    :value="option.id"
+                    :id="option.id"
+                    required
+                    @change="
+                    ChangeJawaban(
+                      option.ujian_id,
+                      index,
+                      option.id,
+                      lists[listIndex - 1].urutan
+                      )
+                      "
+                      />
+                      <label :for="option.id" class="answer__item">
+                        {{ option.jawaban }}
+                      </label>
+                    </div>
+                  </div>
+                </fieldset>
+              </form>
+            </div>
+          </mdb-col>
+        </mdb-row>
 
           <mdb-row
             v-if="tests.is_already == 0 && lists.length > 0"
@@ -295,7 +294,8 @@ export default {
           this.field.jawaban.push(id_jawaban);
         }
       } else {
-        this.field.jawaban.splice(position, 0, id_jawaban);
+        // this.field.jawaban.splice(position, 0, id_jawaban);
+        this.field.jawaban[position] = id_jawaban;
         console.log(position);
         console.log(false);
       }
@@ -352,9 +352,9 @@ export default {
       this.$axios
         .get(url)
         .then(({ data }) => {
-          console.log(data)
+          // console.log(data)
           this.is_can_test = data.is_can_test;
-          this.pelatihanDetail = data.pelatihan_detail ? data.pelatihan_detail : '';
+          this.pelatihanDetail = data.pelatihan_detail;
           this.lists = data.list_data;
           this.config.totalItem = data.list_data.length;
           this.tests = data.pelatihan;
@@ -417,7 +417,7 @@ export default {
           if (result.isConfirmed) {
             this.KirimJawaban(this.field.soal, this.field.jawaban);
           } else if (result.isDenied) {
-            this.field.jawaban = [];
+            // this.field.jawaban = [];
             this.loading_soal = false;
             this.$swal("Changes are not saved", "", "info");
           }

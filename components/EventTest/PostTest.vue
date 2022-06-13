@@ -1,19 +1,19 @@
 <template>
   <div class="pre__test">
     <!-- <mdb-container v-if="save_test.user_id == profiles.id ? save_test.status : success.status" class="success__test">
-			<mdb-row col="12" class="row justify-content-center">
-				<mdb-col lg="12">
-					<mdb-alert :color="`${save_test.status ? 'info' : 'success'}`">
-						Halo, {{save_test.profile.nama}}. {{save_test.message ? save_test.message :  success.message}}
-					</mdb-alert>
-				</mdb-col>
-			</mdb-row>
-		</mdb-container> -->
+      <mdb-row col="12" class="row justify-content-center">
+        <mdb-col lg="12">
+          <mdb-alert :color="`${save_test.status ? 'info' : 'success'}`">
+            Halo, {{save_test.profile.nama}}. {{save_test.message ? save_test.message :  success.message}}
+          </mdb-alert>
+        </mdb-col>
+      </mdb-row>
+    </mdb-container> -->
 
     <mdb-container>
       <!-- <pre>
-				{{lists}}
-			</pre> -->
+        {{lists}}
+      </pre> -->
       <div v-if="loading_soal">
         <mdb-row col="12" class="row justify-content-center">
           <mdb-col lg="12">
@@ -77,13 +77,13 @@
             </ul>
           </mdb-col>
         </mdb-row>
-
+        
         <div v-if="is_can_test == 0">
           <mdb-row col="12" class="row justify-content-center mb-3">
             <mdb-col lg="12" xs="12" sm="12">
-              <small class="text-primary" style="font-size: 24px">
-                Test bisa diisi sesuai tanggal
-              </small>
+              <mdb-alert color="info">
+                 Test bisa diisi sesuai tanggal
+              </mdb-alert>
             </mdb-col>
           </mdb-row>
         </div>
@@ -332,7 +332,8 @@ export default {
           this.field.jawaban.push(id_jawaban);
         }
       } else {
-        this.field.jawaban.splice(position, 0, id_jawaban);
+        // this.field.jawaban.splice(position, 0, id_jawaban);
+        this.field.jawaban[position] = id_jawaban;
         console.log(position);
         console.log(false);
       }
