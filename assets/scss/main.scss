@@ -735,7 +735,7 @@
 		z-index: 9999;
 		h1{
 			color:$default!important;
-			font-size:27px;
+			font-size:23px;
 			font-weight: 700;
 			line-height: 32.68px;
 			margin-left: -5.6rem;
@@ -1013,18 +1013,18 @@
 				margin-top: 1.3rem;
 				font-size:14px;
 				font-weight: 400;
-				line-height: 19.07px;	
+				line-height: 23px;	
 			}
 			address{
-				margin-top: -.3rem;
+				margin-top: -.5rem;
 				font-size:14px;
 				font-weight: 600!important;
-				line-height: 31px;
+				line-height: 21px;
 				width: 80%;
 			}
 
 			img{
-				max-width: 175px!important;
+				max-width: 270px!important;
 			}
 		}
 
@@ -1049,7 +1049,7 @@
 				}
 				ul li{
 					font-size: 14px;
-					font-weight: 600;
+					font-weight: 400;
 					line-height: 21.07px;
 					margin-bottom:1.5rem;
 				}

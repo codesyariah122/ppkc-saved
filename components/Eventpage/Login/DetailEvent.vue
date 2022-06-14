@@ -109,7 +109,7 @@
             </div>
             <div v-else>
               <mdb-btn @click="ProfileEvent($username(profiles.nama), data_event.event_id, $slug(details.kegiatan_title))" v-if="data_event || token.accessToken" class="btn my__btn-primary rounded-pill btn-block shadow-none" :size="`${$device.isDesktop ? 'md' : 'sm'}`">
-                <h5>Lanjut Pelatihan</h5>
+                Lanjut Pelatihan
               </mdb-btn>
             </div>
               <mdb-btn v-else size="md" color="grey" disabled class="mb-3 not__allowed">Daftar</mdb-btn>

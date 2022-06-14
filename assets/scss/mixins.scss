@@ -137,6 +137,13 @@
 @mixin listMobile($color){
 	margin-left: .1rem;
 	margin-top: -5rem;
+	h1{
+		color:$default!important;
+		font-size:25px;
+		font-weight: 700;
+		line-height: 32.68px;
+		margin-left: -5.6rem;
+	}
 	h5{
 		font-size:14px!important;
 		font-weight: 600!important;

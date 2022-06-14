@@ -26,7 +26,7 @@
                 nasional.
               </p>
               <b-button v-if="!token.accessToken"
-              class="my__btn-primary rounded"
+              class="my__btn-primary rounded btn-md"
               @click="$router.push({ name: 'auth-registrasi' })"
               >Daftar Sekarang</b-button
               >
@@ -53,7 +53,7 @@
               nasional. 
             </p>
             <b-button v-if="!token.accessToken"
-            class="my__btn-primary rounded"
+            class="my__btn-primary rounded btn-sm"
             @click="$router.push({ name: 'auth-registrasi' })"
             >Daftar Sekarang</b-button
             >

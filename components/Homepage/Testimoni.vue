@@ -27,7 +27,7 @@
       <!-- Testimoni card components -->
       <MoleculesHomepageMoleculesCardTestimoni v-if="lists.length > 0" :lists="lists"/>
 
-        <MoleculesHomepageMoleculesListTestimoniSample v-else/>
+      <MoleculesHomepageMoleculesListTestimoniSample v-else/>
 
 
       </mdb-container>

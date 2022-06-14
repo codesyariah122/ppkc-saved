@@ -30,27 +30,53 @@
             </mdb-col>
           </mdb-row>
 
-          <div
-            class="answer"
-            v-for="(option, index) in list_fasilitator"
-            :key="option.id"
-            :value="option.id"
-          >
-            <input
-              type="radio"
-              :id="option.id"
-              :value="option.id"
-              v-model="selectedFasilitator"
-              required
-              @change="ChangeFasilitator"
-            />
-            <label :for="option.id" class="answer__item">
-              <b>{{ option.nama }}</b> (Kelas Online :
-              <b>{{ option.judul }}</b> -
-              {{
-                $moment(option.waktu_webinar_awal).format("DD MMMM YYYY HH:mm")
-              }})
-            </label>
+          <div id="table-rtl" class="table-responsive">
+            <table class="table table-hover" style="overflow-x: hidden">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Fasilitator</th>
+                  <th>Judul</th>
+                  <th>Waktu</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-if="loading">
+                  <td colspan="5">
+                    <div class="d-flex justify-content-center">
+                      <div class="spinner-border text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr v-else v-for="item in list_fasilitator" :key="item.id">
+                  <td>
+                    <input
+                      type="radio"
+                      :id="item.id"
+                      :value="item.id"
+                      v-model="selectedFasilitator"
+                      required
+                      @change="ChangeFasilitator"
+                    />
+                  </td>
+                  <td>{{ item.nama }}</td>
+                  <td>
+                    Kelas Online : <b>{{ item.judul }}</b>
+                  </td>
+                  <td>
+                    {{
+                      $moment(item.waktu_webinar_awal).format(
+                        "DD MMMM YYYY HH:mm"
+                      )
+                    }}
+                  </td>
+                  <td>{{ item.status_fasilitator }}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
 
           <div v-if="selectedFasilitator">

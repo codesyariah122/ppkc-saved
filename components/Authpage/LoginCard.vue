@@ -2,7 +2,7 @@
   <mdb-card class="card__login shadow-none">
     <mdb-card-body class="form__auth">
       <!-- Material form login -->
-      <img :src="require('~/assets/images/logo/brand.svg')" width="150" />
+      <img :src="require('~/assets/images/logo/brand.svg')" width="250" />
 
       <form class="mt-2" @submit.prevent="LoginProfile">
         <h4 class="h4 text-left mb-2">Selamat Datang</h4>
