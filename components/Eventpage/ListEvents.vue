@@ -127,7 +127,7 @@
         </mdb-col>
       </mdb-row>
       <div v-else>
-        <mdb-row v-if="listToShow <= lists.length" class="row justify-content-center mt-2">
+        <mdb-row v-if="listToShow < lists.length" class="row justify-content-center mt-2">
           <mdb-col
           col="12"
           xl="5"

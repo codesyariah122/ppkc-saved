@@ -81,6 +81,7 @@ export default {
       month: "",
       selected: undefined,
       currentPage: 1,
+      basedOn: null
     };
   },
 
@@ -93,7 +94,8 @@ export default {
         this.field.category_id,
         this.field.month,
         true,
-        this.month
+        this.month,
+        this.basedOn
       );
     },
 
@@ -105,6 +107,7 @@ export default {
 
     ChangeCategory(e) {
       this.field.category_id = e.target.value;
+      this.basedOn = "category"
       this.SearchEvent()
     },
 
@@ -112,6 +115,7 @@ export default {
       const options = e.target.options;
       this.field.month = options[options.selectedIndex].getAttribute("data-month");
       this.month = options[options.selectedIndex].getAttribute("data-name");
+      this.basedOn = "month"
       this.SearchEvent()
     },
 

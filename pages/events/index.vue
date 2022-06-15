@@ -46,7 +46,7 @@
 				this.$store.dispatch('config/checkAuthLogin', 'token')
 			},
 
-			FetchListEvent(keyword, start, category, month, loadingBtn=null){
+			FetchListEvent(keyword, start, category, month, loadingBtn=null, basedOn=null){
 				this.loading = true
 				this.loadingBtn = loadingBtn
 				const url = `${this.api_url}/web/event/paging?keyword=${keyword ? keyword : ''}&start=${start ? start : this.start}&jenis_pelatihan=${category ? category : ''}&bulan_pelatihan=${month ? month : ''}`
@@ -57,15 +57,26 @@
 					if(data.list_kegiatan_terdekat.length > 0){
 						this.empty = false
 						this.lists = data.list_kegiatan_terdekat
+						// console.log(this.lists.length)
+						if(this.lists.length < 9){
+							this.listToShow = 3
+						}else{
+							this.listToShow = 9
+						}
 						// if (this.lists.length <= this.listToShow) {
 						// 	SampleEvents.map(d => {
 						// 		this.lists.push(d)
 						// 	})
 						// }
 					}else{
+						
 						this.empty = true
 						this.search = false
-						this.message = `Tidak ada event terdekat di bulan ${this.month}!`
+						if(basedOn === "category"){
+							this.message = "Event dengan kategori yang di cari belum tersedia !"
+						}else{
+							this.message = `Tidak ada event terdekat di bulan ${this.month}!`
+						}
 						this.lists = []
 						// setTimeout(() => {
 						// 	this.empty = false
@@ -106,7 +117,7 @@
 				this.FetchListEvent('', this.start+=start,'', '', true)
 			},
 
-			SearchEvent(page, keyword, category, month, loadingBtn, month_name){
+			SearchEvent(page, keyword, category, month, loadingBtn, month_name, basedOn){
 				this.search = true
 				this.month = month_name
 				console.log(keyword)
@@ -125,7 +136,7 @@
 					this.search = true
 					this.empty = false
 					this.error_search = false
-					this.FetchListEvent(keyword, page, category, month, loadingBtn)
+					this.FetchListEvent(keyword, page, category, month, loadingBtn, basedOn)
 				}
 			},
 
