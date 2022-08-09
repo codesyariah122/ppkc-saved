@@ -14,7 +14,7 @@
 					<mdb-card-body>
 						<mdb-badge class="badge btn-outline-primary mb-4 badge__category">{{lists[listIndex-1].kategori_value}}</mdb-badge>
 
-						<mdb-card-title>{{lists[listIndex-1].kegiatan_title}}</mdb-card-title>
+						<mdb-card-title class="truncate2">{{lists[listIndex-1].kegiatan_title}}</mdb-card-title>
 
 						<span class="mt-2">{{$moment(lists[listIndex-1].tgl_awal).format("LL")}} - {{$moment(lists[listIndex-1].tgl_akhir).format("LL")}}</span>
 						<br>
@@ -36,3 +36,25 @@
 		props: ['lists', 'listToShow']
 	}
 </script>
+
+<style lang="css">
+	.truncate2 {
+		display: -webkit-box;
+		-webkit-line-clamp: var(--line-clamp, 2);
+		-webkit-box-orient: vertical;
+		word-break: var(--word-break, "none");
+		overflow: hidden;
+		hyphens: auto;
+		text-align: var(--align, left);
+
+		--is-single-line: 1 - Clamp(0, Calc(var(--line-clamp) - 1), var(--line-clamp));
+		--delay: Calc(-1s * (var(--is-single-line, 1) - 1));
+		animation: states 1s var(--delay) paused;
+
+		@keyframes states {
+			0% {
+				word-break: break-all;
+			}
+		}
+	}
+</style>

@@ -1,15 +1,18 @@
 <template>
 	<div class="webinar__list">
 		<!-- Header filter event page -->
-		<EventpageHeader @update-list-event="ListEvent" :lists="lists" :loading="loading" :loadingBtn="loadingBtn" :listToShow="listToShow" @load-more-event="LoadListEvent" :categories="categories" ref="eventChild"/>
+		<EventpageHeader @update-list-event="SearchEvent" :lists="lists" :loading="loading" :loadingBtn="loadingBtn" :listToShow="listToShow" @load-more-event="LoadListEvent" :categories="categories" ref="eventChild" :search="search"/>
 
+		
 		<!-- List event page content -->
-		<EventpageListEvents :lists="lists" :loading="loading" :loadingBtn="loadingBtn" :listToShow="listToShow" :message="message" :empty="empty" :token="token" :data_event="data_event"/>
+		<EventpageListEvents :lists="lists" :loading="loading" :loadingBtn="loadingBtn" :listToShow="listToShow" :message="message" :empty="empty" :token="token" :data_event="data_event" :error_search="error_search" @load-more-event="LoadListEvent" :page="page" :search="search"/>
 
 	</div>
 </template>
 
 <script>
+	import {SampleEvents} from '@/helpers'
+
 	export default{
 		name: 'events',
 		layout: 'default',
@@ -19,9 +22,14 @@
 				loadingBtn: null,
 				lists: [],
 				categories: [],
-				listToShow: 3,
+				listToShow: 9,
+				page: 1,
+				start: 20,
 				message:'',
-				empty: null
+				empty: null,
+				error_search: null,
+				month: '',
+				search: null
 			}
 		},
 
@@ -30,7 +38,7 @@
 		},
 
 		mounted(){
-			this.ListEvent(1,'', '', '')
+			this.FetchListEvent()
 		},
 
 		methods:{
@@ -38,57 +46,98 @@
 				this.$store.dispatch('config/checkAuthLogin', 'token')
 			},
 
-			ListEvent(page, keyword, category, month, loadingBtn){
-				// Clear list base on page == 1
-				// if(page == 1) page = 0 
-					const search_data = {
-						'page': page,
-						'keyword': keyword,
-						'category': category,
-						'month': month
-					}
-					// console.log(search_data)
-
-					this.loadingBtn = loadingBtn ? loadingBtn : null
-					this.loading=true
-					const url = `${this.api_url}/web/event/paging?keyword=${keyword ? keyword : ''}&page=${page ? page : ''}&jenis_pelatihan=${category ? category : ''}&bulan_pelatihan=${month ? month : ''}`
-
-					this.$axios.get(url)
-					.then(res => {
-						this.categories = res.data.list_jenis_kegiatan
-						this.$refs.eventChild.ResetForm()
-
-						console.log(res.data.list_kegiatan_terdekat.length)
-						if(res.data.list_kegiatan_terdekat.length > 0){
-							this.empty=false
-							this.lists = res.data.list_kegiatan_terdekat
+			FetchListEvent(keyword, start, category, month, loadingBtn=null, basedOn=null){
+				this.loading = true
+				this.loadingBtn = loadingBtn
+				const url = `${this.api_url}/web/event/paging?keyword=${keyword ? keyword : ''}&start=${start ? start : this.start}&jenis_pelatihan=${category ? category : ''}&bulan_pelatihan=${month ? month : ''}`
+				this.$axios.get(url)
+				.then(({data}) => {
+					this.categories = data.list_jenis_kegiatan
+					this.$refs.eventChild.ResetForm()
+					if(data.list_kegiatan_terdekat.length > 0){
+						this.empty = false
+						this.lists = data.list_kegiatan_terdekat
+						// console.log(this.lists.length)
+						if(this.lists.length < 9){
+							this.listToShow = 3
 						}else{
-							this.empty=true
-							if(search_data.month == undefined){
-								this.message = "Pilih bulan pelatihan terlebih dahulu"
-							}else{
-								this.message = 'Data event yang dicari tidak di temukan'
-							}
+							this.listToShow = 9
 						}
-					})
-					.catch(err => {
-						console.log(err.message)
-					})
-					.finally(() => {
-						setTimeout(() => {
-							this.loading=false
-							this.loadingBtn=false
-						}, 800)
-					})
-				},
+						// if (this.lists.length <= this.listToShow) {
+						// 	SampleEvents.map(d => {
+						// 		this.lists.push(d)
+						// 	})
+						// }
+					}else{
+						
+						this.empty = true
+						this.search = false
+						if(basedOn === "category"){
+							this.message = "Event dengan kategori yang di cari belum tersedia !"
+						}else{
+							this.message = `Tidak ada event terdekat di bulan ${this.month}!`
+						}
+						this.lists = []
+						// setTimeout(() => {
+						// 	this.empty = false
+						// 	this.LoadListEvent(this.start)
+						// }, 3000)
+						// setTimeout(() => {
+						// 	this.empty = false
+						// }, 2500)
 
-			LoadListEvent(page){
+						// if(month == undefined){
+						// 	this.empty = true
+						// 	this.message = "Pilih bulan pelatihan terlebih dahulu"
+						// 	setTimeout(() => {
+						// 		this.empty = false
+						// 	}, 2500)
+						// }else{
+						// 	this.message = 'Data event yang dicari tidak di temukan'
+						// }
+					}
+				})
+				.catch(err => console.log(err.message))
+				.finally(() => {
+					setTimeout(() => {
+						this.loading = false
+						this.loadingBtn = false
+					}, 1500)
+				})
+			},
+
+			LoadListEvent(start){
 				// Clear list base on page == 1
 				// console.log(page)
 				// if(page == 1){
 				// 	page = 0
 				// }
-				this.ListEvent(page,'', '', '')
+				this.listToShow += 9
+				this.search = false
+				this.FetchListEvent('', this.start+=start,'', '', true)
+			},
+
+			SearchEvent(page, keyword, category, month, loadingBtn, month_name, basedOn){
+				this.search = true
+				this.month = month_name
+				console.log(keyword)
+				if(month === undefined && month === ""){
+					this.error_search = true
+					this.message = "Pilih bulan pelatihan terlebih dahulu"
+					this.error_search= false
+					this.lists = []
+					this.search = false
+					// setTimeout(() => {
+					// }, 500)
+					// setTimeout(() => {
+					// 	this.FetchListEvent(keyword="",  this.start, category="", month="", loadingBtn)
+					// }, 1500)
+				}else{
+					this.search = true
+					this.empty = false
+					this.error_search = false
+					this.FetchListEvent(keyword, page, category, month, loadingBtn, basedOn)
+				}
 			},
 
 			ConfigApiUrl(){

@@ -7,8 +7,8 @@
     >
       <mdb-container style="max-width: 1300px">
         <mdb-row class="row justify-content-center header__ppkc-list-page">
-          <mdb-col lg="12" xs="12" sm="12" style="margin-top: 32px">
-            <h2 style="color: #004899 !important; font-weight: 700">
+          <mdb-col lg="12" xs="12" sm="12"  class="text-center">
+            <h2 style="font-weight: 700">
               Fasilitator
             </h2>
           </mdb-col>

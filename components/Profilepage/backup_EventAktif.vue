@@ -2,8 +2,8 @@
   <div>
     <hr class="mt-5">
     <mdb-container  v-if="status_pendaftaran !== 'Menunggu Konfirmasi' &&status_pendaftaran !== 'Daftar'" :class="`${$device.isDesktop ? 'mt-5' : ''}`">
-      <mdb-row class="justify-content-center mt-2 mb-5">
-        <mdb-col lg="12" col="12">
+      <mdb-row lg="12" class="justify-content-center mt-2 mb-5">
+        <mdb-col col="12">
           <mdb-tooltip trigger="hover" :options="{placement: 'top'}">
             <span slot="tip"> Kembali ke halaman profile</span>
             <nuxt-link :to="`/profile/${profiles}`" class="btn__tooltip" slot="reference">
@@ -15,210 +15,110 @@
       </mdb-row>
 
       <!-- Detail pelatihan boxed -->
-      <mdb-row class="row justify-content-center pelatihan__box">
-        <mdb-col col="4" md="4" class="nav__event-pelatihan">
-          <div v-for="(item, index) in pelatihans" :key="item.id">
-            <b-button v-b-toggle="`collapse-${item.id}`" class="btn__pelatihan">
-              <mdb-row class="row justify-content-between">
-                <mdb-col md="6">  
-                  {{item.id == 1 ? item.title : `Pelatihan ${item.id}`}} 
+      <div class="pelatihan__box">
+        <mdb-row class="row justify-content-center">
+          <mdb-col col="4" md="4" class="nav__event-pelatihan">
+            <div v-for="(item, index) in pelatihans" :key="item.id">
+              <b-button v-b-toggle="`collapse-${item.id}`" class="btn__pelatihan shadow-none" @click="ToggleFile">
+                <mdb-row class="row justify-content-between">
+                  <mdb-col md="8">  
+                    {{item.title}}
+                  </mdb-col>
+                  <mdb-col md="1">
+                    <mdb-icon icon="plus-circle" size="lg"/>
+                  </mdb-col>
+                </mdb-row>
+              </b-button>
+
+              <b-collapse :id="`collapse-${item.id}`" class="collapse__category-event mb-3 shadow-none">
+                <b-card class="shadow-none">
+                  <div v-for="(c, index) in item.categories"  :key="c.id">
+                    <div v-for="(d, index) in c.details" :key="d.id">
+                      <b-list-group class="list__modul">
+                        <b-list-group-item id="navbar__event-detail">
+                          <a class="font-weight-bold" :href="`#item-${d.kategori}`" @click="ShowField(d, d.kategori == 3 || d.kategori == 4 || d.kategori == 6 ? d.id : d.kategori, d.kategori)">
+                            <mdb-icon :icon="FilterIcon(d.kategori)"/> {{d.title}}
+                          </a>
+                        </b-list-group-item>
+                      </b-list-group>
+                    </div>
+                  </div>
+                </b-card>
+              </b-collapse>
+            </div>
+          </mdb-col>
+
+          <mdb-col  md="8" class="content__event-pelatihan">
+            <div v-if="loading">
+              <div class="text-center">
+                <div class="spinner-border text-primary" role="status" style="width:120px; height:120px; margin-top: 10rem;">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </div>
+            </div>
+            <!-- Show file event -->
+            <div v-else>
+              <mdb-row>
+                <mdb-col md="12" class="column__content">
+                  <mdb-tooltip v-if="show_close" trigger="hover" :options="{placement: 'bottom'}" class="float-right">
+                    <span slot="tip"> Close {{type == 3 || type == 4 ? 'Test' : 'File'}} </span>
+                    <a slot="reference" class="icon__close" @click="ToggleFile">
+                      <mdb-icon  icon="times-circle" size="lg" />
+                    </a>
+                  </mdb-tooltip>
+                  <div v-if="show_file" data-spy="scroll" data-target="#navbar__event-detail" data-offset="0">
+
+                    <div v-if="type == 1" class="embed__file">
+                      <h5 class="type__name">{{type_name}}</h5>
+                      <h2>{{detailed_data.title}}</h2>
+                      <EventpageVideoSection :video="detailed.video"/>
+                    </div>
+
+                    <div v-else-if="type == 2" class="embed__file">
+                      <h5 class="type__name">{{type_name}}</h5>
+                      <h2>{{detailed_data.title}}</h2>
+                      <object :data="detailed.file_pdf" type="application/pdf" width="100%" :height="`${$device.isDesktop ? '800px' : '500px'}`">
+                      </object>
+                    </div>
+
+                    <div v-else-if="type == 3" class="embed__file">
+                      <h5 class="type__name">{{type_name}}</h5>
+                      <h2>{{detailed_data.title}}</h2>
+                      <EventTestPreTest :id_test="id_test" :type_name="type_name" :token="token" :api_url="api_url"/>
+                    </div>
+
+                    <div v-else-if="type == 4" class="embed__file">
+                      <h5 class="type__name">{{type_name}}</h5>
+                      <h2>{{detailed_data.title}}</h2>
+                      <EventTestPostTest :id_test="id_test" :type_name="type_name" :token="token" :api_url="api_url"/>
+                    </div>
+
+                    <div v-else-if="type == 5" class="embed__file">
+                      <h5 class="type__name">{{type_name}}</h5>
+                      <h2>{{detailed_data.title}}</h2>
+                      <object :data="detailed.file_pdf" type="application/pdf" width="100%" :height="`${$device.isDesktop ? '700px' : '500px'}`">
+                      </object>
+                    </div>
+
+                    <div v-else-if="type == 6" class="embed__file">
+                      <h5 class="type__name">{{type_name}}</h5>
+                      <h2>{{detailed_data.title}}</h2>
+                      <EventWebinar :id_webinar="id_webinar" :token="token" :api_url="api_url"/>
+                    </div>
+                  </div>
                 </mdb-col>
-                <mdb-col md="1">
-                  <mdb-icon icon="plus-circle" size="lg"/>
-                </mdb-col>
+
               </mdb-row>
-            </b-button>
-
-            <b-collapse :id="`collapse-${item.id}`" class="collapse__category-event-1">
-              <div v-for="(c, index) in item.categories"  :key="c.id">
-                <b-button v-b-toggle="`collapse-${c.id}-inner`" size="sm" class="btn__category-1">
-                  <mdb-row class="row justify-content-between">
-                    <mdb-col md="5">
-                      <mdb-tooltip trigger="hover" :options="{placement: 'top'}">
-                        <span slot="tip"> {{c.title}} </span>
-                        <a slot="reference">Kategori {{index+1}}</a>
-                      </mdb-tooltip>
-                    </mdb-col>
-                    <mdb-col md="1">
-                       <mdb-icon icon="caret-down" size="lg"/>
-                    </mdb-col>
-                  </mdb-row>
-                </b-button>
-
-                <b-collapse :id="`collapse-${c.id}-inner`" class="collapse__category-event-2 mb-3">
-                  <div v-for="(d, index) in c.details" :key="d.id" class="list__modul">
-                    <mdb-btn v-b-toggle="`collapse-${d.id}-pelatihan`" size="sm" class="btn__category-2"  @click="ToggleFile(d.kategori, d.id)">
-                      <mdb-row class="row justify-content-between">
-                        <mdb-col md="6">
-                          {{d.kategori !== 3 && d.kategori !== 4 ? d.title : `Test ${index}`}}
-                        </mdb-col>
-                        <mdb-col md="2">
-                          <mdb-icon icon="caret-down" size="lg"/>
-                        </mdb-col>
-                      </mdb-row>
-                    </mdb-btn>
-
-                    <b-collapse :id="`collapse-${d.id ? d.id : ''}-pelatihan`" class="collapse__category-event-3">
-                      <b-card>
-                        <b-list-group class="list__modul">
-                          <b-list-group-item id="navbar__event-detail">
-                            <small class="text-sucess mb-5">
-                              Click tombol / link kategori dibawah untuk membuka {{d.kategori !== 3 && d.kategori !== 4 ? d.title : `Test ${index}`}} :
-                            </small> <br> <br>
-
-                            <a class="font-weight-bold btn btn-danger" v-if="d.kategori == 1" :href="`#item-${d.kategori}`" @click="ShowField(d, '', 'video', d.kategori)">
-                              <div v-if="loading">
-                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                Loading...
-                              </div>
-                              <div v-else>
-                                <mdb-icon icon="video" /> Buka Video
-                              </div>
-                            </a>
-
-                            <a class="font-weight-bold btn btn-info" v-else-if="d.kategori == 2" :href="`#item-${d.kategori}`" @click="ShowField(d, '', 'file_pdf', d.kategori)">
-                              <div v-if="loading">
-                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                Loading...
-                              </div>
-                              <div v-else>
-                                <mdb-icon far icon="file-pdf" /> Buka Materi PDF
-                              </div>
-                            </a>
-
-                            <a class="font-weight-bold btn btn-success" v-else-if="d.kategori == 3" :href="`#item-${d.kategori}`" @click="ShowField(d, d.id, 'pre test', d.kategori)">
-                              <div v-if="loading">
-                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                Loading...
-                              </div>
-                              <div v-else>
-                                <mdb-icon far icon="file-alt" /> Pre Test {{d.title}}
-                              </div>
-                            </a>
-
-                            <a class="font-weight-bold btn btn-success" v-else-if="d.kategori == 4" :href="`#item-${d.kategori}`" @click="ShowField(d, d.id, 'post test', d.kategori)">
-                              <div v-if="loading">
-                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                Loading...
-                              </div>
-                              <div v-else>
-                                <mdb-icon icon="file-signature" /> Post Test {{d.title}}
-                              </div>
-                            </a>
-
-                            <a class="font-weight-bold btn btn-info" v-else-if="d.kategori == 5" :href="`#item-${d.kategori}`" @click="ShowField(d, '', 'file_pdf', d.kategori)">
-                              <div v-if="loading">
-                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                Loading...
-                              </div>
-                              <div v-else>                                
-                                <mdb-icon icon="file-signature" /> Buka Informed Consent
-                              </div>
-                            </a>
-
-                            <a class="font-weight-bold btn btn-secondary" v-else-if="d.kategori == 6" :href="`#item-${d.kategori}`" @click="ShowField(d, d.id, 'video', d.kategori)">
-                              <div v-if="loading">
-                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                Loading...
-                              </div>
-                              <div v-else>
-                                <mdb-icon far icon="file-video" /> Buka Webinar
-                              </div>
-                            </a>
-
-                          </b-list-group-item>
-                        </b-list-group>
-                      </b-card>
-                    </b-collapse>
-
-                  </div>
-                </b-collapse>
-              </div>
-            </b-collapse>
-          </div>
-        </mdb-col>
-
-        <mdb-col col="8" md="8" class="content__event-pelatihan mt-3">
-          <div v-if="loading">
-            <div class="text-center">
-              <div class="spinner-border text-primary" role="status" style="width:150px; height:150px;">
-                <span class="sr-only">Loading...</span>
-              </div>
             </div>
-          </div>
-          <!-- Show file event -->
-          <div v-else>
-            <div v-if="show_file" data-spy="scroll" data-target="#navbar__event-detail" data-offset="0">
-
-              <div v-if="type == 1" :id="`#item-${type}`" class="embed__file">
-                <h5 class="type__name">{{type_name}}</h5>
-                <h2>{{detailed_data.title}}</h2>
-                <div v-if="yt_link" class="mt-5 mb-5">
-                  <div class="text-center">
-                    <div class="spinner-grow text-danger" style="width: 5rem; height: 5rem;" role="status">
-                    <span class="sr-only">Loading...</span>
-                  </div>
-                  </div>
-                </div>
-                <div v-else>
-                  <b-embed 
-                  type="iframe"
-                  aspect="16by9"
-                  :src="detailed.video"
-                  allowfullscreen 
-                  ></b-embed>
-                </div>
-              </div>
-
-              <div v-else-if="type == 2" :id="`#item-${type}`" class="embed__file">
-                <h5 class="type__name">{{type_name}}</h5>
-                <h2>{{detailed_data.title}}</h2>
-                <object :data="detailed.file_pdf" type="application/pdf" width="100%" :height="`${$device.isDesktop ? '800px' : '500px'}`">
-                </object>
-              </div>
-
-              <div v-else-if="type == 3" :id="`#item-${type}`" class="embed__file">
-                <EventTestPreTest :id_test="id_test" :type_name="type_name"/>
-              </div>
-
-              <div v-else-if="type == 4" :id="`#item-${type}`" class="embed__file">
-                <EventTestPostTest :id_test="id_test" :type_name="type_name"/>
-              </div>
-
-              <div v-else-if="type == 5" class="embed__file">
-                <h5 class="type__name">{{type_name}}</h5>
-                <h2>{{detailed_data.title}}</h2>
-
-                <pre>
-                  {{categories}}
-                </pre>
-
-                <object :data="detailed.file_pdf" type="application/pdf" width="100%" :height="`${$device.isDesktop ? '800px' : '500px'}`">
-                </object>
-
-                <mdb-list-group class="mt-5">
-                  <mdb-list-group-item>Cras justo odio</mdb-list-group-item>
-                </mdb-list-group>
-
-              </div>
-
-              <div v-else-if="type == 6" :id="`#item-${type}`">
-                <EventWebinar :id_test="id_test" :detailed_data="detailed_data"/>
-              </div>
-
-            </div>
-          </div>
-        </mdb-col>
-      </mdb-row>
+          </mdb-col>
+        </mdb-row>
+      </div>
     </mdb-container>
-    
-    <!-- debuging -->
-    <!-- <pre class="mt-5">
-      {{events}}
-    </pre> -->
-    <!-- <pre class="mt-5">
+
+    <!-- <pre>
       {{pelatihans}}
     </pre> -->
+
   </div>
 </template>
 
@@ -230,21 +130,25 @@
     data(){
       return {
         loading: null,
-        yt_link: null,
         profiles: [],
         pelatihans: [],
         kegiataan: [],
-        categories:[],
+        categories:'',
         category_title: '',
         detailed_data: {},
+        category_name: '',
         detailed: '',
         type: '',
         tgl: '',
         start: '',
         end: '',
+        visible: true,
         show_file:false,
         id_test: '',
-        type_name: ''
+        id_webinar: '',
+        type_name: '',
+        show_close: false,
+        show_collapse: null
       }
     },
 
@@ -270,56 +174,37 @@
         }, 900)
       },
 
-      ToggleFile(category='', id_kategori=''){
-        
-        if(this.show_file){
+
+      ToggleFile(){
+        if(this.show_file || this.show_close){
           this.show_file = false
+          this.show_close = false
         }
+      }, 
 
-
-        this.ShowCategory(id_kategori)
-        // console.log(this.show_file)
-      },
-
-      ShowCategory(id){
-        const string_class = `collapse-${id}-pelatihan`
-        const filter = this.pelatihans.filter(d => d.id == id)
-        this.categories = filter.map(c => {
-          return c.categories.filter(f => f.pelatihan_id == id)
-        })
-        // this.categories  = filter
-      },
-
-      ShowField(raw, id_kategori='', field, type){
-        this.loading = true
-        this.show_file = true
-        this.detailed_data = raw
-        this.detailed = Object.keys(raw)
-        .filter(key => field.includes(key))
-        .reduce((obj, key) => {
-          obj[key] = raw[key];
-          // console.log(obj)
-          return obj;
-        }, {});
-
-        const format_yt  = this.detailed.video ? this.$ytString(this.detailed.video) : ''
-
-        this.yt_link = format_yt  == 'https://www.youtube.com/embed/' ? true : false
-        this.type = type
-
-        this.FileType(type)
-
-        this.id_test = id_kategori
-
-        setTimeout(() => {
-          this.loading = false
-        }, 900)
-
-        setTimeout(() => {
-          this.yt_link=false
-        }, 5500)
-
-        // console.log(this.detailed);
+      FilterIcon(type){
+        switch(type){
+          case 1:
+          return 'video'
+          break;
+          case 2:
+          return 'file-pdf'
+          break;
+          case 3:
+          return 'file-alt'
+          break;
+          case 4:
+          return 'file-archive'
+          break;
+          case 5:
+          return 'file-pdf'
+          break;
+          case 6:
+          return 'file-video'
+          break;
+          default:
+          return 'No type here'
+        }
       },
 
       FileType(type){
@@ -345,6 +230,70 @@
           default:
           this.type_name = 'No type here'
         }
+      },
+
+      ShowCategory(id){
+        console.log(id)
+        const filter = this.pelatihans.filter(d => d.id == id)
+        this.categories = filter.map(c => {
+          return c.categories.map(d => {
+            this.category_name = d.title
+            return d
+          })
+        })
+      },
+
+      ShowField(raw, id_kategori='', type){
+        this.loading = true
+        this.show_file = true
+        this.show_close = true
+        this.detailed_data = raw
+        let field = ''
+        switch(type){
+          case 1:
+          field = 'video'
+          break;
+          case 2:
+          field = 'file_pdf'
+          break;
+          case 3:
+          field = 'pre_test'
+          break;
+          case 4:
+          field = 'post_test'
+          break;
+          case 5:
+          field = 'file_pdf'
+          break;
+          case 6:
+          field = 'video'
+          break;
+          default:
+          field = 'No field here'
+        }
+        this.detailed = Object.keys(raw)
+        .filter(key => field.includes(key))
+        .reduce((obj, key) => {
+          obj[key] = raw[key];
+          // console.log(obj)
+          return obj;
+        }, {});
+
+        const format_yt  = this.detailed.video ? this.$ytString(this.detailed.video) : ''
+
+        this.type = type
+
+        this.FileType(type)
+
+        this.id_test = id_kategori
+        this.id_webinar = id_kategori
+
+        setTimeout(() => {
+          this.loading = false
+        }, 900)
+
+
+        // console.log(this.detailed);
       },
 
       UserProfileData(){

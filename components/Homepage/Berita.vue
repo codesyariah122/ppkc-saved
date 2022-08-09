@@ -1,37 +1,41 @@
 <template>
-	<div class="berita__list">
-		<mdb-container>
-			<mdb-row class="row justify-content-between">
-				<!-- colomn header berita -->
-				<mdb-col class="header__inside-content" md="3">
-					<h1 class="mb-3">Berita</h1>
-					<blockquote class="mb-5">Ikuti semua kegiatan dan berita dari PPKC</blockquote>
-					<mdb-tooltip trigger="hover" :options="{placement: 'top'}">
-						<span slot="tip"> Lihat semua berita </span>
-						<nuxt-link to="/ppkc/berita" class="btn__tooltip" slot="reference">
-							lihat semua berita 
-							<mdb-icon icon="arrow-right" />
-						</nuxt-link>
-					</mdb-tooltip>
-				</mdb-col>
+  <div class="berita__list">
+    <mdb-container>
+      <mdb-row class="row justify-content-center header__inside-content">
+        <!-- colomn header berita -->
+        <mdb-col col="12" md="12" xs="12" sm="12">
+          <h5 class="text-center">Berita</h5>
+        </mdb-col>
+        <mdb-col md="12" xs="12" sm="12">
+          <h2
+            class="text-center"
+            :style="`${
+              $device.isDesktop ? 'margin-left:0rem;' : 'margin-left:0rem;'
+            }`"
+            style="width: 100% !important"
+          >
+            Ikuti Berita dan Kegiatan Kami
+          </h2>
+        </mdb-col>
+      </mdb-row>
 
-				<!-- column card berita -->
-				<mdb-col class="col__berita mt-3 mb-5" md="9">
-					<!-- Card berita components -->
-					<CardBerita :lists="lists" ref="childBerita"/>	
-				</mdb-col>
-			</mdb-row>
-		</mdb-container>
-	</div>
+      <mdb-row
+        v-if="lists.length > 0"
+        class="justify-content-center col__berita mt-3 mb-3"
+      >
+        <MoleculesHomepageMoleculesCardBerita
+          :lists="lists"
+          ref="childBerita"
+        />
+      </mdb-row>
+
+      <MoleculesHomepageMoleculesListBeritaSample v-else />
+    </mdb-container>
+  </div>
 </template>
 
 <script>
-	import CardBerita from '@/components/Molecules/HomepageMolecules/CardBerita'
-
-	export default{
-		props: ['lists'],
-		components: {
-			CardBerita
-		}
-	}
+export default {
+  props: ["lists"],
+};
 </script>

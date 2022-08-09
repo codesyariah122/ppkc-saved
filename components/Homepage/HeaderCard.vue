@@ -19,14 +19,14 @@
               <h2 class="display-6 text-capitalize white-text">
                 Selamat datang di PPKC
               </h2>
-              <p style="color: white">
+              <p style="color: white;width: 50%;">
                 Pusat Pengembangan Kesehatan Caroulus (PPKC) menyelenggarakan
                 pelatihan di bidang kesehatan yang profesional, unggul dan
                 berlandaskan I-CARE serta mampu berdaya saing di tingkat
                 nasional.
               </p>
-              <b-button
-              class="my__btn-primary rounded"
+              <b-button v-if="!token.accessToken"
+              class="my__btn-primary rounded btn-md"
               @click="$router.push({ name: 'auth-registrasi' })"
               >Daftar Sekarang</b-button
               >
@@ -50,10 +50,10 @@
               Pusat Pengembangan Kesehatan Caroulus (PPKC) menyelenggarakan
               pelatihan di bidang kesehatan yang profesional, unggul dan
               berlandaskan I-CARE serta mampu berdaya saing di tingkat
-              nasional.
+              nasional. 
             </p>
-            <b-button
-            class="my__btn-primary rounded"
+            <b-button v-if="!token.accessToken"
+            class="my__btn-primary rounded btn-sm"
             @click="$router.push({ name: 'auth-registrasi' })"
             >Daftar Sekarang</b-button
             >
@@ -61,11 +61,26 @@
         </b-row>
       </b-container>
     </b-jumbotron>
+    <div class="banner">
+      
+      <mdb-carousel
+      :interval="8000"
+      slide
+      :items="items"
+      controlls
+      indicators
+      fade
+      dark
+      class="jumbotron__home mb-5"
+      customClass="rounded"
+      >
+      </mdb-carousel>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["bg", "items"]
+  props: ["bg", "items", "token"]
 }
 </script>

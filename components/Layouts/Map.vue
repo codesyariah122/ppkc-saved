@@ -59,7 +59,7 @@
 				url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
 				attribution:
 				'&copy; <a target="_blank" href="http://osm.org/copyright">PPKC Carolus Map</a> contributors',
-				zoom: this.$device.isMobile ? 17 : 17,
+				zoom: this.$device.isMobile ? 17 : 21,
 				center: {
 					lat: '',
 					lng: ''
@@ -87,6 +87,10 @@
 				staticAnchor: [10, 15],
 				iconSize: [70,80]
 			}
+		},
+
+		mounted(){
+			this.SetCoordinates()
 		},
 
 		methods: {
@@ -120,10 +124,6 @@
 					})
 				},1500) 
 			}
-		},
-
-		mounted(){
-			this.SetCoordinates()
 		}
 	}
 </script>

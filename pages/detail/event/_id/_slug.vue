@@ -1,32 +1,19 @@
 <template>
-	<div :class="`${$device.isDesktop ? 'event__detail mb-5' : 'event__detail'}`">
+	<div :class="`${$device.isDesktop ? 'event__detail mb-5' : 'event__detail mb-5'}`">
 		<mdb-container>
 			<!-- Event detail content -->
 			<mdb-row class="row event__detail-content">
 				<mdb-col v-if="token.accessToken" lg="12">
-					<EventpageLoginDetailEvent :loading="loading" :details="details" :data_event="data_event" :status_pendaftaran="status_pendaftaran" :token="token" @registrasi-event="RegistrasiEvent"/>
+					<EventpageLoginDetailEvent :loading="loading" :details="details" :data_event="data_event" :status_pendaftaran="status_pendaftaran" :token="token" @registrasi-event="RegistrasiEvent" :profiles="profiles" :schedules="schedules"/>
 				</mdb-col>
 				<mdb-col v-else lg="12">
-					<EventpageDetailEventNoAuth :events="events" :details="details"/>
+					<EventpageDetailEventNoAuth :events="events" :loading="loading"/>
 				</mdb-col>
 			</mdb-row>
 			
-			<!-- Event profile setelah login -->
-			<mdb-row v-if="token.accessToken || status_pendaftaran == 'Terdaftar'" class="row justify-content-center event__detail-profile">
-				<mdb-col v-if="details" lg="12" xs="12" sm="12">
-					<div v-if="$device.isDesktop">
-						<ProfilepageEventAktif :token="token" :api_url="api_url" :events="events" :status_pendaftaran="status_pendaftaran"/>
-					</div>
-					<div v-else>
-						<mdb-alert color="warning" v-if="p1" @closeAlert="p1=false" dismiss>
-							<strong>Ooppss !</strong> Untuk menampilkan konten ini anda harus membuka nya di komputer/PC - Laptop.
-						</mdb-alert>
-					</div>
-				</mdb-col>
-			</mdb-row>
 
 			<!-- List Event lainnya -->
-			<mdb-row v-else class="event__detail-list">
+			<mdb-row class="event__detail-list">
 				<EventpageEventLainnya :lists="lists" :currentPage="currentPage" :loading="loading" :listToShow="listToShow" :token="token" :data_event="data_event"/>
 			</mdb-row>
 		</mdb-container>
@@ -41,8 +28,10 @@
 		layout: 'default',
 		data(){
 			return {
+				profiles: {},
 				details: [],
 				lists: [],
+				schedules: [],
 				listToShow: 3,
 				loading:null,
 				currentPage: 1,
@@ -58,7 +47,7 @@
 
 		async asyncData({$axios, params}){
 			const events =  await $axios.$get(`/web/event/no-auth/${params.id}`)
-			
+			console.log(events)
 			return {
 				events,
 			}
@@ -67,14 +56,16 @@
 		beforeMount(){
 			this.SetEventLogin(this.data_event_path)
 			this.ConfigApiUrl(),
-			this.CheckToken()
+			this.CheckToken(),
+			this.UserProfileData()
 		},
 
 		mounted(){
-			this.ListEvent(0, '', '', ''),
+			this.ListEvent(),
 			this.StatusPembayaran(),
 			this.DetailEventProfileLogin(),
-			this.GetEventDataLogin()
+			this.GetEventDataLogin(),
+			this.CheckLogout()
 		},
 
 		methods: {
@@ -86,6 +77,9 @@
 				const url = process.env.NUXT_ENV_API_URL
 				this.$store.dispatch('config/storeConfigApiUrl', url)
 			},
+			CheckLogout(){
+				this.$store.dispatch('config/getProfileLogout', 'logout')
+			},
 
 			DetailEventProfileLogin(){
 				if(this.token.accessToken){
@@ -95,6 +89,7 @@
 					this.$axios.get(url)
 					.then(({data}) => {
 						this.details = data.kegiatan
+						this.schedules = data.pelatihans
 					})
 					.catch(err => console.log(err))
 				}
@@ -172,7 +167,25 @@
 						}, 1000)
 					})
 				}
-			}
+			},
+
+			UserProfileData(){
+				if(this.token){
+					this.loading=true					
+					const url = `${this.api_url}/web/user`
+					this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
+					this.$axios.get(url)
+					.then(({data}) => {
+						this.profiles = data.user
+					})
+					.catch(err => console.log(err.response ? err.response : ''))
+					.finally(() => {
+						setTimeout(() => {
+							this.loading=false
+						},1500)
+					})
+				}
+			},
 
 		},
 
@@ -188,6 +201,9 @@
 			},
 			data_event(){
 				return this.$store.getters['config/ConfigEventDataLogin']
+			},
+			logout_data(){
+				return this.$store.getters['config/ConfigProfileDataLogout']
 			}
 		}
 

@@ -2,8 +2,9 @@
   <mdb-card class="card__registrasi">
     <mdb-card-body class="form__auth">
       <!-- Material form login -->
-      <form @submit.prevent="RegistrasiProfile">
-        <h4 class="h4 text-left mb-2">Daftar</h4>
+      <img :src="require('~/assets/images/logo/brand.svg')" width="250" />
+      <!-- Material form login -->
+      <form @submit.prevent="RegistrasiProfile" class="mt-3">
         
         <p class="text-left">
           Buat akun baru untuk mengakses seluruh layanan dan informasi pelatihan
@@ -33,6 +34,7 @@
         <div class="form-group has-input">
           <mdb-icon icon="lock" class="form-control-feedback" />
           <input
+          id="password1"
           type="password"
           class="form-control"
           placeholder="Password"
@@ -42,11 +44,30 @@
         <div class="form-group has-input">
           <mdb-icon icon="lock" class="form-control-feedback" />
           <input
+          id="password2"
           type="password"
           class="form-control"
           placeholder="Ulangi Password"
           v-model="fields.confirm_password"
+          v-on:keyup="CheckPassword"
           />
+        </div>
+
+        <div v-if="showCheckPassword && fields.confirm_password">
+          <span :class="classStatus">
+            {{passwordStatus}} <i v-if="iconStatus" :class="iconStatus"></i>
+          </span>
+        </div>
+
+        <div class="form-group mt-3">
+          <div @click="showPassword">
+            <span v-if="showing_pass === false" style="cursor: pointer">
+              <mdb-icon far icon="eye" /> Check Password
+            </span>
+            <span v-else style="cursor: pointer">
+              <mdb-icon far icon="eye-slash" /> Sembunyikan
+            </span>
+          </div>
         </div>
 
         <div class="form-group mt-5">
@@ -55,7 +76,7 @@
           block
           color="white"
           size="md"
-          class="text-primary"
+          class="text-white rounded-pill shadow-none"
           >
           <div v-if="loading">
             <span
@@ -71,54 +92,35 @@
         </mdb-btn>
       </div>
     </form>
-    <!-- Material form login -->
-      <!-- <mdb-row class="row justify-content-center white-text">
-				<mdb-col md="5" class="mt-2">
-					<b-dropdown-divider class="line"></b-dropdown-divider>
-				</mdb-col>
-				<mdb-col md="2">
-					<h6 v-if="$device.isMobile" class="text-center mt-2">Atau</h6>
-					<small v-else>Atau</small>
-				</mdb-col>
-				<mdb-col md="5" class="mt-2">
-					<b-dropdown-divider class="line"></b-dropdown-divider>
-				</mdb-col>
-			</mdb-row> -->
 
-      <!-- <div class="form-group mt-3">
-				<mdb-btn block color="white" size="md" class="text-primary">
-					<mdb-icon fab icon="google" /> Daftar dengan Akun Google
-				</mdb-btn>
-			</div> -->
-
-      <mdb-row class="row justify-content-center white-text mb-3 mt-5">
-        <mdb-col v-if="show_alert" lg="12" xs="12" sm="12">
-          <mdb-alert color="danger" dismiss>
-            <strong>Ooops!</strong> {{ validation }}
-          </mdb-alert>
-        </mdb-col>
-      </mdb-row>
-
-      <mdb-row
-      :class="`${
-        $device.isMobile
-        ? 'justify-content-center black-text form__daftar-link'
-        : 'justify-content-center black-text'
-      }`"
-      >
-        <mdb-col md="12" xs="12" sm="12" lg="12">
-          <h6
-          :class="`${
-            $device.isMobile
-            ? 'text-center mt-1 mb-5'
-            : 'text-center mt-4 mb-5'
-          }`"
-          >
-          Sudah punya Akun ?
-          <nuxt-link to="/auth/login">Masuk Sekarang</nuxt-link>
-        </h6>
+    <mdb-row class="row justify-content-center white-text mb-3 mt-5">
+      <mdb-col v-if="show_alert" lg="12" xs="12" sm="12" class="text-center">
+        <mdb-alert color="danger">
+          <strong>Ooops!</strong> {{ validation }}
+        </mdb-alert>
       </mdb-col>
     </mdb-row>
+
+    <mdb-row
+    :class="`${
+      $device.isMobile
+      ? 'justify-content-center black-text form__daftar-link'
+      : 'justify-content-center black-text'
+    }`"
+    >
+    <mdb-col md="12" xs="12" sm="12" lg="12">
+      <h6
+      :class="`${
+        $device.isMobile
+        ? 'text-center mt-1 mb-5'
+        : 'text-center  mb-5'
+      }`"
+      >
+      Sudah punya Akun ?
+      <nuxt-link to="/auth/login">Masuk Sekarang</nuxt-link>
+    </h6>
+  </mdb-col>
+</mdb-row>
 </mdb-card-body>
 </mdb-card>
 </template>
@@ -130,11 +132,15 @@
       return {
         fields: {},
         showing_pass: false,
+        showCheckPassword: null,
+        passwordStatus: null,
+        classStatus: null,
+        iconStatus: null
       };
     },
-
     methods: {
       RegistrasiProfile() {
+        this.showCheckPassword=false
         const params = {
           nama: this.fields.nama,
           email: this.fields.email,
@@ -143,14 +149,30 @@
         };
         this.$emit("registrasi-profile", params);
       },
-
+      CheckPassword(){
+        this.showCheckPassword=true
+        console.log(this.fields.passwords)
+        if(this.fields.password !== this.fields.confirm_password){
+          this.passwordStatus = "Password Tidak Sama"
+          this.classStatus = 'text-danger'
+          this.iconStatus = "fas fa-exclamation-triangle"
+        }else{
+          this.passwordStatus = "Ok lanjutkan pendaftaran"
+          this.iconStatus = "fas fa-check"
+          this.classStatus = 'text-success'
+        }
+      },
       showPassword() {
-        const password = document.querySelector("#password");
-        if (password.type === "password") {
-          password.type = "text";
+        this.showCheckPassword=false
+        const password1 = document.querySelector("#password1");
+        const password2 = document.querySelector("#password2");
+        if (password1.type === "password" && password2.type === "password") {
+          password1.type = "text";
+          password2.type = "text";
           this.showing_pass = true;
         } else {
-          password.type = "password";
+          password1.type = "password";
+          password2.type = "password";
           this.showing_pass = false;
         }
       },

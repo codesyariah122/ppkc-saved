@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<Profilepage :profiles="profiles" :genders="genders" :jobs="jobs" :studs="studs" :works="works" :maritals="maritals" :pelatihans="pelatihans" :categories="categories" :api_url="api_url" @load-event-follow="EventYangDiikuti" :empty_filter="empty_filter" :loading="loading" :token="token" />
+		<Profilepage :profiles="profiles" :genders="genders" :jobs="jobs" :studs="studs" :works="works" :maritals="maritals"  :categories="categories" :api_url="api_url" :loading="loading" :token="token" :username="username"/>
 	</div>
 </template>
 
@@ -19,24 +19,21 @@
 				studs: {},
 				works: [],
 				maritals: [],
-				pelatihans:[],
 				categories: [],
 				empty_filter: false,
-				loading: null
+				loading: null,
+				start_submit: null,
+				username: ''
 			}
 		},
 
-		beforeMount(){
-			this.ConfigApiUrl(),
-			this.UserProfileData(),
-			this.EventYangDiikuti(),
-			this.EventCategories()
-		},
-
 		mounted(){
+			this.ConfigApiUrl(),
 			this.CheckToken(),
 			this.IsLoggedIn(),
-			this.CheckLogout()
+			this.CheckLogout(),
+			this.UserProfileData(),
+			this.EventCategories()
 		},
 
 		methods: {
@@ -69,44 +66,39 @@
 				this.$store.dispatch('config/storeConfigApiUrl', api_url)
 			},
 
+			FilterPekerjaan(works, user){
+				const work = works.map(d => d).find(d => d.code == user.status_pekerjaan_id)
+				this.works = work
+			},
+
 			UserProfileData(){
-				if(this.token){					
+				if(this.token){
+					this.loading=true					
 					const url = `${this.api_url}/web/user`
 					this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
 					this.$axios.get(url)
 					.then(({data}) => {
+						console.log(data.user.status_pekerjaan_id)
 						this.profiles = data.user
-						this.works = data.pekerjaan
-						this.studs = data.pendidikan
+						this.username = this.$username(data.user.nama)
+
+						this.FilterPekerjaan(data.statusPekerjaans, data.user)
+
+						this.studs = data.pendidikan ? data.pendidikan : ''
 						this.genders = data.jenisKelamins
 						this.jobs = data.statusPekerjaans
 						this.maritals = data.statusPernikahan
 					})
 					.catch(err => console.log(err.response ? err.response : ''))
+					.finally(() => {
+						setTimeout(() => {
+							this.loading=false
+						},1500)
+					})
 				}
 			},
 
-			EventYangDiikuti(page=0, category='', month=''){
-				// console.log(month)
-				this.loading=true
-				const url = `${this.api_url}/web/kegiatan/saya/list/page?start=${page}&jenis_pelatihan=${category}&bulan_pelatihan=${month}`
-				this.$axios.get(url)
-				.then(({data}) => {
-					// console.log(data.list_data)
-					if(data.list_data.length > 0){
-						this.pelatihans = data.list_data
-					}else{
-						this.empty_filter = false
-						this.pelatihans = []
-					}
-				})
 
-				.catch(err => console.log(err))
-
-				.finally(() => {
-					this.loading=false
-				})
-			},
 
 			EventCategories(page=1,keyword='',category='',month=''){
 				const url = `${this.api_url}/web/event/paging?keyword=${keyword?keyword:''}&page=${page?page:1}&jenis_pelatihan=${category?category:''}&bulan_pelatihan=${month?month:''}`

@@ -1,47 +1,62 @@
 <template>
-	<div>
+  <div>
     <!-- Testimoni content -->
-    <mdb-row>
-      <mdb-col v-if="testiIndex <= lists.length" v-for="testiIndex in testiToShow" col="12" md="6" :key="lists[testiIndex-1].id">
-        <mdb-card class="card__testimoni-content">
-          <mdb-container class="mt-4 mb-2">
-            <blockquote class="post__quote"> 
-              <mdb-icon icon="quote-left"/><br>
-              <p class="quote__txt">
-                {{lists[testiIndex-1].testimoni}}
-              </p>
-              <h3 class="profile__name">
-                {{lists[testiIndex-1].konsumen ? lists[testiIndex-1].konsumen : 'PPKC Visitor'}}
-              </h3>
-            </blockquote>
+    <mdb-row class="row justify-content-center col__testimoni">
+      <mdb-col
+        v-for="item in lists.slice(0, 2)"
+        col="12"
+        md="6"
+        class="col__testimoni-card"
+        :key="item.id"
+      >
+        <mdb-card class="card__testimoni-content" style="width: 100%">
+          <mdb-container class="mt-3">
+            <mdb-row>
+              <mdb-col md="4" class="avatar">
+                <b-avatar
+                  variant="none"
+                  border-variant="none"
+                  v-if="item.foto_url !== null"
+                  :src="`https://api.ppkc-online.com/image-testimoni/${item.foto_url}`"
+                  size="6rem"
+                ></b-avatar>
+                <b-avatar
+                  variant="none"
+                  border-variant="none"
+                  v-else
+                  :src="require('~/assets/images/profile/profile.svg')"
+                  size="6rem"
+                ></b-avatar>
+              </mdb-col>
+            </mdb-row>
+            <mdb-row>
+              <mdb-card-body>
+                <mdb-card-title>{{ item.konsumen }}</mdb-card-title>
+                <h6>{{ item.profesi }}</h6>
+                <mdb-card-text>{{ item.testimoni }}</mdb-card-text>
+              </mdb-card-body>
+            </mdb-row>
           </mdb-container>
         </mdb-card>
       </mdb-col>
     </mdb-row>
-
   </div>
 </template>
 
 <script>
-  import DefaultProfile from  '~/assets/images/profile/user-profile.svg'
+import DefaultProfile from "~/assets/images/profile/user-profile.svg";
 
-  export default{
-    props: ['lists'],
-    data(){
-      return {
-        testiToShow: 2,
-        profile_default: DefaultProfile,
-        null_foto: null,
-        default_dua:'https://i.imgur.com/RCwPA3O.jpg'
-      }
-    }
-	}
+export default {
+  props: ["lists"],
+  data() {
+    return {
+      profile_default: DefaultProfile,
+      null_foto: null,
+    };
+  },
+
+  mounted() {
+    console.log("Welcome !!");
+  },
+};
 </script>
-
-<style lang="scss">
-@include card_testimonial_mobile;
-
-@media (min-width: 992px) {
-  @include card_testimonial_desktop;
-}
-</style>
