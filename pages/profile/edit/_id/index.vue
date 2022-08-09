@@ -1,7 +1,7 @@
 <template>
   <div class="berita__detail" :style="berita__list_style">
     <mdb-container>
-      <mdb-row class="row justify-content-center berita__detail-content">
+      <mdb-row center class="justify-content-center berita__detail-content">
         <mdb-col lg="12" xs="12" sm="12" class="mb-3">
           <mdb-btn @click="$router.go(-1)" color="danger" class="rounded-pill">
             <mdb-icon icon="angle-left" size="lg" /> Kembali Ke Profile 
@@ -32,9 +32,11 @@
           <b-avatar  v-else
           variant="primary"
           :text="profiles.nama.charAt(0)"
-          size="8rem"
-          ></b-avatar>
-          <p class="text-center mt-3">
+          size="12rem"
+          >
+          </b-avatar>
+
+          <p class="mt-5">
             <a href="#" class="edit-photo" title="Ganti foto">
               <input
               type="file"
@@ -402,6 +404,8 @@
 
               if (this.input_file) formData.append("photo", this.input_file);
 
+              // formData.append("photo", this.profiles.photo)
+
               this.$axios
               .post(url, formData, {
                 headers: {
@@ -418,16 +422,19 @@
                   timer: 1500
                 })
                 setTimeout(() => {
-                  this.$router.go(-1)
+                  // this.$router.go(-1)
+                  this.$router.push({path: `/profile/${this.profiles.nama.toLowerCase()}`})
                 }, 1500)
               })
               .catch((err) => {
-                console.log(err);
-                alert("Gagal menyimpan profile. Coba lagi");
+                console.log(err.response);
+                this.$swal("Gagal menyimpan profile. Coba lagi");
               })
               .finally(() => {
                 this.loading = false;
               });
+              
+
             }
           } 
         })
