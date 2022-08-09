@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Testimoni content -->
-    <mdb-row class="row justify-content-center col__testimoni">
+    <mdb-row center class="col__testimoni">
       <mdb-col
         v-for="item in lists.slice(0, 2)"
         col="12"
