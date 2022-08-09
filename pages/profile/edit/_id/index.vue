@@ -209,7 +209,7 @@
       v-model="profiles.jenis_kelamin_id"
       >
       <option
-      v-for="gender in profiles.jenisKelamins"
+      v-for="gender in filteredGender"
       v-bind:value="gender.id" v-bind:key="gender.id"
       >
       {{ gender.value }}
@@ -227,7 +227,8 @@
     >
     <option
     v-for="work in profiles.statusPekerjaans"
-    v-bind:value="work.id" v-bind:key="work.id"
+    v-bind:value="work.code" v-bind:key="work.id"
+    @change="changeStatusPekerjaan($event)"
     >
     {{ work.value }}
   </option>
@@ -240,8 +241,9 @@
     <select
     class="form-control"
     id="sel1" v-model="profiles.golongan_pekerjaan_id"
+    @change="changeGolongan($event)"
     >
-    <option v-for="golongan in profiles.golongan" v-bind:key="golongan.code" v-bind:value="golongan.id">
+    <option v-for="golongan in profiles.golongan" v-bind:key="golongan.id" v-bind:value="golongan.code">
       {{golongan.value}}
     </option>
   </select>
@@ -254,6 +256,7 @@
     class="form-control"
     id="sel1"
     v-model="profiles.agama_id"
+    @change="changeAgama($event)"
     >
     <option
     v-for="agama in profiles.religions"
@@ -292,6 +295,7 @@
         id: this.$route.params.id,
         path: this.$route.name,
         profiles: {
+          user: {},
           nama: "",
           no_anggota: "",
           email: "",
@@ -322,7 +326,9 @@
       this.IsLoggedIn();
       this.UserProfileData();
       this.PropinsiList();
-      this.KabupatenList()
+      this.KabupatenList();
+      this.listingAgama();
+      this.listingGolongan()
     },
 
     methods: {
@@ -350,8 +356,7 @@
         this.$store.dispatch("config/storeConfigApiUrl", api_url);
       },
 
-      simpan: async function () {
-        console.log(this.profiles.jenis_kelamin_id)
+      async simpan() {
         try {
           this.$swal({
             title: 'Do you want to save the changes?',
@@ -454,9 +459,15 @@
         this.profiles.propinsi_id = user.propinsi_id;
         this.profiles.kabupaten_id = user.kabupaten_id;
         this.profiles.photo = user.photo;
+        this.profiles.agama_id = user.agama_id
+        this.profiles.jenis_kelamin_id = user.jenis_kelamin_id
+        this.profiles.status_pekerjaan_id = user.status_pekerjaan_id
+        this.profiles.golongan_pekerjaan_id = user.golongan_pekerjaan_id
       },
 
-      listingGolongan(user){
+ 
+
+      listingGolongan(){
         if(this.token){
           const url = `${this.api_url}/web/golongan-pegawai/list`
           this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
@@ -464,23 +475,12 @@
           .get(url)
           .then(({data}) => {
             this.profiles.golongan = data.list_data
-            const golongan_pekerjaan = data.list_data.map(d => d)
-            const find_golongan_pekerjaan = golongan_pekerjaan.find(d => d.code == user.golongan_pekerjaan_id)
-
-            this.profiles.golongan_pekerjaan_id = parseInt(find_golongan_pekerjaan.id)
           })
           .catch((err) => console.log(err.response ? err.response : err));
         }
       },
 
-      listingGender(genders, user){
-        const gender = genders.map(d => d)
-        const jenis_kelamin = gender.find(d => d.code == user.jenis_kelamin_id)
-        this.profiles.jenisKelamins = genders
-        this.profiles.jenis_kelamin_id = parseInt(jenis_kelamin.code)
-      },
-
-      listingAgama(user){
+      listingAgama(){
         if(this.token){
           const url = `${this.api_url}/web/user-agama/list`
           this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
@@ -488,20 +488,9 @@
           .get(url)
           .then(({data}) => {
             this.profiles.religions = data.list_data
-
-            const list_agama = data.list_data.map(d => d)
-            const find_agama = list_agama.find(d => d.code == user.agama_id)
-            this.profiles.agama_id = parseInt(find_agama.code)
           })
           .catch((err) => console.log(err.response ? err.response : err))
         }
-      },
-
-      listingPekerjaan(works, user){
-        this.profiles.statusPekerjaans = works
-        const work = works.map(d => d)
-        const status_pekerjaan = work.find(d => d.code == user.status_pekerjaan_id)
-        this.profiles.status_pekerjaan_id = parseInt(status_pekerjaan.id)
       },
 
 
@@ -513,16 +502,14 @@
           .get(url)
           .then(({ data }) => {
 
+            this.user = data.user
+
             this.listingProfiles(data.user)
-            
-            this.listingGender(data.jenisKelamins, data.user)
 
-            this.listingPekerjaan(data.statusPekerjaans, data.user)
+            this.profiles.statusPekerjaans = data.statusPekerjaans
 
-            this.listingAgama(data.user)
-
-            this.listingGolongan(data.user)
-            
+            this.profiles.jenisKelamins = data.jenisKelamins
+                        
           })
           .catch((err) => console.log(err.response ? err.response : err));
         }
@@ -556,6 +543,18 @@
         this.profiles.jenis_kelamin_id = parseInt(event.target.value)
       },
 
+      changeAgama(event) {
+        this.profiles.agama_id = parseInt(event.target.value)
+      },
+
+      changeGolongan(event){
+        this.profiles.golongan_pekerjaan_id = parseInt(event.target.value)
+      },
+
+      changeStatusPekerjaan(event){
+        this.profiles.status_pekerjaan_id = parseInt(event.target.value)
+      },
+
 
       previewFiles(event) {
         console.log(event.target.files[0]);
@@ -579,9 +578,25 @@
 
       filteredGender(){
         if(this.profiles.jenis_kelamin_id == "" || this.profiles.jenis_kelamin_id == null)
-          return this.jenisKelamins
+          return this.profiles.jenisKelamins
 
         return this.profiles.jenisKelamins.filter(d => d.id == this.profiles.jenis_kelamin_id)
+      },
+
+      filteredGolongan(){
+        if(this.profiles.golongan_pekerjaan_id == "" || this.profiles.golongan_pekerjaan_id == null)
+          return this.profiles.golongan
+
+        return this.profiles.golongan.filter(d => d.code == this.profiles.golongan_pekerjaan_id)
+      },
+
+      filteredStatusPekerjaan(){
+        if (this.profiles.status_pekerjaan_id == "" || this.profiles.status_pekerjaan_id == null)
+          return this.profiles.statusPekerjaans;
+
+        return this.profiles.statusPekerjaans.filter(
+          (c) => c.code == this.profiles.status_pekerjaan_id
+          );
       },
 
       filteredPropinsi() {
