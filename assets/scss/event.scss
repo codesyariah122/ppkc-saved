@@ -239,59 +239,57 @@
 }
 // Desktop
 @media (min-width: 992px) {
-	.webinar__list{
-		.card__content-lists{
-			margin-top: -1rem;
-			// margin-left: 2rem;
-			.webinar__content{
-				.card {
-					height: auto;
-					.event__image-wrap{
-						position: relative;
-						width: 350px;
-						height: 250px;
-						object-fit: cover;
-					}
-					.card-body{					
-						.badge__category{
-							background-color: transparent!important;
-							color: $color-primary!important;
-							border:1px $color-primary solid;
+	.card__content-lists{
+		margin-top: -1rem;
+		margin-left: 5rem;
 
-						}
-					}
-					@include card_rounded_desktop;
+		.webinar__content{
+			.card {
+				height: auto;
+				.event__image-wrap{
+					position: relative;
+					width: 350px;
+					height: 250px;
+					object-fit: cover;
 				}
+				.card-body{					
+					.badge__category{
+						background-color: transparent!important;
+						color: $color-primary!important;
+						border:1px $color-primary solid;
+
+					}
+				}
+				@include card_rounded_desktop;
 			}
 		}
-		.header__event{
-			margin-left: 8.5rem;
-			margin-top:8rem;
-			color:$second-black;
-			h2{
-				font-weight: 800;
-				line-height: 23px;
+	}
+	.header__event{
+		margin-top:8rem;
+		color:$second-black;
+		h2{
+			font-weight: 800;
+			line-height: 23px;
+		}
+		p{
+			font-weight: 400;
+		}
+
+		.filter__event{
+			h6{
+				font-size:16px;
+				margin-top: .5rem;
 			}
-			p{
-				font-weight: 400;
+			select{
+				background-color: $jumbotron-bg!important;			
+				color:$default-black;
+				font-weight: 600;
+				width:100%!important;
+				font-size: 16px;
 			}
 
-			.filter__event{
-				h6{
-					font-size:16px;
-					margin-top: .5rem;
-				}
-				select{
-					background-color: $jumbotron-bg!important;			
-					color:$default-black;
-					font-weight: 600;
-					width:100%!important;
-					font-size: 16px;
-				}
-
-				.count__event{
-					margin-left: 23rem;
-				}
+			.count__event{
+				margin-left: 23rem;
 			}
 		}
 	}

@@ -1,5 +1,5 @@
 <template>
-	<div class="webinar__list">
+	<div>
 		<!-- Header filter event page -->
 		<EventpageHeader @update-list-event="SearchEvent" :lists="lists" :loading="loading" :loadingBtn="loadingBtn" :listToShow="listToShow" @load-more-event="LoadListEvent" :categories="categories" ref="eventChild" :search="search"/>
 

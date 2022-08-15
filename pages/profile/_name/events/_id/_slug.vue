@@ -14,10 +14,8 @@
 
       <div class="docs-content">
         <div class="container">
-          <!-- Sidebar Toggler -->
-          <MoleculesProfilePageTogglerSidebar />
 
-          <!-- <ColorModePicker/> -->
+          <MoleculesProfilePageTogglerSidebar />
 
           <article v-if="!show_file" class="docs-article">
             <header class="docs-header">
@@ -62,11 +60,6 @@
                   </div>
                 </div>
               </section>
-              <!--//section-->
-              <section class="docs-intro mt-5" id="section-1">
-               
-              </section>
-              <!--//docs-intro-->
             </header>
           </article>
 
@@ -289,6 +282,7 @@ export default {
       this.show_close = true;
       this.detailed_data = raw;
       let field = "";
+      console.log(type)
       switch (type) {
         case 1:
           field = "video";

@@ -1,19 +1,19 @@
 <template>
-  <div>
-    <mdb-container>
-      <mdb-row center class="justify-content-center berita__detail-content">
-        <mdb-col lg="12" xs="12" sm="12" class="mb-3">
-          <mdb-btn @click="$router.go(-1)" color="danger" class="rounded-pill">
-            <mdb-icon icon="angle-left" size="lg" /> Kembali Ke Profile 
-          </mdb-btn>
-        </mdb-col>
+	<div>
+		<mdb-container>
+			<mdb-row center class="justify-content-center berita__detail-content">
+				<mdb-col lg="12" xs="12" sm="12" class="mb-3">
+					<mdb-btn @click="$router.go(-1)" color="danger" class="rounded-pill">
+						<mdb-icon icon="angle-left" size="lg" /> Kembali Ke Profile 
+					</mdb-btn>
+				</mdb-col>
 
-        <mdb-col lg="12" xs="12" sm="12" class="col__berita-1">
-          <h2 class="text-capitalize">Data Diri</h2>
-        </mdb-col>
+				<mdb-col lg="12" xs="12" sm="12" class="col__berita-1">
+					<h2 class="text-capitalize">Data Diri</h2>
+				</mdb-col>
 
-        <mdb-col sm="6" md="4" class="justify-content-center col__img-profile">
-          <!-- <img v-if="profiles.photo !== 'https://api.ppkc-online.com/image-profiles/function%20File()%20%7B%20[native%20code]%20%7D'" :src="profiles.photo" class="mx-auto d-block rounded-circle" width="200" height="200" alt="" style="object-fit: cover"/> -->
+				<mdb-col sm="6" md="4" class="justify-content-center col__img-profile">
+					<!-- <img v-if="profiles.photo !== 'https://api.ppkc-online.com/image-profiles/function%20File()%20%7B%20[native%20code]%20%7D'" :src="profiles.photo" class="mx-auto d-block rounded-circle" width="200" height="200" alt="" style="object-fit: cover"/> -->
 
          <b-avatar v-if="profiles.photo !== 'https://api.ppkc-online.com/image-profiles/function%20File()%20%7B%20[native%20code]%20%7D'"
          variant="primary"
@@ -21,157 +21,157 @@
          size="12rem"
          ></b-avatar>
 
-          <b-avatar v-else variant="primary" :text="profiles.nama.charAt(0)" size="12rem">
-          </b-avatar>
+					<b-avatar v-else variant="primary" :text="profiles.nama.charAt(0)" size="12rem">
+					</b-avatar>
 
-          <p class="mt-5">
-            <a href="javascript:void(0)" class="edit-photo" title="Ganti foto">
-              <input
-              type="file"
-              placeholder="Ganti foto"
-              @change="previewFiles"
-              />
-              Ganti Foto
-            </a>
-          </p>
-        </mdb-col>
-      </mdb-row>
+					<p class="mt-5">
+						<a href="javascript:void(0)" class="edit-photo" title="Ganti foto">
+							<input
+							type="file"
+							placeholder="Ganti foto"
+							@change="previewFiles"
+							/>
+							Ganti Foto
+						</a>
+					</p>
+				</mdb-col>
+			</mdb-row>
 
-      <mdb-row class="mt-5">
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="no">No Anggota</label>
-            <input type="text" class="form-control" id="input_no_anggota" autofocus v-model="profiles.no_anggota"/>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="nama">Alamat Email</label>
-            <input type="text" class="form-control" id="input_nama_ktp" v-model="profiles.email"/>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="nama">No Telphone</label>
-            <input type="text" class="form-control" id="input_nama_ktp" v-model="profiles.phone"/>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="nama">Nama KTP</label>
-            <input type="text" class="form-control" id="input_nama_ktp" v-model="profiles.nama"/>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="nama">Tempat Lahir</label>
-            <input type="text" class="form-control" id="input_nama_ktp" v-model="profiles.tempat_lahir"/>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="nama">No KTP</label>
-            <input type="text" class="form-control" id="input_nama_ktp" v-model="profiles.no_ktp"/>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="nama">Tanggal Lahir</label>
-            <input type="date" class="form-control" id="input_nama_ktp" v-model="profiles.tanggal_lahir"/>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="nama">No STR</label>
-            <input type="text" class="form-control" id="input_nama_ktp" v-model="profiles.str"/>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="nama">Masa Berlaku</label>
-            <input type="date" class="form-control" id="input_nama_ktp" v-model="profiles.masa_berlaku"/>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="nama">Propinsi</label>
-            <select class="form-control" id="sel1" v-model="profiles.propinsi_id" @change="changePropinsi($event)">
-              <option v-for="item in propinsi" v-bind:value="item.id" v-bind:key="item.id">{{ item.nama }}
-              </option>
-            </select>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="nama">Kabupaten</label>
-            <select class="form-control" id="sel1" v-model="profiles.kabupaten_id">
-              <option v-for="item in filteredPropinsi" v-bind:value="item.id" v-bind:key="item.id">
-                {{ item.nama }}
-              </option>
-            </select>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="nama">Alamat Lengkap</label>
-            <textarea type="text" class="form-control" id="input_nama_ktp" v-model="profiles.address"></textarea>
-          </div>
-        </div>
-      </mdb-row>
+			<mdb-row class="mt-5">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="no">No Anggota</label>
+						<input type="text" class="form-control" id="input_no_anggota" autofocus v-model="profiles.no_anggota"/>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="nama">Alamat Email</label>
+						<input type="text" class="form-control" id="input_nama_ktp" v-model="profiles.email"/>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="nama">No Telphone</label>
+						<input type="text" class="form-control" id="input_nama_ktp" v-model="profiles.phone"/>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="nama">Nama KTP</label>
+						<input type="text" class="form-control" id="input_nama_ktp" v-model="profiles.nama"/>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="nama">Tempat Lahir</label>
+						<input type="text" class="form-control" id="input_nama_ktp" v-model="profiles.tempat_lahir"/>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="nama">No KTP</label>
+						<input type="text" class="form-control" id="input_nama_ktp" v-model="profiles.no_ktp"/>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="nama">Tanggal Lahir</label>
+						<input type="date" class="form-control" id="input_nama_ktp" v-model="profiles.tanggal_lahir"/>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="nama">No STR</label>
+						<input type="text" class="form-control" id="input_nama_ktp" v-model="profiles.str"/>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="nama">Masa Berlaku</label>
+						<input type="date" class="form-control" id="input_nama_ktp" v-model="profiles.masa_berlaku"/>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="nama">Propinsi</label>
+						<select class="form-control" id="sel1" v-model="profiles.propinsi_id" @change="changePropinsi($event)">
+							<option v-for="item in propinsi" v-bind:value="item.id" v-bind:key="item.id">{{ item.nama }}
+							</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="nama">Kabupaten</label>
+						<select class="form-control" id="sel1" v-model="profiles.kabupaten_id">
+							<option v-for="item in filteredPropinsi" v-bind:value="item.id" v-bind:key="item.id">
+								{{ item.nama }}
+							</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="nama">Alamat Lengkap</label>
+						<textarea type="text" class="form-control" id="input_nama_ktp" v-model="profiles.address"></textarea>
+					</div>
+				</div>
+			</mdb-row>
 
-      <mdb-row class="mt-3">
-        <div class="col-md-12 col-sm-12">
-          <h5>
-            <strong>Personal Information</strong>
-          </h5>
-        </div>
-        <div class="col-md-6 mt-3">
-          <div class="form-group">
-            <label for="gender">Jenis Kelamin</label>
-            <select class="form-control" id="sel1" v-model="profiles.jenis_kelamin_id">
-              <option v-for="gender in profiles.jenisKelamins" v-bind:value="gender.id" v-bind:key="gender.id">
-                {{ gender.value }}
-              </option>
-            </select>
-          </div>
-        </div>
-        <div class="col-md-6 mt-3">
-          <div class="form-group">
-            <label for="gender">Status Pekerjaan</label>
-            <select class="form-control" id="sel1" v-model="profiles.status_pekerjaan_id">
-              <option v-for="work in profiles.statusPekerjaans" v-bind:value="work.code" v-bind:key="work.id" @change="changeStatusPekerjaan($event)">
-                {{ work.value }}
-              </option>
-            </select>
-          </div>
-        </div>
-        <div class="col-md-6 mt-3">
-          <div class="form-group">
-            <label for="gender">Nama Golongan</label>
-            <select class="form-control" id="sel1" v-model="profiles.golongan_pekerjaan_id" @change="changeGolongan($event)">
-              <option v-for="golongan in profiles.golongan" v-bind:key="golongan.id" v-bind:value="golongan.code">{{golongan.value}}</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-md-6 mt-3">
-          <div class="form-group">
-            <label for="gender">Agama</label>
-            <select class="form-control" id="sel1" v-model="profiles.agama_id" @change="changeAgama($event)">
-              <option v-for="agama in profiles.religions" v-bind:value="agama.code" v-bind:key="agama.code">{{ agama.value }}</option>
-            </select>
-          </div>
-        </div>
-      </mdb-row>
+			<mdb-row class="mt-3">
+				<div class="col-md-12 col-sm-12">
+					<h5>
+						<strong>Personal Information</strong>
+					</h5>
+				</div>
+				<div class="col-md-6 mt-3">
+					<div class="form-group">
+						<label for="gender">Jenis Kelamin</label>
+						<select class="form-control" id="sel1" v-model="profiles.jenis_kelamin_id">
+							<option v-for="gender in profiles.jenisKelamins" v-bind:value="gender.id" v-bind:key="gender.id">
+								{{ gender.value }}
+							</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-6 mt-3">
+					<div class="form-group">
+						<label for="gender">Status Pekerjaan</label>
+						<select class="form-control" id="sel1" v-model="profiles.status_pekerjaan_id">
+							<option v-for="work in profiles.statusPekerjaans" v-bind:value="work.code" v-bind:key="work.id" @change="changeStatusPekerjaan($event)">
+								{{ work.value }}
+							</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-6 mt-3">
+					<div class="form-group">
+						<label for="gender">Nama Golongan</label>
+						<select class="form-control" id="sel1" v-model="profiles.golongan_pekerjaan_id" @change="changeGolongan($event)">
+							<option v-for="golongan in profiles.golongan" v-bind:key="golongan.id" v-bind:value="golongan.code">{{golongan.value}}</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-6 mt-3">
+					<div class="form-group">
+						<label for="gender">Agama</label>
+						<select class="form-control" id="sel1" v-model="profiles.agama_id" @change="changeAgama($event)">
+							<option v-for="agama in profiles.religions" v-bind:value="agama.code" v-bind:key="agama.code">{{ agama.value }}</option>
+						</select>
+					</div>
+				</div>
+			</mdb-row>
 
-      <mdb-row class="row justify-content-center berita__detail-content">
-        <mdb-col lg="12" xs="12" sm="12" class="col__berita-1">
-          <button type="button" class="btn btn-primary btn-block rounded-pill mt-5" @click.prevent="simpan">
-            Simpan
-          </button>
-        </mdb-col>
-      </mdb-row>
-    </mdb-container>
-  </div>
+			<mdb-row class="row justify-content-center berita__detail-content">
+				<mdb-col lg="12" xs="12" sm="12" class="col__berita-1">
+					<button type="button" class="btn btn-primary btn-block rounded-pill mt-5" @click.prevent="simpan">
+						Simpan
+					</button>
+				</mdb-col>
+			</mdb-row>
+		</mdb-container>
+	</div>
 </template>
 
 
