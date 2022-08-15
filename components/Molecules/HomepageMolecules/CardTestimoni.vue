@@ -9,7 +9,7 @@
         class="col__testimoni-card"
         :key="item.id"
       >
-        <mdb-card class="card__testimoni-content" :style="`${$device.isMobile ? 'width: 328px;' : ''}`">
+        <mdb-card class="card__testimoni-content" :style="`${$device.isMobile ? 'width: 370px;' : ''}`">
           <mdb-container class="mt-3">
             <mdb-row>
               <mdb-col md="4" class="avatar">

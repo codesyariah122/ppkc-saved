@@ -1,5 +1,5 @@
 <template>
-  <mdb-container class="akses__pelatihan">
+  <mdb-container class="akses__pelatihan" :style="`${$device.isDesktop ? 'margin-top: -2rem;' : ''}`">
     <b-row class="row justify-content-center">
       <b-col lg="12" xs="12" sm="12">
         <b-jumbotron class="shadow-none bg-gray">
@@ -35,9 +35,9 @@
             </b-row>
 
             <b-row v-else>
-              <b-col v-if="listIndex <= pelatihans.length" v-for="listIndex in listToShow" md="4" xs="12" sm="12" :class="`${$device.isDesktop ? 'mb-3' : 'mb-5'} card__pelatihan`" :key="pelatihans[listIndex-1].id">
+              <b-col v-if="listIndex <= pelatihans.length" v-for="listIndex in listToShow" md="4" xs="12" sm="12" :class="`${$device.isDesktop ? 'mb-5' : 'mb-5'} card__pelatihan`" :key="pelatihans[listIndex-1].id">
                 
-                <mdb-card :style="`${$device.isDesktop ? 'width: 20rem;' : 'width: 18rem;'}`"> 
+                <mdb-card :style="`${$device.isDesktop ? 'width: 20rem;' : 'width: 19rem;'}`"> 
                   <mdb-card-image
                   :src="pelatihans[listIndex-1].photo"
                   alt="No image found"
@@ -143,7 +143,6 @@
       }
       .card{
         height: auto;
-        width: 287px;
         margin-left: -1rem;
         .card-body{
           .card-title{
@@ -249,7 +248,6 @@
   }
 @media (min-width: 992px) {
   .akses__pelatihan{
-    margin-top: -3rem;
     font-family: 'Poppins', sans-serif;
     .jumbotron{
       background-color: $jumbotron-bg;
