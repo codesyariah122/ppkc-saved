@@ -2,8 +2,8 @@ require('dotenv').config()
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
-  // mode: 'spa',
-  // target: 'static',
+  mode: 'spa',
+  target: 'static',
   loading: {
     color: '#2f80ed',
     height: '15px'
@@ -70,7 +70,6 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     // 'bootstrap-css-only/css/bootstrap.min.css',
-    '~assets/css/video.css',
     'mdbvue/lib/mdbvue.css',
     'mdbvue/lib/css/mdb.min.css'
     ],
@@ -107,7 +106,10 @@ export default {
     '~assets/scss/auth.scss',
     '~assets/scss/profile.scss',
     '~assets/scss/event-detail-login.scss',
-    '~assets/scss/event-test.scss'
+    '~assets/scss/event-test.scss',
+    '~assets/scss/docs-event.scss',
+    '~assets/scss/keranjang.scss',
+    '~assets/scss/pembayaran.scss'
     ]
   },
 
