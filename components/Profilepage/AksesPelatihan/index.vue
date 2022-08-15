@@ -35,9 +35,9 @@
             </b-row>
 
             <b-row v-else>
-              <b-col v-if="listIndex <= pelatihans.length" v-for="listIndex in listToShow" md="4" xs="12" sm="12" class="mb-3 card__pelatihan" :key="pelatihans[listIndex-1].id">
+              <b-col v-if="listIndex <= pelatihans.length" v-for="listIndex in listToShow" md="4" xs="12" sm="12" :class="`${$device.isDesktop ? 'mb-3' : 'mb-5'} card__pelatihan`" :key="pelatihans[listIndex-1].id">
                 
-                <mdb-card>
+                <mdb-card :style="`${$device.isDesktop ? 'width: 20rem;' : 'width: 18rem;'}`"> 
                   <mdb-card-image
                   :src="pelatihans[listIndex-1].photo"
                   alt="No image found"
@@ -50,11 +50,11 @@
                     >
 
                     <mdb-card-title
-                    class="truncate"
+                    :class="`${$device.isDesktop ? 'mb-5' : 'mb-2'}`"
                     >{{ pelatihans[listIndex-1].kegiatan_title }}</mdb-card-title
                     >
                     <mdb-card-text
-                    class="truncate2 mt-2"
+                    class="truncate2"
                     style="width: 200px; min-height: 45px"
                     >{{ pelatihans[listIndex-1].kegiatan_desc }}</mdb-card-text
                     >
