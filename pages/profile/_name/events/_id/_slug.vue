@@ -64,11 +64,7 @@
               </section>
               <!--//section-->
               <section class="docs-intro mt-5" id="section-1">
-                <ProfilepageEventDashboardDetailEvent
-                  :details="details"
-                  :loading="loading"
-                  :status_pendaftaran="status_pendaftaran"
-                />
+               
               </section>
               <!--//docs-intro-->
             </header>

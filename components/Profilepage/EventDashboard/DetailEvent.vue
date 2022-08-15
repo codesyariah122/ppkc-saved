@@ -153,7 +153,7 @@
 			.event__image-wrap{
 				img{
 					width:375px;
-					height: 250px;
+					height: 300px;
 				}
 				position: relative;
 				.overlay__event-img {

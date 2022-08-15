@@ -135,6 +135,9 @@
 	}
 	.nav-profile{
 		margin-left: 1.5rem;
+		.dropdown-menu{
+			margin-left: -3rem;
+		}
 	}
 	.no-caret::after{
 		display: none;

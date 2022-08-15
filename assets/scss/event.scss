@@ -242,7 +242,7 @@
 	.webinar__list{
 		.card__content-lists{
 			margin-top: -1rem;
-			margin-left: 5rem;
+			// margin-left: 2rem;
 			.webinar__content{
 				.card {
 					height: auto;
@@ -265,7 +265,7 @@
 			}
 		}
 		.header__event{
-			margin-left: 6rem;
+			margin-left: 6.5rem;
 			margin-top:8rem;
 			color:$second-black;
 			h2{
@@ -286,10 +286,11 @@
 					color:$default-black;
 					font-weight: 600;
 					width:100%!important;
+					font-size: 16px;
 				}
 
 				.count__event{
-					margin-left: 24rem;
+					margin-left: 23rem;
 				}
 			}
 		}
