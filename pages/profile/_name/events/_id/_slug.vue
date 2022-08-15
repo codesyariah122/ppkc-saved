@@ -40,7 +40,7 @@
                     </h2>
                     <p>
                       <strong
-                        >Selamat Datang di Dashboard Pelatihan CPD
+                        >Selamat Datang di Dashboard Pelatihan PPKC Carolus
                         Online</strong
                       >
                       <br />

@@ -47,10 +47,13 @@
 </template>
 
 <script>
+	import pdf from "pdfvuer";
 
 	export default {
 		props: ['detailed', 'detailed_data', 'type_name', 'pdfdata', 'numPages', 'loading'],
-		
+		components: {
+			pdf,
+		},
 		data(){
 			return {
 				page: 1,
