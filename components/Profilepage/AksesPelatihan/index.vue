@@ -127,14 +127,15 @@
 
 <style lang="scss">
   .akses__pelatihan{
-    margin-top: 5rem;
+    margin-top: -3rem;
     margin-bottom: 7rem;
     font-family: 'Poppins', sans-serif;
     .jumbotron{
       background-color: $jumbotron-bg;
       h1{
-        font-size: 2rem;
+        font-size: 1.5rem;
         font-weight: 800;
+        width: 100%;
       }
       p{
         font-size: 16px;
@@ -248,7 +249,7 @@
   }
 @media (min-width: 992px) {
   .akses__pelatihan{
-    margin-top: 1rem;
+    margin-top: -3rem;
     font-family: 'Poppins', sans-serif;
     .jumbotron{
       background-color: $jumbotron-bg;
