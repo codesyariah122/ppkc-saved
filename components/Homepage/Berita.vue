@@ -1,41 +1,32 @@
 <template>
   <div class="berita__list">
-    <mdb-container>
-      <mdb-row class="text-center justify-content-center header__inside-content">
+    <mdb-container>     
+      <mdb-row class="row justify-content-center header__inside-content">
         <!-- colomn header berita -->
         <mdb-col col="12" md="12" xs="12" sm="12">
-          <h5>Berita</h5>
+          <h5 class="text-center">Berita</h5>
         </mdb-col>
         <mdb-col md="12" xs="12" sm="12">
-          <h2 class="text-center"
-          :style="`${
-            $device.isDesktop ? 'margin-left:0rem;' : 'margin-left:0rem;'
-          }`"
-          style="width: 100% !important"
-          >
-          Ikuti Berita dan Kegiatan Kami
-        </h2>
-      </mdb-col>
-    </mdb-row>
+          <h2 class="text-center" :style="`${$device.isDesktop ? 'margin-left:5rem;' : 'margin-left:2rem;'}`">
+            Ikuti Berita dan Kegiatan Kami
+          </h2>
+        </mdb-col>
+      </mdb-row>
 
-    <mdb-row
-    v-if="lists.length > 0"
-    class="justify-content-center col__berita mt-3 mb-3"
-    >
-    <MoleculesHomepageMoleculesCardBerita
-    :lists="lists"
-    ref="childBerita"
-    />
-  </mdb-row>
-  <mdb-row v-else>
-    <MoleculesHomepageMoleculesListBeritaSample/>
-  </mdb-row>
-</mdb-container>
-</div>
+      <mdb-row v-if="lists.length > 0" class="justify-content-center col__berita mt-3 mb-3">
+        <MoleculesHomepageMoleculesCardBerita  :lists="lists" ref="childBerita"/> 
+      </mdb-row>
+
+      <MoleculesHomepageMoleculesListBeritaSample v-else />
+
+    </mdb-container>
+
+  </div>
 </template>
 
 <script>
-  export default {
-    props: ["lists"],
-  };
+
+  export default{
+    props: ['lists']
+  }
 </script>

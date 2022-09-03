@@ -42,7 +42,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-if="loading">
+                <tr v-if="loading_answer">
                   <td colspan="5">
                     <div class="d-flex justify-content-center">
                       <div class="spinner-border text-primary" role="status">

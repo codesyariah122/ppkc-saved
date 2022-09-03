@@ -78,7 +78,7 @@
               </b-col>
             </b-row>
 
-            <b-row v-if="listToShow <= pelatihans.length" class="row justify-content-center">
+            <b-row v-if="listToShow < pelatihans.length" class="row justify-content-center">
               <b-col md="12" xs="12" sm="12">
                 <b-button block pill variant="primary" @click="ShowMore">Load More Event</b-button>
               </b-col>
@@ -103,7 +103,7 @@
     props: ['loading_event', 'pelatihans', 'username'],
     data(){
       return{
-        listToShow:3,
+        listToShow:6,
         header: {
           title: 'Pelatihan Saya',
           context: 'Silahkan mulai belajar dengan klik list pelatihan yang telah kamu beli, atau lihat pelatihan terbaru lainnya dibagian bawah halaman ini. Selamat belajar!'
