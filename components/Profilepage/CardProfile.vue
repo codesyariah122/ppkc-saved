@@ -38,7 +38,7 @@
               "
               >
               <b-avatar
-              variant="primary"
+              variant="none"
               :src="profiles.photo"
               :size="size"
               ></b-avatar>

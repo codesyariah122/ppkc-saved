@@ -28,7 +28,7 @@
 	@media (min-width: 992px) {
 		.toggler{
 			margin-left: -1.5rem;
-			z-index:-1;
+			z-index:0;
 		}
 	}
 </style>
