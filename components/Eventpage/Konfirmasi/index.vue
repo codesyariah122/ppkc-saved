@@ -126,6 +126,7 @@
 								</div>
 								<div v-else>
 									<b-card no-body class="shadow-none overflow-hidden card__bank-list">
+										
 										<b-row no-gutters>
 											<b-col md="4" class="mt-5">
 												<b-card-img :src="require('~/assets/images/bank/logo-bank-mandiri.svg')" alt="Image" class="rounded-0"></b-card-img>

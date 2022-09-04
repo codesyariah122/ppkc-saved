@@ -24,6 +24,14 @@ export default {
   name: "auth-login",
   layout: "auth",
 
+  async asyncData({ from }) {
+    const previousPath = from 
+    console.log(previousPath.fullPath)
+    return {
+      previousPath
+    }
+  },
+
   data() {
     return {
       validation: {},
@@ -95,7 +103,6 @@ export default {
       const event_path = this.event_data.event_path
         ? this.event_data.event_path
         : false;
-      // Method from helpers
       LoginProfile(url, params)
         .then((res) => {
           if (res.message) {
@@ -105,25 +112,20 @@ export default {
           }
           const alert_data = `Halo, Selamat Datang ${res.user.nama}, Login berhasil !`;
           this.Alert("success", alert_data);
-          // store access token
           this.ConfigAuthLogin(JSON.stringify(res.token));
 
-          // assignment
           this.profiles = res.user;
 
-          // redirect
-          if (event_id) {
-            // console.log("ok send event")
+          if (this.previousPath.fullPath === event_path) {
             this.$router.push({
               path: event_path,
             });
           } else {
-            // console.log("no event data")
             this.$router.push({
-              path: `/profile/${this.$username(res.user.nama)}`,
-              // params: {
-              // 	slug: this.$username(res.user.nama)
-              // }
+              name: 'profile-name',
+              params: {
+                name: this.$username(res.user.nama)
+              }
             });
           }
         })
