@@ -22,13 +22,13 @@
 							<tbody>
 								<tr>
 									<td>
-										{{pembayaran.kegiatan.kegiatan_title}}
+										{{data_pendaftaran.kegiatan_title}}
 									</td>
 									<td>
 										{{$moment(details.tanggal_awal).format("LLLL")}} - {{$moment(details.tanggal_akhir).format("LLLL")}}
 									</td>
 									<td>
-										{{$format(pembayaran.kegiatan.harga)}}
+										{{$format(data_pendaftaran.harga)}}
 									</td>
 								</tr>
 							</tbody>
@@ -39,7 +39,7 @@
 						<b-col md="5" xs="12" sm="12">
 							<b-card title="Total Harga" class="shadow-none rincian__bayar">
 								<b-card-text>
-									<h2> {{$format(pembayaran.kegiatan.harga)}} </h2>
+									<h2> {{$format(data_pendaftaran.harga)}} </h2>
 								</b-card-text>
 							</b-card>
 						</b-col>
@@ -63,13 +63,13 @@
 							<tbody>
 								<tr>
 									<td>
-										{{pembayaran.kegiatan.kegiatan_title}}
+										{{data_pendaftaran.kegiatan_title}}
 									</td>
 									<td>
 										{{$moment(details.tanggal_awal).format("LLLL")}} - {{$moment(details.tanggal_akhir).format("LLLL")}}
 									</td>
 									<td>
-										{{$format(pembayaran.kegiatan.harga)}}
+										{{$format(data_pendaftaran.harga)}}
 									</td>
 								</tr>
 							</tbody>
@@ -80,7 +80,7 @@
 						<b-col md="5" xs="12" sm="12">
 							<b-card title="Total Harga" class="shadow-none rincian__bayar">
 								<b-card-text>
-									<h2> {{$format(pembayaran.kegiatan.harga)}} </h2>
+									<h2> {{$format(data_pendaftaran.harga)}} </h2>
 								</b-card-text>
 							</b-card>
 						</b-col>
@@ -215,21 +215,17 @@
 		},
 
 		mounted(){
-			// console.log(this.bank)
-			this.CheckPembayaran(this.$route.params.id),
+			console.log(this.id),
+			this.CheckPembayaran(this.id),
 			this.StatusPembayaran()
 		},
 
 		methods: {
 
 			StatusPembayaran(){
-				console.log(this.$route.params.data_storage)
-				const check = this.$route.params.check
-				const data = check ? this.$route.params.data_storage.data : this.$route.params.data_storage 
-				console.log(data)
-				this.pembayaran.bank = data.bank
-				this.pembayaran.kegiatan = data.kegiatan
-				this.new_message = data.data.message
+				this.pembayaran.bank = this.bank
+				this.pembayaran.kegiatan = this.kegiatan
+				console.log(this.pembayaran.bank)
 			},
 
 			CheckPembayaran(id){

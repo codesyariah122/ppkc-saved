@@ -3,7 +3,8 @@
 		<mdb-container>
 			<EventpageSuccessHeader :data_pendaftaran="data_pendaftaran" :message="pembayaran.message" :bank="pembayaran.bank" :kegiatan="pembayaran.kegiatan" :checks="checks" />
 
-			<EventpageSuccess :id="id" :your_events="your_events" :token="token" :api_url="api_url" bank="pembayaran.bank" :data_pendaftaran="data_pendaftaran" :kegiatan="pembayaran.kegiatan" :checks="checks" :details="details"/>
+
+			<EventpageSuccess :id="id" :your_events="your_events" :token="token" :api_url="api_url" :bank="pembayaran.bank" :data_pendaftaran="data_pendaftaran" :kegiatan="pembayaran.kegiatan" :checks="checks" :details="details"/>
 
 		</mdb-container>
 	</div>
@@ -35,6 +36,7 @@
 		},
 
 		mounted(){
+			console.log(this.checks),
 			this.StatusPembayaran(),
 			this.GoYourEvent(),
 			this.IsLoggedIn(),
@@ -63,10 +65,9 @@
 			},
 
 			StatusPembayaran(){
-				this.pembayaran.bank = this.$route.params.bank
-				this.pembayaran.kegiatan = this.$route.params.kegiatan
-				this.pembayaran.message = this.$route.params.message
-				console.log(this.pembayaran.bank)
+				this.pembayaran.bank = this.checks.bank
+				this.pembayaran.kegiatan = this.checks.kegiatan
+				this.pembayaran.message = this.checks.message
 			},
 
 			GoYourEvent(){
@@ -84,9 +85,7 @@
 				this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
 				this.$axios.get(url)
 				.then(({data}) => {
-					console.log(data)
 					this.data_pendaftaran = data.kegiatan
-					// data.kegiatan.map(d => this.status_pendaftaran = d.status_pendaftaran_value)
 				})
 				.catch(err => console.log(err))
 				.finally(() => {

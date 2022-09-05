@@ -4,7 +4,8 @@
 			<mdb-col col="12"  lg="8" xs="10" sm="12" class="mb-3">
 				<b-card no-body class="overflow-hidden shadow-none">
 					<b-row v-if="$device.isDesktop" no-gutters class="mt-2 row justify-content-start ml-2 rincian__event-table">
-						<h5>Ringkasan Belanja</h5>
+						
+						<h5>Ringkasan Belanja Pelatihan</h5>
 						<table class="table table-borderless">
 							<thead>
 								<tr>
@@ -113,7 +114,7 @@
 												<b-card-body title="Transfer Bank">
 													<b-card-text>
 														<h6 class="mt-2">Bank {{pembayaran.bank.nama}} </h6>
-														<p> a.n : <span class="text-capitalize">{{bank.nama_rek}}</span> </p>
+														<p> a.n : <span class="text-capitalize">{{pembayaran.bank.nama_rek}}</span> </p>
 
 														<h5>
 															{{pembayaran.bank.no_rek}}
@@ -126,7 +127,6 @@
 								</div>
 								<div v-else>
 									<b-card no-body class="shadow-none overflow-hidden card__bank-list">
-										
 										<b-row no-gutters>
 											<b-col md="4" class="mt-5">
 												<b-card-img :src="require('~/assets/images/bank/logo-bank-mandiri.svg')" alt="Image" class="rounded-0"></b-card-img>
@@ -225,15 +225,13 @@
 				pembayaran: {
 					bank: {},
 					kegiatan: {}
-				},
-				data_event: this.$route.params.data
+				}
 			}
 		},
 
 		mounted(){
-			// console.log(this.bank)
-			this.CheckPembayaran(this.id),
-			this.StatusPembayaran()
+			this.CheckPembayaranUser(),
+			this.CheckPembayaran(this.id)
 		},
 
 		methods: {
@@ -247,10 +245,20 @@
 				console.log(this.photo)
 			},
 
-			StatusPembayaran(){
-				this.pembayaran.bank = this.bank
-				this.pembayaran.kegiatan = this.kegiatan
-				console.log(this.pembayaran.bank)
+			CheckPembayaranUser(){
+				this.loading = true
+				const url = `${this.api_url}/web/event/${this.$route.params.id}/konfirmasi`
+				this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
+				this.$axios.get(url)
+				.then(({data}) => {
+					console.log(data)
+					this.pembayaran.kegiatan = data.kegiatan
+					this.pembayaran.bank = data.bank
+				})
+				.catch(err => console.log(err))
+				.finally(() => {
+					this.loading = false
+				})
 			},
 
 			LanjutPendaftaran(){
@@ -299,14 +307,15 @@
 				})
 			},
 
+			
 			CheckPembayaran(id){
 				const url = `${this.api_url}/web/event/${id}/daftar`
 				this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
 				this.$axios.post(url, {
-					bank_id: this.bank.id
+					bank_id: this.pembayaran.bank.id
 				})
 				.then(({data}) => {
-					// console.log(data)
+					console.log(data)
 					if(data.message === "Anda telah terdaftar pada event ini" || data.message === ""){
 						this.status_pembayaran = true
 						this.new_message = "Terima kasih telah mendaftar, segera lakukan pembayaran, kemudian unggah bukti pembayaran Anda melalui tombol di bawah ini !"
