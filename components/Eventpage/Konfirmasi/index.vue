@@ -22,13 +22,13 @@
 							<tbody>
 								<tr>
 									<td>
-										{{pembayaran.kegiatan.kegiatan_title}}
+										{{kegiatan.kegiatan_title}}
 									</td>
 									<td>
 										{{$moment(details.tanggal_awal).format("LLLL")}} - {{$moment(details.tanggal_akhir).format("LLLL")}}
 									</td>
 									<td>
-										{{$format(pembayaran.kegiatan.harga)}}
+										{{$format(kegiatan.harga)}}
 									</td>
 								</tr>
 							</tbody>
@@ -39,7 +39,7 @@
 						<b-col md="5" xs="12" sm="12">
 							<b-card title="Total Harga" class="shadow-none rincian__bayar">
 								<b-card-text>
-									<h2> {{$format(pembayaran.kegiatan.harga)}} </h2>
+									<h2> {{$format(kegiatan.harga)}} </h2>
 								</b-card-text>
 							</b-card>
 						</b-col>
@@ -63,13 +63,13 @@
 							<tbody>
 								<tr>
 									<td>
-										{{pembayaran.kegiatan.kegiatan_title}}
+										{{kegiatan.kegiatan_title}}
 									</td>
 									<td>
 										{{$moment(details.tanggal_awal).format("LLLL")}} - {{$moment(details.tanggal_akhir).format("LLLL")}}
 									</td>
 									<td>
-										{{$format(pembayaran.kegiatan.harga)}}
+										{{$format(kegiatan.harga)}}
 									</td>
 								</tr>
 							</tbody>
@@ -80,7 +80,7 @@
 						<b-col md="5" xs="12" sm="12">
 							<b-card title="Total Harga" class="shadow-none rincian__bayar">
 								<b-card-text>
-									<h2> {{$format(pembayaran.kegiatan.harga)}} </h2>
+									<h2> {{$format(kegiatan.harga)}} </h2>
 								</b-card-text>
 							</b-card>
 						</b-col>
@@ -232,7 +232,7 @@
 
 		mounted(){
 			// console.log(this.bank)
-			this.CheckPembayaran(this.$route.params.id),
+			this.CheckPembayaran(this.id),
 			this.StatusPembayaran()
 		},
 
@@ -248,8 +248,8 @@
 			},
 
 			StatusPembayaran(){
-				this.pembayaran.bank = this.$route.params.bank
-				this.pembayaran.kegiatan = this.$route.params.kegiatan
+				this.pembayaran.bank = this.bank
+				this.pembayaran.kegiatan = this.kegiatan
 				console.log(this.pembayaran.bank)
 			},
 

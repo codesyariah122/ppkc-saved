@@ -32,7 +32,7 @@
         <mdb-badge
         class="mb-2 badge__category shadow-none"
         >{{details.kategori_value}}</mdb-badge
-        >     
+        >
         <h1>
           {{details.kegiatan_title}}
         </h1>
@@ -84,7 +84,7 @@
             </div>
             <div v-else>
               <mdb-btn @click="MenungguKonfirmasi(details.kegiatan_id)" class="btn my__btn-secondary rounded-pill btn-block shadow-none" :size="`${$device.isDesktop ? 'md' : 'sm'}`"> 
-                <mdb-icon icon="check" :size="`${$device.isDesktop ? 'lg' : 'sm'}`"/> {{status_pendaftaran == 'Menunggu Konfirmasi' ? 'Check Status' : status_pendaftaran}}
+                <mdb-icon icon="check" :size="`${$device.isDesktop ? 'lg' : 'sm'}`"/> {{status_pendaftaran == 'Menunggu Konfirmasi' ? 'Check Konfirmasi Pendaftaran' : status_pendaftaran}}
               </mdb-btn>
             </div>
           </mdb-col>
@@ -178,48 +178,8 @@
               </b-card>
             </div>
           </mdb-col>
-
-          <!-- <mdb-col lg="6" xs="6" sm="12" class="profile__pengajar mt-2">
-            <div class="row">
-              <div class="col-lg-12 col-sm-12 col-xs-12">
-                <h5>Profile Fasilitator</h5>
-              </div>
-              <div class="col-lg-12 col-xs-12 col-sm-12 mt-3 card__profile">
-                <b-card no-body class="shadow-none overflow-hidden">
-                  <b-row no-gutters class="row justify-content-center mt-4">
-                    <b-col md="2" col="12" class="profile__pic">
-                      <b-avatar :size="`${$device.isMobile ? '5rem' : '4rem'}`" variant="info" :src="require('~/assets/images/Avatar/5.jpg')"></b-avatar>
-                      <div :class="`${$device.isMobile ? 'd-flex justify-content-start mt-3 mx-auto' : 'row justify-content-start mt-3'}`">
-                        <div class="col-md-4 col-sm-4">
-                          <mdb-icon class="text-primary" fab icon="facebook-square" size="lg"/>
-                        </div>
-                        <div class="col-md-4 col-sm-4">
-                          <mdb-icon class="text-info" fab icon="linkedin-in" size="lg"/>
-                        </div>
-                      </div>
-                    </b-col>
-                    <b-col md="8" class="profile__info">
-                      <b-card-body title="dr. Hasan Fadly">
-                        <b-card-text>
-                          <blockquote>
-                            Dokter Umum
-                          </blockquote>
-                          <span>
-                            Saat ini, dr. Hasan Fadly bertugas sebagai dokter umum di Rumah Sakit Islam Sultan Agung Semarang dan aktif sebagai penyuluh kesehatan masyarakat di kota Semarang.
-                          </span>
-                          
-                        </b-card-text>
-                      </b-card-body>
-                    </b-col>
-                  </b-row>
-                </b-card>
-              </div>
-            </div>
-          </mdb-col> -->
-          
         </mdb-row>
       </div>
-      <!-- end event detail schedule -->
 
     </div>
   </template>
