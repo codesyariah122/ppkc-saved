@@ -25,7 +25,7 @@
 		</mdb-row>
 
 		<div v-else>
-			<mdb-row class="justify-content-start">
+			<mdb-row :class="`${$device.isMobile ? 'row justify-content-center' : ''}`">
 				<mdb-col v-if="$device.isMobile" lg="4" xs="4" sm="12" col="12" class="event__flyer">
 					<img :src="events.kegiatan.photo">
 				</mdb-col>
