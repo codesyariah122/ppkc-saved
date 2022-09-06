@@ -166,13 +166,12 @@
 											<div class="file-input-2">
 												<input type="file" id="file" class="rounded-pill file" @change="FileImage($event)">
 												<label for="file">
-													Ubah Bukti Pembayaran
-													<p class="file-name"></p>
+													<mdb-icon icon="upload" size="lg"/>&nbsp; Ubah Bukti Pembayaran
 												</label>
 											</div>
 										</mdb-col>
 										<mdb-col md="12">
-											<mdb-btn @click="LanjutPendaftaran" class="btn my__btn-primary rounded-pill btn-block shadow-none">Lanjutkan Pendaftaran</mdb-btn>
+											<mdb-btn @click="LanjutPendaftaran" class="btn my__btn-primary rounded-pill btn-block text-white"><mdb-icon far icon="credit-card" size="lg" />&nbsp; Lanjutkan Pendaftaran</mdb-btn>
 										</mdb-col>
 
 									</mdb-row>
@@ -187,8 +186,7 @@
 									<div class="file-input">
 										<input type="file" id="file" class="rounded-pill file" @change="FileImage($event)">
 										<label for="file">
-											Unggah Bukti Pembayaran
-											<p class="file-name"></p>
+											<mdb-icon icon="upload" size="lg"/>&nbsp; Unggah Bukti Pembayaran
 										</label>
 									</div>
 								</div>
