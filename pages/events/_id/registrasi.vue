@@ -54,7 +54,6 @@
 				this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
 				this.$axios.get(url)
 				.then(({data}) => {
-					console.log(data)
 					// this.status_pendaftaran = data.kegiatan.status_pendaftaran_value
 					if(data.kegiatan.status_pendaftaran_value === 'Menunggu Konfirmasi'){
 						this.$router.push({

@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<mdb-row class="justify-content-start pembayaran__card">
-			<mdb-col col="12"  lg="8" xs="10" sm="12" class="mb-3">
+			<mdb-col  lg="8" xs="10" sm="12" class="mb-3">
 				<b-card no-body class="overflow-hidden shadow-none">
 					<b-row v-if="$device.isDesktop" no-gutters class="mt-2 row justify-content-start ml-2 rincian__event-table">
 						<h5>Ringkasan Belanja</h5>
@@ -112,6 +112,7 @@
 												<b-card-body title="Transfer Bank">
 													<b-card-text>
 														<h6 class="mt-2">Bank {{pembayaran.bank.nama}} </h6>
+														
 														<p> a.n : <span class="text-capitalize">{{bank.nama_rek}}</span> </p>
 
 														<h5>
@@ -133,6 +134,7 @@
 												<b-card-body title="Transfer Bank">
 													<b-card-text>
 														<h6 class="mt-2">Bank {{pembayaran.bank.nama}} </h6>
+														
 														<p> a.n : <span class="text-capitalize">{{bank.nama_rek}}</span> </p>
 
 														<h5>
@@ -216,26 +218,32 @@
 
 		mounted(){
 			console.log(this.id),
-			this.CheckPembayaran(this.id),
-			this.StatusPembayaran()
+			this.CheckPembayaranUser()
 		},
 
 		methods: {
 
-			StatusPembayaran(){
-				this.pembayaran.bank = this.bank
-				this.pembayaran.kegiatan = this.kegiatan
-				console.log(this.pembayaran.bank)
+			CheckPembayaranUser(){
+				const url = `${this.api_url}/web/event/${this.$route.params.id}/konfirmasi`
+				this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
+				this.$axios.get(url)
+				.then(({data}) => {
+					this.pembayaran.kegiatan = data.kegiatan
+					this.pembayaran.bank = data.bank
+					this.CheckPembayaran(this.id, data.bank.id)
+					
+				})
+				.catch(err => console.log(err))
 			},
 
-			CheckPembayaran(id){
+			CheckPembayaran(id, bank_id){
 				const url = `${this.api_url}/web/event/${id}/daftar`
 				this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
 				this.$axios.post(url, {
-					bank_id: this.bank.id
+					bank_id: bank_id
 				})
 				.then(({data}) => {
-					// console.log(data)
+					console.log(data)
 					if(data.message === "Anda telah terdaftar pada event ini" || data.message === ""){
 						this.status_pembayaran = true
 						this.new_message = "Terima kasih telah mendaftar, segera lakukan pembayaran, kemudian unggah bukti pembayaran Anda melalui tombol di bawah ini !"

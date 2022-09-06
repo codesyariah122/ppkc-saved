@@ -3,10 +3,10 @@
     <mdb-col lg="12">
       <b-card>
         <b-row>
-          <b-col col="4">
+          <b-col>
             <b-skeleton-img></b-skeleton-img>
           </b-col>
-          <b-col col="8">             
+          <b-col>             
             <b-skeleton animation="wave" width="85%"></b-skeleton>
             <b-skeleton animation="wave" width="55%"></b-skeleton>
             <b-skeleton animation="wave" width="70%"></b-skeleton>
@@ -25,10 +25,10 @@
 
   <div v-else>
     <mdb-row :class="`${$device.isMobile ? 'row justify-content-center' : ''}`">
-      <mdb-col v-if="$device.isMobile" lg="4" xs="4" sm="12" col="12" class="event__flyer">
+      <mdb-col v-if="$device.isMobile" lg="4" xs="4" sm="12" class="event__flyer">
         <img :src="details.photo">
       </mdb-col>
-      <mdb-col lg="6" xs="6" sm="12" col="12" class="event__info">
+      <mdb-col lg="6" xs="6" sm="12" class="event__info">
         <mdb-badge
         class="mb-2 badge__category shadow-none"
         >{{details.kategori_value}}</mdb-badge

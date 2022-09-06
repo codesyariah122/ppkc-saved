@@ -1,6 +1,7 @@
 <template>
 	<div :class="`${$device.isDesktop ? 'event__detail mb-5' : 'event__detail mb-5'}`">
 		<mdb-container>
+			
 			<!-- Event detail content -->
 			<mdb-row class="row event__detail-content">
 				<mdb-col v-if="token.accessToken" lg="12">
@@ -10,11 +11,8 @@
 					<EventpageDetailEventNoAuth :events="events" :loading="loading"/>
 				</mdb-col>
 			</mdb-row>
-			
 
-			<!-- List Event lainnya -->
 			<mdb-row class="event__detail-list">
-				<EventpageEventLainnya :lists="lists" :currentPage="currentPage" :loading="loading" :listToShow="listToShow" :token="token" :data_event="data_event"/>
 			</mdb-row>
 		</mdb-container>
 	</div>
@@ -61,7 +59,6 @@
 		},
 
 		mounted(){
-			this.ListEvent(),
 			this.StatusPembayaran(),
 			this.DetailEventProfileLogin(),
 			this.GetEventDataLogin(),
@@ -88,6 +85,7 @@
 					this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
 					this.$axios.get(url)
 					.then(({data}) => {
+						console.log(data)
 						this.details = data.kegiatan
 						this.schedules = data.pelatihans
 					})
@@ -95,30 +93,7 @@
 				}
 			},
 
-			ListEvent(page, category, month, keyword){
-				if(this.token.accessToken){					
-					this.loading=true
 
-					const url = `${this.api_url}/web/event/page?jenis_pelatihan=${category ? category : ''}&bulan_pelatihan=${month ? month : ''}&start=${page ? page : 0}&keyword=${keyword ? keyword : ''}`
-
-					FetchData(url)
-					.then((res) => {
-						this.lists = res.map(d => {
-							d.list_kegiatan_terdekat.filter(d => d.id != this.id)
-						})
-						// console.log(res.list_kegiatan_terdekat)
-						// this.lists = res.list_kegiatan_terdekat
-					})
-					.catch((err) => {
-						console.log(err.response ? err.response : err.message)
-					})
-					.finally(() => {
-						setTimeout(() => {
-							this.loading=false
-						}, 1000)
-					})
-				}
-			},
 
 			LoadEvent(page){
 				if(page == 1){
@@ -154,10 +129,11 @@
 			StatusPembayaran(){
 				if(this.token.accessToken){
 					this.loading=true
-					const url = `${this.api_url}/web/event/${this.$route.params.id}`
+					const url = `${this.api_url}/web/event/${this.id}`
 					this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
 					this.$axios.get(url)
 					.then(({data}) => {
+						console.log(data)
 						this.status_pendaftaran = data.kegiatan.status_pendaftaran_value
 					})
 					.catch(err => console.log(err))

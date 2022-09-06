@@ -131,6 +131,7 @@
 											<img :src="`${bank.id === 1 ? require('~/assets/images/bank/bsi.png') : require('~/assets/images/bank/permata-syariah.png')}`" width="100" height="50"> {{bank.nama}}
 										</label>
 									</div> -->
+									
 									<b-form-radio class="mb-2" v-for="bank in banks" :key="bank.id" name="bank" :id="`bank-${bank.id}`" :value="bank.id" v-model="field.bank_id" >
 										<img :src="`${bank.id === 1 ? require('~/assets/images/bank/logo-bank-bca.svg') : require('~/assets/images/bank/logo-bank-mandiri.svg')}`" width="150" height="50"> <span>{{bank.nama}}</span>
 									</b-form-radio>
@@ -195,7 +196,7 @@
 				this.loading = true
 				this.$axios.get(`/web/event/${this.id}/daftar`)
 				.then(({data}) => {
-					console.log(data)
+					// console.log(data)
 					this.event = data.kegiatan
 					this.banks = data.list_bank
 				})
@@ -208,14 +209,11 @@
 				this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
 				this.$axios.get(`/web/event/${id}/konfirmasi`)
 				.then(({data}) => {
-					console.log(data)
 					if(data.kegiatan){
 						this.$router.push({
 							name: 'events-id-konfirmasi',
 							params: {
-								id: id,
-								bank: data.bank,
-								kegiatan: data.kegiatan
+								id: id
 							}
 						})
 					}
@@ -228,16 +226,27 @@
 				this.error = false
 				this.validation.message=""
 				this.loading_btn = true
-				console.log(this.field.bank_id)
 				if(this.field.bank_id){
 					const url = `${this.api_url}/web/event/${this.id}/daftar`
 
 					this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
-					this.$axios.post(url, {
+
+					const data_bank = {
 						bank_id: this.field.bank_id
+					}
+					const config = {
+						headers: {
+							'content-type': 'application/json',
+							'Accept': 'application/json'
+						}
+					}
+					this.$axios.post(url,  data_bank, {
+						headers: {
+							'content-type': 'application/json',
+							'Accept': 'application/json'
+						}
 					})
 					.then(({data}) => {
-						console.log(data)
 						let new_message = ''
 						if(data.kegiatan_peserta.kegiatan_id){
 							if(data.message === "Anda telah terdaftar pada event ini" || data.message === ""){
@@ -245,25 +254,20 @@
 							}else{
 								new_message = data.message
 							}
-							this.Alert('success', new_message)
-							// this.$router.push({
-							// 	name: 'events-id-konfirmasi',
-							// 	params: {
-							// 		id: data.kegiatan_peserta.kegiatan_id,
 
-							// 	}
-							// })
+							setTimeout(() => {
+								this.loading_btn = false
+							}, 1000)
+
+							this.Alert('success', new_message)
+
 							this.CheckPembayaran(data.kegiatan_peserta.kegiatan_id)
 						}
 					})
 					.catch(err => {
-						console.log(err)
+						console.error(err.response)
 					})
-					.finally(() => {
-						setTimeout(() => {
-							this.loading_btn = false
-						}, 1000)
-					})
+					
 				}else{					
 					this.error = true
 					this.validation.message = "Harap checklist pada bagian bank yang tersedia"

@@ -36,7 +36,6 @@
 		},
 
 		mounted(){
-			console.log(this.checks),
 			this.StatusPembayaran(),
 			this.GoYourEvent(),
 			this.IsLoggedIn(),

@@ -1,10 +1,9 @@
 <template>
 	<div>
 		<mdb-row class="justify-content-start pembayaran__card">
-			<mdb-col col="12"  lg="8" xs="10" sm="12" class="mb-3">
+			<mdb-col lg="8" xs="10" sm="12" class="mb-3">
 				<b-card no-body class="overflow-hidden shadow-none">
 					<b-row v-if="$device.isDesktop" no-gutters class="mt-2 row justify-content-start ml-2 rincian__event-table">
-						
 						<h5>Ringkasan Belanja Pelatihan</h5>
 						<table class="table table-borderless">
 							<thead>
@@ -225,13 +224,14 @@
 				pembayaran: {
 					bank: {},
 					kegiatan: {}
-				}
+				},
+				data_bank: {},
+				data_kegiatan: {}
 			}
 		},
 
 		mounted(){
-			this.CheckPembayaranUser(),
-			this.CheckPembayaran(this.id)
+			this.CheckPembayaranUser()
 		},
 
 		methods: {
@@ -246,19 +246,16 @@
 			},
 
 			CheckPembayaranUser(){
-				this.loading = true
 				const url = `${this.api_url}/web/event/${this.$route.params.id}/konfirmasi`
 				this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
 				this.$axios.get(url)
 				.then(({data}) => {
-					console.log(data)
 					this.pembayaran.kegiatan = data.kegiatan
 					this.pembayaran.bank = data.bank
+					this.CheckPembayaran(this.id, data.bank.id)
+					
 				})
 				.catch(err => console.log(err))
-				.finally(() => {
-					this.loading = false
-				})
 			},
 
 			LanjutPendaftaran(){
@@ -267,7 +264,6 @@
 				}
 				this.$axios.post(`${this.api_url}/web/event/${this.id}/buktibayar`, this.form_data, config)
 				.then(({data}) => {
-					console.log(data)
 					this.new_preview = data.kegiatan_peserta.bukti_bayar
 
 					this.total_bayar = data.kegiatan_peserta.total_bayar
@@ -308,11 +304,11 @@
 			},
 
 			
-			CheckPembayaran(id){
+			CheckPembayaran(id, bank_id){
 				const url = `${this.api_url}/web/event/${id}/daftar`
 				this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
 				this.$axios.post(url, {
-					bank_id: this.pembayaran.bank.id
+					bank_id: bank_id
 				})
 				.then(({data}) => {
 					console.log(data)
@@ -323,6 +319,7 @@
 						this.new_message = data.message
 					}
 				})
+				.catch(err => console.error(err.response))
 			}
 		}
 	}

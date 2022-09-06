@@ -2,6 +2,7 @@
 	<div :class="`${$device.isDesktop ? 'event__pembayaran mb-5' : 'event__pembayaran mb-5'}`">
 		<mdb-container>
 			<EventpageKonfirmasiHeader/>
+			
 			<EventpageKonfirmasi :id="id" :kegiatan="kegiatan" :bank="bank" :loading="loading" :token="token" :api_url="api_url" :details="details"/>
 		</mdb-container>
 	</div>
