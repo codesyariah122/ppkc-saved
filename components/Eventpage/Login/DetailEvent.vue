@@ -1,5 +1,5 @@
 <template>
-  <mdb-row v-if="loading" col="12" class="mt-5">
+  <mdb-row v-if="loading" col="12">
     <mdb-col lg="12">
       <b-card>
         <b-row>
