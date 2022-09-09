@@ -68,8 +68,8 @@
 
               <mdb-row class="row justify-content-start">
                 <mdb-col md="12" col="12" sm="12">
-                  <mdb-btn @click="BeliKelas(details.kegiatan_id, details)" class="btn my__btn-primary rounded-pill btn-block shadow-none mb-2" :size="`${$device.isDesktop ? 'md' : 'sm'}`">
-                    <mdb-icon icon="credit-card" size="lg"/> {{status_pendaftaran == "Daftar" ? "Beli Kelas" : status_pendaftaran}}
+                  <mdb-btn @click="BeliKelas(details.kegiatan_id, details)" class="btn my__btn-primary rounded-pill btn-block mb-2" :size="`${$device.isDesktop ? 'md' : 'sm'}`">
+                    <mdb-icon icon="credit-card" size="lg"/>&nbsp;{{status_pendaftaran == "Daftar" ? "Beli Kelas" : status_pendaftaran}}
                   </mdb-btn>
                 </mdb-col>
               </mdb-row>

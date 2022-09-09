@@ -54,10 +54,10 @@
                     slug: $slug(item.kegiatan_title),
                   },
                 }"
-                :class="`btn my__btn-primary rounded-pill mt-3 mb-2 btn-block shadow-none ${
+                :class="`btn my__btn-primary rounded-pill mt-3 mb-2 btn-block ${
                   $device.isMobile ? 'btn-sm' : ''
                 }`"
-                >Detail Kelas</nuxt-link
+                ><mdb-icon icon="calendar-day" size="lg"/>&nbsp; Detail Kelas</nuxt-link
               >
             </mdb-card-body>
           </mdb-card>
@@ -65,7 +65,6 @@
       </mdb-row>
       <mdb-row v-if="lists.length > 0" class="row justify-content-center mt-2">
         <mdb-col
-          col="12"
           xl="5"
           lg="12"
           xs="12"
@@ -77,7 +76,7 @@
             :class="`btn my__btn-primary rounded-pill  ${
               $device.isMobile ? 'btn-block btn-sm' : 'btn-block'
             }`"
-            >Lihat Semua Kelas</nuxt-link
+            ><mdb-icon icon="chalkboard" size="lg"/>&nbsp; Lihat Semua Kelas</nuxt-link
           >
         </mdb-col>
       </mdb-row>

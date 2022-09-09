@@ -59,7 +59,7 @@
 					</mdb-row>
 					<mdb-row class="mt-3" col="12">
 						<mdb-col md="12" xs="12" sm="12" col="12">
-							<mdb-btn class="btn my__btn-secondary rounded-pill btn-block shadow-none mb-2" :size="`${$device.isDesktop ? 'md' : 'sm'}`" @click="GoToLogin"> Beli kelas
+							<mdb-btn class="btn my__btn-secondary rounded-pill btn-block mb-2" :size="`${$device.isDesktop ? 'md' : 'sm'}`" @click="GoToLogin"><mdb-icon far icon="credit-card" size="lg"/>&nbsp; Beli kelas
 							</mdb-btn>
 						</mdb-col>
 					</mdb-row>
