@@ -28,7 +28,7 @@
 										{{$moment(details.tanggal_awal).format("LLLL")}} - {{$moment(details.tanggal_akhir).format("LLLL")}}
 									</td>
 									<td>
-										{{$format(kegiatan.harga)}}
+										{{kegiatan.harga}}
 									</td>
 								</tr>
 							</tbody>
@@ -69,7 +69,7 @@
 										{{$moment(details.tanggal_awal).format("LLLL")}} - {{$moment(details.tanggal_akhir).format("LLLL")}}
 									</td>
 									<td>
-										{{$format(kegiatan.harga)}}
+										{{kegiatan.harga}}
 									</td>
 								</tr>
 							</tbody>
@@ -160,9 +160,9 @@
 											<b-badge pill variant="primary">Bukti Bayar Anda</b-badge>
 										</mdb-col>
 										<mdb-col md="12" class="mb-2">
-											<img :src="photo" width="150" class="img-fluid">
+											<img :src="photo" width="350" class="img-fluid img-thumbnail">
 										</mdb-col>
-										<mdb-col md="12" class="mb-4">
+										<mdb-col md="12" class="mb-4 mt-5">
 											<div class="file-input-2">
 												<input type="file" id="file" class="rounded-pill file" @change="FileImage($event)">
 												<label for="file">
@@ -171,7 +171,7 @@
 											</div>
 										</mdb-col>
 										<mdb-col md="12">
-											<mdb-btn @click="LanjutPendaftaran" class="btn my__btn-primary rounded-pill btn-block text-white"><mdb-icon far icon="credit-card" size="lg" />&nbsp; Lanjutkan Pendaftaran</mdb-btn>
+											<mdb-btn @click="LanjutPendaftaran" class="btn my__btn-primary rounded-pill btn-block text-white btn-md"><mdb-icon far icon="credit-card" size="lg" />&nbsp; Lanjutkan Pendaftaran</mdb-btn>
 										</mdb-col>
 
 									</mdb-row>

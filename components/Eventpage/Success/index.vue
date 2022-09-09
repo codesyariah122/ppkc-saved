@@ -28,7 +28,7 @@
 										{{$moment(details.tanggal_awal).format("LLLL")}} - {{$moment(details.tanggal_akhir).format("LLLL")}}
 									</td>
 									<td>
-										{{$format(data_pendaftaran.harga)}}
+										{{data_pendaftaran.harga}}
 									</td>
 								</tr>
 							</tbody>
@@ -69,7 +69,7 @@
 										{{$moment(details.tanggal_awal).format("LLLL")}} - {{$moment(details.tanggal_akhir).format("LLLL")}}
 									</td>
 									<td>
-										{{$format(data_pendaftaran.harga)}}
+										{{data_pendaftaran.harga}}
 									</td>
 								</tr>
 							</tbody>
@@ -105,19 +105,21 @@
 
 									<b-card no-body class="shadow-none overflow-hidden card__bank-list">
 										<b-row no-gutters>
-											<b-col md="4" class="mt-5">
-												<b-card-img :src="require('~/assets/images/bank/logo-bank-bca.svg') " alt="Image" class="rounded-0"></b-card-img>
+											<b-col md="2" class="mt-5">
+												<b-card-img :src="require('~/assets/images/bank/logo-bank-bca.svg') " alt="Image" class="img-fluid rounded-circle"></b-card-img>
 											</b-col>
-											<b-col md="8">
+											<b-col md="10">
 												<b-card-body title="Transfer Bank">
 													<b-card-text>
-														<h6 class="mt-2">Bank {{pembayaran.bank.nama}} </h6>
-														
-														<p> a.n : <span class="text-capitalize">{{bank.nama_rek}}</span> </p>
-
-														<h5>
-															{{pembayaran.bank.no_rek}}
-														</h5>
+														<b-list-group>
+															<b-list-group-item button>
+																Bank {{pembayaran.bank.nama}} 
+															</b-list-group-item>
+															<b-list-group-item button>
+																a.n : <span class="text-capitalize">{{pembayaran.bank.nama_rek}}</span> 
+															</b-list-group-item>
+															<b-list-group-item button disabled>No Rek : {{pembayaran.bank.no_rek}}</b-list-group-item>
+														</b-list-group>
 													</b-card-text>
 												</b-card-body>
 											</b-col>
@@ -133,13 +135,15 @@
 											<b-col md="8">
 												<b-card-body title="Transfer Bank">
 													<b-card-text>
-														<h6 class="mt-2">Bank {{pembayaran.bank.nama}} </h6>
-														
-														<p> a.n : <span class="text-capitalize">{{bank.nama_rek}}</span> </p>
-
-														<h5>
-															{{pembayaran.bank.no_rek}}
-														</h5>
+														<b-list-group>
+															<b-list-group-item button>
+																Bank {{pembayaran.bank.nama}} 
+															</b-list-group-item>
+															<b-list-group-item button>
+																a.n : <span class="text-capitalize">{{pembayaran.bank.nama_rek}}</span> 
+															</b-list-group-item>
+															<b-list-group-item button disabled>No Rek : {{pembayaran.bank.no_rek}}</b-list-group-item>
+														</b-list-group>
 													</b-card-text>
 												</b-card-body>
 											</b-col>
@@ -154,28 +158,47 @@
 						</div>
 						<mdb-col lg="12" xs="12" sm="12" class="col__card-upload-file mt-2 mb-2">
 
-
 							<div v-if="checks.data" class="form-group">
 								<mdb-row class="row justify-content-center">
 									<mdb-col md="12" class="mt-2 mb-2">
 										<b-badge pill variant="primary">Bukti Bayar Anda</b-badge>
 									</mdb-col>
 									<mdb-col md="12" class="mb-4">
-										<img :src="checks.data.bukti_bayar" width="150" class="img-fluid">
+										<img :src="checks.data.bukti_bayar" width="350" class="img-fluid img-thumbnail">
 									</mdb-col>
 
 									<mdb-col md="12">
-										<mdb-btn disabled class="btn my__btn-primary text-white rounded-pill btn-block shadow-none"> <mdb-icon icon="calendar-check" size="lg"/>&nbsp; {{data_pendaftaran.status_pendaftaran_value }} </mdb-btn>
+										<mdb-btn disabled :color="data_pendaftaran.status_pendaftaran_value === 'Terdaftar' ? 'success' : 'warning'" class="btn text-white rounded-pill btn-md btn-block shadow-none">{{data_pendaftaran.status_pendaftaran_value }} &nbsp; <mdb-icon icon="pause" size="lg"/> </mdb-btn>
 									</mdb-col>
 
 									<mdb-col md="12" class="mt-3">
-										<nuxt-link :to="`/detail/event/${id}/${$slug(your_events.kegiatan_title ? your_events.kegiatan_title : '')}`" class="btn btn-primary rounded-pill btn-block shadow-none">
-											<div v-if='data_pendaftaran.status_pendaftaran_value === "Menunggu Konfirmasi"'>
-												<mdb-icon icon="money-check" size="lg" />
-												Check Status Pendaftaran
+										<nuxt-link :to="`/detail/event/${id}/${$slug(your_events.kegiatan_title ? your_events.kegiatan_title : '')}`" class="btn btn-primary btn-md rounded-pill btn-block">
+											<div v-if='data_pendaftaran.status_pendaftaran_value === "Menunggu Konfirmasi"'><mdb-icon far icon="calendar-alt" size="lg"/>&nbsp; Check Status Pendaftaran
 											</div>
 											<div v-else>
-												Selesai Terkonfirmasi&nbsp;  <mdb-icon icon="arrow-right" size="lg"  />
+												Selesai Terkonfirmasi &nbsp;  <mdb-icon icon="check-double" size="lg"/>
+											</div>
+										</nuxt-link>
+									</mdb-col>
+
+								</mdb-row>
+							</div>
+
+							<div v-else-if="data_pendaftaran.status_pendaftaran_value" class="form-group">
+								<mdb-row class="row justify-content-center">
+									<mdb-col md="12">
+										<small class="text-danger mt-5 mb-2 blockquote-footer">
+											{{data_pendaftaran.status_pendaftaran_value === 'Menunggu Konfirmasi' ? 'Admin kami akan segera mengkonfirmasi' : 'Terkonfirmasi' }}
+										</small>
+										<mdb-btn disabled :color="data_pendaftaran.status_pendaftaran_value === 'Terdaftar' ? 'success' : 'warning'" class="btn text-white rounded-pill btn-sm btn-block shadow-none">{{data_pendaftaran.status_pendaftaran_value }} &nbsp; <mdb-icon icon="pause" size="lg"/> </mdb-btn>
+									</mdb-col>
+
+									<mdb-col md="12" class="mt-3">
+										<nuxt-link :to="`/detail/event/${id}/${$slug(your_events.kegiatan_title ? your_events.kegiatan_title : '')}`" class="btn btn-primary rounded-pill btn-sm btn-block shadow-none">
+											<div v-if='data_pendaftaran.status_pendaftaran_value === "Menunggu Konfirmasi"'><mdb-icon far icon="calendar-alt" size="lg"/>&nbsp; Check Status Pendaftaran
+											</div>
+											<div v-else>
+												Selesai Terkonfirmasi &nbsp;  <mdb-icon icon="check-double" size="lg"/>
 											</div>
 										</nuxt-link>
 									</mdb-col>
@@ -225,7 +248,7 @@
 		},
 
 		mounted(){
-			console.log(this.id),
+			console.log(this.bank),
 			this.CheckPembayaranUser()
 		},
 

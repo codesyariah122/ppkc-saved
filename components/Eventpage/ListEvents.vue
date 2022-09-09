@@ -94,7 +94,7 @@
               :class="`btn my__btn-secondary rounded-pill mt-3 mb-2 btn-block shadow-none ${
                 $device.isMobile ? 'btn-sm' : ''
               }`"
-              >Info Kelas</nuxt-link
+              ><mdb-icon icon="info-circle" size="lg"/> &nbsp; Info Kelas</nuxt-link
               >
             </mdb-card-body>
           </mdb-card>

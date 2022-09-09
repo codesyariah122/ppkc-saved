@@ -31,7 +31,7 @@
 										{{$moment(details.tanggal_awal).format("LLLL")}} - {{$moment(details.tanggal_akhir).format("LLLL")}}
 									</td>
 									<td>
-										{{$format(event.harga)}}
+										{{event.harga}}
 									</td>
 								</tr>
 							</tbody>
@@ -89,7 +89,7 @@
 										{{$moment(details.tanggal_awal).format("LLLL")}} - {{$moment(details.tanggal_akhir).format("LLLL")}}
 									</td>
 									<td>
-										{{$format(event.harga)}}
+										{{event.harga}}
 									</td>
 								</tr>
 							</tbody>

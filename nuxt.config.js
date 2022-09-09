@@ -69,6 +69,7 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    // 'bootstrap-css-only/css/bootstrap.min.css',
     'mdbvue/lib/mdbvue.css',
     'mdbvue/lib/css/mdb.min.css'
     ],
