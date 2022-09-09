@@ -37,7 +37,7 @@
             <b-row v-else>
               <b-col v-if="listIndex <= pelatihans.length" v-for="listIndex in listToShow" md="4" xs="12" sm="12" :class="`${$device.isDesktop ? 'mb-5' : 'mb-5'} card__pelatihan`" :key="pelatihans[listIndex-1].id">
                 
-                <mdb-card :style="`${$device.isDesktop ? 'width: 20rem;' : 'width: 19rem;'}`"> 
+                <mdb-card :style="`${$device.isDesktop ? 'width: 20rem;' : 'width: 18rem;'}`"> 
                   <mdb-card-image
                   :src="pelatihans[listIndex-1].photo"
                   alt="No image found"
@@ -71,7 +71,7 @@
 
                     <hr />
 
-                      <nuxt-link :to="`/profile/${username}/events/${pelatihans[listIndex-1].kegiatan_id}/${$slug(pelatihans[listIndex-1].kegiatan_title)}`" size="sm" class="btn my__btn-primary rounded-pill btn-block text-white">Akses Pelatihan</nuxt-link>
+                      <nuxt-link :to="`/profile/${username}/events/${pelatihans[listIndex-1].kegiatan_id}/${$slug(pelatihans[listIndex-1].kegiatan_title)}`" size="sm" class="btn my__btn-primary rounded-pill btn-block text-white"><mdb-icon icon="chalkboard" size="lg"/>&nbsp;Akses Kelas</nuxt-link>
                     </mdb-card-body>
                   </mdb-card>
 

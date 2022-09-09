@@ -364,12 +364,28 @@ export default {
         const url = `${this.api_url}/web/event/${this.$route.params.id}`;
         this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`;
         this.$axios
-          .get(url)
-          .then(({ data }) => {
-            // console.log(data)
-            this.details = data.kegiatan;
-          })
-          .catch((err) => console.log(err));
+        .get(url)
+        .then(({ data }) => {
+          if(data.kegiatan.status_pendaftaran_value === "Terdaftar"){
+            this.details = data.kegiatan;    
+          }else{
+            this.$swal({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Something went wrong!',
+              footer: '<a href="">Anda tidak bisa mengakses kelas ini !</a>'
+            })
+            setTimeout(() => {
+              this.$router.push({
+                name: 'profile-name',
+                params: {
+                  name: this.username
+                }
+              })
+            }, 1500)
+          }
+        })
+        .catch((err) => console.log(err));
       }
     },
 
