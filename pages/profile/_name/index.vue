@@ -53,6 +53,42 @@
 				}
 			},
 
+			LogoutProfile() {
+				this.$swal({
+					title: `Keluar sebagai ${this.profiles.nama}?`,
+					text: "Anda akan keluar dari halaman profile!",
+					icon: "warning",
+					showCancelButton: true,
+					confirmButtonColor: "#3085d6",
+					cancelButtonColor: "#d33",
+					confirmButtonText: "Ya, Lanjut keluar!",
+				}).then((result) => {
+					if (result.isConfirmed) {
+						this.$store.dispatch("config/storeConfigAuth", "");
+						this.$store.dispatch("config/setEventToLogin", "");
+						this.$store.dispatch(
+							"config/setProfileLogout",
+							JSON.stringify({
+								logout: true,
+								username: this.$username(this.profiles.nama),
+							})
+							);
+						this.$swal(
+							"Logout!",
+							`Anda berhasil keluar dari profile ${this.profiles.nama}.`,
+							"success"
+							);
+
+						this.$router.push({
+							path: this.$route.path,
+						});
+						setTimeout(() => {
+							location.reload();
+						}, 900);
+					}
+				});
+			},
+
 			CheckToken(){
 				this.$store.dispatch('config/checkAuthLogin', 'token')
 			},
@@ -78,7 +114,6 @@
 					this.$axios.defaults.headers.common.Authorization = `Bearer ${this.token.accessToken}`
 					this.$axios.get(url)
 					.then(({data}) => {
-						console.log(data.user.status_pekerjaan_id)
 						this.profiles = data.user
 						this.username = this.$username(data.user.nama)
 

@@ -31,6 +31,7 @@
 
         <mdb-row class="d-flex justify-content-between">
           <mdb-col md="3" xs="12" sm="12" class="col__img-profile">
+
             <div class="hover__image-wrap">
               <div
               v-if="
@@ -38,7 +39,7 @@
               "
               >
               <b-avatar
-              variant="none"
+              variant="primary"
               :src="profiles.photo"
               :size="size"
               ></b-avatar>
@@ -94,14 +95,14 @@
           <mdb-col md="4" class="profile__options-page">
             <mdb-row class="d-flex justify-content-center">
               <mdb-col col="12" sm="6">
-                <mdb-btn class="shadow-none" outline="primary" size="sm">
+                <mdb-btn outline="primary" size="sm">
                   <nuxt-link :to="`/profile/edit/${profiles.id}`">
                     <mdb-icon icon="user-cog" size="sm" />Edit Profile
                   </nuxt-link>
                 </mdb-btn>
               </mdb-col>
               <mdb-col col="12" sm="6">
-                <mdb-btn class="shadow-none" color="deep-orange" size="sm" @click="LogoutProfile">
+                <mdb-btn  color="deep-orange" size="sm" @click="LogoutProfile">
                   <mdb-icon icon="sign-out-alt" size="sm" /> Logout
                 </mdb-btn>
               </mdb-col>

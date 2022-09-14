@@ -165,8 +165,8 @@
 
 			<mdb-row class="row justify-content-center berita__detail-content">
 				<mdb-col lg="12" xs="12" sm="12" class="col__berita-1">
-					<button type="button" class="btn btn-primary btn-block rounded-pill mt-5" @click.prevent="simpan">
-						Simpan
+					<button type="button" class="btn btn-primary btn-block rounded-pill mt-5" @click.prevent="simpan"><mdb-icon far icon="save" size="lg"/>
+						Simpan perubahan
 					</button>
 				</mdb-col>
 			</mdb-row>

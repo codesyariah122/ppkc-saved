@@ -5,9 +5,6 @@
       <b-skeleton animation="wave" width="55%"></b-skeleton>
       <b-skeleton animation="wave" width="70%"></b-skeleton>
     </div>
-    <!-- <pre>
-			{{works}}
-		</pre> -->
 
     <ul v-else class="mt-3">
       <li
@@ -22,11 +19,22 @@
     <li class="mb-3">
       <div class="col-md-12 col-xs-12 col-sm-12">
         <strong class="text-primary text-uppercase font-weight-bold"
+        >Nama Lengkap</strong
+        >
+        <br />
+        <p><b>
+         {{profiles.gelar_depan}} {{ profiles.nama }}. {{profiles.gelar_belakang}}
+        </b></p>
+      </div>
+    </li>
+    <li class="mb-3">
+      <div class="col-md-12 col-xs-12 col-sm-12">
+        <strong class="text-primary text-uppercase font-weight-bold"
         >Nira</strong
         >
         <br />
         <p>
-          {{ profiles.no_anggota }}
+          <b>{{ profiles.no_anggota }}</b>
         </p>
       </div>
     </li>
@@ -79,6 +87,12 @@
       <p>{{ profiles.kabupaten_name }}, {{ profiles.propinsi_name }}</p>
     </div>
   </li>
+  <!-- <li>
+    <div class="col-6 col-md-6 col-xl-6">
+      <strong class="text-primary font-weight-bold">Alamat</strong> <br />
+      <address>{{ profiles.address }}</address>
+    </div>
+  </li> -->
 </ul>
 </div>
 </template>

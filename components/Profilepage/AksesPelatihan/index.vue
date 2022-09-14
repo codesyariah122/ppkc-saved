@@ -103,7 +103,7 @@
     props: ['loading_event', 'pelatihans', 'username'],
     data(){
       return{
-        listToShow:6,
+        listToShow:10,
         header: {
           title: 'Pelatihan Saya',
           context: 'Silahkan mulai belajar dengan klik list pelatihan yang telah kamu beli, atau lihat pelatihan terbaru lainnya dibagian bawah halaman ini. Selamat belajar!'

@@ -2,7 +2,7 @@
   <div class="auth__content">
     <mdb-container>
       <mdb-row class="row justify-content-center">
-        <mdb-col md="6" sm="8" xs="8">
+        <mdb-col md="5" sm="8" xs="8">
           <AuthpageLoginCard
             @login-profile="Login"
             :validation="validation"
