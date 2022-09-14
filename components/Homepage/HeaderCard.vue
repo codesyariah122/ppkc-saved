@@ -28,7 +28,7 @@
               <b-button v-if="!token.accessToken"
               class="my__btn-primary rounded btn-md"
               @click="$router.push({ name: 'auth-registrasi' })"
-              >Daftar Sekarang</b-button
+              >Daftar Sekarang&nbsp;<mdb-icon icon="user-plus" size="lg"/></b-button
               >
             </div>
           </b-col>
