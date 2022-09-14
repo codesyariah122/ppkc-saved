@@ -19,7 +19,7 @@
     <li class="mb-3">
       <div class="col-md-12 col-xs-12 col-sm-12">
         <strong class="text-primary text-uppercase font-weight-bold"
-        >Nama Lengkap</strong
+        >Fullname</strong
         >
         <br />
         <p><b>
