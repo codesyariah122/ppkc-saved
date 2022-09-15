@@ -1,3 +1,22 @@
+<style lang="scss">
+  .card__content-lists{
+    .webinar__content{
+      .badge__category{
+        background-color: transparent!important;
+        color: $color-primary!important;
+        border:1px $color-primary solid;
+        font-size: 13px;
+      }
+      .card{
+        .card-body{
+          .card-title{
+            color: $default-black!important;
+          }
+        }
+      }
+    }
+  }
+</style>
 <template>
   <div class="card__content-lists">
     <mdb-container>
