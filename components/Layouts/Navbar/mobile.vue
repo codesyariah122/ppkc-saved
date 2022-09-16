@@ -65,7 +65,7 @@
 
    <mdb-row v-if="token.accessToken">
     <mdb-col col="12" sm="12">
-      <mdb-dropdown tag="li" class="nav-item mt-4 text-black">
+      <mdb-dropdown tag="li" class="nav-item nav-profile mt-4 text-dark">
         <mdb-dropdown-toggle tag="a" navLink slot="toggle">
           <b-avatar
           v-if="
@@ -94,7 +94,7 @@
             >
             <b-avatar v-if="profiles.photo !== 'https://api.ppkc-online.com/image-profiles/null'" variant="primary" :src="profiles.photo" size="1.7rem"></b-avatar>
             <b-avatar v-else variant="primary" :text="slug.charAt(0)" size="1.7rem"></b-avatar> 
-              &nbsp; <b>{{ profiles.nama }}</b>
+            &nbsp; <b>{{ profiles.nama }}</b>
           </nuxt-link>
           <!-- <mdb-icon far icon="user-circle" size="lg"/>  -->
                     <!-- <a :href="`/profile/${$username(slug)}`" class="text-center">
