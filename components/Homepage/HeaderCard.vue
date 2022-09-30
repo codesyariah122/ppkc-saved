@@ -17,7 +17,7 @@
       <b-carousel-slide v-for="(item, index) in items"
       :img-src="item.src" :key="item.id"
       >
-      <b-container v-if="$device.isDesktop" class="container">
+      <b-container v-if="$device.isDesktop && index === 0" class="container">
         <b-row>
           <b-col>
             <div class="caption__banner">
