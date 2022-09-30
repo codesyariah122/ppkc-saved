@@ -1,18 +1,23 @@
 <template>
-    <div v-if="$device.isDesktop" class="banner">
-      <mdb-carousel
-      :interval="8000"
-      slide
-      :items="items"
-      controlls
+    <div class="banner">
+      <b-carousel
+      id="carousel-1"
+      v-model="slide"
+      :interval="4000"
+      controls
       indicators
-      fade
-      dark
+      background="#ababab"
+      img-width="1024"
+      img-height="480"
+      style="text-shadow: 1px 1px 2px #333;"
+      @sliding-start="onSlideStart"
+      @sliding-end="onSlideEnd"
       class="jumbotron__home"
-      customClass="rounded"
       >
-    </mdb-carousel>
-      <b-container class="container">
+      <b-carousel-slide v-for="(item, index) in items"
+      :img-src="item.src" :key="item.id"
+      >
+      <b-container v-if="$device.isDesktop" class="container">
         <b-row>
           <b-col>
             <div class="caption__banner">
@@ -28,54 +33,14 @@
               <b-button v-if="!token.accessToken"
               class="my__btn-primary rounded btn-md"
               @click="$router.push({ name: 'auth-registrasi' })"
-              >Daftar Sekarang&nbsp;<mdb-icon icon="user-plus" size="lg"/></b-button
+              >Daftar Sekarang</b-button
               >
             </div>
           </b-col>
         </b-row>
       </b-container>
-    </div>
-
-    <!-- If Mobile using jumbotron -->
-    <div v-else>
-      <b-jumbotron
-      class="jumbotron__home"
-      :style="`background-image: url(${bg});`"
-      >
-      <b-container>
-        <b-row>
-          <b-col>
-            <h2 class="display-6 text-capitalize">selamat datang di PPKC</h2>
-            <p>
-              Pusat Pengembangan Kesehatan Caroulus (PPKC) menyelenggarakan
-              pelatihan di bidang kesehatan yang profesional, unggul dan
-              berlandaskan I-CARE serta mampu berdaya saing di tingkat
-              nasional. 
-            </p>
-            <b-button v-if="!token.accessToken"
-            class="my__btn-primary rounded btn-sm"
-            @click="$router.push({ name: 'auth-registrasi' })"
-            >Daftar Sekarang</b-button
-            >
-          </b-col>
-        </b-row>
-      </b-container>
-    </b-jumbotron>
-    <div class="banner">
-      
-      <mdb-carousel
-      :interval="8000"
-      slide
-      :items="items"
-      controlls
-      indicators
-      fade
-      dark
-      class="jumbotron__home mb-5"
-      customClass="rounded"
-      >
-      </mdb-carousel>
-    </div>
+    </b-carousel-slide>
+  </b-carousel>
   </div>
 </template>
 

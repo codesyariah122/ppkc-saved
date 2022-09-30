@@ -5,8 +5,8 @@
 // Navigation
 @mixin navbar_desktop{
 	text-transform: capitalize;
-	font-size:14px;
-	font-weight: 600;
+	font-size:16px;
+	font-weight: 500;
 	line-height: 21.79px;
 }
 
@@ -60,6 +60,7 @@
 	
 	.container__jumbotron{
 		@include container_jumbotron;
+		margin-top: -5rem;
 	}
 	.display-6{
 		color:$second-black;
@@ -86,23 +87,30 @@
 	color:$default;
 	font-weight: 500;
 	font-size:14px;
+	// height: 35px;
+	// padding: 5px;
+	letter-spacing: 1.3px;
 	text-transform: uppercase;
 	letter-spacing: 1.3px;
 	&:hover{
-		color: $bg-blue-gray!important;
+		border: 2px solid $color-primary;
+		background-color: transparent!important;
+		color: $default-black!important;
+		font-weight: 500;
 	}
 }
 
 @mixin button_secondary{
-	background-color:$bg-button-gray!important;
+	background-color:transparent!important;
 	color:$default-black;
-	font-weight: 600;
+	font-weight: 500;
 	font-size:14px;
-	text-transform: capitalize;
+	text-transform: uppercase;
 	letter-spacing: 1.3px;
+	border: 2px solid $color-primary;
 	&:hover{
-		color: $scroll-bar-color!important;
-		background-color: $bg-hover-first;
+		color: $default!important;
+		background-color: $bg-primary!important;
 	}
 }
 
@@ -136,7 +144,7 @@
 
 @mixin listMobile($color){
 	margin-left: .1rem;
-	margin-top: -5rem;
+	margin-top: -3rem;
 	h1{
 		color:$default!important;
 		font-size:25px;
@@ -667,4 +675,18 @@
 	}
 }
 
+
+@mixin transition($time) {
+	-webkit-transition: all $time ease-out 0s;
+	-moz-transition: all $time ease-out 0s;
+	-ms-transition: all $time ease-out 0s;
+	-o-transition: all $time ease-out 0s;
+	transition: all $time ease-out 0s;
+}
+
+@mixin transform($value) {
+  -webkit-transform: $value;
+      -ms-transform: $value;
+          transform: $value;
+}
 // End auth component base on auth.scss

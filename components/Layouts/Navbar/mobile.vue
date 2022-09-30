@@ -115,17 +115,17 @@
             <mdb-col col="12" lg="12" xs="12" sm="12" class="mt-2">
               <nuxt-link 
               to="/auth/login"
-              class="my__btn-secondary rounded-pill btn btn-block btn-md shadow-none"
-              size="md"
+              class="btn my__btn-primary btn-block btn-md shadow-none"
+              size="md" style="border-radius: 5px;"
               >Masuk</nuxt-link>
             </mdb-col>
-            <mdb-col lg="12" xs="12" sm="12" class="mt-2">
+           <!--  <mdb-col lg="12" xs="12" sm="12" class="mt-2">
               <nuxt-link
               to="/auth/registrasi"
               class="my__btn-primary rounded-pill btn btn-block btn-md shadow-none"
               size="md"
               >Daftar</nuxt-link>
-            </mdb-col>         
+            </mdb-col>   -->       
           </mdb-row>
         </div>
 

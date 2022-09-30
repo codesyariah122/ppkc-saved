@@ -1,14 +1,14 @@
 <template>
   <div>
-    <!-- Homepage Content -->
-    <!-- inside container -->
-    <mdb-container>
+    <HomepageHeaderCard v-if="$device.isMobile" :bg="bg_image" :items="items" :token="token" />
+    <mdb-container v-else>
       <mdb-row class="justify-content-center mt-5">
         <mdb-col lg="12" sm="12" xs="12">
           <HomepageHeaderCard :bg="bg_image" :items="items" :token="token" />
         </mdb-col>
       </mdb-row>
-
+    </mdb-container>
+    <mdb-container>
       <mdb-row class="justify-content-center mt-5 mt-lg-0">
         <mdb-col lg="12" sm="12" xs="12">
           <HomepageEventList

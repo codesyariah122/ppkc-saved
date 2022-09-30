@@ -15,7 +15,7 @@
       </nuxt-link>
     </mdb-navbar-brand>
     <mdb-navbar-toggler>
-      <mdb-navbar-nav right style="margin-left: 1.5rem;">
+      <mdb-navbar-nav right style="margin-right: 2rem;">
         <mdb-nav-item active waves-fixed>
           <nuxt-link to="/" tag="li" navLink > Home </nuxt-link>
         </mdb-nav-item>
@@ -78,7 +78,7 @@ style="font-size: 31px !important"
     class="text-center"
     >
     <b-avatar v-if="profiles.photo !== 'https://api.ppkc-online.com/image-profiles/function File() { [native code]}'" variant="primary" :src="profiles.photo" size="1.7rem"></b-avatar>
-  <b-avatar v-else variant="primary" :text="slug.charAt(0)" size="1.7rem"></b-avatar> &nbsp; <b>{{ profiles.nama }}</b>
+    <b-avatar v-else variant="primary" :text="slug.charAt(0)" size="1.7rem"></b-avatar> &nbsp; <b>{{ profiles.nama }}</b>
   </nuxt-link>
 </mdb-dropdown-item>
 <div class="dropdown-divider"></div>
@@ -91,15 +91,15 @@ style="font-size: 31px !important"
 <div v-else tag="li">
   <nuxt-link 
   to="/auth/login"
-  class="btn btn-outline-primary btn-sm shadow-none"
+  class="btn my__btn-primary btn-block btn-md shadow-none"
   size="md" style="border-radius: 5px;"
   >Masuk</nuxt-link>
 
-  <nuxt-link
+  <!-- <nuxt-link
   to="/auth/registrasi"
   class="my__btn-primary btn btn-sm shadow-none rounded"
   size="md"
-  >Daftar</nuxt-link>
+  >Daftar</nuxt-link> -->
 </div>
 </mdb-navbar-toggler>
 </mdb-navbar>
