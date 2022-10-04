@@ -21,9 +21,9 @@
             <b-card no-body class="overflow-hidden card__testimoni-content">
               <b-container>
                 <b-row no-gutters>
-                  <b-col md="4" class="mt-2">
-                   <b-avatar variant="none" border-variant="none" v-if="item.foto_url !== null" :src="item.foto_url" size="6rem"></b-avatar>
-                    <b-avatar variant="none" border-variant="none" v-else :src="require('~/assets/images/profile/profile.svg')" size="6rem"></b-avatar>
+                  <b-col md="4" class="mt-4">
+                   <b-avatar variant="primary" border-variant="primary" v-if="item.foto_url !== null" :src="item.foto_url" size="10rem"></b-avatar>
+                    <b-avatar variant="none" border-variant="none" v-else :src="require('~/assets/images/profile/profile.svg')" size="11rem"></b-avatar>
                   </b-col>
                   <b-col md="8">
                     <b-card-body :title="item.konsumen">

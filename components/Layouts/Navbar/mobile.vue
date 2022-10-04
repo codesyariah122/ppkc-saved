@@ -110,20 +110,18 @@
 
         <div v-else>
           <mdb-row class="row justify-content-center">
-            <mdb-col col="12" lg="12" xs="12" sm="12" class="mt-2">
-              <nuxt-link 
-              to="/auth/login"
-              class="btn my__btn-primary btn-block btn-md shadow-none"
-              size="md" style="border-radius: 5px;"
-              >Masuk</nuxt-link>
-            </mdb-col>
-           <!--  <mdb-col lg="12" xs="12" sm="12" class="mt-2">
+            <mdb-col v-if="$route.name === 'auth-login'" lg="12" xs="12" sm="12" class="mt-2">
               <nuxt-link
               to="/auth/registrasi"
-              class="my__btn-primary rounded-pill btn btn-block btn-md shadow-none"
-              size="md"
+              class="my__btn-primary rounded btn btn-block btn-md shadow-none"
               >Daftar</nuxt-link>
-            </mdb-col>   -->       
+            </mdb-col>         
+            <mdb-col v-else col="12" lg="12" xs="12" sm="12" class="mt-2">
+              <nuxt-link 
+              to="/auth/login"
+              class="btn my__btn-primary rounded btn-block btn-md shadow-none" style="border-radius: 5px;"
+              >Masuk</nuxt-link>
+            </mdb-col>
           </mdb-row>
         </div>
 
