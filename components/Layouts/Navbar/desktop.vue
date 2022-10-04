@@ -63,7 +63,7 @@ class="nav-item nav-profile"
 style="font-size: 31px !important"
 >
 <mdb-dropdown-toggle tag="a" navLink slot="toggle">
-  {{profiles.nama}}
+  <b>{{profiles.nama}}</b>
   <b-avatar v-if="profiles.photo != 'https://api.ppkc-online.com/image-profiles/function File() { [native code]}'" variant="primary" :src="profiles.photo"></b-avatar>
   <b-avatar v-else variant="primary" :text="slug.charAt(0)"></b-avatar>
   
@@ -78,7 +78,7 @@ style="font-size: 31px !important"
     class="text-center"
     >
     <b-avatar v-if="profiles.photo !== 'https://api.ppkc-online.com/image-profiles/function File() { [native code]}'" variant="primary" :src="profiles.photo" size="1.7rem"></b-avatar>
-    <b-avatar v-else variant="primary" :text="slug.charAt(0)" size="1.7rem"></b-avatar> &nbsp; <b>{{ profiles.nama }}</b>
+    <b-avatar v-else variant="primary" :text="slug.charAt(0)" size="1.7rem"></b-avatar> &nbsp; <b style="font-weight: 800;">{{ profiles.nama }}</b>
   </nuxt-link>
 </mdb-dropdown-item>
 <div class="dropdown-divider"></div>

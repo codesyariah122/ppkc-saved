@@ -4,7 +4,7 @@
       <mdb-row class="row justify-content-between header__inside-content">
         <!-- colomn header testimoni -->
         <mdb-col col="12" md="7">
-          <h5 class="text-capitalize">
+          <h5 class="text-capitalize" :style="`${$device.isDesktop ? 'margin-left: -.7rem;' : ''}`">
             <strong class="font-weight-bold">testimoni</strong>
           </h5>
         </mdb-col>
@@ -15,7 +15,7 @@
 
         <!-- <mdb-col md="4"></mdb-col> -->
         <mdb-col md="12" xs="12" sm="12" :class="`text-capitalize ${$device.isDesktop ? '' : ''}`">
-          <h2>Cerita sukses member kami</h2>
+          <h2 :style="`${$device.isDesktop ? 'text-align: left!important;' : ''}`">Cerita sukses member kami</h2>
         </mdb-col>
 
         <mdb-col v-if="$device.isMobile" col="12" md="3" sm="12" class="mt-2">
