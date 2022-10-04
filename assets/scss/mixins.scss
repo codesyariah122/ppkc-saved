@@ -95,8 +95,8 @@
 	&:hover{
 		border: 2px solid $color-primary;
 		background-color: transparent!important;
-		color: $default-black!important;
-		font-weight: 600;
+		color: $color-primary!important;
+		font-weight: 700;
 	}
 }
 
@@ -116,7 +116,8 @@
 
 // Card pelatihan
 @mixin listDesktop($color){
-	margin-left: 2rem;
+	margin-left: 1.5rem;
+	margin-top: -5rem;
 	h5{
 		font-size:14px;
 		font-weight: 600;
@@ -144,7 +145,7 @@
 
 @mixin listMobile($color){
 	margin-left: .1rem;
-	margin-top: -3rem;
+	margin-top: 1rem;
 	h1{
 		color:$default!important;
 		font-size:25px;
@@ -333,7 +334,7 @@
 // For header inside container
 @mixin header_inside_list_desktop($color){
 	.header__inside-content{
-		margin-left: 2rem;
+		margin-left: 1rem;
 		h5{
 			font-size:25px;
 			font-weight: 600;
@@ -348,7 +349,7 @@
 			text-align: center;
 			line-height: 40px!important;
 			font-size: 31px!important;
-			margin-left: -1rem;
+			margin-left: -.7rem;
 		}
 		a{
 			background-color:$bg-button-gray!important;
@@ -580,7 +581,7 @@
 			bottom: 0;
 			left: 0;
 			right: 0;
-			height: 200px;
+			height: 230px;
 			width: 100%;
 			opacity: 0;
 			transition: .3s ease;

@@ -55,15 +55,15 @@
 		h2, p{
 			text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.5);
 			font-weight: 700;
-			font-size: 21px;
 		}
 		h2{
+			font-size: 21px;
 			margin-top:2rem;
 		}
 		p{
 			width: 600px;
 			text-align: justify;
-			font-size: 12px;
+			font-size: 13px;
 			line-height: 31px;
 		}
 		button{
@@ -126,19 +126,19 @@
 		}
 
 		.container{
-			margin-left: -5rem;
+			margin-left: -3rem;
 			h2, p{
 				text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.8);
 				font-weight: 700;
 			}
 			h2{
-				font-size: 23px;
+				font-size: 21px!important;
 				text-align: left;
 			}
 			p{
 				width: 600px;
 				text-align: justify;
-				font-size: 15px;
+				font-size: 13px;
 				line-height: 31px;
 			}
 			button{

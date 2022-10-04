@@ -1,5 +1,5 @@
 <template>
-  <div class="card__list mt-5 mt-lg-0">
+  <div class="card__list mt-lg-0">
     <!-- webinar list header -->
     <div class="row justify-content-between card__header">
       <mdb-col md="12" xs="12" sm="12">

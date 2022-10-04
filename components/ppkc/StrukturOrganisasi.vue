@@ -9,7 +9,7 @@
           </h2>
         </mdb-col>
 
-        <mdb-col lg="12" xs="12" sm="12" class="ppkc__col-1">
+        <mdb-col v-if="lists.length > 0" lg="12" xs="12" sm="12" class="ppkc__col-1">
           <center>
             <img
               img
