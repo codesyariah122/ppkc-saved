@@ -13,10 +13,8 @@
             </h2>
           </mdb-col>
         </mdb-row>
-        <!-- delay looping data with loader spinner -->
-
+      
         <div class="row text-center text-md-left" style="margin-top: 32px">
-          <!-- Grid column -->
           <div
             v-for="item in lists"
             :key="item.id"

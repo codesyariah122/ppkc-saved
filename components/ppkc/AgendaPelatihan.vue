@@ -6,7 +6,7 @@
         <mdb-col lg="12" xs="12" sm="12" class="text-center">
           <h2 style="font-weight: 700">Agenda Pelatihan</h2>
         </mdb-col>
-
+        
         <mdb-col lg="12" xs="12" sm="12" class="ppkc__col-1">
           <center>
             <img

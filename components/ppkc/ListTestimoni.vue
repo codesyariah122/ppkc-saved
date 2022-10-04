@@ -1,41 +1,116 @@
 <template>
-  <div class="testimoni__list">
-    <mdb-row>
-      <mdb-col
-        v-if="listIndex <= lists.length"
-        v-for="listIndex in listToShow"
-        col="6"
-        md="6"
-        :key="lists[listIndex - 1].id"
-        class="col__testimoni"
+  <div>
+    <div ref="testimoni_square" class="card__list" :style="berita__list_style">
+      <mdb-container>
+        <!-- header -->
+        <mdb-row class="row justify-content-center header__ppkc-list-page">
+          <mdb-col lg="12" xs="12" sm="12">
+            <h2>
+              Testimoni
+            </h2>
+            <p>
+              PPKC Carolus telah melakukan berbagai macam pelatihan dan
+              telah banyak membantu meningkatkan kemampuan tenaga kesehatan
+            </p>
+          </mdb-col>
+        </mdb-row>
+
+        <!-- Testimoni content -->
+        <mdb-row center class="col__testimoni">
+          <mdb-col v-for="item in lists" md="6" xs="12" sm="12" class="col__testimoni-card" :key="item.id">
+            <b-card no-body class="overflow-hidden card__testimoni-content">
+              <b-container>
+                <b-row no-gutters>
+                  <b-col md="4" class="mt-2">
+                   <b-avatar variant="none" border-variant="none" v-if="item.foto_url !== null" :src="item.foto_url" size="6rem"></b-avatar>
+                    <b-avatar variant="none" border-variant="none" v-else :src="require('~/assets/images/profile/profile.svg')" size="6rem"></b-avatar>
+                  </b-col>
+                  <b-col md="8">
+                    <b-card-body :title="item.konsumen">
+                      <h6>{{item.profesi}}</h6>
+                      <b-card-text v-html="item.testimoni">
+                      </b-card-text>
+                    </b-card-body>
+                  </b-col>
+                </b-row>
+              </b-container>
+            </b-card>
+          </mdb-col>
+        </mdb-row>
+
+        <mdb-row v-if="loading" class="row justify-content-center">
+          <mdb-col lg="12" xs="12" sm="12">
+            <div class="d-flex justify-content-center mt-5 mb-5">
+              <div
+              class="spinner-grow text-primary"
+              role="status"
+              style="width: 3rem; height: 3rem"
+              >
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+        </mdb-col>
+      </mdb-row>
+      <mdb-row
+      v-if="error"
+      class="row justify-content-center header__ppkc-list-page"
       >
-        <mdb-card class="card__testimoni-content">
-          <mdb-container class="mt-4">
-            <!-- <small>
-							{{lists[listIndex-1].id}}
-						</small> -->
-            <blockquote class="post__quote">
-              <mdb-icon icon="quote-left" /><br />
-              <span class="quote__txt">
-                {{ lists[listIndex - 1].testimoni }}
-              </span>
-              <p class="profile__name">
-                {{
-                  lists[listIndex - 1].konsumen
-                    ? lists[listIndex - 1].konsumen
-                    : "PPKC Visitor"
-                }}
-              </p>
-            </blockquote>
-          </mdb-container>
-        </mdb-card>
+      <mdb-col lg="12" xs="12" sm="12">
+        <button type="button" @click="LoadTestimoni" class="btn btn-info">
+          Load More
+        </button>
       </mdb-col>
     </mdb-row>
-  </div>
+  </mdb-container>
+</div>
+</div>
 </template>
 
 <script>
-export default {
-  props: ["lists", "listToShow"],
+ import {TestimoniSamples} from '@/helpers'
+
+ export default {
+  props: ["path", "lists", "loading", "error", "end"],
+  data() {
+    return {
+      currentPage: 1,
+      listToShow: 6,
+      berita__list_style:
+      this.$router.path == "/ppkc/berita" && this.$device.isDesktop
+      ? "margin-top: 15rem;"
+      : "margin-top: 7rem;",
+    };
+  },
+
+  mounted() {
+    this.getNextTestimoni()
+  },
+
+  methods: {
+    LoadTestimoni() {
+      this.$emit("load-more-testi");
+    },
+
+    getNextTestimoni() {
+      window.onscroll = () => {
+        if (!this.loading && !this.end && !this.error && this.$route.path == '/ppkc/testimoni') {
+          if (
+            this.$refs.testimoni_square.getBoundingClientRect().bottom <= 450
+            ) {
+            this.$emit("load-more-testi");
+        }
+      } else {
+        console.log("else");
+      }
+    };
+  },
+},
 };
 </script>
+<style lang="scss">
+  @include card_testimonial_mobile;
+
+  @media (min-width: 992px) {
+    @include card_testimonial_desktop;
+  }
+</style>

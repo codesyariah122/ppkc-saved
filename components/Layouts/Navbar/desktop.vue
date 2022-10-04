@@ -89,17 +89,15 @@ style="font-size: 31px !important"
 </mdb-dropdown>
 
 <div v-else tag="li">
-  <nuxt-link 
-  to="/auth/login"
-  class="btn my__btn-primary btn-block btn-md shadow-none"
-  size="md" style="border-radius: 5px;"
-  >Masuk</nuxt-link>
-
-  <!-- <nuxt-link
+  <nuxt-link v-if="$route.name === 'auth-login'"
   to="/auth/registrasi"
-  class="my__btn-primary btn btn-sm shadow-none rounded"
-  size="md"
-  >Daftar</nuxt-link> -->
+  class="btn  my__btn-primary btn-md shadow-none rounded"
+  >Daftar</nuxt-link>
+
+  <nuxt-link v-else
+  to="/auth/login"
+  class="btn my__btn-primary btn-block btn-md shadow-none rounded"
+  >Masuk</nuxt-link>
 </div>
 </mdb-navbar-toggler>
 </mdb-navbar>
@@ -125,6 +123,7 @@ style="font-size: 31px !important"
         { id: 5, name: "Testimoni", link: "/ppkc/testimoni" },
         { id: 6, name: "Fasilitator", link: "/ppkc/fasilitator" },
         { id: 7, name: "Yayasan & Direksi", link: "/ppkc/yayasan-direksi" },
+        { id: 8, name: "Berita", link: "/ppkc/berita" }
         ],
       };
     },

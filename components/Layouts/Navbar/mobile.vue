@@ -53,9 +53,7 @@
           </mdb-dropdown-item>
         </mdb-dropdown-menu>
       </mdb-dropdown>
-      <mdb-nav-item waves-fixed>
-        <nuxt-link to="/ppkc/berita" tag="li" navLink > Berita </nuxt-link>
-      </mdb-nav-item>
+      
     </mdb-navbar-nav>
     <!-- check user login -->
 
@@ -151,7 +149,8 @@
         { id: 4, name: "Fasilitas", link: "/ppkc/fasilitas" },
         { id: 5, name: "Testimoni", link: "/ppkc/testimoni" },
         { id: 6, name: "Fasilitator", link: "/ppkc/fasilitator" },
-        { id: 7, name: "Yayasan & Direksi", link: "/ppkc/yayasan-direksi" }
+        { id: 7, name: "Yayasan & Direksi", link: "/ppkc/yayasan-direksi" },
+        { id: 8, name: "Berita", link: "/ppkc/berita" }
         ]
       }
     },

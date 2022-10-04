@@ -11,7 +11,7 @@
 
         <mdb-col lg="12" xs="12" sm="12" class="filter__event">
           <div :class="`${$device.isDesktop ? 'd-flex flex-row bd-highlight mb-3' : 'bd-highlight mb-3'}`">
-            <div class="p-2 bd-highlight mr-3">
+            <div class="p-2 bd-highlight">
               <h6 :style="`${$device.isMobile ? 'font-weight: 600;' : ''}`">Filter Pelatihan</h6>
             </div>
             <div class="p-2 bd-highlight mr-2">

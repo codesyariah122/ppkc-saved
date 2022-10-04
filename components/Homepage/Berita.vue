@@ -7,12 +7,12 @@
           <h5 class="text-center">Berita</h5>
         </mdb-col>
         
-        <mdb-col md="12" xs="12" sm="12" :class="`text-capitalize ${$device.isDesktop ? '' : ''}`">
+        <mdb-col md="12" xs="12" sm="12" class="text-capitalize">
           <h2>Ikuti Berita dan Kegiatan Kami</h2>
         </mdb-col>
       </mdb-row>
 
-      <mdb-row v-if="lists.length > 0" class="justify-content-center col__berita mt-3 mb-3">
+      <mdb-row v-if="lists.length > 0" class="justify-content-center col__berita mt-5 mb-3">
         <MoleculesHomepageMoleculesCardBerita  :lists="lists" ref="childBerita"/> 
       </mdb-row>
 

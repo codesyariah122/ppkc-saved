@@ -9,74 +9,72 @@
             </h2>
           </mdb-col>
         </mdb-row>
-        <!-- delay looping data with loader spinner -->
 
-        <div class="row text-center text-md-left" style="margin-top: 32px">
-          <!-- Grid column -->
+        <div :class="`${lists.length > 1 ? 'row' : 'row justify-content-center'} text-center text-md-left`" style="margin-top: 32px">
           <div
-            v-for="item in lists"
-            :key="item.id"
-            class="col-xl-6 col-lg-12 mb-5 d-md-flex"
+          v-for="item in lists"
+          :key="item.id"
+          class="col-xl-6 col-lg-12 mb-5 d-md-flex"
           >
-            <div class="avatar mb-md-0 mb-4 mx-4">
-              <img
-                :src="item.foto_url"
-                class="rounded z-depth-1"
-                height="250px"
-                width="200px"
-                style="object-fit: cover"
-              />
-            </div>
-            <div class="mx-2">
-              <h4 class="font-weight-bold mb-3" style="font-size: 22px">
-                {{ item.nama }}
-              </h4>
-              <h6
-                class="font-weight-bold grey-text mb-3"
-                style="font-size: 14px"
-              >
-                {{ item.jabatan_value }}
-              </h6>
-            </div>
+          <div class="avatar mb-md-0 mb-4 mx-4">
+            <img
+            :src="item.foto_url"
+            class="rounded z-depth-1"
+            height="250px"
+            width="200px"
+            style="object-fit: cover"
+            />
           </div>
+          <div class="mx-2">
+            <h4 class="font-weight-bold mb-3" style="font-size: 22px">
+              {{ item.nama }}
+            </h4>
+            <h6
+            class="font-weight-bold grey-text mb-3"
+            style="font-size: 14px"
+            >
+            {{ item.jabatan_value }}
+          </h6>
         </div>
-
-        <mdb-row v-if="loading" class="row justify-content-center">
-          <mdb-col lg="12" xs="12" sm="12">
-            <div class="d-flex justify-content-center mt-5 mb-5">
-              <div
-                class="spinner-grow text-primary"
-                role="status"
-                style="width: 3rem; height: 3rem"
-              >
-                <span class="sr-only">Loading...</span>
-              </div>
-            </div>
-          </mdb-col>
-        </mdb-row>
-      </mdb-container>
+      </div>
     </div>
-  </div>
+
+    <mdb-row v-if="loading" class="row justify-content-center">
+      <mdb-col lg="12" xs="12" sm="12">
+        <div class="d-flex justify-content-center mt-5 mb-5">
+          <div
+          class="spinner-grow text-primary"
+          role="status"
+          style="width: 3rem; height: 3rem"
+          >
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+    </mdb-col>
+  </mdb-row>
+</mdb-container>
+</div>
+</div>
 </template>
 
 <script>
-export default {
-  props: ["lists", "loading"],
-  data() {
-    return {
-      currentPage: 1,
+  export default {
+    props: ["lists", "loading"],
+    data() {
+      return {
+        currentPage: 1,
 
-      berita__list_style:
+        berita__list_style:
         this.$router.path == "berita" && this.$device.isDeskktop
-          ? "margin-top: 15rem;"
-          : "margin-top: 5rem;",
-    };
-  },
+        ? "margin-top: 15rem;"
+        : "margin-top: 5rem;",
+      };
+    },
 
-  mounted() {},
+    mounted() {},
 
-  methods: {},
-};
+    methods: {},
+  };
 </script>
 
 <style lang="css">

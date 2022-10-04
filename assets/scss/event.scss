@@ -266,7 +266,7 @@
 	}
 	.header__event{
 		margin-top:8rem;
-		margin-left: 8rem;
+		margin-left: 7rem;
 		color:$second-black;
 		h2{
 			font-weight: 800;
@@ -277,6 +277,7 @@
 		}
 
 		.filter__event{
+			margin-left: -1rem;
 			h6{
 				font-size:16px;
 				margin-top: .5rem;
@@ -290,7 +291,7 @@
 			}
 
 			.count__event{
-				margin-left: 23rem;
+				margin-left: 27rem!important;
 			}
 		}
 	}

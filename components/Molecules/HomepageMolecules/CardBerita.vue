@@ -1,11 +1,10 @@
 <template>
   <div>
-    <mdb-row class="row justify-content-center">
-      <!-- bg content -->
+    <!-- <mdb-row class="row justify-content-center">
       <mdb-col col="12" lg="12" xs="12" sm="12" class="bg__content">
         <img :src="require('~/assets/art/vector-5.png')" />
       </mdb-col>
-    </mdb-row>
+    </mdb-row> -->
 
     <mdb-row class="row justify-content-center card__berita-list">
       <mdb-col

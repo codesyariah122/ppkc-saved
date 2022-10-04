@@ -1,7 +1,7 @@
 <!-- Component base on directory /components/ppkc -->
 <template>
   <div>
-    <TestimonipageListTestimoni
+    <ppkcListTestimoni
     :path="path"
     :lists="lists"
     :loading="loading"
