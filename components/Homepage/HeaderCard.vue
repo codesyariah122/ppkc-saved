@@ -30,11 +30,13 @@
                 berlandaskan I-CARE serta mampu berdaya saing di tingkat
                 nasional.
               </p>
-              <b-button v-if="!token.accessToken"
-              class="my__btn-primary rounded btn-md"
-              @click="$router.push({ name: 'auth-registrasi' })"
-              >Daftar Sekarang</b-button
-              >
+              <div class="text-left mb-5">
+                <b-button v-if="!token.accessToken" variant="primary"
+                class="rounded btn-md"
+                @click="$router.push({ name: 'auth-registrasi' })"
+                >Daftar Sekarang</b-button
+                >
+              </div>
             </div>
           </b-col>
         </b-row>

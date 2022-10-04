@@ -126,10 +126,10 @@
 		}
 
 		.container{
+			margin-left: -5rem;
 			h2, p{
 				text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.8);
 				font-weight: 700;
-				margin-left: -7rem;
 			}
 			h2{
 				font-size: 23px;
@@ -143,9 +143,8 @@
 				line-height: 31px;
 			}
 			button{
-				background-color:$color-primary;
+				background-color:$bg-primary!important;
 				font-size: 14px;
-				border-radius:8px;
 			}
 			
 			.my__btn-primary{
@@ -190,7 +189,7 @@
 				text-align: justify;
 			}
 
-			@include hover_image_display;
+			// @include hover_image_display;
 		}
 
 		.ppkc__col-3{
@@ -283,7 +282,7 @@
 	.card__list{
 		.header__ppkc-list-page{
 			margin-top:10rem;
-			margin-left: 1.5rem;
+			margin-left: .5rem;
 			h2{
 				color: $second-black;
 				font-size:21px;
@@ -1030,35 +1029,35 @@
 				font-size:18px;
 				margin-top: 1.3rem;
 				font-weight: 600;
-				}
-				ul li{
-					font-size: 14px;
-					font-weight: 400;
-					line-height: 21.07px;
-					margin-bottom:1.5rem;
-				}
-				a{
-					color: $second-black;
-					&:hover{
-						color: $scroll-bar-color;
-					}
-				}
-				.footer__sitemap-apk{
-					margin-top: -1rem;
+			}
+			ul li{
+				font-size: 14px;
+				font-weight: 400;
+				line-height: 21.07px;
+				margin-bottom:1.5rem;
+			}
+			a{
+				color: $second-black;
+				&:hover{
+					color: $scroll-bar-color;
 				}
 			}
-
+			.footer__sitemap-apk{
+				margin-top: -1rem;
+			}
 		}
 
-		.footer-copyright{
-			background-color:$bg-button-gray!important;
-			color: $color-primary!important;
-			a{
-				color: $default-black!important;
-				font-weight: 500;
-			}
+	}
+
+	.footer-copyright{
+		background-color:$bg-button-gray!important;
+		color: $color-primary!important;
+		a{
+			color: $default-black!important;
+			font-weight: 500;
 		}
 	}
+}
 
 	// Desktop
 	@media (min-width: 992px) {

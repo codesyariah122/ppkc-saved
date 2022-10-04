@@ -109,7 +109,8 @@ export default {
     '~assets/scss/event-test.scss',
     '~assets/scss/docs-event.scss',
     '~assets/scss/keranjang.scss',
-    '~assets/scss/pembayaran.scss'
+    '~assets/scss/pembayaran.scss',
+    '~assets/scss/gallery-images.scss'
     ]
   },
 
