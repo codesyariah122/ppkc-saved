@@ -74,15 +74,21 @@
                   }}
                 </time>
               </li>
+              <li v-if="tests.is_already == 1">
+                Score :
+                <time>
+                  {{ tests.score }}
+                </time>
+              </li>
             </ul>
           </mdb-col>
         </mdb-row>
-        
+
         <div v-if="is_can_test == 0">
           <mdb-row col="12" class="row justify-content-center mb-3">
             <mdb-col lg="12" xs="12" sm="12">
               <mdb-alert color="info">
-                 Test bisa diisi sesuai tanggal
+                Test bisa diisi sesuai tanggal
               </mdb-alert>
             </mdb-col>
           </mdb-row>

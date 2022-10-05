@@ -1,6 +1,11 @@
 <template>
   <div>
-    <HomepageHeaderCard v-if="$device.isMobile" :bg="bg_image" :items="items" :token="token" />
+    <HomepageHeaderCard
+      v-if="$device.isMobile"
+      :bg="bg_image"
+      :items="items"
+      :token="token"
+    />
     <mdb-container v-else>
       <mdb-row class="justify-content-center mt-5">
         <mdb-col lg="12" sm="12" xs="12">
@@ -10,6 +15,14 @@
     </mdb-container>
     <mdb-container>
       <mdb-row class="justify-content-center mt-5 mt-lg-0">
+        <mdb-col lg="12" sm="12" xs="12">
+          <HomepageIndeksKepuasan :index_kepuasan="lists.index_kepuasan" />
+        </mdb-col>
+      </mdb-row>
+    </mdb-container>
+
+    <mdb-container>
+      <mdb-row class="justify-content-center mt-5">
         <mdb-col lg="12" sm="12" xs="12">
           <HomepageEventList
             :lists="lists.list_kegiatan_terdekat"

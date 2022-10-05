@@ -157,6 +157,28 @@
       Logout() {
         this.$emit("logout-profile");
       },
-    },
+      GoToLogin() {
+        if (this.event_id === this.$route.params.id) {
+          const data = {
+            event_id: this.event_id,
+            event_path: this.event_path,
+          };
+          this.SetEventLogin(data);
+        } else {
+          this.$router.push({ name: "auth-login" });
+        }
+      },
+
+      GoToRegistrasi() {
+        this.$router.push({ name: "auth-registrasi" });
+      },
+
+      SetEventLogin(data) {
+        this.$store.dispatch("config/setEventToLogin", JSON.stringify(data));
+        this.$router.push({
+          name: "auth-login",
+        });
+      }
+    }
   };
 </script>
