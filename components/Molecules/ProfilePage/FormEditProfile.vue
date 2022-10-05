@@ -105,7 +105,7 @@
           <div class="form-group">
             <label for="nama">Profesi Lainnya</label>
             <select class="form-control" id="sel1" v-model="profiles.profesi_lainnya_id" @change="changeProfesiLainnya($event)">
-              <option v-for="item in profiles.profesiLainnya" v-bind:key="item.id" v-bind:value="item.code">{{item.value}}</option>
+              <option v-for="item in profiles.profesi" v-bind:key="item.id" v-bind:value="item.code">{{item.value}}</option>
             </select>
           </div>
         </div>
